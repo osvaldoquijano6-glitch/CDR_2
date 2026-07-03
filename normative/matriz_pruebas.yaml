@@ -1,0 +1,882 @@
+# =============================================================================
+# MATRIZ NORMATIVA MAESTRA DE PRUEBAS — versión inicial (FASE 1)
+# Sistema de Verificación de Código de Red — Centrales Eléctricas y Centros de Carga
+#
+# REGLAS DE ESTA MATRIZ:
+#   1. Ningún límite/umbral se inventa. Cada criterio cuantitativo debe tener
+#      `fuente_documental` con documento + numeral + versión.
+#   2. estado_normativo:
+#        VALIDADO                        criterio con cita documental confirmada
+#        HEREDADO_PROTOCOLO_SIN_CITA     valor usado en protocolos previos (código
+#                                        legado core/droop.py, tests/registry.py);
+#                                        requiere confirmación contra numeral
+#        PENDIENTE_VALIDACION_NORMATIVA  falta el dato; `dato_requerido` describe
+#                                        exactamente qué capturar
+#   3. El motor de reglas emite NO_EVALUABLE si estado_normativo != VALIDADO,
+#      aunque existan datos de medición suficientes.
+#   4. IDs nuevos: CE-<dominio>-<nn> (central), CC-<nn> (centro de carga).
+#      `legacy_id` conserva el mapeo con el Anexo 5 / proyecto anterior (P1..P28).
+#
+# Documentos de referencia (registrar versión y fecha DOF en normative/fuentes/):
+#   COD_RED : Código de Red (disposiciones administrativas de carácter general)
+#   INTER   : Manual Regulatorio de Requerimientos Técnicos para la
+#             Interconexión de Centrales Eléctricas
+#   CONE    : Manual Regulatorio de Requerimientos Técnicos para la Conexión
+#             de Centros de Carga
+#   POC_A5  : Procedimiento para la Declaración de Operación Comercial, Anexo 5
+#   PROT    : Protocolo de pruebas aprobado por CENACE para la instalación
+# =============================================================================
+
+version: "0.1.0"
+fecha: "2026-07-03"
+resultados_posibles: &resultados [CUMPLE, NO_CUMPLE, NO_EVALUABLE, PENDIENTE_DOCUMENTAL]
+
+pruebas:
+
+  # ===========================================================================
+  # CENTRALES ELÉCTRICAS — FRECUENCIA Y POTENCIA ACTIVA
+  # ===========================================================================
+
+  - id: CE-F-01
+    legacy_id: P1
+    nombre: Rango de frecuencia
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]          # confirmar exigencia por categoría
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, frequency, active_power]
+    unidad_esperada: {frequency: Hz, active_power: MW}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: por banda de frecuencia según tabla normativa
+    criterio_aceptacion: >
+      Operación continua sin desconexión dentro de las bandas de frecuencia y
+      tiempos mínimos de permanencia definidos en la tabla del manual.
+    formula_algoritmo: >
+      Clasificar cada muestra en banda de frecuencia; acumular tiempo de
+      permanencia por banda; verificar ausencia de desconexión (P > umbral de
+      operación) durante la permanencia exigida.
+    evidencia_requerida: [serie f(t) y P(t), tabla de permanencia por banda]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: >
+      Tabla de bandas de frecuencia (Hz) vs tiempo mínimo de operación por área
+      síncrona y categoría, con numeral del Manual INTER / Código de Red.
+    observaciones: El legado (P1) grafica sin comparar contra tabla de bandas.
+
+  - id: CE-F-02
+    legacy_id: P2
+    nombre: Razón de cambio de frecuencia (ROCOF)
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, frequency, active_power]
+    unidad_esperada: {frequency: Hz, rocof: Hz/s}
+    fs_minima_sugerida_hz: 10          # df/dt no es confiable con fs < 10 Hz; confirmar método normativo
+    duracion_minima: evento completo de rampa de frecuencia + estabilización
+    criterio_aceptacion: >
+      La central permanece conectada y sin disparo ante eventos con ROCOF hasta
+      el valor de inmunidad exigido.
+    formula_algoritmo: >
+      ROCOF(t) = df/dt calculado sobre ventana móvil configurable (parámetro
+      ventana_rocof_ms); verificación de continuidad de P y ausencia de disparo
+      durante y después del evento.
+    parametros_heredados:
+      rocof_inmunidad_hz_s: 2.0        # de tests/registry.py "Razón de cambio 2.0 Hz/s"
+    evidencia_requerida: [serie f(t), serie ROCOF(t), P(t), marcado de evento]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: HEREDADO_PROTOCOLO_SIN_CITA
+    dato_requerido: >
+      Numeral que fija el ROCOF de inmunidad (¿2.0 Hz/s?) y la ventana/método de
+      cálculo de df/dt (ciclos, ms) exigidos.
+    observaciones: null
+
+  - id: CE-F-03
+    legacy_id: P3
+    nombre: Respuesta ante alta frecuencia
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, frequency, active_power]
+    unidad_esperada: {frequency: Hz, active_power: MW}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: escalón de frecuencia + tiempo de establecimiento por caso de estatismo
+    criterio_aceptacion: >
+      Reducción de potencia activa proporcional al estatismo configurado al
+      superar el umbral de sobre-frecuencia, dentro de la tolerancia y tiempos
+      exigidos.
+    formula_algoritmo: >
+      P_esperada(f) = P_op - (P_ref/S)*((f - f_umbral)/f_nom) por tramos (droop
+      piecewise, pendiente referida a P_ref); error = P_medida - P_esperada;
+      evaluación por zonas con tolerancia (semáforo del legado core/droop.py).
+    parametros_heredados:               # de core/droop.py (PRUEBAS[3])
+      f_min_hz: 59.97
+      f_max_hz: 62.70
+      umbral_activacion_hz: 60.20
+      estatismos: [0.03, 0.05, 0.08]
+    evidencia_requerida: [f(t) y P(t) por caso, curva droop teórica vs medida, tabla de error por zona]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: HEREDADO_PROTOCOLO_SIN_CITA
+    dato_requerido: >
+      Numeral con umbral de activación, estatismos admisibles, banda muerta
+      máxima y tolerancia de la respuesta (% o MW) para sobre-frecuencia.
+    observaciones: Casos multi-estatismo 3/5/8 % heredados del protocolo.
+
+  - id: CE-F-04
+    legacy_id: P8
+    nombre: Respuesta ante baja frecuencia
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, frequency, active_power]
+    unidad_esperada: {frequency: Hz, active_power: MW}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: escalón de frecuencia + tiempo de establecimiento por caso de estatismo
+    criterio_aceptacion: >
+      Incremento de potencia activa proporcional al estatismo configurado al
+      caer la frecuencia bajo el umbral, dentro de tolerancia y tiempos, sujeto
+      a reserva disponible.
+    formula_algoritmo: Igual a CE-F-03 con signo inverso y zona de sub-frecuencia.
+    parametros_heredados:               # de core/droop.py (PRUEBAS[8])
+      f_min_hz: 59.49
+      f_max_hz: 60.03
+      umbral_activacion_hz: 59.80
+      estatismos: [0.03, 0.05, 0.08]
+    evidencia_requerida: [f(t) y P(t) por caso, curva droop teórica vs medida, tabla de error por zona]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: HEREDADO_PROTOCOLO_SIN_CITA
+    dato_requerido: >
+      Numeral con umbral de activación, estatismos, banda muerta y tolerancia
+      para sub-frecuencia; tratamiento de headroom/reserva.
+    observaciones: null
+
+  - id: CE-F-05
+    legacy_id: P9
+    nombre: Control primario de frecuencia (CPF)
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]          # confirmar exigencia por categoría
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, frequency, active_power]
+    unidad_esperada: {frequency: Hz, active_power: MW}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: perfil completo de variaciones de frecuencia del protocolo
+    criterio_aceptacion: >
+      Modulación de P inversa y proporcional a Δf conforme al estatismo y banda
+      muerta declarados; tiempos de respuesta t1 (inicio) y t2 (establecimiento)
+      dentro de los máximos exigidos; error dentro de tolerancia.
+    formula_algoritmo: >
+      Curva droop teórica en ambas zonas (core/droop.py PRUEBAS[9]); detección
+      de escalones de f; medición de t1/t2 sobre P(t); error por zona con
+      semáforo.
+    parametros_heredados:
+      f_min_hz: 59.49
+      f_max_hz: 62.70
+      estatismos: [0.03, 0.05, 0.08]
+      banda_muerta_hz: 0.030          # db usado en derivar_p_op del legado
+    evidencia_requerida: [f(t)/P(t), droop teórico vs medido, tabla t1/t2 y error]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: HEREDADO_PROTOCOLO_SIN_CITA
+    dato_requerido: >
+      Numeral con tiempos máximos de respuesta/establecimiento del CPF,
+      tolerancia de aporte y banda muerta máxima permitida.
+    observaciones: null
+
+  - id: CE-F-06
+    legacy_id: P28
+    nombre: Control secundario de frecuencia (CSF / AGC)
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: []                    # aplicabilidad por categoría PENDIENTE
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, frequency, active_power, setpoint_agc]
+    unidad_esperada: {active_power: MW, setpoint_agc: MW}
+    fs_minima_sugerida_hz: 0.2
+    duracion_minima: secuencia de consignas AGC del protocolo
+    criterio_aceptacion: >
+      Seguimiento de consignas AGC dentro de tolerancia y rampa exigidas cuando
+      el CSF aplique a la central.
+    formula_algoritmo: error de seguimiento P_medida vs consigna; rampa efectiva MW/min.
+    evidencia_requerida: [P vs consigna, tabla de error y rampas]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Aplicabilidad por categoría/tecnología, tolerancia y rampas — numeral.
+    observaciones: El legado P28 mezcla "control de frecuencia" genérico; separar CPF/CSF.
+
+  - id: CE-F-07
+    legacy_id: P4
+    nombre: Potencia activa constante
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, frequency, active_power, setpoint_p]
+    unidad_esperada: {active_power: MW}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: ventana completa del modo P constante del protocolo
+    criterio_aceptacion: >
+      P se mantiene en la consigna dentro del margen de tolerancia durante toda
+      la ventana, incluida operación con frecuencia fuera de nominal.
+    formula_algoritmo: desviación = P_medida - consigna; estadísticos y permanencia dentro de banda de tolerancia.
+    evidencia_requerida: [P(t) vs consigna con banda de tolerancia, tabla de desviaciones]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Tolerancia (% de Pn o MW) y numeral.
+    observaciones: null
+
+  - id: CE-F-08
+    legacy_id: null
+    nombre: Limitación total/parcial de potencia activa
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: []
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, active_power, setpoint_limite]
+    unidad_esperada: {active_power: MW}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: por escalón de limitación del protocolo
+    criterio_aceptacion: >
+      Al recibir consigna de limitación, P desciende al valor límite dentro del
+      tiempo y tolerancia exigidos y no lo excede mientras dura la consigna.
+    formula_algoritmo: detección de escalón de consigna; t de cumplimiento; excedencias sobre el límite.
+    evidencia_requerida: [P(t) vs límite, tabla de tiempos y excedencias]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Tiempo máximo de actuación y tolerancia — numeral.
+    observaciones: null
+
+  - id: CE-F-09
+    legacy_id: null
+    nombre: Rampas de variación de carga
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: []
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, active_power]
+    unidad_esperada: {rampa: "MW/min o %Pn/min"}
+    fs_minima_sugerida_hz: 0.2
+    duracion_minima: maniobras de subida y bajada completas
+    criterio_aceptacion: >
+      Las rampas de subida/bajada se mantienen dentro de los límites declarados
+      /exigidos (MW/min o %Pn/min).
+    formula_algoritmo: rampa = ΔP/Δt por ventana móvil; comparación contra límite por signo.
+    evidencia_requerida: [P(t) con rampas anotadas, tabla de rampas máximas]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Límite de rampa aplicable (declarado vs normativo) — numeral.
+    observaciones: null
+
+  - id: CE-F-10
+    legacy_id: P6
+    nombre: Reconexión automática
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: []
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, frequency, active_power, estado_interruptor]
+    unidad_esperada: {active_power: MW}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: evento de apertura + reconexión + rampa de recuperación
+    criterio_aceptacion: >
+      Tras apertura, la central reconecta automáticamente solo dentro de las
+      condiciones de f/V permitidas y recupera P con rampa controlada.
+    formula_algoritmo: detección de desconexión (P≈0/estado); tiempo a reconexión; condiciones f/V al reconectar; rampa de recuperación.
+    evidencia_requerida: [f/P(t) con evento anotado, tabla de tiempos]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Ventanas f/V de reconexión permitida y rampa máxima — numeral.
+    observaciones: null
+
+  # ===========================================================================
+  # CENTRALES ELÉCTRICAS — TENSIÓN Y POTENCIA REACTIVA
+  # ===========================================================================
+
+  - id: CE-V-01
+    legacy_id: P12
+    nombre: Rango de tensión en el Punto de Interconexión
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, voltage]
+    unidad_esperada: {voltage: "pu (base = tensión nominal POI)"}
+    fs_minima_sugerida_hz: 0.0033     # 1 muestra / 5 min mínimo; confirmar agregación normativa
+    duracion_minima: por banda de tensión según tabla normativa
+    criterio_aceptacion: >
+      Operación continua sin desconexión dentro de las bandas de tensión (pu) y
+      tiempos de permanencia de la tabla normativa para el nivel de tensión del POI.
+    formula_algoritmo: conversión a pu; clasificación por banda; permanencia y detección de desconexión.
+    evidencia_requerida: [V(t) en pu con bandas, tabla de permanencia]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Tabla bandas de tensión (pu) vs tiempo por nivel de tensión — numeral.
+    observaciones: null
+
+  - id: CE-V-02
+    legacy_id: P13
+    nombre: Capacidad de potencia reactiva
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]          # exigencia de curva completa varía por categoría
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, active_power, reactive_power, voltage]
+    unidad_esperada: {active_power: MW, reactive_power: MVAr, voltage: pu}
+    fs_minima_sugerida_hz: 0.2
+    duracion_minima: puntos sostenidos en los extremos capacitivo e inductivo del protocolo
+    criterio_aceptacion: >
+      La central alcanza y sostiene los puntos Q exigidos (inyección y
+      absorción) a los niveles de P y V del protocolo, cubriendo la envolvente
+      P-Q/Pmáx exigida.
+    formula_algoritmo: puntos (P,Q) medidos vs envolvente exigida; sostenimiento por punto; márgenes.
+    evidencia_requerida: [nube P-Q vs envolvente, Q(t)/V(t) por punto, tabla]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Envolvente P-Q/Pmáx exigida (vértices) por categoría/tecnología y duración de sostenimiento — numeral.
+    observaciones: null
+
+  - id: CE-V-03
+    legacy_id: null
+    nombre: Curva V-Q/Pmáx
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: []
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, voltage, reactive_power, active_power]
+    unidad_esperada: {voltage: pu, reactive_power: MVAr}
+    fs_minima_sugerida_hz: 0.2
+    duracion_minima: barrido de tensión del protocolo
+    criterio_aceptacion: Cobertura de la envolvente V-Q/Pmáx exigida.
+    formula_algoritmo: puntos (V,Q) vs envolvente exigida.
+    evidencia_requerida: [curva V-Q medida vs exigida, tabla]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Envolvente V-Q/Pmáx (vértices) — numeral.
+    observaciones: null
+
+  - id: CE-V-04
+    legacy_id: null
+    nombre: Control de tensión
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: []
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, voltage, reactive_power, setpoint_v]
+    unidad_esperada: {voltage: pu}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: escalones de consigna de V del protocolo
+    criterio_aceptacion: >
+      Ante escalón de consigna de tensión, la respuesta de Q/V cumple tiempos
+      (t1/t2), pendiente (droop de tensión) y error en estado estable exigidos.
+    formula_algoritmo: detección de escalón de consigna; t1/t2 sobre V/Q; error final vs tolerancia.
+    evidencia_requerida: [V/Q(t) con escalones, tabla t1/t2 y error]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Tiempos de respuesta, droop admisible y tolerancia — numeral.
+    observaciones: null
+
+  - id: CE-V-05
+    legacy_id: null
+    nombre: Control de potencia reactiva
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: []
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, reactive_power, setpoint_q]
+    unidad_esperada: {reactive_power: MVAr}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: escalones de consigna Q del protocolo
+    criterio_aceptacion: Seguimiento de consignas Q dentro de tolerancia y tiempos exigidos.
+    formula_algoritmo: error de seguimiento y tiempos por escalón.
+    evidencia_requerida: [Q(t) vs consigna, tabla]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Tolerancia y tiempos — numeral.
+    observaciones: null
+
+  - id: CE-V-06
+    legacy_id: null
+    nombre: Control de factor de potencia
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: []
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, power_factor, active_power, reactive_power]
+    unidad_esperada: {power_factor: adimensional}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: escalones de consigna FP del protocolo
+    criterio_aceptacion: Seguimiento de consigna de FP dentro de tolerancia y tiempos exigidos.
+    formula_algoritmo: FP medido (o derivado de P,Q con signo) vs consigna; error y tiempos.
+    evidencia_requerida: [FP(t) vs consigna, tabla]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Tolerancia y tiempos — numeral.
+    observaciones: null
+
+  - id: CE-V-07
+    legacy_id: null
+    nombre: Comportamiento dinámico ante falla (LVRT/HVRT)
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: []
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, voltage_abc, current_abc, active_power, reactive_power]
+    unidad_esperada: {voltage: pu}
+    fs_minima_sugerida_hz: 1000       # requiere registro tipo COMTRADE
+    duracion_minima: evento de falla completo (pre, durante, post)
+    criterio_aceptacion: >
+      La central permanece conectada mientras la trayectoria V(t) esté por
+      encima de la curva LVRT (o debajo de HVRT) y aporta corriente
+      reactiva/recupera P según lo exigido.
+    formula_algoritmo: >
+      V RMS de secuencia positiva desde COMTRADE; comparación de trayectoria
+      V(t) contra curva límite; verificación de continuidad y aporte durante
+      hueco; recuperación de P post-falla.
+    evidencia_requerida: [V(t) vs curva LVRT/HVRT, P/Q/I durante evento]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Curva LVRT/HVRT (puntos V-t), aporte de corriente reactiva y recuperación exigidos — numeral.
+    observaciones: Normalmente se valida con simulación + registro de fallas reales; definir alcance de campo.
+
+  # ===========================================================================
+  # CENTRALES ELÉCTRICAS — POTENCIA / CAPACIDAD
+  # ===========================================================================
+
+  - id: CE-P-01
+    legacy_id: P25
+    nombre: Capacidad instalada neta
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: POC_A5
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, active_power, frequency, voltage]
+    unidad_esperada: {active_power: MW}
+    fs_minima_sugerida_hz: 0.0033
+    duracion_minima: ventana de demostración del protocolo (típicamente horas; confirmar)
+    criterio_aceptacion: >
+      La potencia activa neta sostenida en el POI demuestra la capacidad
+      instalada neta declarada, dentro de la tolerancia y duración exigidas.
+    formula_algoritmo: >
+      P máxima sostenida (promedio móvil sobre la ventana exigida) vs valor
+      declarado; verificación de condiciones f/V normales durante la demostración.
+    evidencia_requerida: [P(t) con umbral declarado, f(t), V(t), tabla de indicadores]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Duración de sostenimiento y tolerancia (% del valor declarado) — numeral POC/Anexo 5.
+    observaciones: El legado (P25) ya genera gráficas de inyección neta, f, V e indicadores diarios.
+
+  # ===========================================================================
+  # CENTRALES ELÉCTRICAS — DOCUMENTALES
+  # ===========================================================================
+
+  - id: CE-D-01
+    nombre: Modelos de simulación entregados y validados
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: INTER
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [checklist_documental]
+    unidad_esperada: {}
+    fs_minima_sugerida_hz: null
+    duracion_minima: null
+    criterio_aceptacion: Entrega completa y aceptación por CENACE de los modelos exigidos (estático/dinámico/corto circuito).
+    formula_algoritmo: checklist con evidencia de entrega/aceptación por ítem.
+    evidencia_requerida: [oficios/acuses, versiones de modelos]
+    tipo_salida: [tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Lista exacta de modelos y formatos exigidos por categoría — numeral.
+    observaciones: Las pruebas documentales CE-D-02..05 (protecciones, ajustes de control, instrumentación, intercambio de información) siguen esta misma estructura de checklist; se instancian al validar sus numerales.
+
+  # ===========================================================================
+  # CENTRALES ELÉCTRICAS — CALIDAD DE LA POTENCIA
+  # ===========================================================================
+
+  - id: CE-Q-01
+    legacy_id: P26
+    nombre: Desbalance de tensión
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: COD_RED
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, voltage_a, voltage_b, voltage_c]
+    unidad_esperada: {desbalance: "%"}
+    fs_minima_sugerida_hz: 0.0033     # agregaciones 10 min típicas de analizadores; confirmar
+    duracion_minima: campaña de medición exigida (típ. 7 días; confirmar)
+    criterio_aceptacion: Desbalance dentro del límite (%) durante el percentil exigido de la campaña.
+    formula_algoritmo: >
+      Definición pendiente de confirmar (componentes simétricas V2/V1 vs
+      aproximación NEMA); percentil 95 (u exigido) de agregaciones vs límite.
+    evidencia_requerida: [serie de desbalance, histograma/percentiles, tabla]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Definición (método), límite %, agregación y percentil, duración de campaña — numeral.
+    observaciones: null
+
+  - id: CE-Q-02
+    legacy_id: P26
+    nombre: Flicker (Pst/Plt)
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: COD_RED
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, pst, plt]   # o forma de onda si se calcula
+    unidad_esperada: {pst: adimensional, plt: adimensional}
+    fs_minima_sugerida_hz: null       # Pst = ventana 10 min, Plt = 2 h (IEC 61000-4-15)
+    duracion_minima: campaña de medición exigida
+    criterio_aceptacion: Pst y Plt bajo los límites en el percentil exigido de la campaña.
+    formula_algoritmo: >
+      Preferente: consumir Pst/Plt calculados por el analizador (IEC
+      61000-4-15). Cálculo propio solo si existe forma de onda con fs
+      suficiente e integración con librería especializada validada.
+    evidencia_requerida: [series Pst/Plt, percentiles, tabla]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Límites Pst/Plt, percentil y duración de campaña — numeral.
+    observaciones: null
+
+  - id: CE-Q-03
+    legacy_id: P26
+    nombre: Variaciones rápidas de tensión (RVC)
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: COD_RED
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, voltage_rms]
+    unidad_esperada: {rvc: "% de Vnominal"}
+    fs_minima_sugerida_hz: 1          # requiere RMS rápido (ciclo a ciclo ideal); confirmar
+    duracion_minima: maniobras de conexión/desconexión del protocolo
+    criterio_aceptacion: ΔV/V de eventos de variación rápida bajo el límite % y frecuencia de ocurrencia permitida.
+    formula_algoritmo: detección de cambios de estado estable de V RMS; ΔV/V por evento.
+    evidencia_requerida: [V RMS con eventos anotados, tabla de eventos]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Límite % y ocurrencia permitida — numeral.
+    observaciones: null
+
+  - id: CE-Q-04
+    legacy_id: P26
+    nombre: Armónicos de tensión (individuales y THD)
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: COD_RED
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, thd_v, armónicos_v_h2_h50]
+    unidad_esperada: {thd_v: "%", armonico: "% de V1"}
+    fs_minima_sugerida_hz: 0.0033     # agregaciones 10 min del analizador
+    duracion_minima: campaña de medición exigida
+    criterio_aceptacion: Cada armónico individual y el THD bajo su límite en el percentil exigido.
+    formula_algoritmo: percentiles por armónico vs tabla de límites según nivel de tensión.
+    evidencia_requerida: [espectro/percentiles por armónico, serie THD, tabla]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Tabla de límites por armónico y THD según nivel de tensión — numeral (confirmar si el manual remite a IEEE 519).
+    observaciones: null
+
+  - id: CE-Q-05
+    legacy_id: P26
+    nombre: Armónicos de corriente (individuales y TDD)
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: [A, B, C, D]
+    tecnologia: AMBAS
+    manual_referencia: COD_RED
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, tdd, armónicos_i_h2_h50, corriente_demanda_maxima]
+    unidad_esperada: {tdd: "%", armonico: "% de IL"}
+    fs_minima_sugerida_hz: 0.0033
+    duracion_minima: campaña de medición exigida
+    criterio_aceptacion: Armónicos individuales de corriente y TDD bajo límites según Isc/IL.
+    formula_algoritmo: percentiles por armónico vs tabla según relación de cortocircuito Isc/IL.
+    evidencia_requerida: [percentiles por armónico, serie TDD, tabla]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Tabla de límites por Isc/IL e IL de referencia — numeral.
+    observaciones: Requiere dato de red (Isc en el POI) además de medición.
+
+  - id: CE-Q-06
+    nombre: Inyección de corriente directa
+    aplica_a: CENTRAL_ELECTRICA
+    categorias: []
+    tecnologia: ASINCRONA             # confirmar aplicabilidad (inversores)
+    manual_referencia: COD_RED
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, corriente_dc, corriente_nominal]
+    unidad_esperada: {corriente_dc: "% de In"}
+    fs_minima_sugerida_hz: null
+    duracion_minima: null
+    criterio_aceptacion: Componente de CD inyectada bajo el límite % de In.
+    formula_algoritmo: I_dc medida vs límite.
+    evidencia_requerida: [tabla de medición]
+    tipo_salida: [tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Límite % y aplicabilidad — numeral.
+    observaciones: null
+
+  # ===========================================================================
+  # CENTROS DE CARGA (Manual CONE)
+  # ===========================================================================
+
+  - id: CC-01
+    nombre: Rango de tensión (Centro de Carga)
+    aplica_a: CENTRO_DE_CARGA
+    manual_referencia: CONE
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, voltage]
+    unidad_esperada: {voltage: pu}
+    fs_minima_sugerida_hz: 0.0033
+    duracion_minima: campaña de medición exigida
+    criterio_aceptacion: Operación dentro de las bandas de tensión exigidas para el nivel de conexión.
+    formula_algoritmo: clasificación por banda y permanencia.
+    evidencia_requerida: [V(t) con bandas, tabla]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Tabla de bandas por nivel de tensión — numeral CONE.
+    observaciones: null
+
+  - id: CC-02
+    nombre: Rango de frecuencia (Centro de Carga)
+    aplica_a: CENTRO_DE_CARGA
+    manual_referencia: CONE
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, frequency]
+    unidad_esperada: {frequency: Hz}
+    fs_minima_sugerida_hz: 1
+    duracion_minima: campaña / eventos del protocolo
+    criterio_aceptacion: Permanencia conectado dentro de las bandas de frecuencia exigidas (incl. esquemas de baja frecuencia si aplican).
+    formula_algoritmo: clasificación por banda y permanencia; verificación de esquemas de deslastre si aplica.
+    evidencia_requerida: [f(t) con bandas, tabla]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Bandas y obligaciones de deslastre — numeral CONE.
+    observaciones: null
+
+  - id: CC-03
+    nombre: Aportación / soporte ante corto circuito
+    aplica_a: CENTRO_DE_CARGA
+    manual_referencia: CONE
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [estudio_corto_circuito]
+    unidad_esperada: {}
+    fs_minima_sugerida_hz: null
+    duracion_minima: null
+    criterio_aceptacion: Cumplimiento de los requisitos de corto circuito del manual (estudio aceptado, capacidades interruptivas adecuadas).
+    formula_algoritmo: checklist documental + verificación de valores del estudio contra capacidades instaladas.
+    evidencia_requerida: [estudio, hojas de datos de tableros]
+    tipo_salida: [tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Requisitos exactos — numeral CONE.
+    observaciones: null
+
+  - id: CC-04
+    nombre: Factor de potencia (Centro de Carga)
+    aplica_a: CENTRO_DE_CARGA
+    manual_referencia: CONE
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, power_factor, active_power, reactive_power]
+    unidad_esperada: {power_factor: adimensional}
+    fs_minima_sugerida_hz: 0.0033
+    duracion_minima: campaña de medición exigida (confirmar intervalo de integración)
+    criterio_aceptacion: FP dentro del rango obligatorio en los intervalos de medición exigidos.
+    formula_algoritmo: FP por intervalo de integración (o derivado de energías P/Q); % de intervalos en cumplimiento.
+    evidencia_requerida: [FP(t), histograma, tabla de intervalos fuera de rango]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Rango de FP, base e intervalo de medición — numeral CONE.
+    observaciones: null
+
+  - id: CC-05
+    nombre: Protecciones (Centro de Carga)
+    aplica_a: CENTRO_DE_CARGA
+    manual_referencia: CONE
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [checklist_documental, ajustes_protecciones]
+    unidad_esperada: {}
+    fs_minima_sugerida_hz: null
+    duracion_minima: null
+    criterio_aceptacion: Esquemas y ajustes de protección conforme a lo exigido/coordinado con el transportista y CENACE.
+    formula_algoritmo: checklist + comparación de ajustes entregados vs aprobados.
+    evidencia_requerida: [estudios de coordinación, hojas de ajuste, pruebas de inyección]
+    tipo_salida: [tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Requisitos exactos — numeral CONE.
+    observaciones: null
+
+  - id: CC-06
+    nombre: Control (Centro de Carga)
+    aplica_a: CENTRO_DE_CARGA
+    manual_referencia: CONE
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [checklist_documental]
+    unidad_esperada: {}
+    fs_minima_sugerida_hz: null
+    duracion_minima: null
+    criterio_aceptacion: Sistemas de control exigidos instalados y funcionales.
+    formula_algoritmo: checklist con evidencia funcional.
+    evidencia_requerida: [pruebas funcionales, actas]
+    tipo_salida: [tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Requisitos exactos — numeral CONE.
+    observaciones: null
+
+  - id: CC-07
+    nombre: Intercambio de información (Centro de Carga)
+    aplica_a: CENTRO_DE_CARGA
+    manual_referencia: CONE
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [checklist_documental, lista_senales_scada]
+    unidad_esperada: {}
+    fs_minima_sugerida_hz: null
+    duracion_minima: null
+    criterio_aceptacion: Señales, protocolos y enlaces con CENACE operando conforme a lo exigido.
+    formula_algoritmo: checklist punto-a-punto de señales exigidas vs verificadas.
+    evidencia_requerida: [actas de pruebas punto a punto]
+    tipo_salida: [tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Lista de señales exigidas — numeral CONE.
+    observaciones: null
+
+  - id: CC-08
+    nombre: Calidad de la potencia (Centro de Carga)
+    aplica_a: CENTRO_DE_CARGA
+    manual_referencia: CONE
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [timestamp, thd_v, tdd, armónicos, pst, plt, desbalance, flicker]
+    unidad_esperada: {thd_v: "%", tdd: "%"}
+    fs_minima_sugerida_hz: 0.0033
+    duracion_minima: campaña de medición exigida (típ. 7 días; confirmar)
+    criterio_aceptacion: >
+      Armónicos, flicker, desbalance y demás parámetros de calidad dentro de los
+      límites del Código de Red para centros de carga en su nivel de conexión.
+    formula_algoritmo: reutiliza evaluadores CE-Q-01..06 con límites propios de CC.
+    evidencia_requerida: [series y percentiles por parámetro, tabla consolidada]
+    tipo_salida: [grafica, tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Tablas de límites de calidad para CC por nivel de tensión — numerales.
+    observaciones: null
+
+  - id: CC-09
+    nombre: Modelos de simulación (Centro de Carga)
+    aplica_a: CENTRO_DE_CARGA
+    manual_referencia: CONE
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [checklist_documental]
+    unidad_esperada: {}
+    fs_minima_sugerida_hz: null
+    duracion_minima: null
+    criterio_aceptacion: Modelos exigidos entregados y aceptados.
+    formula_algoritmo: checklist.
+    evidencia_requerida: [acuses, versiones]
+    tipo_salida: [tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Lista de modelos exigidos — numeral CONE.
+    observaciones: null
+
+  - id: CC-10
+    nombre: Plan de trabajo y verificación de conformidad
+    aplica_a: CENTRO_DE_CARGA
+    manual_referencia: CONE
+    numeral: null
+    fuente_documental: null
+    variables_requeridas: [checklist_documental, cronograma]
+    unidad_esperada: {}
+    fs_minima_sugerida_hz: null
+    duracion_minima: null
+    criterio_aceptacion: Plan de trabajo presentado y verificación de conformidad completada según el procedimiento.
+    formula_algoritmo: checklist de hitos del plan vs evidencia.
+    evidencia_requerida: [plan, actas, dictámenes]
+    tipo_salida: [tabla, conclusion]
+    resultados_posibles: *resultados
+    estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
+    dato_requerido: Contenido mínimo exigido del plan — numeral CONE.
+    observaciones: El legado ya maneja cronograma.json por proyecto; se reutiliza como base del plan de trabajo.
