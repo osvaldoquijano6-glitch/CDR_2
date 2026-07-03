@@ -1,0 +1,28 @@
+{
+  "slug": "Pruebas_Centrales_v3",
+  "central_name": "TRANE",
+  "central_kind": "asincrona",
+  "central_class": "B",
+  "applicable_tests": [
+    "asincrona:1",
+    "asincrona:2",
+    "asincrona:3",
+    "asincrona:4",
+    "asincrona:5",
+    "asincrona:6",
+    "asincrona:7",
+    "asincrona:8",
+    "asincrona:9",
+    "asincrona:12",
+    "asincrona:13",
+    "asincrona:20",
+    "asincrona:24",
+    "asincrona:25",
+    "asincrona:26",
+    "asincrona:27",
+    "asincrona:28",
+    "asincrona:31",
+    "asincrona:81",
+    "asincrona:91"
+  ]
+}
