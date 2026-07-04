@@ -1,0 +1,104 @@
+"""Tests FASE 4: figuras de evidencia y exportadores Excel/HTML/Word."""
+
+import pandas as pd
+import pytest
+
+from gcv.evaluation.frequency.rango_frecuencia import RangoFrecuencia
+from gcv.evaluation.frequency.respuesta_frecuencia import RespuestaAltaFrecuencia
+from gcv.evaluation.power_quality.armonicos import ArmonicosTension
+from gcv.models import Installation, InstallationKind, Technology, Category
+from gcv.reporting.context import ReportContext
+from gcv.reporting.docx_report import export_docx
+from gcv.reporting.excel import export_excel
+from gcv.reporting.html_report import export_html, render_html
+from gcv.visualization.evidence import build_figures
+
+from tests.unit.helpers import make_dataset, make_spec, ts
+
+_VARS = ["timestamp", "frequency", "active_power"]
+
+
+@pytest.fixture
+def escenario():
+    """Dataset + dos resultados (frecuencia CUMPLE, droop CUMPLE) + armónicos."""
+    df = pd.DataFrame({
+        "timestamp": ts(160),
+        "frequency": [60.0] * 80 + [60.8] * 80,
+        "active_power": [80.0] * 80 + [60.0] * 80,
+    })
+    ds = make_dataset(df)
+
+    spec_f1 = make_spec("CE-F-01", _VARS,
+                        limites={"bandas": [{"f_min": 59.5, "f_max": 61.0, "t_min_s": 10}]})
+    r1 = RangoFrecuencia(spec_f1).run(ds)
+
+    spec_f3 = make_spec("CE-F-03", _VARS, limites={
+        "umbral_hz": 60.2, "tolerancia_pct_pref": 5.0, "cumplimiento_minimo_pct": 90.0})
+    r3 = RespuestaAltaFrecuencia(spec_f3).run(ds, {"estatismo": 0.05, "p_ref_mw": 100.0})
+
+    df_q = pd.DataFrame({"timestamp": ts(20), "thd_voltage": [2.5] * 20,
+                         "harmonic_voltage_5": [1.5] * 20})
+    ds_q = make_dataset(df_q)
+    spec_q = make_spec("CE-Q-04", ["timestamp"], limites={
+        "thd_max_pct": 5.0, "armonicos": {5: 3.0}})
+    rq = ArmonicosTension(spec_q).run(ds_q)
+
+    return ds, ds_q, [r1, r3, rq]
+
+
+def test_figuras_por_familia(escenario):
+    ds, ds_q, (r1, r3, rq) = escenario
+    figs1 = build_figures(r1, ds)
+    assert len(figs1) == 1  # f + P apiladas en una figura
+
+    figs3 = build_figures(r3, ds)
+    assert len(figs3) == 2  # series temporales + característica P(f)
+    nombres = [tr.name for tr in figs3[0].data]
+    assert "P esperada (droop)" in nombres  # curva teórica presente
+
+    figsq = build_figures(rq, ds_q)
+    assert len(figsq) == 1
+    assert figsq[0].data[0].type == "bar"
+
+
+def test_figuras_sin_vista_definida(escenario):
+    ds, _, (r1, _, _) = escenario
+    r1_mod = r1.model_copy(update={"test_id": "CE-D-01"})
+    assert build_figures(r1_mod, ds) == []
+
+
+def _context(escenario) -> ReportContext:
+    ds, ds_q, resultados = escenario
+    figuras = {r.test_id: build_figures(r, ds if r.test_id.startswith("CE-F") else ds_q)
+               for r in resultados}
+    inst = Installation(nombre="Central X", kind=InstallationKind.CENTRAL_ELECTRICA,
+                        tech=Technology.ASINCRONA, category=Category.C)
+    return ReportContext(proyecto="Proyecto demo", installation=inst,
+                         resultados=resultados, datasets=[ds, ds_q], figuras=figuras)
+
+
+def test_export_excel(escenario, tmp_path):
+    path = export_excel(_context(escenario), tmp_path / "matriz.xlsx")
+    assert path.exists() and path.stat().st_size > 5_000
+    hojas = pd.read_excel(path, sheet_name=None)
+    assert set(hojas) == {"Matriz de cumplimiento", "Criterios", "Mediciones", "Bitacora"}
+    assert len(hojas["Matriz de cumplimiento"]) == 3
+
+
+def test_export_html(escenario, tmp_path):
+    ctx = _context(escenario)
+    html = render_html(ctx)
+    assert "CE-F-03" in html and "Informe técnico" in html
+    assert html.count("plotly") > 0  # figuras embebidas
+    assert "Bitácora" in html or "bitácora" in html.lower()
+    path = export_html(ctx, tmp_path / "informe.html")
+    assert path.exists() and path.stat().st_size > 100_000  # plotly.js inline
+
+
+def test_export_docx(escenario, tmp_path):
+    path = export_docx(_context(escenario), tmp_path / "informe.docx")
+    assert path.exists() and path.stat().st_size > 10_000
+    from docx import Document
+    doc = Document(str(path))
+    textos = "\n".join(p.text for p in doc.paragraphs)
+    assert "CE-F-03" in textos and "Conclusión" in textos

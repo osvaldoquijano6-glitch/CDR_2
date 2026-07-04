@@ -13,7 +13,7 @@ evidencia e informes.
 | 1 | Arquitectura + matriz normativa ([docs/FASE1_ARQUITECTURA.md](docs/FASE1_ARQUITECTURA.md)) | ✅ |
 | 2 | Paquete `src/gcv`: lectores, normalización, motor de reglas, unit tests | ✅ |
 | 3 | Pruebas prioritarias: 13 evaluadores (frecuencia, ROCOF, droop, tensión, FP, capacidad, armónicos, flicker, desbalance, RVC) — ver [docs/FASE3_ESTADO_DISENO.md](docs/FASE3_ESTADO_DISENO.md) | ✅ |
-| 4 | Reportes y gráficas | pendiente |
+| 4 | Gráficas Plotly, informes HTML/Excel/Word y borrador de interfaz Streamlit | ✅ |
 | 5 | Módulo ML de apoyo | pendiente |
 
 La aplicación Streamlit anterior (`app.py`, `core/`, `tests/*.py` de campo)
@@ -39,6 +39,18 @@ print(resultado.status, resultado.conclusion)
 Regla central: sin criterio normativo `VALIDADO` (con documento y numeral en
 `normative/matriz_pruebas.yaml`) el motor reporta mediciones pero el resultado
 es `NO_EVALUABLE` — nunca inventa límites.
+
+## Interfaz (borrador FASE 4)
+
+```bash
+pip install -e .[reporting,ui]
+./run_app.sh      # Streamlit: datos → pruebas → resultados → reportes
+```
+
+Exportadores disponibles: matriz de cumplimiento Excel, informe técnico HTML
+autocontenido (gráficas Plotly interactivas), informe Word y bitácora JSON.
+PDF vía weasyprint en entornos con sus librerías de sistema
+(`gcv.reporting.html_report.export_pdf`).
 
 ## Desarrollo
 
