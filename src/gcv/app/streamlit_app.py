@@ -30,6 +30,7 @@ from gcv.reporting.docx_report import export_docx
 from gcv.reporting.excel import export_excel
 from gcv.reporting.html_report import export_html
 from gcv.visualization.evidence import build_figures
+from gcv.app import ui_theme
 
 st.set_page_config(page_title="Verificación Código de Red", layout="wide", page_icon="⚡")
 
@@ -59,14 +60,17 @@ def _matrix():
 
 
 def _sidebar() -> Installation:
-    st.sidebar.title("⚡ Proyecto")
+    ui_theme.sidebar_logo()
+    st.sidebar.title("Proyecto")
     nombre = st.sidebar.text_input("Nombre del proyecto", "Proyecto de verificación")
-    kind = st.sidebar.radio("Tipo de instalación",
-                            [k.value for k in InstallationKind], horizontal=False)
+    etiquetas = {"CENTRAL_ELECTRICA": "Central Eléctrica", "CENTRO_DE_CARGA": "Centro de Carga",
+                 "SINCRONA": "Síncrona", "ASINCRONA": "Asíncrona", "MIXTA": "Mixta"}
+    kind = st.sidebar.radio("Tipo de instalación", [k.value for k in InstallationKind],
+                            format_func=etiquetas.get, horizontal=False)
     kwargs = {}
     if kind == InstallationKind.CENTRAL_ELECTRICA.value:
         kwargs["tech"] = Technology(st.sidebar.selectbox(
-            "Tecnología", [t.value for t in Technology]))
+            "Tecnología", [t.value for t in Technology], format_func=etiquetas.get))
         kwargs["category"] = Category(st.sidebar.selectbox(
             "Categoría (A/B/C/D)", [c.value for c in Category], index=2))
         kwargs["area_sincrona"] = SyncArea(st.sidebar.selectbox(
@@ -188,27 +192,27 @@ def _tab_resultados(state: dict) -> None:
     resumen = {}
     for tid, (r, _) in state["results"].items():
         resumen[r.status.value] = resumen.get(r.status.value, 0) + 1
-    cols = st.columns(len(resumen) or 1)
-    for col, (status, cuenta) in zip(cols, resumen.items()):
-        col.metric(f"{_STATUS_ICON.get(status,'')} {status.replace('_',' ')}", cuenta)
+    ui_theme.summary_cards(resumen)
 
     for tid, (r, _) in state["results"].items():
         with st.expander(f"{_STATUS_ICON.get(r.status.value,'')} {tid} — {r.test_name} · "
                          f"{r.status.value.replace('_',' ')}", expanded=True):
             refs = "; ".join(f"{n.documento} {n.numeral or '(numeral pendiente)'}"
                              for n in r.normative_reference) or "—"
+            st.markdown(ui_theme.chip(r.status.value), unsafe_allow_html=True)
             st.caption(f"Referencia: {refs} · Estado del criterio: {r.estado_normativo}")
+            fmt = lambda v: "—" if v is None else f"{v:.6g}"  # noqa: E731
             if r.pass_fail_details:
                 st.dataframe(pd.DataFrame([{
-                    "criterio": c.nombre, "medido": c.valor_medido,
-                    "límite": f"{c.comparacion or ''} {c.limite if c.limite is not None else '—'}",
+                    "criterio": c.nombre, "medido": fmt(c.valor_medido),
+                    "límite": f"{c.comparacion or ''} {fmt(c.limite)}",
                     "unidad": c.unidad or "",
                     "cumple": {True: "SÍ", False: "NO"}.get(c.cumple, "NO EVALUABLE"),
                     "detalle": c.detalle or ""} for c in r.pass_fail_details]),
                     width="stretch")
             if r.measured_values:
                 st.dataframe(pd.DataFrame([{
-                    "variable": m.nombre, "valor": m.valor, "unidad": m.unidad or "",
+                    "variable": m.nombre, "valor": fmt(m.valor), "unidad": m.unidad or "",
                     "detalle": m.detalle or ""} for m in r.measured_values]),
                     width="stretch")
             for w in r.warnings:
@@ -252,11 +256,16 @@ def _tab_reportes(state: dict, inst: Installation) -> None:
 
 
 def main() -> None:
+    ui_theme.inject_css()
     inst = _sidebar()
     state = _state()
-    st.title("Verificación de pruebas — Código de Red")
-    st.caption("Los criterios no validados documentalmente producen NO EVALUABLE: "
-               "el sistema nunca inventa límites.")
+    clasificacion = (f"Cat. {inst.category.value} · {inst.tech.value.title()}"
+                     if inst.category and inst.tech else inst.kind.value.replace("_", " ").title())
+    ui_theme.header(
+        subtitle="Manual INTER · Manual CONE · POC/Anexo 5 — evaluación determinística y trazable",
+        badge=f"{inst.nombre} — {clasificacion}")
+    st.markdown('<p class="gcv-foot">Los criterios no validados documentalmente producen '
+                'NO EVALUABLE: el sistema nunca inventa límites.</p>', unsafe_allow_html=True)
     tabs = st.tabs(["📥 Datos", "🧪 Pruebas", "📈 Resultados", "📤 Reportes"])
     with tabs[0]:
         _tab_datos(state)
@@ -268,4 +277,5 @@ def main() -> None:
         _tab_reportes(state, inst)
 
 
-main()
+if __name__ == "__main__":
+    main()
