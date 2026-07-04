@@ -13,7 +13,7 @@ def csv_sucio(tmp_path):
     """CSV con preámbulo, duplicado, desorden, valor no numérico y kW."""
     path = tmp_path / "poi.csv"
     path.write_text(textwrap.dedent("""\
-        Analizador;Hioki PW3198
+        Analizador;Registrador PQ-3000
         ;
         Date/Time;Frequency [Hz];Active Power [kW];Comentario
         2026-07-01 10:00:00;60.01;25000;ok
