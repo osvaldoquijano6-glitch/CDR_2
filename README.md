@@ -12,7 +12,7 @@ evidencia e informes.
 |---|---|---|
 | 1 | Arquitectura + matriz normativa ([docs/FASE1_ARQUITECTURA.md](docs/FASE1_ARQUITECTURA.md)) | ✅ |
 | 2 | Paquete `src/gcv`: lectores, normalización, motor de reglas, unit tests | ✅ |
-| 3 | Pruebas prioritarias (frecuencia, ROCOF, tensión, FP, armónicos…) | pendiente |
+| 3 | Pruebas prioritarias: 13 evaluadores (frecuencia, ROCOF, droop, tensión, FP, capacidad, armónicos, flicker, desbalance, RVC) — ver [docs/FASE3_ESTADO_DISENO.md](docs/FASE3_ESTADO_DISENO.md) | ✅ |
 | 4 | Reportes y gráficas | pendiente |
 | 5 | Módulo ML de apoyo | pendiente |
 

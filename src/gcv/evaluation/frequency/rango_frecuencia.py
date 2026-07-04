@@ -25,26 +25,19 @@ from gcv.evaluation.base import BaseTest, Calculation, WorkingData
 from gcv.evaluation.registry import register
 from gcv.evaluation.result import CriterionCheck, Evidence, MeasuredValue
 from gcv.models import NormRef
+from gcv.signal_processing.statistics import time_in_bands
 
 
 def _permanencia_por_banda(df: pd.DataFrame, bandas: list[dict]) -> list[dict]:
     """Segundos acumulados dentro de cada banda [f_min, f_max]."""
-    times = pd.to_datetime(df["timestamp"])
-    freq = pd.to_numeric(df["frequency"], errors="coerce")
-    # Δt de cada muestra = distancia a la siguiente (última muestra: mediana)
-    dt = times.diff().shift(-1).dt.total_seconds()
-    dt = dt.fillna(dt.median() if dt.notna().any() else 0.0)
-    rows = []
-    for banda in bandas:
-        mask = (freq >= banda["f_min"]) & (freq <= banda["f_max"])
-        rows.append({
-            "f_min": banda["f_min"],
-            "f_max": banda["f_max"],
-            "t_min_s": banda.get("t_min_s"),
-            "permanencia_s": float(dt[mask].sum()),
-            "muestras": int(mask.sum()),
-        })
-    return rows
+    stats = time_in_bands(
+        df["timestamp"], df["frequency"],
+        [(b["f_min"], b["f_max"]) for b in bandas])
+    return [
+        {"f_min": b["f_min"], "f_max": b["f_max"], "t_min_s": b.get("t_min_s"),
+         "permanencia_s": s["permanencia_s"], "muestras": s["muestras"]}
+        for b, s in zip(bandas, stats)
+    ]
 
 
 @register("CE-F-01")

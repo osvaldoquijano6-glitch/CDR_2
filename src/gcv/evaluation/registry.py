@@ -32,7 +32,11 @@ def register(test_id: str):
 
 def _load_builtin_implementations() -> None:
     """Importa los módulos de pruebas para poblar el registro."""
+    import gcv.evaluation.capacidad_instalada  # noqa: F401
     import gcv.evaluation.frequency  # noqa: F401
+    import gcv.evaluation.load_center  # noqa: F401
+    import gcv.evaluation.power_quality  # noqa: F401
+    import gcv.evaluation.voltage  # noqa: F401
 
 
 def implemented_ids() -> list[str]:
