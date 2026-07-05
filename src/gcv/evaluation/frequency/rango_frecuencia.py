@@ -42,6 +42,18 @@ def _permanencia_por_banda(df: pd.DataFrame, bandas: list[dict]) -> list[dict]:
 
 @register("CE-F-01")
 class RangoFrecuencia(BaseTest):
+    def _bandas(self, wd: WorkingData) -> list[dict] | None:
+        """Bandas planas, o por área síncrona (Tabla 2.1: SIN_SIBC / SIBCS_SIM)."""
+        lim = self.spec.limites
+        if lim.get("bandas"):
+            return lim["bandas"]
+        por_area = lim.get("bandas_por_area")
+        if not por_area:
+            return None
+        area = str(wd.params.get("area_sincrona", "SIN"))
+        grupo = "SIN_SIBC" if area in ("SIN", "SIBC", "BCA") else "SIBCS_SIM"
+        return por_area.get(grupo)
+
     def calculate(self, wd: WorkingData) -> Calculation:
         df = wd.dataset.df
         freq = pd.to_numeric(df["frequency"], errors="coerce")
@@ -54,7 +66,7 @@ class RangoFrecuencia(BaseTest):
                 MeasuredValue(nombre="f_p05", valor=float(freq.quantile(0.05)), unidad="Hz"),
             ],
         )
-        bandas = self.spec.limites.get("bandas")
+        bandas = self._bandas(wd)
         if bandas:
             permanencia = _permanencia_por_banda(df, bandas)
             calc.extra["permanencia"] = permanencia
@@ -78,7 +90,8 @@ class RangoFrecuencia(BaseTest):
 
         df = wd.dataset.df
         p_col = "active_power" if "active_power" in df.columns else None
-        umbral_desc = self.spec.limites.get("umbral_desconexion_mw")
+        umbral_desc = self.spec.limites.get(
+            "umbral_desconexion_mw", wd.params.get("umbral_desconexion_mw"))
 
         for fila in permanencia:
             exigido = fila.get("t_min_s")

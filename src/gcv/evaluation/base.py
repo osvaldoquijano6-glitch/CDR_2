@@ -107,6 +107,13 @@ class BaseTest(ABC):
     # ─── Método plantilla ────────────────────────────────────────────────
     def run(self, data: NormalizedDataset, params: dict | None = None) -> TestResult:
         params = params or {}
+        # límites diferenciados por tipo de central: se resuelven una vez y el
+        # resto del ciclo lee spec.limites ya efectivos
+        if "por_tipo" in self.spec.limites:
+            self.spec = self.spec.model_copy(
+                update={"limites": self.spec.limites_efectivos(params.get("tipo_ce"))})
+            if not params.get("tipo_ce"):
+                pass  # sin tipo declarado: solo llaves base; los checks faltantes lo reportan
         result = TestResult(
             test_id=self.spec.id,
             test_name=self.spec.nombre,

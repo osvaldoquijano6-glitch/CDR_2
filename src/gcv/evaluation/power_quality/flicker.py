@@ -37,6 +37,7 @@ class Flicker(BaseTest):
             if señal in df.columns:
                 value = series_percentile(df[señal], pct)
                 calc.extra[señal] = value
+                calc.extra[f"{señal}_p99"] = series_percentile(df[señal], 99)
                 if value is not None:
                     calc.measured.append(MeasuredValue(
                         nombre=f"{señal}_p{pct:g}", valor=value))
@@ -58,6 +59,14 @@ class Flicker(BaseTest):
                 cumple=bool(medido <= float(limite)) if medido is not None else None,
                 referencia=ref,
                 detalle=None if medido is not None else f"Sin señal {señal}"))
+            factor = self.spec.limites.get("p99_factor")
+            if factor and medido is not None:
+                p99 = calc.extra.get(f"{señal}_p99")
+                checks.append(CriterionCheck(
+                    nombre=f"{señal}_p99", valor_medido=p99,
+                    limite=round(float(factor) * float(limite), 4), comparacion="<=",
+                    cumple=bool(p99 <= float(factor) * float(limite)) if p99 is not None else None,
+                    referencia=ref, detalle=f"P99 ≤ {factor} × límite"))
         if not checks:
             checks.append(CriterionCheck(nombre="flicker", cumple=None, referencia=ref,
                                          detalle="limites.pst_max / plt_max ausentes"))

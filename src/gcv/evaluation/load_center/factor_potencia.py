@@ -37,9 +37,10 @@ def _fp_series(df: pd.DataFrame) -> pd.Series | None:
 @register("CC-04")
 class FactorPotenciaCentroCarga(BaseTest):
     def validate_inputs(self, data: NormalizedDataset, params: dict) -> list[InputIssue]:
-        # No exigir 'power_factor' textual: puede derivarse de P y Q.
+        # Las señales FP/P/Q son alternativas (FP directo o derivado de P y Q):
+        # se sustituye la validación genérica por la comprobación específica.
         issues = [i for i in super().validate_inputs(data, params)
-                  if "power_factor" not in i.mensaje]
+                  if "Señales requeridas" not in i.mensaje]
         if _fp_series(data.df) is None:
             issues.append(InputIssue(
                 "Se requiere señal power_factor, o bien active_power y reactive_power"))
@@ -62,14 +63,41 @@ class FactorPotenciaCentroCarga(BaseTest):
         ref = NormRef(documento=self.spec.manual_referencia or "", numeral=self.spec.numeral,
                       version=self.spec.fuente_documental)
         lim = self.spec.limites
-        fp_min, min_pct = lim.get("fp_min"), lim.get("cumplimiento_minimo_pct")
-        if fp_min is None or min_pct is None:
-            return [CriterionCheck(nombre="rango_fp", cumple=None, referencia=ref,
-                                   detalle="limites.fp_min / cumplimiento_minimo_pct ausentes")]
+        min_pct = lim.get("cumplimiento_minimo_pct")
         fp = calc.extra["fp"].dropna()
         if fp.empty:
             return [CriterionCheck(nombre="rango_fp", cumple=None, referencia=ref,
                                    detalle="Sin muestras válidas de FP")]
+
+        # Límite por vigencia (Manual CONE 2.4: 0.95 hasta 08-abr-2026; 0.97 después).
+        # Se resuelve muestra a muestra por su estampa de tiempo: los periodos que
+        # cruzan la fecha de cambio quedan evaluados por tramos automáticamente.
+        vigencias = lim.get("vigencias")
+        if vigencias and min_pct is not None:
+            times = pd.to_datetime(wd.dataset.df.loc[fp.index, "timestamp"])
+            fp_min_serie = pd.Series(float("nan"), index=fp.index)
+            for tramo in sorted(vigencias, key=lambda v: str(v["desde"])):
+                fp_min_serie[times >= pd.Timestamp(tramo["desde"])] = float(tramo["fp_min"])
+            if fp_min_serie.isna().any():
+                return [CriterionCheck(nombre="rango_fp", cumple=None, referencia=ref,
+                                       detalle="Muestras anteriores a toda vigencia declarada")]
+            within = fp >= fp_min_serie
+            fp_max = lim.get("fp_max")
+            if fp_max is not None:
+                within &= fp <= float(fp_max)
+            pct = 100.0 * within.sum() / len(fp)
+            limites_usados = sorted({v for v in fp_min_serie})
+            return [CriterionCheck(
+                nombre="rango_fp", valor_medido=round(float(pct), 2), limite=float(min_pct),
+                unidad="%", comparacion=">=", cumple=bool(pct >= float(min_pct)),
+                referencia=ref,
+                detalle=f"FP mínimo por vigencia {limites_usados}; medición 5-minutal, "
+                        "cumplimiento mensual exigido")]
+
+        fp_min = lim.get("fp_min")
+        if fp_min is None or min_pct is None:
+            return [CriterionCheck(nombre="rango_fp", cumple=None, referencia=ref,
+                                   detalle="limites.fp_min/vigencias o cumplimiento_minimo_pct ausentes")]
         fp_max = lim.get("fp_max")
         within = fp >= float(fp_min)
         if fp_max is not None:

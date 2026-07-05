@@ -58,6 +58,20 @@ class VariacionesRapidasTension(BaseTest):
             return [CriterionCheck(nombre="rvc", cumple=None, referencia=ref,
                                    detalle="limites.limite_pct ausente")]
         eventos = calc.extra.get("eventos", [])
+        # Cap. 7.3 Manual INTE: máximo N variaciones POR DÍA sobre el umbral
+        max_por_dia = self.spec.limites.get("max_eventos_por_dia")
+        if max_por_dia is not None:
+            por_dia: dict = {}
+            for e in eventos:
+                dia = e.inicio.date()
+                por_dia[dia] = por_dia.get(dia, 0) + 1
+            peor = max(por_dia.values()) if por_dia else 0
+            return [CriterionCheck(
+                nombre="variaciones_por_dia",
+                valor_medido=float(peor), limite=float(max_por_dia),
+                unidad="eventos/día", comparacion="<=",
+                cumple=bool(peor <= float(max_por_dia)), referencia=ref,
+                detalle=f"día con más variaciones ΔV > {self.spec.limites['limite_pct']}%")]
         max_eventos = self.spec.limites.get("max_eventos", 0)
         return [CriterionCheck(
             nombre="eventos_rvc_sobre_limite",

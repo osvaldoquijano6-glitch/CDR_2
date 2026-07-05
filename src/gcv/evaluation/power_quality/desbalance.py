@@ -57,7 +57,8 @@ class Desbalance(BaseTest):
         metodo, serie = found
         pct = float(self.spec.limites.get("percentil", 95))
         value = series_percentile(serie, pct)
-        calc.extra.update({"metodo": metodo, "percentil": pct, "valor": value})
+        calc.extra.update({"metodo": metodo, "percentil": pct, "valor": value,
+                           "p99": series_percentile(serie, 99)})
         if value is not None:
             calc.measured.append(MeasuredValue(
                 nombre=f"desbalance_p{pct:g}", valor=value, unidad="%",
@@ -78,8 +79,18 @@ class Desbalance(BaseTest):
                                    detalle="limites.limite_pct ausente")]
         value = calc.extra.get("valor")
         pct = calc.extra["percentil"]
-        return [CriterionCheck(
+        checks = [CriterionCheck(
             nombre=f"desbalance_p{pct:g}", valor_medido=value, limite=float(limite),
             unidad="%", comparacion="<=",
             cumple=bool(value <= float(limite)) if value is not None else None,
             referencia=ref, detalle=f"método {calc.extra.get('metodo')}")]
+        # Criterio dual del Cap. 7 (Manual INTE): P99 ≤ 1.5 × límite
+        if self.spec.limites.get("p99_factor"):
+            factor = float(self.spec.limites["p99_factor"])
+            p99 = calc.extra.get("p99")
+            checks.append(CriterionCheck(
+                nombre="desbalance_p99", valor_medido=p99,
+                limite=round(factor * float(limite), 4), unidad="%", comparacion="<=",
+                cumple=bool(p99 <= factor * float(limite)) if p99 is not None else None,
+                referencia=ref, detalle=f"P99 ≤ {factor} × límite"))
+        return checks

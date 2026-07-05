@@ -11,7 +11,32 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from gcv.evaluation.spec import TestSpec
-from gcv.models import Installation, InstallationKind, Technology
+from gcv.models import Category, Installation, InstallationKind, SyncArea, Technology
+
+# Tabla 1.1 del Manual INTE (CdR 2.0): bandas [min, max) de Capacidad
+# Instalada Neta (MW) por área síncrona. max=None → sin tope.
+_CLASIFICACION: dict[str, list[tuple[Category, float, float | None]]] = {
+    "SIN": [(Category.A, 0, 0.5), (Category.B, 0.5, 10), (Category.C, 10, 30), (Category.D, 30, None)],
+    "SIBC": [(Category.A, 0, 0.5), (Category.B, 0.5, 5), (Category.C, 5, 20), (Category.D, 20, None)],
+    "SIBCS": [(Category.A, 0, 0.5), (Category.B, 0.5, 3), (Category.C, 3, 10), (Category.D, 10, None)],
+    "SIM": [(Category.A, 0, 0.5), (Category.B, 0.5, 1), (Category.C, 1, 3), (Category.D, 3, None)],
+}
+# alias: models.SyncArea usa BCA/BCS/MULEGE
+_AREA_ALIAS = {"BCA": "SIBC", "BCS": "SIBCS", "MULEGE": "SIM"}
+
+
+def clasificar_central(area: SyncArea | str, capacidad_mw: float) -> Category:
+    """Clasificación A/B/C/D según Tabla 1.1 del Manual INTE (CdR 2.0)."""
+    nombre = area.value if isinstance(area, SyncArea) else str(area)
+    nombre = _AREA_ALIAS.get(nombre, nombre)
+    if nombre not in _CLASIFICACION:
+        raise ValueError(f"Área síncrona desconocida: {area}")
+    if capacidad_mw < 0:
+        raise ValueError("La capacidad no puede ser negativa")
+    for cat, lo, hi in _CLASIFICACION[nombre]:
+        if capacidad_mw >= lo and (hi is None or capacidad_mw < hi):
+            return cat
+    raise ValueError(f"Capacidad fuera de tabla: {capacidad_mw} MW")
 
 
 @dataclass(frozen=True)

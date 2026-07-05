@@ -175,14 +175,49 @@ def test_todas_las_implementadas_instancian_con_matriz_real():
         assert prueba.spec.id == tid
 
 
-def test_matriz_real_sigue_sin_veredicto():
-    """Con la matriz real (criterios pendientes) el droop calcula pero no dictamina."""
+def test_matriz_real_ce_f03_dictamina():
+    """Con la matriz VALIDADA (2.2.2-2.2.4 CdR 2.0) el droop emite veredicto."""
     df = pd.DataFrame({
         "timestamp": ts(160),
         "frequency": [60.0] * 80 + [60.8] * 80,
         "active_power": [80.0] * 80 + [60.0] * 80})
     prueba = get_test("CE-F-03")
     result = prueba.run(make_dataset(df), {"estatismo": 0.05, "p_ref_mw": 100.0})
-    assert result.status == TestStatus.NO_EVALUABLE
-    assert result.estado_normativo == "HEREDADO_PROTOCOLO_SIN_CITA"
+    assert result.status == TestStatus.CUMPLE
+    assert result.estado_normativo == "VALIDADO"
     assert any(m.nombre == "p_op" for m in result.measured_values)
+
+
+def test_matriz_real_flicker_por_tipo():
+    """Pst 0.85 cumple para tipo B (≤0.90) pero NO para tipo D (≤0.80)."""
+    df = pd.DataFrame({"timestamp": ts(20), "pst": [0.85] * 20, "plt": [0.5] * 20})
+    r_b = get_test("CE-Q-02").run(make_dataset(df), {"tipo_ce": "B"})
+    r_d = get_test("CE-Q-02").run(make_dataset(df), {"tipo_ce": "D"})
+    assert r_b.status == TestStatus.CUMPLE
+    assert r_d.status == TestStatus.NO_CUMPLE
+
+
+def test_fp_vigencias_por_fecha():
+    """El límite de FP cambia el 08-abr-2026: 0.96 cumple antes, no después."""
+    antes = pd.DataFrame({
+        "timestamp": pd.date_range("2026-03-01", periods=20, freq="5min"),
+        "power_factor": [0.96] * 20})
+    despues = pd.DataFrame({
+        "timestamp": pd.date_range("2026-05-01", periods=20, freq="5min"),
+        "power_factor": [0.96] * 20})
+    r1 = get_test("CC-04").run(make_dataset(antes))
+    r2 = get_test("CC-04").run(make_dataset(despues))
+    assert r1.status == TestStatus.CUMPLE      # límite 0.95
+    assert r2.status == TestStatus.NO_CUMPLE   # límite 0.97
+
+
+def test_rvc_maximo_por_dia():
+    """Matriz real: ≤5 variaciones/día; 1 evento aislado cumple (tipo B, umbral 5 %)."""
+    df = pd.DataFrame({
+        "timestamp": ts(120),
+        "voltage": [230.0] * 60 + [200.0, 200.0] + [230.0] * 58})
+    result = get_test("CE-Q-03").run(
+        make_dataset(df), {"v_nominal_v": 230.0, "tipo_ce": "B"})
+    assert result.status == TestStatus.CUMPLE
+    check = result.pass_fail_details[0]
+    assert check.nombre == "variaciones_por_dia" and check.limite == 5.0

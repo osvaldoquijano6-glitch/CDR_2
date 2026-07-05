@@ -56,6 +56,20 @@ class TestSpec(BaseModel):
     def es_validado(self) -> bool:
         return self.estado_normativo == EstadoNormativo.VALIDADO
 
+    def limites_efectivos(self, tipo_ce: str | None) -> dict:
+        """Resuelve límites diferenciados por tipo de central (B vs C/D).
+
+        Si `limites` trae `por_tipo: {B: {...}, CD: {...}}`, el bloque del tipo
+        se superpone a las llaves base. Tipos C y D comparten el bloque "CD".
+        """
+        base = {k: v for k, v in self.limites.items() if k != "por_tipo"}
+        por_tipo = self.limites.get("por_tipo")
+        if not por_tipo or not tipo_ce:
+            return base
+        clave = "CD" if tipo_ce in ("C", "D") else tipo_ce
+        overlay = por_tipo.get(clave) or por_tipo.get(tipo_ce) or {}
+        return {**base, **overlay}
+
     def cita(self) -> str:
         doc = self.manual_referencia or "documento no asignado"
         num = self.numeral or "numeral pendiente"

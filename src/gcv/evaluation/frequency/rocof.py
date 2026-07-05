@@ -52,7 +52,8 @@ class Rocof(BaseTest):
         calc.extra["peak"] = peak
         calc.extra["window_s"] = window_s
 
-        umbral = self.spec.limites.get("umbral_desconexion_mw")
+        umbral = self.spec.limites.get(
+            "umbral_desconexion_mw", wd.params.get("umbral_desconexion_mw"))
         if umbral is not None and "active_power" in df.columns:
             episodios = detect_disconnection(df["timestamp"], df["active_power"], float(umbral))
             calc.extra["desconexiones"] = episodios

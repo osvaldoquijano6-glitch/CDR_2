@@ -47,6 +47,7 @@ class _ArmonicosBase(BaseTest):
         if self.total_signal in df.columns:
             total = series_percentile(df[self.total_signal], pct)
             calc.extra["total"] = total
+            calc.extra["total_p99"] = series_percentile(df[self.total_signal], 99)
             if total is not None:
                 calc.measured.append(MeasuredValue(
                     nombre=f"{self.total_name.lower()}_p{pct:g}", valor=total, unidad="%"))
@@ -75,6 +76,15 @@ class _ArmonicosBase(BaseTest):
                 cumple=bool(total <= float(total_max)) if total is not None else None,
                 referencia=ref,
                 detalle=None if total is not None else f"Sin señal {self.total_signal}"))
+            factor = lim.get("p99_factor")
+            if factor and total is not None:
+                p99 = calc.extra.get("total_p99")
+                checks.append(CriterionCheck(
+                    nombre=f"{self.total_name.lower()}_p99", valor_medido=p99,
+                    limite=round(float(factor) * float(total_max), 4), unidad="%",
+                    comparacion="<=",
+                    cumple=bool(p99 <= float(factor) * float(total_max)) if p99 is not None else None,
+                    referencia=ref, detalle=f"P99 ≤ {factor} × límite"))
 
         tabla = lim.get("armonicos") or {}
         individual = calc.extra.get("individual", {})
