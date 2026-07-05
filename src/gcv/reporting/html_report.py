@@ -75,6 +75,7 @@ _TEMPLATE = """<!doctype html>
   {% for n in r.normative_reference %}{{ n.documento }} {{ n.numeral or "(numeral pendiente)" }}{{ "; " if not loop.last }}{% endfor %}
   {% if not r.normative_reference %}—{% endif %}
   · Estado del criterio: {{ r.estado_normativo }}</p>
+ {% if objetivos.get(r.test_id) %}<p><b>Objetivo:</b> {{ objetivos[r.test_id] }}</p>{% endif %}
 
  {% if r.pass_fail_details %}
  <table><tr><th>Criterio</th><th>Medido</th><th>Límite</th><th>Unidad</th><th>Cumple</th><th>Detalle</th></tr>
@@ -95,7 +96,7 @@ _TEMPLATE = """<!doctype html>
 
  {% for w in r.warnings %}<div class="warns">⚠ {{ w }}</div>{% endfor %}
  {% for fig_html in figuras.get(r.test_id, []) %}<div class="figure">{{ fig_html }}</div>{% endfor %}
- <p><b>Conclusión:</b> {{ r.conclusion }}</p>
+ <p><b>Conclusión:</b> {{ conclusiones[r.test_id] }}</p>
 {% endfor %}
 
 <h2>7. Pendientes</h2>
@@ -130,6 +131,11 @@ Los resultados NO EVALUABLE por criterio normativo pendiente no constituyen dict
 
 
 def render_html(ctx: ReportContext) -> str:
+    from gcv.reporting import plantillas
+
+    nombre = ctx.installation.nombre
+    objetivos = {r.test_id: plantillas.objetivo(r.test_id, nombre) for r in ctx.resultados}
+    conclusiones = {r.test_id: plantillas.conclusion(r, nombre) for r in ctx.resultados}
     figuras: dict[str, list[str]] = {}
     first = True
     for tid, figs in ctx.figuras.items():
@@ -143,7 +149,8 @@ def render_html(ctx: ReportContext) -> str:
         figuras[tid] = frags
     env = Environment(loader=BaseLoader(), autoescape=False)
     return env.from_string(_TEMPLATE).render(
-        ctx=ctx, figuras=figuras, status_class=_STATUS_CLASS)
+        ctx=ctx, figuras=figuras, status_class=_STATUS_CLASS,
+        objetivos=objetivos, conclusiones=conclusiones)
 
 
 def export_html(ctx: ReportContext, path: Path) -> Path:

@@ -81,6 +81,43 @@ def stacked_timeseries(
     return _layout(fig, title)
 
 
+def dual_axis_timeseries(
+    df: pd.DataFrame,
+    excitacion: tuple,  # (col|Series, nombre, unidad) — eje izquierdo, trazo escalonado
+    respuestas: list[tuple],  # [(col|Series, nombre, rol)] — eje derecho
+    title: str,
+    y2_title: str = "Potencia Activa [MW]",
+    bands: list[tuple] | None = None,
+    time_col: str = "timestamp",
+) -> go.Figure:
+    """Serie de tiempo a doble eje — convención de reportes del proyecto:
+    eje izq. variable de excitación (f en Hz o V en pu, escalonada, color 1);
+    eje der. potencia activa (color 2); bandas normativas sobre el eje izq."""
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    x = df[time_col]
+    exc_data, exc_nombre, exc_unidad = excitacion
+    y_exc = df[exc_data] if isinstance(exc_data, str) else exc_data
+    fig.add_trace(go.Scatter(
+        x=x, y=y_exc, name=exc_nombre, mode="lines",
+        line=dict(color=SERIES["medida"], width=2, shape="hv")), secondary_y=False)
+    for data, nombre, rol in respuestas:
+        y = df[data] if isinstance(data, str) else data
+        dash = "dash" if rol == "teorica" else None
+        color = SERIES["teorica"] if rol == "teorica" else SERIES["secundaria"]
+        fig.add_trace(go.Scatter(
+            x=x, y=y, name=nombre, mode="lines",
+            line=dict(color=color, width=2, dash=dash)), secondary_y=True)
+    for y0, y1, etiqueta in bands or []:
+        fig.add_hrect(y0=y0, y1=y1, fillcolor=BAND_FILL, line_width=0, secondary_y=False)
+        fig.add_hline(y=y1, line=dict(color=STATUS["neutro"], width=1, dash="dot"),
+                      annotation_text=etiqueta, annotation_font_size=10, secondary_y=False)
+    fig.update_yaxes(title_text=f"{exc_nombre} [{exc_unidad}]",
+                     secondary_y=False, gridcolor=GRID)
+    fig.update_yaxes(title_text=y2_title, secondary_y=True, showgrid=False)
+    fig.update_layout(height=440)
+    return _layout(fig, title)
+
+
 def limits_bar(
     measured: dict[str, float],
     limits: dict[str, float],

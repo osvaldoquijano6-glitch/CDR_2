@@ -71,6 +71,8 @@ def export_docx(ctx: ReportContext, path: Path) -> Path:
     doc.add_heading("5. Resumen de resultados", level=1)
     _table(doc, list(ctx.resumen.keys()), [list(ctx.resumen.values())])
 
+    from gcv.reporting import plantillas
+
     doc.add_heading("6. Resultados por prueba", level=1)
     sin_png = False
     for r in ctx.resultados:
@@ -83,6 +85,9 @@ def export_docx(ctx: ReportContext, path: Path) -> Path:
                          for n in r.normative_reference) or "—"
         doc.add_paragraph(f"Referencia normativa: {refs} · Estado del criterio: "
                           f"{r.estado_normativo}")
+        obj = plantillas.objetivo(r.test_id, ctx.installation.nombre)
+        if obj:
+            doc.add_paragraph(f"Objetivo: {obj}")
 
         if r.pass_fail_details:
             _table(doc, ["Criterio", "Medido", "Límite", "Unidad", "Cumple", "Detalle"], [
@@ -102,7 +107,8 @@ def export_docx(ctx: ReportContext, path: Path) -> Path:
                 doc.add_picture(io.BytesIO(png), width=Inches(6.5))
             else:
                 sin_png = True
-        doc.add_paragraph(f"Conclusión: {r.conclusion}")
+        doc.add_paragraph(
+            f"Conclusión: {plantillas.conclusion(r, ctx.installation.nombre)}")
 
     doc.add_heading("7. Pendientes", level=1)
     if ctx.pendientes:

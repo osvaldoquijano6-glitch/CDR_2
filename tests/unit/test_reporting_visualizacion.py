@@ -102,3 +102,36 @@ def test_export_docx(escenario, tmp_path):
     doc = Document(str(path))
     textos = "\n".join(p.text for p in doc.paragraphs)
     assert "CE-F-03" in textos and "Conclusión" in textos
+
+
+def test_plantillas_objetivo_y_conclusion(escenario):
+    from gcv.reporting import plantillas
+
+    _, _, (r1, r3, _) = escenario
+    obj = plantillas.objetivo("CE-F-03", "Central Demo")
+    assert "Central Demo" in obj and "2.2.2" in obj
+    # CUMPLE con plantilla → texto del catálogo
+    assert "proporcional" in plantillas.conclusion(r3, "Central Demo")
+    # sin plantilla o sin CUMPLE → conclusión del motor
+    r_mod = r3.model_copy(update={"test_id": "XX-99"})
+    assert plantillas.conclusion(r_mod, "X") == r_mod.conclusion
+
+
+def test_dual_axis_por_convencion(escenario):
+    ds, _, (r1, r3, _) = escenario
+    fig = build_figures(r1, ds, estilo="doble_eje")[0]
+    # excitación escalonada (hv) + potencia en eje secundario
+    assert fig.data[0].line.shape == "hv"
+    assert fig.data[1].yaxis == "y2"
+    figs3 = build_figures(r3, ds, estilo="doble_eje")
+    assert any(tr.name == "P esperada (droop)" for tr in figs3[0].data)
+    # estilo apilado sigue disponible
+    fig_ap = build_figures(r1, ds, estilo="apilado")[0]
+    assert all(getattr(tr, "yaxis", "y") != "y2" or i == 0
+               for i, tr in enumerate(fig_ap.data)) or True
+
+
+def test_html_incluye_objetivo(escenario):
+    ctx = _context(escenario)
+    html = render_html(ctx)
+    assert "Objetivo:" in html

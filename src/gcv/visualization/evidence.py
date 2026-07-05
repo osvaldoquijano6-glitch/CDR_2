@@ -34,15 +34,30 @@ def _freq_bands(result: TestResult) -> list[tuple]:
             for b in bandas if "f_min" in b]
 
 
-def build_figures(result: TestResult, ds: NormalizedDataset) -> list[go.Figure]:
-    """Figuras de evidencia para un resultado. Lista vacía si no hay vista definida."""
+def build_figures(
+    result: TestResult,
+    ds: NormalizedDataset,
+    estilo: str = "doble_eje",
+) -> list[go.Figure]:
+    """Figuras de evidencia para un resultado. Lista vacía si no hay vista definida.
+
+    estilo: "doble_eje" (convención de reportes del proyecto: excitación
+    escalonada eje izq. + P eje der.) o "apilado" (paneles con eje X común).
+    """
     df = ds.df
     tid = result.test_id
     titulo = f"{tid} — {result.test_name}"
+    dual = estilo == "doble_eje"
 
     if tid == "CE-F-01" and "frequency" in df.columns:
+        bandas = _freq_bands(result)
+        if dual and "active_power" in df.columns:
+            return [plots.dual_axis_timeseries(
+                df, ("frequency", "Frecuencia", "Hz"),
+                [("active_power", "Potencia Activa", "medida")],
+                titulo, bands=bandas)]
         panels = [{"series": [("frequency", "Frecuencia", "medida")],
-                   "y_title": "Hz", "bands": _freq_bands(result)}]
+                   "y_title": "Hz", "bands": bandas}]
         if "active_power" in df.columns:
             panels.append({"series": [("active_power", "Potencia activa", "medida")],
                            "y_title": "MW"})
@@ -81,13 +96,20 @@ def build_figures(result: TestResult, ds: NormalizedDataset) -> list[go.Figure]:
                   or _DROOP_ZONA[tid] == "ambas") else None
             if dp is not None:
                 expected = expected_power(df["frequency"], p_op, dp)
-        p_series = [("active_power", "P medida", "medida")]
-        if expected is not None:
-            p_series.append((expected, "P esperada (droop)", "teorica"))
-        figs.append(plots.stacked_timeseries(df, [
-            {"series": [("frequency", "Frecuencia", "medida")], "y_title": "Hz"},
-            {"series": p_series, "y_title": "MW"},
-        ], titulo))
+        if estilo == "doble_eje":
+            respuestas = [("active_power", "P medida", "secundaria")]
+            if expected is not None:
+                respuestas.append((expected, "P esperada (droop)", "teorica"))
+            figs.append(plots.dual_axis_timeseries(
+                df, ("frequency", "Frecuencia", "Hz"), respuestas, titulo))
+        else:
+            p_series = [("active_power", "P medida", "medida")]
+            if expected is not None:
+                p_series.append((expected, "P esperada (droop)", "teorica"))
+            figs.append(plots.stacked_timeseries(df, [
+                {"series": [("frequency", "Frecuencia", "medida")], "y_title": "Hz"},
+                {"series": p_series, "y_title": "MW"},
+            ], titulo))
         if expected is not None:
             orden = df["frequency"].sort_values()
             figs.append(plots.scatter_xy(
