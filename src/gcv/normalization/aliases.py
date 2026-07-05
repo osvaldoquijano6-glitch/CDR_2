@@ -44,6 +44,12 @@ ALIASES: dict[str, list[str]] = {
     "rocof": ["rocof", "df/dt", "dfdt"],
     "setpoint_p": ["setpoint", "set point", "consigna", "p setpoint", "order", "potencia teorica",
                    "potencia referencia", "theoretical power", "reference power", "p ref"],
+    "setpoint_v": ["v setpoint", "consigna v", "consigna tension", "voltage setpoint",
+                   "v ref", "vref"],
+    "setpoint_q": ["q setpoint", "consigna q", "consigna reactiva", "reactive setpoint",
+                   "q ref", "qref"],
+    "setpoint_fp": ["fp setpoint", "consigna fp", "pf setpoint", "consigna factor",
+                    "fp ref", "pfref"],
 }
 
 # Grupos de tokens: match si TODOS los tokens aparecen en el encabezado normalizado.

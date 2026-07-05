@@ -282,12 +282,13 @@ pruebas:
   legacy_id: null
   nombre: Limitación total/parcial de potencia activa
   aplica_a: CENTRAL_ELECTRICA
-  categorias: []
+  categorias: [B, C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
-  variables_requeridas: [timestamp, active_power, setpoint_limite]
+  numeral: 2.2.5 y 2.2.6 [1]; Pruebas 5/7 (asínc.) y 23/25 (sínc.) Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
+  variables_requeridas: [timestamp, active_power]
   unidad_esperada: {active_power: MW}
   fs_minima_sugerida_hz: 1
   duracion_minima: por escalón de limitación del protocolo
@@ -299,9 +300,11 @@ pruebas:
   evidencia_requerida: [P(t) vs límite, tabla de tiempos y excedencias]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Tiempo máximo de actuación y tolerancia — numeral.
-  observaciones: null
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: 'Total: asíncronas <5 s (interfaz lógica); síncronas >5 s (rampa controlada). Parcial:
+    tiempo/tolerancia por oficio CENACE (parámetros). Excluible por CENACE en tipo B (documentar oficio).'
+  limites: {t_limite_s: 5}
 - id: CE-F-09
   legacy_id: null
   nombre: Rampas de variación de carga
@@ -439,12 +442,13 @@ pruebas:
   legacy_id: null
   nombre: Control de tensión
   aplica_a: CENTRAL_ELECTRICA
-  categorias: []
+  categorias: [C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
-  variables_requeridas: [timestamp, voltage, reactive_power, setpoint_v]
+  numeral: 3.5.3 [1]; Prueba 16 Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
+  variables_requeridas: [timestamp, voltage, setpoint_v]
   unidad_esperada: {voltage: pu}
   fs_minima_sugerida_hz: 1
   duracion_minima: escalones de consigna de V del protocolo
@@ -456,18 +460,21 @@ pruebas:
   evidencia_requerida: [V/Q(t) con escalones, tabla t1/t2 y error]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Tiempos de respuesta, droop admisible y tolerancia — numeral.
-  observaciones: null
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: 'Tipos C/D; disponibilidad en B a solicitud de CENACE. error_base por modo: V=v_base
+    (pu), Q=Qmax declarada, FP=1.0. Paso máximo de consigna y banda muerta: verificación documental.'
+  limites: {t90_max_s: 3, t_estabilizacion_max_s: 5, error_max_pct: 0.5}
 - id: CE-V-05
   legacy_id: null
   nombre: Control de potencia reactiva
   aplica_a: CENTRAL_ELECTRICA
-  categorias: []
+  categorias: [C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
+  numeral: 3.5.3 [1]; Prueba 17 Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
   variables_requeridas: [timestamp, reactive_power, setpoint_q]
   unidad_esperada: {reactive_power: MVAr}
   fs_minima_sugerida_hz: 1
@@ -477,19 +484,22 @@ pruebas:
   evidencia_requerida: [Q(t) vs consigna, tabla]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Tolerancia y tiempos — numeral.
-  observaciones: null
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: 'Tipos C/D; disponibilidad en B a solicitud de CENACE. error_base por modo: V=v_base
+    (pu), Q=Qmax declarada, FP=1.0. Paso máximo de consigna y banda muerta: verificación documental.'
+  limites: {t90_max_s: 3, t_estabilizacion_max_s: 5, error_max_pct: 2.0}
 - id: CE-V-06
   legacy_id: null
   nombre: Control de factor de potencia
   aplica_a: CENTRAL_ELECTRICA
-  categorias: []
+  categorias: [C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
-  variables_requeridas: [timestamp, power_factor, active_power, reactive_power]
+  numeral: 3.5.3 [1]; Prueba 18 Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
+  variables_requeridas: [timestamp, power_factor, setpoint_fp]
   unidad_esperada: {power_factor: adimensional}
   fs_minima_sugerida_hz: 1
   duracion_minima: escalones de consigna FP del protocolo
@@ -498,9 +508,11 @@ pruebas:
   evidencia_requerida: [FP(t) vs consigna, tabla]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Tolerancia y tiempos — numeral.
-  observaciones: null
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: 'Tipos C/D; disponibilidad en B a solicitud de CENACE. error_base por modo: V=v_base
+    (pu), Q=Qmax declarada, FP=1.0. Paso máximo de consigna y banda muerta: verificación documental.'
+  limites: {t90_max_s: 3, t_estabilizacion_max_s: 5, error_max_pct: 0.1}
 - id: CE-V-07
   legacy_id: null
   nombre: Comportamiento dinámico ante falla (LVRT/HVRT)

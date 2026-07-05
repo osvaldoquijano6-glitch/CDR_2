@@ -22,7 +22,7 @@ def test_matriz_real_carga_completa():
     # ningún criterio VALIDADO sin fuente documental ni numeral
     validadas = [s for s in matrix.values()
                  if s.estado_normativo == EstadoNormativo.VALIDADO]
-    assert len(validadas) == 19
+    assert len(validadas) == 23
     for spec in validadas:
         assert spec.fuente_documental, f"{spec.id} VALIDADO sin fuente documental"
         assert spec.numeral, f"{spec.id} VALIDADO sin numeral"
@@ -61,7 +61,7 @@ def test_aplicabilidad_por_tipo_instalacion():
     # CE-F-06 (CSF) ahora definida por Anexo 5: aplica a C/D sin duda
     assert decisiones["CE-F-06"].aplica and not decisiones["CE-F-06"].dudosa
     # prueba sin categorías definidas → incluida pero dudosa
-    assert decisiones["CE-F-08"].aplica and decisiones["CE-F-08"].dudosa
+    assert decisiones["CE-F-09"].aplica and decisiones["CE-F-09"].dudosa
 
 
 # ─── Ciclo del motor ─────────────────────────────────────────────────────────
