@@ -22,7 +22,7 @@ def test_matriz_real_carga_completa():
     # ningún criterio VALIDADO sin fuente documental ni numeral
     validadas = [s for s in matrix.values()
                  if s.estado_normativo == EstadoNormativo.VALIDADO]
-    assert len(validadas) == 17
+    assert len(validadas) == 19
     for spec in validadas:
         assert spec.fuente_documental, f"{spec.id} VALIDADO sin fuente documental"
         assert spec.numeral, f"{spec.id} VALIDADO sin numeral"

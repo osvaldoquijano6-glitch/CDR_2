@@ -115,7 +115,39 @@ class ArmonicosTension(_ArmonicosBase):
 
 @register("CE-Q-05")
 class ArmonicosCorriente(_ArmonicosBase):
+    """Los límites dependen del nivel de tensión y de Icc/IL (Tablas 2.8.A/B/C).
+
+    Con `limites.tabla_tdd` y los parámetros `v_kv` + `icc_il` (o icc_a e il_a)
+    se resuelven el límite DATD y la tabla por armónica; pares = 25 % del impar.
+    """
+
     kind = "current"
     total_signal = "tdd"
     total_limit_key = "tdd_max_pct"
     total_name = "TDD"
+
+    def evaluate(self, calc: Calculation, wd: WorkingData) -> list[CriterionCheck]:
+        lim = self.spec.limites
+        if lim.get("tabla_tdd"):
+            v_kv = wd.params.get("v_kv")
+            icc_il = wd.params.get("icc_il")
+            if icc_il is None and wd.params.get("icc_a") and wd.params.get("il_a"):
+                icc_il = float(wd.params["icc_a"]) / float(wd.params["il_a"])
+            if v_kv is None or icc_il is None:
+                ref = NormRef(documento=self.spec.manual_referencia or "",
+                              numeral=self.spec.numeral, version=self.spec.fuente_documental)
+                return [CriterionCheck(
+                    nombre="tdd", cumple=None, referencia=ref,
+                    detalle="Se requieren parámetros v_kv e icc_il (o icc_a e il_a) "
+                            "para resolver la tabla 2.8")]
+            from gcv.quality_power.tdd import limite_armonica, resolver_fila
+
+            fila = resolver_fila(float(v_kv), float(icc_il))
+            pares = float(lim.get("pares_pct_de_impares", 25))
+            armonicos = {orden: limite_armonica(orden, fila, pares)
+                         for orden in calc.extra.get("individual", {})}
+            armonicos = {k: v for k, v in armonicos.items() if v is not None}
+            resueltos = {k: v for k, v in lim.items() if k != "tabla_tdd"}
+            resueltos.update({"tdd_max_pct": fila["datd"], "armonicos": armonicos})
+            self.spec = self.spec.model_copy(update={"limites": resueltos})
+        return super().evaluate(calc, wd)

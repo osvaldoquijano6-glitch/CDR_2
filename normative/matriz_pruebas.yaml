@@ -333,9 +333,10 @@ pruebas:
   categorias: [A, B, C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
-  variables_requeridas: [timestamp, frequency, active_power, estado_interruptor]
+  numeral: 2.2.8 [1]; Prueba 6 Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
+  variables_requeridas: [timestamp, frequency, active_power, voltage]
   unidad_esperada: {active_power: MW}
   fs_minima_sugerida_hz: 1
   duracion_minima: evento de apertura + reconexión + rampa de recuperación
@@ -348,9 +349,15 @@ pruebas:
   evidencia_requerida: [f/P(t) con evento anotado, tabla de tiempos]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Ventanas f/V de reconexión permitida y rampa máxima — numeral.
-  observaciones: null
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: Reconexión solo con f 58.8–60.2 Hz y V ±5% Vnom estables ≥5 min; rampa ≤10% CIN/min.
+    CdR 2.0 corrige el ±10% de protocolos previos.
+  limites:
+    f_rango_hz: [58.8, 60.2]
+    v_tolerancia_pct: 5.0
+    ventana_previa_s: 300
+    rampa_max_pct_cin_min: 10.0
 - id: CE-V-01
   legacy_id: P12
   nombre: Rango de tensión en el Punto de Interconexión
@@ -498,11 +505,12 @@ pruebas:
   legacy_id: null
   nombre: Comportamiento dinámico ante falla (LVRT/HVRT)
   aplica_a: CENTRAL_ELECTRICA
-  categorias: []
+  categorias: [B, C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
+  numeral: Cap. 4, Tablas 4.1.1.A/B y 4.2.1.A/B [1]; Prueba 20 Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
   variables_requeridas: [timestamp, voltage_abc, current_abc, active_power, reactive_power]
   unidad_esperada: {voltage: pu}
   fs_minima_sugerida_hz: 1000
@@ -518,11 +526,59 @@ pruebas:
   evidencia_requerida: [V(t) vs curva LVRT/HVRT, P/Q/I durante evento]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Curva LVRT/HVRT (puntos V-t), aporte de corriente reactiva y recuperación exigidos —
-    numeral.
-  observaciones: Normalmente se valida con simulación + registro de fallas reales; definir alcance de
-    campo.
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: Zona A por tecnología y tipo; recuperación de P post-falla 0.25–0.5 s (asíncronas B/C).
+    En campo suele validarse con ajustes 27/59 documentales; el evaluador cubre registros reales de falla.
+  limites:
+    curvas:
+      sincrona_BC:
+        inferior:
+        - [0.0, 0.0]
+        - [0.25, 0.0]
+        - [0.25, 0.7]
+        - [0.7, 0.7]
+        - [1.5, 0.9]
+        superior:
+        - [0.0, 1.2]
+        - [0.2, 1.2]
+        - [0.2, 1.1]
+      asincrona_BC:
+        inferior:
+        - [0.0, 0.0]
+        - [0.4, 0.0]
+        - [0.55, 0.35]
+        - [0.7, 0.7]
+        - [1.5, 0.9]
+        superior:
+        - [0.0, 1.3]
+        - [0.2, 1.3]
+        - [0.2, 1.1]
+      sincrona_D:
+        inferior:
+        - [0.0, 0.0]
+        - [0.25, 0.0]
+        - [0.25, 0.25]
+        - [0.45, 0.25]
+        - [0.7, 0.5]
+        - [1.5, 0.9]
+        superior:
+        - [0.0, 1.2]
+        - [0.2, 1.2]
+        - [0.2, 1.1]
+      asincrona_D:
+        inferior:
+        - [0.0, 0.0]
+        - [0.25, 0.0]
+        - [0.35, 0.0]
+        - [0.45, 0.0]
+        - [1.05, 0.45]
+        - [1.5, 0.9]
+        superior:
+        - [0.0, 1.3]
+        - [0.2, 1.3]
+        - [0.2, 1.1]
+    recuperacion_p_postfalla_s: [0.25, 0.5]
 - id: CE-P-01
   legacy_id: P25
   nombre: Capacidad instalada neta
