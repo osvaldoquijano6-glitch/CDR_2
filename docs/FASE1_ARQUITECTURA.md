@@ -84,7 +84,7 @@ unit tests), `components/`, `projects/`.
 2. No hay bitácora de limpieza: las transformaciones (dropna, dedup, reescala
    kW→MW) se aplican silenciosamente.
 3. No hay unit tests (la carpeta `tests/` son motores de prueba de campo).
-4. Sin soporte COMTRADE ni CSV de analizadores de calidad de energía, registradores o PMU con
+4. Sin soporte COMTRADE ni CSV de analizadores (Elspec/Hioki/SEL/PMU) con
    encabezados desplazados.
 5. Resultado sin estados: el legado siempre "concluye"; falta
    `No evaluable` / `Pendiente documental`.
@@ -299,7 +299,7 @@ confirmación del usuario cuando altera datos o mapeos; jamás participa en
 | 2 | fs insuficiente para la prueba (ej. ROCOF con datos de 1 s) | Resultado inválido | `fs_minima_sugerida` en matriz; `validate_inputs` degrada a NO_EVALUABLE |
 | 3 | Flicker Pst/Plt: cálculo IEC 61000-4-15 requiere forma de onda o Pst ya calculado por el analizador | No reproducible desde RMS lentos | Aceptar Pst/Plt pre-calculados del equipo (con trazabilidad) y calcular solo si hay muestreo suficiente |
 | 4 | Volumen: registros de 50 ms de día completo (~1.7 M filas/canal) | Memoria/latencia en Streamlit | Lectura por chunks, pyarrow, downsampling solo para render (nunca para cálculo); polars si se confirma cuello |
-| 5 | COMTRADE con .cfg inconsistente o binario no estándar | Fallo de ingesta | Validación de .cfg contra .dat, tests con archivos reales de relevadores y registradores |
+| 5 | COMTRADE con .cfg inconsistente o binario no estándar | Fallo de ingesta | Validación de .cfg contra .dat, tests con archivos reales de SEL/registradores |
 | 6 | Criterios normativos incompletos o versiones distintas de manuales | Dictamen indefendible | `estado_normativo` por prueba + registro de fuentes con versión/fecha DOF; motor bloquea veredicto sin cita |
 | 7 | Mezcla de unidades no declarada (kW vs MW en la misma columna, pu sin base) | Errores de magnitud ×1000 | Homologación con detección de rango físico plausible + confirmación del usuario; bitácora registra el factor aplicado |
 | 8 | Relojes distintos entre POI y GEN / TZ | Desalineación de series | Tolerancia de merge configurable (legado ya la tiene), reporte de offset detectado |

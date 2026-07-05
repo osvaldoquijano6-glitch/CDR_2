@@ -7,9 +7,6 @@ Paleta única del sistema (la misma de reportes y gráficas):
 
 from __future__ import annotations
 
-import base64
-from pathlib import Path
-
 import streamlit as st
 
 STATUS_META = {
@@ -43,7 +40,7 @@ header[data-testid="stHeader"]{background:transparent;}
   border-radius:14px; padding:18px 26px; margin-bottom:6px;
   box-shadow:0 6px 18px rgba(42,63,84,.25);
 }
-.gcv-header img{height:52px; border-radius:8px; background:#fff; padding:4px;}
+.gcv-header .gcv-emblem{display:flex;} .gcv-header .gcv-emblem svg{display:block;}
 .gcv-header .t{color:#fff; font-size:1.45rem; font-weight:700; line-height:1.2; margin:0;}
 .gcv-header .s{color:#c7d5e4; font-size:.85rem; margin-top:3px;}
 .gcv-header .badge{
@@ -92,7 +89,7 @@ section[data-testid="stSidebar"]{
 }
 section[data-testid="stSidebar"] *{color:#e8eef5;}
 section[data-testid="stSidebar"] .sb-logo{display:flex; justify-content:center; margin:6px 0 2px;}
-section[data-testid="stSidebar"] .sb-logo img{height:64px; background:#fff; border-radius:10px; padding:6px;}
+section[data-testid="stSidebar"] .sb-logo svg{display:block;}
 section[data-testid="stSidebar"] hr{border-color:rgba(255,255,255,.2);}
 section[data-testid="stSidebar"] div[data-baseweb="select"] *,
 section[data-testid="stSidebar"] input{color:var(--ink) !important;}
@@ -130,18 +127,22 @@ def inject_css() -> None:
     st.markdown(_CSS, unsafe_allow_html=True)
 
 
-def _logo_b64() -> str | None:
-    logo = Path(__file__).resolve().parents[3] / "LOGO.png"
-    if not logo.exists():
-        return None
-    return base64.b64encode(logo.read_bytes()).decode()
+# Emblema neutro del sistema: monograma de malla/onda, sin marca comercial.
+def _emblem(size: int, bg: str, fg: str) -> str:
+    return (
+        f'<svg width="{size}" height="{size}" viewBox="0 0 48 48" '
+        'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="emblema">'
+        f'<rect width="48" height="48" rx="11" fill="{bg}"/>'
+        f'<path d="M6 30 L14 30 L18 16 L24 34 L28 22 L32 30 L42 30" '
+        f'fill="none" stroke="{fg}" stroke-width="2.6" '
+        'stroke-linecap="round" stroke-linejoin="round"/>'
+        f'<circle cx="24" cy="34" r="2.4" fill="{fg}"/></svg>')
 
 
 def header(subtitle: str, badge: str) -> None:
-    logo = _logo_b64()
-    img = f'<img src="data:image/png;base64,{logo}" alt="logo">' if logo else ""
+    emblem = _emblem(52, "#1f3350", "#5fa8ff")
     st.markdown(
-        f"""<div class="gcv-header">{img}
+        f"""<div class="gcv-header"><span class="gcv-emblem">{emblem}</span>
         <div><p class="t">Verificación de pruebas — Código de Red</p>
         <div class="s">{subtitle}</div></div>
         <div class="badge">{badge}</div></div>""",
@@ -149,11 +150,9 @@ def header(subtitle: str, badge: str) -> None:
 
 
 def sidebar_logo() -> None:
-    logo = _logo_b64()
-    if logo:
-        st.sidebar.markdown(
-            f'<div class="sb-logo"><img src="data:image/png;base64,{logo}"></div>',
-            unsafe_allow_html=True)
+    emblem = _emblem(60, "#ffffff", "#2a3f54")
+    st.sidebar.markdown(
+        f'<div class="sb-logo">{emblem}</div>', unsafe_allow_html=True)
 
 
 def chip(status: str) -> str:

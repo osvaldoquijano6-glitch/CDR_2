@@ -4026,9 +4026,9 @@ def render_top_panel() -> tuple[str, dict | None]:
     st.markdown(
         """
         <div class="top-brand">
-            <div class="top-brand-mark">K</div>
+            <div class="top-brand-mark">⚡</div>
             <div class="top-brand-text">
-                <div class="top-brand-name">KYNTRA</div>
+                <div class="top-brand-name">Código de Red</div>
                 <div class="top-brand-sub">Panel tecnico</div>
             </div>
         </div>

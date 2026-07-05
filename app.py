@@ -1239,7 +1239,7 @@ TEST_GRAPH_PROFILES = {
 # ─── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Pruebas de Centrales · Código de Red",
-    page_icon=str(COMPANY_LOGO_PATH),
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
 )

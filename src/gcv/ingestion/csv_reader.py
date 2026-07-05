@@ -1,7 +1,7 @@
 """Lector de CSV exportados de analizadores, SCADA, registradores y PMU.
 
 Detecta separador y codificación; entrega la rejilla cruda sin asumir fila de
-encabezado (los exportes de analizadores y registradores suelen traer preámbulos).
+encabezado (los exportes de Elspec/Hioki/SEL suelen traer preámbulos).
 Los valores se conservan como texto: la coerción numérica ocurre en
 `normalization.cleaning` y queda registrada en la bitácora.
 """

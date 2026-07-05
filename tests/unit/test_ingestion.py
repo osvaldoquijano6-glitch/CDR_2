@@ -9,9 +9,9 @@ from gcv.normalization.header_detect import apply_header, detect_header
 
 @pytest.fixture
 def csv_con_preambulo(tmp_path):
-    path = tmp_path / "export_analizador.csv"
+    path = tmp_path / "elspec_export.csv"
     path.write_text(textwrap.dedent("""\
-        Equipo;Analizador de calidad AQ-500
+        Equipo;Elspec G4500
         Campania;POI Central X
         ;
         Date/Time;Frequency [Hz];Active Power [kW];Voltage (kV)
