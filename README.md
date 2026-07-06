@@ -6,6 +6,8 @@ POC/Anexo 5. Procesa Excel/CSV/COMTRADE, normaliza y depura datos con bitácora
 trazable, evalúa criterios de aceptación de forma determinística y genera
 evidencia e informes.
 
+**Versión 1.0** — ver [docs/VERSION_1.md](docs/VERSION_1.md) (alcance, pendientes urgentes y mejoras futuras).
+
 ## Estado
 
 | Fase | Contenido | Estado |
@@ -14,7 +16,7 @@ evidencia e informes.
 | 2 | Paquete `src/gcv`: lectores, normalización, motor de reglas, unit tests | ✅ |
 | 3 | Pruebas prioritarias: 13 evaluadores (frecuencia, ROCOF, droop, tensión, FP, capacidad, armónicos, flicker, desbalance, RVC) — ver [docs/FASE3_ESTADO_DISENO.md](docs/FASE3_ESTADO_DISENO.md) | ✅ |
 | 4 | Gráficas Plotly, informes HTML/Excel/Word y borrador de interfaz Streamlit | ✅ |
-| 5 | Módulo ML de apoyo | pendiente |
+| 5 | Módulo ML de apoyo (sugerencias, nunca dictamina) | ✅ |
 
 La aplicación Streamlit anterior (`app.py`, `core/`, `tests/*.py` de campo)
 permanece operable como referencia mientras la nueva arquitectura alcanza

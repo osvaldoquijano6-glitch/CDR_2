@@ -8,4 +8,4 @@ Regla de dependencia central: solo `evaluation` compara contra límites
 normativos; `ml` nunca participa en un veredicto.
 """
 
-__version__ = "0.2.0"
+__version__ = "1.0.0"
