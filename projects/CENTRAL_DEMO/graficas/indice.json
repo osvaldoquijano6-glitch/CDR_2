@@ -1,0 +1,18 @@
+[
+  {
+    "archivo": "CENTRAL_DEMO_CE-F-03_20260706_160259_1.html",
+    "json": "CENTRAL_DEMO_CE-F-03_20260706_160259_1.json",
+    "prueba": "CE-F-03",
+    "resultado": "CUMPLE",
+    "fecha": "20260706_160259",
+    "titulo": "CE-F-03 — Respuesta ante alta frecuencia"
+  },
+  {
+    "archivo": "CENTRAL_DEMO_CE-F-03_20260706_160259_2.html",
+    "json": "CENTRAL_DEMO_CE-F-03_20260706_160259_2.json",
+    "prueba": "CE-F-03",
+    "resultado": "CUMPLE",
+    "fecha": "20260706_160259",
+    "titulo": "CE-F-03 — Característica P(f) medida vs droop teórico"
+  }
+]

@@ -135,3 +135,41 @@ def test_html_incluye_objetivo(escenario):
     ctx = _context(escenario)
     html = render_html(ctx)
     assert "Objetivo:" in html
+
+
+def test_etiquetas_de_escalones():
+    """Cada escalón lleva etiqueta de f y de P asentada, alternadas (sin encimar)."""
+    f = [60.0] * 30 + [60.3] * 30 + [60.6] * 30 + [60.0] * 30
+    p = [80.0] * 30 + [76.0] * 30 + [66.0] * 30 + [80.0] * 30
+    df = pd.DataFrame({"timestamp": ts(120), "frequency": f, "active_power": p})
+    ds = make_dataset(df)
+    spec = make_spec("CE-F-01", _VARS,
+                     limites={"bandas": [{"f_min": 58.8, "f_max": 61.2, "t_min_s": 10}]})
+    r = RangoFrecuencia(spec).run(ds)
+    fig = build_figures(r, ds, estilo="doble_eje")[0]
+    anotaciones = [a for a in fig.layout.annotations
+                   if a.showarrow and "Hz" in (a.text or "")]
+    assert len(anotaciones) == 4  # una por meseta (la etiqueta de banda no cuenta)
+    labels_p = [a for a in fig.layout.annotations if "MW" in (a.text or "")]
+    assert len(labels_p) == 4
+    # alternancia vertical de las etiquetas de f (no se enciman entre vecinas)
+    ays = [a.ay for a in anotaciones]
+    assert ays[0] * ays[1] < 0
+
+
+def test_repositorio_historico(tmp_path, escenario):
+    from gcv.reporting.repositorio import (
+        cargar_figura, guardar_figuras, listar_centrales, listar_graficas)
+
+    ds, _, (r1, _, _) = escenario
+    figs = build_figures(r1, ds)
+    rutas = guardar_figuras("Central Fotovoltaica Niña", "CE-F-01", figs,
+                            r1.status.value, base=tmp_path)
+    assert rutas and rutas[0].exists()
+    assert "CENTRAL_FOTOVOLTAICA_NINA_CE-F-01_" in rutas[0].name
+    assert (rutas[0].parent / "plotly.min.js").exists()  # abrible sin internet
+    assert listar_centrales(base=tmp_path) == ["CENTRAL_FOTOVOLTAICA_NINA"]
+    entradas = listar_graficas("Central Fotovoltaica Niña", base=tmp_path)
+    assert entradas[0]["prueba"] == "CE-F-01" and entradas[0]["resultado"] == "CUMPLE"
+    fig = cargar_figura(entradas[0]["ruta_json"])
+    assert fig.data  # previsualizable en la app

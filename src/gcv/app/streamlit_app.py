@@ -177,7 +177,11 @@ def _tab_pruebas(state: dict, inst: Installation) -> None:
             try:
                 result = get_test(tid, matrix).run(ds, params)
                 state["results"][tid] = (result, ds_idx)
-                state["figs"][tid] = build_figures(result, ds)
+                figs = build_figures(result, ds)
+                state["figs"][tid] = figs
+                if figs:  # repositorio histórico por central
+                    from gcv.reporting.repositorio import guardar_figuras
+                    guardar_figuras(inst.nombre, tid, figs, result.status.value)
             except Exception as exc:
                 st.error(f"{tid}: {exc}")
             barra.progress(n / len(items))
@@ -235,24 +239,61 @@ def _tab_reportes(state: dict, inst: Installation) -> None:
         figuras=state["figs"],
         responsable=responsable or None, fecha=datetime.now())
 
+    # Descarga en un solo clic: los artefactos se generan al entrar a la pestaña
+    # (el patrón botón→botón perdía el estado entre reruns y mostraba errores).
     outdir = Path(tempfile.mkdtemp(prefix="gcv_rep_"))
+    with st.spinner("Generando informes..."):
+        try:
+            p_xlsx = export_excel(ctx, outdir / "matriz_cumplimiento.xlsx")
+            p_html = export_html(ctx, outdir / "informe_tecnico.html")
+            p_docx = export_docx(ctx, outdir / "informe_tecnico.docx")
+        except Exception as exc:
+            st.error(f"Error al generar informes: {exc}")
+            return
+    bitacora = json.dumps([json.loads(d.log.to_json()) for d in state["datasets"]],
+                          indent=2, ensure_ascii=False)
     c1, c2, c3, c4 = st.columns(4)
-    if c1.button("📊 Excel (matriz)"):
-        p = export_excel(ctx, outdir / "matriz_cumplimiento.xlsx")
-        c1.download_button("Descargar Excel", p.read_bytes(), p.name,
-                           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    if c2.button("🌐 Informe HTML"):
-        p = export_html(ctx, outdir / "informe_tecnico.html")
-        c2.download_button("Descargar HTML", p.read_bytes(), p.name, "text/html")
-    if c3.button("📝 Informe Word"):
-        p = export_docx(ctx, outdir / "informe_tecnico.docx")
-        c3.download_button("Descargar Word", p.read_bytes(), p.name,
-                           "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-    if c4.button("🧾 Bitácora JSON"):
-        payload = json.dumps(
-            [json.loads(d.log.to_json()) for d in state["datasets"]],
-            indent=2, ensure_ascii=False)
-        c4.download_button("Descargar bitácora", payload, "bitacora.json", "application/json")
+    c1.download_button("📊 Excel (matriz)", p_xlsx.read_bytes(), p_xlsx.name,
+                       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                       width="stretch")
+    c2.download_button("🌐 Informe HTML", p_html.read_bytes(), p_html.name,
+                       "text/html", width="stretch")
+    c3.download_button("📝 Informe Word", p_docx.read_bytes(), p_docx.name,
+                       "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                       width="stretch")
+    c4.download_button("🧾 Bitácora JSON", bitacora, "bitacora.json",
+                       "application/json", width="stretch")
+    st.caption("El informe HTML se abre en el navegador (doble clic). Las gráficas de "
+               "cada corrida quedan además en el Histórico por central.")
+
+
+def _tab_historico() -> None:
+    from gcv.reporting.repositorio import cargar_figura, listar_centrales, listar_graficas
+
+    st.subheader("Histórico de gráficas por central")
+    centrales = listar_centrales()
+    if not centrales:
+        st.info("Aún no hay gráficas guardadas. Cada ejecución de pruebas guarda sus "
+                "gráficas automáticamente en projects/<central>/graficas/.")
+        return
+    central = st.selectbox("Central", centrales)
+    entradas = listar_graficas(central)
+    pruebas = sorted({e["prueba"] for e in entradas})
+    filtro = st.multiselect("Filtrar por prueba", pruebas, default=pruebas)
+    entradas = [e for e in entradas if e["prueba"] in filtro]
+    st.caption(f"{len(entradas)} gráficas · carpeta: projects/{central}/graficas/ "
+               "(los .html se abren directo con doble clic)")
+    for e in entradas[:60]:
+        fecha = f"{e['fecha'][:4]}-{e['fecha'][4:6]}-{e['fecha'][6:8]} {e['fecha'][9:11]}:{e['fecha'][11:13]}"
+        icono = {"CUMPLE": "✅", "NO_CUMPLE": "❌"}.get(e.get("resultado") or "", "⚠️")
+        with st.expander(f"{icono} {fecha} · {e['prueba']} — {e['titulo']}"):
+            if e.get("ruta_json") and Path(e["ruta_json"]).exists():
+                st.plotly_chart(cargar_figura(e["ruta_json"]), width="stretch",
+                                key=f"hist_{e['archivo']}")
+            ruta = Path(e["ruta"])
+            if ruta.exists():
+                st.download_button("Descargar HTML autocontenible", ruta.read_bytes(),
+                                   ruta.name, "text/html", key=f"dl_{e['archivo']}")
 
 
 def main() -> None:
@@ -266,7 +307,7 @@ def main() -> None:
         badge=f"{inst.nombre} — {clasificacion}")
     st.markdown('<p class="gcv-foot">Los criterios no validados documentalmente producen '
                 'NO EVALUABLE: el sistema nunca inventa límites.</p>', unsafe_allow_html=True)
-    tabs = st.tabs(["📥 Datos", "🧪 Pruebas", "📈 Resultados", "📤 Reportes"])
+    tabs = st.tabs(["📥 Datos", "🧪 Pruebas", "📈 Resultados", "📤 Reportes", "📚 Histórico"])
     with tabs[0]:
         _tab_datos(state)
     with tabs[1]:
@@ -275,6 +316,8 @@ def main() -> None:
         _tab_resultados(state)
     with tabs[3]:
         _tab_reportes(state, inst)
+    with tabs[4]:
+        _tab_historico()
 
 
 if __name__ == "__main__":

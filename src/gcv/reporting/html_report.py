@@ -22,24 +22,48 @@ _TEMPLATE = """<!doctype html>
 <html lang="es"><head><meta charset="utf-8">
 <title>Informe técnico — {{ ctx.proyecto }}</title>
 <style>
- body{font-family:Segoe UI,Helvetica,Arial,sans-serif;color:#222;margin:0;background:#f5f5f2}
- .page{max-width:1080px;margin:0 auto;padding:32px 40px;background:#fff}
- h1{font-size:26px;border-bottom:3px solid #2a3f54;padding-bottom:8px}
- h2{font-size:19px;color:#2a3f54;margin-top:36px}
- h3{font-size:16px;margin-top:24px}
+ /* Identidad única del sistema (misma paleta que la app y las gráficas):
+    tinta #1e2430 · marino #2a3f54 · primario #2a78d6 · superficie #f4f5f7 */
+ :root{--ink:#1e2430;--ink-2:#5b6472;--navy:#2a3f54;--accent:#2a78d6;
+   --surface:#f4f5f7;--card:#fff;--line:#e3e6ea;
+   --ok-bg:#e4f4e4;--ok-fg:#0a5c0a;--fail-bg:#fbe7e7;--fail-fg:#8f1f1f;
+   --warn-bg:#fdf2d8;--warn-fg:#7a5a00;--pend-bg:#ececec;--pend-fg:#4a4a4a}
+ body{font-family:"Segoe UI",system-ui,Helvetica,Arial,sans-serif;color:var(--ink);
+   margin:0;background:var(--surface)}
+ .page{max-width:1080px;margin:0 auto;padding:28px 40px 40px;background:var(--card)}
+ .banner{display:flex;align-items:center;gap:16px;
+   background:linear-gradient(100deg,var(--navy) 0%,#33506e 55%,#3c6a99 100%);
+   border-radius:14px;padding:18px 26px;margin-bottom:20px;color:#fff}
+ .banner .t{font-size:22px;font-weight:700;margin:0}
+ .banner .s{color:#c7d5e4;font-size:13px;margin-top:3px}
+ h2{font-size:19px;color:var(--navy);margin-top:36px;
+   border-bottom:2px solid var(--line);padding-bottom:6px}
+ h3{font-size:16px;margin-top:24px;color:var(--navy)}
  table{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0}
- th{background:#2a3f54;color:#fff;text-align:left;padding:6px 8px}
- td{border-bottom:1px solid #e2e1de;padding:5px 8px;vertical-align:top}
- .chip{display:inline-block;padding:3px 12px;border-radius:12px;font-weight:600;font-size:12px}
- .ok{background:#e6f4e6;color:#0a5c0a}.fail{background:#fbe9e9;color:#8f1f1f}
- .warn{background:#fdf3dc;color:#7a5a00}.pend{background:#ececec;color:#444}
- .meta td:first-child{font-weight:600;width:220px;color:#555}
- .warns{background:#fdf3dc;border-left:4px solid #eda100;padding:8px 12px;font-size:13px;margin:8px 0}
- .small{font-size:12px;color:#666}
- .figure{margin:14px 0}
+ th{background:var(--navy);color:#fff;text-align:left;padding:6px 8px}
+ td{border-bottom:1px solid var(--line);padding:5px 8px;vertical-align:top}
+ tr:nth-child(even) td{background:#fafbfc}
+ .chip{display:inline-block;padding:4px 14px;border-radius:14px;font-weight:700;
+   font-size:12px;letter-spacing:.02em;vertical-align:middle}
+ .ok{background:var(--ok-bg);color:var(--ok-fg)}.fail{background:var(--fail-bg);color:var(--fail-fg)}
+ .warn{background:var(--warn-bg);color:var(--warn-fg)}.pend{background:var(--pend-bg);color:var(--pend-fg)}
+ .meta td:first-child{font-weight:600;width:220px;color:var(--ink-2)}
+ .warns{background:var(--warn-bg);border-left:4px solid #eda100;padding:8px 12px;
+   font-size:13px;margin:8px 0;border-radius:0 8px 8px 0}
+ .small{font-size:12px;color:var(--ink-2)}
+ .figure{margin:14px 0;border:1px solid var(--line);border-radius:12px;
+   padding:6px;overflow:hidden}
 </style></head><body><div class="page">
 
-<h1>Informe técnico de verificación — Código de Red</h1>
+<div class="banner">
+ <svg width="46" height="46" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <rect width="48" height="48" rx="11" fill="#1f3350"/>
+  <path d="M6 30 L14 30 L18 16 L24 34 L28 22 L32 30 L42 30" fill="none"
+   stroke="#5fa8ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="24" cy="34" r="2.4" fill="#5fa8ff"/></svg>
+ <div><p class="t">Informe técnico de verificación — Código de Red</p>
+ <div class="s">Manual INTE · Manual CONE · POC/Anexo 5 — evaluación determinística y trazable</div></div>
+</div>
 <table class="meta">
  <tr><td>Proyecto</td><td>{{ ctx.proyecto }}</td></tr>
  <tr><td>Instalación</td><td>{{ ctx.installation.nombre }} ({{ ctx.installation.kind.value }})</td></tr>
