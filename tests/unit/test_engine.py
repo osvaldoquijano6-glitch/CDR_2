@@ -22,7 +22,7 @@ def test_matriz_real_carga_completa():
     # ningún criterio VALIDADO sin fuente documental ni numeral
     validadas = [s for s in matrix.values()
                  if s.estado_normativo == EstadoNormativo.VALIDADO]
-    assert len(validadas) == 23
+    assert len(validadas) == 35
     for spec in validadas:
         assert spec.fuente_documental, f"{spec.id} VALIDADO sin fuente documental"
         assert spec.numeral, f"{spec.id} VALIDADO sin numeral"
@@ -60,8 +60,8 @@ def test_aplicabilidad_por_tipo_instalacion():
     assert not decisiones["CC-01"].aplica  # prueba de Centro de Carga
     # CE-F-06 (CSF) ahora definida por Anexo 5: aplica a C/D sin duda
     assert decisiones["CE-F-06"].aplica and not decisiones["CE-F-06"].dudosa
-    # prueba sin categorías definidas → incluida pero dudosa
-    assert decisiones["CE-F-09"].aplica and decisiones["CE-F-09"].dudosa
+    # CE-F-09 (rampas) definida por Anexo 5: tipos C/D
+    assert decisiones["CE-F-09"].aplica and not decisiones["CE-F-09"].dudosa
 
 
 # ─── Ciclo del motor ─────────────────────────────────────────────────────────
@@ -159,7 +159,6 @@ def test_fs_insuficiente_bloquea():
 
 def test_registry():
     assert "CE-F-01" in implemented_ids()
+    assert len(implemented_ids()) == 35  # cobertura total de la matriz
     with pytest.raises(KeyError, match="matriz"):
         get_test("NO-EXISTE")
-    with pytest.raises(KeyError, match="no tiene implementación"):
-        get_test("CC-10")

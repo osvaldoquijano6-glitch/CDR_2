@@ -8,8 +8,8 @@ Fecha: 2026-07-05 · Rama `claude/grid-compliance-verification-j8j52w` (PR #1) �
 |---|---|
 | **Ingesta** | Excel (.xlsx/.xlsm), CSV de analizadores (preambulos, separadores, encodings) y COMTRADE (.cfg/.dat), con SHA-256 por fuente |
 | **Normalización** | Alias de señales, homologación de unidades, timestamps con desambiguación día/mes, fs/huecos/duplicados, bitácora obligatoria de toda transformación, correcciones manuales YAML |
-| **Matriz normativa** | 35 pruebas; **23 VALIDADAS** con numeral del CdR 2.0 (RES/550/2021) desde los catálogos del proyecto |
-| **Motor determinístico** | 19 evaluadores dictaminando CUMPLE/NO_CUMPLE/NO_EVALUABLE con cita normativa, límites por tipo (B vs C/D), por área síncrona y por vigencia de fecha; clasificador A–D automático (Tabla 1.1) |
+| **Matriz normativa** | 35 pruebas; **35 VALIDADAS** con numeral del CdR 2.0 (RES/550/2021) desde los catálogos del proyecto |
+| **Motor determinístico** | 35 evaluadores (cobertura total de la matriz) dictaminando CUMPLE/NO_CUMPLE/NO_EVALUABLE con cita normativa, límites por tipo (B vs C/D), por área síncrona y por vigencia de fecha; clasificador A–D automático (Tabla 1.1) |
 | **Pruebas cubiertas** | Frecuencia (rango, ROCOF 2.5/200ms, alta/baja, CPF, reconexión, limitación total/parcial), tensión (rango, huecos Zona A, modos de control V/Q/FP), capacidad (P25 240h/25h/no-inyección), calidad (desbalance, flicker, RVC/día, armónicos V con tablas completas, TDD por Icc/IL), CC (FP con vigencia 0.95→0.97) |
 | **Evidencia y reportes** | Gráficas Plotly (doble eje según convención del proyecto + apilado), informe técnico HTML autocontenido, Word, matriz Excel con semáforo, bitácora JSON; objetivos/conclusiones de plantilla del catálogo (solo en CUMPLE) |
 | **Interfaz** | Streamlit (`./run_app.sh`): proyecto → datos → pruebas aplicables → resultados → exportación |
@@ -37,10 +37,9 @@ informe → criterio → numeral → mapeo de columnas → SHA-256 del archivo f
 
 ## 3. Mejoras a FUTURO (no bloquean el uso)
 
-- **Evaluadores restantes de la matriz (12)**: documentales/checklist (modelos,
-  protecciones, EAR, TIC — pruebas 10, 24, 38–41 y CC-03/05/06/07/09/10),
-  rampas 10 % Pn/min (P22), runback (P21), rechazo de carga parcial (P23),
-  amortiguamiento POD (P19), CSF/AGC funcional. Patrón ya establecido.
+- Runback (P21), rechazo de carga parcial (P23) y amortiguamiento POD (P19):
+  pruebas del Anexo 5 sin ficha de criterio cuantitativo en los catálogos;
+  se agregan al definir su protocolo.
 - **Plan de Trabajo CRE** como formato de salida (esquema ya capturado en el
   catálogo 03, §9).
 - **PDF directo** (weasyprint requiere librerías del sistema; hoy la vía es HTML).

@@ -42,6 +42,7 @@ ALIASES: dict[str, list[str]] = {
     "pinst": ["pinst", "ifl"],
     "unbalance": ["unbalance", "desbalance", "desequilibrio", "u2/u1", "v2/v1"],
     "rocof": ["rocof", "df/dt", "dfdt"],
+    "corriente_dc": ["idc", "i dc", "dc current", "corriente directa", "componente dc"],
     "setpoint_p": ["setpoint", "set point", "consigna", "p setpoint", "order", "potencia teorica",
                    "potencia referencia", "theoretical power", "reference power", "p ref"],
     "setpoint_v": ["v setpoint", "consigna v", "consigna tension", "voltage setpoint",

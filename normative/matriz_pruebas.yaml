@@ -237,8 +237,9 @@ pruebas:
   categorias: [C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
+  numeral: 2.3.1 y 2.3.2 [1]; Prueba 10 Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
   variables_requeridas: [timestamp, frequency, active_power, setpoint_agc]
   unidad_esperada: {active_power: MW, setpoint_agc: MW}
   fs_minima_sugerida_hz: 0.2
@@ -251,9 +252,14 @@ pruebas:
   evidencia_requerida: [P vs consigna, tabla de error y rampas]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Aplicabilidad por categoría/tecnología, tolerancia y rampas — numeral.
-  observaciones: El legado P28 mezcla "control de frecuencia" genérico; separar CPF/CSF.
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: 'CSF: verificación de equipamiento y señales (documental + punto a punto).'
+  limites:
+    checklist: [Equipamiento para participar en AGC conforme al Manual de TIC, 'Señal en tiempo real:
+        estado del CPF', 'Señal en tiempo real: consigna de P y P actual', 'Señal en tiempo real: parámetros
+        de respuesta (estatismo, insensibilidad, banda muerta)', 'Señal en tiempo real: rango de P respecto
+        a la CI', 'Señal en tiempo real: umbrales de desactivación']
 - id: CE-F-07
   legacy_id: P4
   nombre: Potencia activa constante
@@ -261,9 +267,10 @@ pruebas:
   categorias: [A, B, C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
-  variables_requeridas: [timestamp, frequency, active_power, setpoint_p]
+  numeral: 2.2.7 inciso i [1]; Prueba 4 Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
+  variables_requeridas: [timestamp, frequency, active_power]
   unidad_esperada: {active_power: MW}
   fs_minima_sugerida_hz: 1
   duracion_minima: ventana completa del modo P constante del protocolo
@@ -275,9 +282,12 @@ pruebas:
   evidencia_requerida: [P(t) vs consigna con banda de tolerancia, tabla de desviaciones]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Tolerancia (% de Pn o MW) y numeral.
-  observaciones: null
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: P constante mientras 60.0 ≤ f ≤ 60.2 Hz. La tolerancia numérica de 'constante' es de
+    protocolo (parámetros tolerancia_mw o tolerancia_pct+p_ref_mw).
+  limites:
+    banda_hz: [60.0, 60.2]
 - id: CE-F-08
   legacy_id: null
   nombre: Limitación total/parcial de potencia activa
@@ -309,11 +319,12 @@ pruebas:
   legacy_id: null
   nombre: Rampas de variación de carga
   aplica_a: CENTRAL_ELECTRICA
-  categorias: []
+  categorias: [C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
+  numeral: Prueba 22 Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
   variables_requeridas: [timestamp, active_power]
   unidad_esperada: {rampa: MW/min o %Pn/min}
   fs_minima_sugerida_hz: 0.2
@@ -326,9 +337,10 @@ pruebas:
   evidencia_requerida: [P(t) con rampas anotadas, tabla de rampas máximas]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Límite de rampa aplicable (declarado vs normativo) — numeral.
-  observaciones: null
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: Rampa de subida y bajada ≤10 % Pn/min (ventana móvil 60 s).
+  limites: {rampa_max_pct_pn_min: 10.0}
 - id: CE-F-10
   legacy_id: P6
   nombre: Reconexión automática
@@ -399,9 +411,10 @@ pruebas:
   categorias: [B, C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
-  variables_requeridas: [timestamp, active_power, reactive_power, voltage]
+  numeral: 3.2 / 3.5.1 [1]; Prueba 13 Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
+  variables_requeridas: [timestamp, active_power, reactive_power]
   unidad_esperada: {active_power: MW, reactive_power: MVAr, voltage: pu}
   fs_minima_sugerida_hz: 0.2
   duracion_minima: puntos sostenidos en los extremos capacitivo e inductivo del protocolo
@@ -413,20 +426,22 @@ pruebas:
   evidencia_requerida: [nube P-Q vs envolvente, Q(t)/V(t) por punto, tabla]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Envolvente P-Q/Pmáx exigida (vértices) por categoría/tecnología y duración de sostenimiento
-    — numeral.
-  observaciones: null
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: F.P. ≥0.95 en atraso y en adelanto en el PI, a los niveles de carga del protocolo (25/50/75/100
+    % CI).
+  limites: {fp_min: 0.95}
 - id: CE-V-03
   legacy_id: null
   nombre: Curva V-Q/Pmáx
   aplica_a: CENTRAL_ELECTRICA
-  categorias: []
+  categorias: [C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
-  variables_requeridas: [timestamp, voltage, reactive_power, active_power]
+  numeral: 3.5.1/3.5.2, Tabla 3.3.2 [1]; Pruebas 14/15 Anexo 5 [2]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
+  variables_requeridas: [timestamp, active_power, reactive_power]
   unidad_esperada: {voltage: pu, reactive_power: MVAr}
   fs_minima_sugerida_hz: 0.2
   duracion_minima: barrido de tensión del protocolo
@@ -435,9 +450,11 @@ pruebas:
   evidencia_requerida: [curva V-Q medida vs exigida, tabla]
   tipo_salida: [grafica, tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Envolvente V-Q/Pmáx (vértices) — numeral.
-  observaciones: null
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: Área blanca obligatoria ±0.33 Q/Pmáx; rango máximo exigible ±0.5. Pmáx = CIN (parámetro
+    pmax_mw).
+  limites: {q_pmax_obligatorio: 0.33, q_pmax_maximo: 0.5}
 - id: CE-V-04
   legacy_id: null
   nombre: Control de tensión
@@ -624,11 +641,12 @@ pruebas:
 - id: CE-D-01
   nombre: Modelos de simulación entregados y validados
   aplica_a: CENTRAL_ELECTRICA
-  categorias: [A, B, C, D]
+  categorias: [B, C, D]
   tecnologia: AMBAS
   manual_referencia: INTER
-  numeral: null
-  fuente_documental: null
+  numeral: 6.1.6 [1]; Prueba 24 Anexo 5 [2]; MIC [3]
+  fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
+    validado 01/02_pruebas*.md
   variables_requeridas: [checklist_documental]
   unidad_esperada: {}
   fs_minima_sugerida_hz: null
@@ -639,11 +657,17 @@ pruebas:
   evidencia_requerida: [oficios/acuses, versiones de modelos]
   tipo_salida: [tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Lista exacta de modelos y formatos exigidos por categoría — numeral.
+  estado_normativo: VALIDADO
+  dato_requerido: null
   observaciones: Las pruebas documentales CE-D-02..05 (protecciones, ajustes de control, instrumentación,
     intercambio de información) siguen esta misma estructura de checklist; se instancian al validar sus
     numerales.
+  limites:
+    checklist: [Modelo de estado estacionario en versión de software solicitada por CENACE, Modelo dinámico
+        (incl. control de velocidad/P y control de tensión), Modelo de transitorios electromagnéticos,
+      Submodelos de protecciones, Submodelos de convertidores/inversores y controlador de planta (centrales
+        basadas en inversores), 'Documentación: diagramas de bloques y manuales', Informe de validación
+        de modelos contra pruebas de conformidad, Oficio de entrega/aceptación]
 - id: CE-Q-01
   legacy_id: P26
   nombre: Desbalance de tensión
@@ -810,10 +834,10 @@ pruebas:
   categorias: [A, B, C, D]
   tecnologia: ASINCRONA
   manual_referencia: COD_RED
-  numeral: 7.5 [1]
+  numeral: 7.5 [1]; nota 3 Tablas 2.8 CONE
   fuente_documental: Manual INTE CdR 2.0 (RES/550/2021, DOF 31-dic-2021); POC/Anexo 5 CENACE — catálogo
     validado 01/02_pruebas*.md
-  variables_requeridas: [timestamp, corriente_dc, corriente_nominal]
+  variables_requeridas: [timestamp, corriente_dc]
   unidad_esperada: {corriente_dc: '% de In'}
   fs_minima_sugerida_hz: null
   duracion_minima: null
@@ -824,7 +848,8 @@ pruebas:
   resultados_posibles: *id001
   estado_normativo: VALIDADO
   dato_requerido: null
-  observaciones: En ningún caso se permite inyección de CD en el PI (tipos A-D).
+  observaciones: Sin inyección de CD en el PI; evaluación contra el umbral de detección del instrumento
+    (parámetro).
   limites: {cd_prohibida: true}
 - id: CC-01
   nombre: Rango de tensión (Centro de Carga)
@@ -876,8 +901,8 @@ pruebas:
   nombre: Aportación / soporte ante corto circuito
   aplica_a: CENTRO_DE_CARGA
   manual_referencia: CONE
-  numeral: null
-  fuente_documental: null
+  numeral: 2.3 Manual CONE
+  fuente_documental: Manual CONE CdR 2.0 (RES/550/2021); catálogo validado 03_centro_de_carga.md
   variables_requeridas: [estudio_corto_circuito]
   unidad_esperada: {}
   fs_minima_sugerida_hz: null
@@ -888,9 +913,13 @@ pruebas:
   evidencia_requerida: [estudio, hojas de datos de tableros]
   tipo_salida: [tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Requisitos exactos — numeral CONE.
+  estado_normativo: VALIDADO
+  dato_requerido: null
   observaciones: null
+  limites:
+    checklist: [Icc trifásica máx/mín informada por CENACE/Distribuidor en el Punto de Conexión, Icc monofásica
+        máx/mín informada, Capacidad interruptiva de tableros ≥ Icc máxima, Ajustes de protección del
+        Punto de Conexión conforme a los niveles informados]
 - id: CC-04
   nombre: Factor de potencia (Centro de Carga)
   aplica_a: CENTRO_DE_CARGA
@@ -922,8 +951,8 @@ pruebas:
   nombre: Protecciones (Centro de Carga)
   aplica_a: CENTRO_DE_CARGA
   manual_referencia: CONE
-  numeral: null
-  fuente_documental: null
+  numeral: 2.5 Manual CONE
+  fuente_documental: Manual CONE CdR 2.0 (RES/550/2021); catálogo validado 03_centro_de_carga.md
   variables_requeridas: [checklist_documental, ajustes_protecciones]
   unidad_esperada: {}
   fs_minima_sugerida_hz: null
@@ -934,15 +963,20 @@ pruebas:
   evidencia_requerida: [estudios de coordinación, hojas de ajuste, pruebas de inyección]
   tipo_salida: [tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Requisitos exactos — numeral CONE.
+  estado_normativo: VALIDADO
+  dato_requerido: null
   observaciones: null
+  limites:
+    checklist: [Detección de fallas internas y externas a la Red Particular, Operación ante baja y alta
+        tensión, Operación ante baja y alta frecuencia, Operación ante sobrecarga de circuitos, Operación
+        ante sobrecarga de transformadores, Operación de protecciones de respaldo, Estudio de coordinación
+        + acta/constancia con Transportista/Distribuidor]
 - id: CC-06
   nombre: Control (Centro de Carga)
   aplica_a: CENTRO_DE_CARGA
   manual_referencia: CONE
-  numeral: null
-  fuente_documental: null
+  numeral: 2.6 Manual CONE
+  fuente_documental: Manual CONE CdR 2.0 (RES/550/2021); catálogo validado 03_centro_de_carga.md
   variables_requeridas: [checklist_documental]
   unidad_esperada: {}
   fs_minima_sugerida_hz: null
@@ -952,15 +986,18 @@ pruebas:
   evidencia_requerida: [pruebas funcionales, actas]
   tipo_salida: [tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Requisitos exactos — numeral CONE.
-  observaciones: null
+  estado_normativo: VALIDADO
+  dato_requerido: null
+  observaciones: Si no se oferta RDC, declarar no aplicable con el sustento.
+  limites:
+    checklist: ['¿Oferta Recursos de Demanda Controlable (RDC)?', 'Si RDC: sistemas adaptados para recibir
+        instrucciones de despacho (Manual TIC)']
 - id: CC-07
   nombre: Intercambio de información (Centro de Carga)
   aplica_a: CENTRO_DE_CARGA
   manual_referencia: CONE
-  numeral: null
-  fuente_documental: null
+  numeral: 2.7 Manual CONE
+  fuente_documental: Manual CONE CdR 2.0 (RES/550/2021); catálogo validado 03_centro_de_carga.md
   variables_requeridas: [checklist_documental, lista_senales_scada]
   unidad_esperada: {}
   fs_minima_sugerida_hz: null
@@ -970,9 +1007,12 @@ pruebas:
   evidencia_requerida: [actas de pruebas punto a punto]
   tipo_salida: [tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Lista de señales exigidas — numeral CONE.
+  estado_normativo: VALIDADO
+  dato_requerido: null
   observaciones: null
+  limites:
+    checklist: [Telemetría en tiempo real conforme al Manual de TIC, Protocolos y equipos conforme al
+        Manual de TIC (DOF 04-dic-2017 o sustituto), Pruebas punto a punto de señales con CENACE]
 - id: CC-08
   nombre: Calidad de la potencia (Centro de Carga)
   aplica_a: CENTRO_DE_CARGA
@@ -1000,8 +1040,8 @@ pruebas:
   nombre: Modelos de simulación (Centro de Carga)
   aplica_a: CENTRO_DE_CARGA
   manual_referencia: CONE
-  numeral: null
-  fuente_documental: null
+  numeral: 2.9 Manual CONE
+  fuente_documental: Manual CONE CdR 2.0 (RES/550/2021); catálogo validado 03_centro_de_carga.md
   variables_requeridas: [checklist_documental]
   unidad_esperada: {}
   fs_minima_sugerida_hz: null
@@ -1011,15 +1051,17 @@ pruebas:
   evidencia_requerida: [acuses, versiones]
   tipo_salida: [tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Lista de modelos exigidos — numeral CONE.
+  estado_normativo: VALIDADO
+  dato_requerido: null
   observaciones: null
+  limites:
+    checklist: [Modelos de simulación entregados a petición de CENACE conforme a normatividad vigente]
 - id: CC-10
   nombre: Plan de trabajo y verificación de conformidad
   aplica_a: CENTRO_DE_CARGA
   manual_referencia: CONE
-  numeral: null
-  fuente_documental: null
+  numeral: Cap. 4 Manual CONE (Plan de Trabajo CRE)
+  fuente_documental: Manual CONE CdR 2.0 (RES/550/2021); catálogo validado 03_centro_de_carga.md
   variables_requeridas: [checklist_documental, cronograma]
   unidad_esperada: {}
   fs_minima_sugerida_hz: null
@@ -1029,7 +1071,13 @@ pruebas:
   evidencia_requerida: [plan, actas, dictámenes]
   tipo_salida: [tabla, conclusion]
   resultados_posibles: *id001
-  estado_normativo: PENDIENTE_VALIDACION_NORMATIVA
-  dato_requerido: Contenido mínimo exigido del plan — numeral CONE.
+  estado_normativo: VALIDADO
+  dato_requerido: null
   observaciones: El legado ya maneja cronograma.json por proyecto; se reutiliza como base del plan de
     trabajo.
+  limites:
+    checklist: ['Identificación (nivel de tensión, RMU/RPU, razón social, demanda contratada, SCIAN)',
+      Representación legal y autorizados para notificaciones, 'Diagnóstico por requerimiento (tensión,
+        frecuencia, corto circuito, FP, protecciones, TIC, control, calidad)', 'Plan: acciones, análisis
+        de alternativas y cronograma (inicio/terminación)', Los estudios de diagnóstico futuros NO cuentan
+        como acción]
