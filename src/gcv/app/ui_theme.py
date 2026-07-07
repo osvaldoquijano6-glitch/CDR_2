@@ -1,8 +1,14 @@
-"""Tema visual de la app: CSS global, cabecera y componentes de estado.
+"""Tema visual de la app — sistema de tokens único del proyecto.
 
-Paleta única del sistema (la misma de reportes y gráficas):
-    tinta #1e2430 · primario #2a78d6 · marino #2a3f54 · superficie #f4f5f7
-    estados: ok #0ca30c / falla #d03b3b / advertencia #b97e00 / neutro #6b6b68
+Plan de diseño (identidad de laboratorio de ingeniería eléctrica):
+  Color   tinta #1e2430 · marino #2a3f54 · azul señal #2a78d6 ·
+          superficie con sesgo azul #f3f5f8 · línea #e2e7ee ·
+          semánticos ok/falla/advertencia (nunca se usan como acento)
+  Tipo    Escala: título 1.35rem/700 · sección .78rem versalitas espaciadas
+          (eyebrow) · cuerpo 1rem · datos tabulares con tabular-nums
+  Layout  Banda de identidad compacta arriba; pestañas tipo píldora;
+          tarjetas de radio 12 con línea 1px; estado como chip, no como texto.
+La misma paleta rige informes HTML y gráficas (plots.SERIES).
 """
 
 from __future__ import annotations
@@ -19,106 +25,138 @@ STATUS_META = {
 _CSS = """
 <style>
 :root{
-  --ink:#1e2430; --ink-2:#5b6472; --navy:#2a3f54; --accent:#2a78d6;
-  --surface:#f4f5f7; --card:#ffffff; --line:#e3e6ea;
+  --ink:#1e2430; --ink-2:#5a6473; --navy:#2a3f54; --navy-2:#33506e;
+  --accent:#2a78d6; --accent-soft:#e8f0fb;
+  --surface:#f3f5f8; --card:#ffffff; --line:#e2e7ee;
   --ok-bg:#e4f4e4; --ok-fg:#0a5c0a; --fail-bg:#fbe7e7; --fail-fg:#8f1f1f;
   --warn-bg:#fdf2d8; --warn-fg:#7a5a00; --pend-bg:#ececec; --pend-fg:#4a4a4a;
+  --radius:12px;
 }
 
-/* tipografía y lienzo */
+/* lienzo y tipografía */
 html, body, [class*="css"]{
   font-family:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  color:var(--ink);
 }
 .stApp{background:var(--surface);}
 header[data-testid="stHeader"]{background:transparent;}
-.block-container{padding-top:3.6rem; max-width:1200px;}
+.block-container{padding-top:3.4rem; padding-bottom:3rem; max-width:1180px;}
 
-/* cabecera de la app */
+h1,h2,h3{color:var(--navy); text-wrap:balance;}
+div[data-testid="stMarkdownContainer"] h3{
+  font-size:1.15rem; font-weight:700; margin-bottom:.4rem;}
+
+/* banda de identidad */
 .gcv-header{
-  display:flex; align-items:center; gap:18px;
-  background:linear-gradient(100deg,var(--navy) 0%,#33506e 55%,#3c6a99 100%);
-  border-radius:14px; padding:18px 26px; margin-bottom:6px;
-  box-shadow:0 6px 18px rgba(42,63,84,.25);
+  display:flex; align-items:center; gap:16px;
+  background:linear-gradient(100deg,var(--navy) 0%,var(--navy-2) 60%,#3c6a99 100%);
+  border-radius:14px; padding:14px 22px; margin-bottom:4px;
+  box-shadow:0 4px 14px rgba(42,63,84,.22);
 }
 .gcv-header .gcv-emblem{display:flex;} .gcv-header .gcv-emblem svg{display:block;}
-.gcv-header .t{color:#fff; font-size:1.45rem; font-weight:700; line-height:1.2; margin:0;}
-.gcv-header .s{color:#c7d5e4; font-size:.85rem; margin-top:3px;}
+.gcv-header .t{color:#fff; font-size:1.35rem; font-weight:700; line-height:1.2; margin:0;}
+.gcv-header .s{color:#c7d5e4; font-size:.82rem; margin-top:2px;}
 .gcv-header .badge{
-  margin-left:auto; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.35);
-  color:#fff; border-radius:20px; padding:5px 14px; font-size:.78rem; white-space:nowrap;
+  margin-left:auto; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.3);
+  color:#fff; border-radius:999px; padding:6px 16px; font-size:.78rem;
+  font-weight:600; white-space:nowrap;
 }
 
-/* pestañas */
-.stTabs [data-baseweb="tab-list"]{gap:6px; border-bottom:1px solid var(--line);}
+/* etiqueta de sección (eyebrow) */
+.gcv-eyebrow{
+  text-transform:uppercase; letter-spacing:.14em; font-size:.72rem; font-weight:700;
+  color:var(--ink-2); margin:6px 0 2px; display:flex; align-items:center; gap:10px;}
+.gcv-eyebrow::after{content:""; flex:1; height:1px; background:var(--line);}
+
+/* pestañas tipo píldora */
+.stTabs [data-baseweb="tab-list"]{gap:8px; border-bottom:none; margin:.35rem 0 .4rem;}
 .stTabs [data-baseweb="tab"]{
-  background:transparent; border-radius:10px 10px 0 0; padding:10px 20px;
-  color:var(--ink-2); font-weight:600;
+  background:var(--card); border:1px solid var(--line); border-radius:999px;
+  padding:8px 20px; color:var(--ink-2); font-weight:600; font-size:.92rem;
 }
-.stTabs [aria-selected="true"]{background:var(--card); color:var(--navy);
-  border:1px solid var(--line); border-bottom:2px solid var(--accent);}
+.stTabs [aria-selected="true"]{
+  background:var(--navy); color:#fff !important; border-color:var(--navy);
+}
+.stTabs [aria-selected="true"] p{color:#fff !important;}
+.stTabs [data-baseweb="tab-highlight"],.stTabs [data-baseweb="tab-border"]{display:none;}
 
-/* tarjetas y expanders */
+/* tarjetas: expanders y contenedores con borde */
 div[data-testid="stExpander"]{
-  background:var(--card); border:1px solid var(--line); border-radius:12px;
-  box-shadow:0 1px 4px rgba(30,36,48,.06); overflow:hidden;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:0 1px 3px rgba(30,36,48,.05); overflow:hidden;
 }
 div[data-testid="stExpander"] summary{font-weight:600; color:var(--navy);}
+div[data-testid="stExpander"] summary:hover{color:var(--accent);}
 div[data-testid="stVerticalBlockBorderWrapper"]{
-  background:var(--card); border-radius:12px;
+  background:var(--card); border-radius:var(--radius);
 }
 
-/* métricas como tarjetas */
+/* métricas como tarjetas de dato */
 div[data-testid="stMetric"]{
   background:var(--card); border:1px solid var(--line); border-left:4px solid var(--accent);
-  border-radius:10px; padding:10px 14px; box-shadow:0 1px 4px rgba(30,36,48,.05);
+  border-radius:10px; padding:10px 14px; box-shadow:0 1px 3px rgba(30,36,48,.04);
 }
-div[data-testid="stMetric"] label{color:var(--ink-2); font-size:.8rem;}
+div[data-testid="stMetric"] label{color:var(--ink-2); font-size:.78rem;}
+div[data-testid="stMetric"] [data-testid="stMetricValue"]{
+  font-variant-numeric:tabular-nums;}
 
 /* botones */
 .stButton>button, .stDownloadButton>button{
   border-radius:10px; font-weight:600; border:1px solid var(--line);
+  background:var(--card); color:var(--navy);
 }
+.stButton>button:hover, .stDownloadButton>button:hover{
+  border-color:var(--accent); color:var(--accent);}
 .stButton>button[kind="primary"]{
-  background:var(--accent); border:none;
-  box-shadow:0 3px 10px rgba(42,120,214,.35);
+  background:var(--accent); border:none; color:#fff;
+  box-shadow:0 3px 10px rgba(42,120,214,.3);
+}
+.stButton>button[kind="primary"]:hover{background:#2569bd; color:#fff;}
+
+/* zona de carga de archivos */
+section[data-testid="stFileUploaderDropzone"]{
+  background:var(--accent-soft); border:1.5px dashed var(--accent);
+  border-radius:var(--radius);
 }
 
 /* barra lateral */
-section[data-testid="stSidebar"]{
-  background:var(--navy);
-}
+section[data-testid="stSidebar"]{background:var(--navy);}
 section[data-testid="stSidebar"] *{color:#e8eef5;}
-section[data-testid="stSidebar"] .sb-logo{display:flex; justify-content:center; margin:6px 0 2px;}
+section[data-testid="stSidebar"] .sb-logo{display:flex; justify-content:center; margin:8px 0 2px;}
 section[data-testid="stSidebar"] .sb-logo svg{display:block;}
-section[data-testid="stSidebar"] hr{border-color:rgba(255,255,255,.2);}
+section[data-testid="stSidebar"] hr{border-color:rgba(255,255,255,.18);}
 section[data-testid="stSidebar"] div[data-baseweb="select"] *,
 section[data-testid="stSidebar"] input{color:var(--ink) !important;}
-section[data-testid="stSidebar"] small{color:#aebdcd;}
+section[data-testid="stSidebar"] small,
+section[data-testid="stSidebar"] .stCaption p{color:#a9bacb !important;}
+section[data-testid="stSidebar"] label p{font-size:.8rem; font-weight:600;
+  text-transform:uppercase; letter-spacing:.06em; color:#c7d5e4 !important;}
 
 /* chips de estado */
-.chip{display:inline-block; padding:4px 14px; border-radius:14px;
+.chip{display:inline-block; padding:4px 14px; border-radius:999px;
   font-weight:700; font-size:.78rem; letter-spacing:.02em; vertical-align:middle;}
 .chip.ok{background:var(--ok-bg); color:var(--ok-fg);}
 .chip.fail{background:var(--fail-bg); color:var(--fail-fg);}
 .chip.warn{background:var(--warn-bg); color:var(--warn-fg);}
 .chip.pend{background:var(--pend-bg); color:var(--pend-fg);}
 
-/* tarjetas de resumen de resultados */
+/* tarjetas de resumen */
 .gcv-sum{display:flex; gap:14px; flex-wrap:wrap; margin:4px 0 14px;}
 .gcv-sum .card{flex:1; min-width:150px; background:var(--card);
-  border:1px solid var(--line); border-radius:12px; padding:14px 18px;
-  box-shadow:0 1px 4px rgba(30,36,48,.06);}
-.gcv-sum .n{font-size:1.9rem; font-weight:800; line-height:1;}
-.gcv-sum .l{font-size:.78rem; color:var(--ink-2); margin-top:4px;
-  text-transform:uppercase; letter-spacing:.05em;}
+  border:1px solid var(--line); border-radius:var(--radius); padding:14px 18px;
+  box-shadow:0 1px 3px rgba(30,36,48,.05);}
+.gcv-sum .n{font-size:2rem; font-weight:800; line-height:1;
+  font-variant-numeric:tabular-nums;}
+.gcv-sum .l{font-size:.74rem; color:var(--ink-2); margin-top:5px;
+  text-transform:uppercase; letter-spacing:.08em; font-weight:600;}
 .gcv-sum .ok .n{color:var(--ok-fg);} .gcv-sum .fail .n{color:var(--fail-fg);}
 .gcv-sum .warn .n{color:var(--warn-fg);} .gcv-sum .pend .n{color:var(--pend-fg);}
 
 /* tablas */
-div[data-testid="stDataFrame"]{border:1px solid var(--line); border-radius:10px; overflow:hidden;}
+div[data-testid="stDataFrame"]{border:1px solid var(--line);
+  border-radius:10px; overflow:hidden;}
 
-/* nota al pie */
-.gcv-foot{color:var(--ink-2); font-size:.78rem; margin-top:8px;}
+.gcv-foot{color:var(--ink-2); font-size:.78rem; margin:2px 0 10px;}
 </style>
 """
 
@@ -127,7 +165,7 @@ def inject_css() -> None:
     st.markdown(_CSS, unsafe_allow_html=True)
 
 
-# Emblema neutro del sistema: monograma de malla/onda, sin marca comercial.
+# Emblema neutro del sistema: onda de frecuencia, sin marca comercial.
 def _emblem(size: int, bg: str, fg: str) -> str:
     return (
         f'<svg width="{size}" height="{size}" viewBox="0 0 48 48" '
@@ -140,7 +178,7 @@ def _emblem(size: int, bg: str, fg: str) -> str:
 
 
 def header(subtitle: str, badge: str) -> None:
-    emblem = _emblem(52, "#1f3350", "#5fa8ff")
+    emblem = _emblem(48, "#1f3350", "#5fa8ff")
     st.markdown(
         f"""<div class="gcv-header"><span class="gcv-emblem">{emblem}</span>
         <div><p class="t">Verificación de pruebas — Código de Red</p>
@@ -150,9 +188,13 @@ def header(subtitle: str, badge: str) -> None:
 
 
 def sidebar_logo() -> None:
-    emblem = _emblem(60, "#ffffff", "#2a3f54")
-    st.sidebar.markdown(
-        f'<div class="sb-logo">{emblem}</div>', unsafe_allow_html=True)
+    emblem = _emblem(56, "#ffffff", "#2a3f54")
+    st.sidebar.markdown(f'<div class="sb-logo">{emblem}</div>', unsafe_allow_html=True)
+
+
+def eyebrow(texto: str) -> None:
+    """Etiqueta de sección en versalitas con regla — jerarquía sin gritar."""
+    st.markdown(f'<div class="gcv-eyebrow">{texto}</div>', unsafe_allow_html=True)
 
 
 def chip(status: str) -> str:

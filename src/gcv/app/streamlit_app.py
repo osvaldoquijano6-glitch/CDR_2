@@ -69,15 +69,23 @@ def _sidebar() -> Installation:
                             format_func=etiquetas.get, horizontal=False)
     kwargs = {}
     if kind == InstallationKind.CENTRAL_ELECTRICA.value:
+        from gcv.evaluation.applicability import clasificar_central
+
         kwargs["tech"] = Technology(st.sidebar.selectbox(
             "Tecnología", [t.value for t in Technology], format_func=etiquetas.get))
-        kwargs["category"] = Category(st.sidebar.selectbox(
-            "Categoría (A/B/C/D)", [c.value for c in Category], index=2))
-        kwargs["area_sincrona"] = SyncArea(st.sidebar.selectbox(
-            "Área síncrona", [a.value for a in SyncArea]))
-    st.sidebar.caption(
-        "La clasificación A–D debe corresponder al numeral del Manual INTER "
-        "(pendiente de validación normativa).")
+        area = st.sidebar.selectbox("Área síncrona", [a.value for a in SyncArea])
+        kwargs["area_sincrona"] = SyncArea(area)
+        cin = st.sidebar.number_input("Capacidad instalada neta (MW)",
+                                      min_value=0.0, value=30.0, step=0.5)
+        kwargs["capacidad_instalada_neta_mw"] = cin
+        categoria = clasificar_central(area, cin)
+        kwargs["category"] = categoria
+        st.sidebar.markdown(
+            f'<div style="background:rgba(95,168,255,.15);border:1px solid rgba(95,168,255,.4);'
+            f'border-radius:10px;padding:8px 14px;margin:4px 0;font-size:.85rem">'
+            f'Clasificación automática: <b>Tipo {categoria.value}</b><br>'
+            f'<span style="font-size:.75rem;color:#a9bacb">Tabla 1.1 Manual INTE '
+            f'({cin:g} MW · {area})</span></div>', unsafe_allow_html=True)
     return Installation(nombre=nombre, kind=InstallationKind(kind), **kwargs)
 
 
@@ -267,6 +275,54 @@ def _tab_reportes(state: dict, inst: Installation) -> None:
                "cada corrida quedan además en el Histórico por central.")
 
 
+def _tab_documentos(inst: Installation) -> None:
+    """Paquete inicial del proyecto: con solo la clasificación y la selección de
+    pruebas genera Checklist, Revisión Anexo 5, Protocolo y Anexo de revisiones
+    en los formatos del proyecto — sin necesidad de cargar mediciones."""
+    from gcv.reporting.documentos_iniciales import generar_paquete
+
+    ui_theme.eyebrow("Paquete documental de arranque")
+    st.markdown("Genera los documentos iniciales del proyecto en el formato estándar. "
+                "El texto por prueba no cambia: solo se agregan o quitan pruebas "
+                "según tu selección.")
+    matrix = _matrix()
+    decisiones = [d for d in applicable_tests(matrix, inst) if d.aplica]
+    opciones = {f"{d.spec.legacy_id or d.spec.id} — {d.spec.nombre}": d.spec.id
+                for d in decisiones}
+    elegidas = st.multiselect("Pruebas incluidas en el protocolo", list(opciones),
+                              default=list(opciones))
+    pruebas_ids = [opciones[e] for e in elegidas]
+    if not pruebas_ids:
+        st.info("Selecciona al menos una prueba.")
+        return
+    outdir = Path(tempfile.mkdtemp(prefix="gcv_docs_"))
+    with st.spinner("Generando documentos..."):
+        try:
+            paquete = generar_paquete(inst, pruebas_ids, outdir)
+        except Exception as exc:
+            st.error(f"Error al generar documentos: {exc}")
+            return
+    _X = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    _W = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    c1, c2 = st.columns(2)
+    c1.download_button("📋 Checklist de Pruebas (.xlsx)",
+                       paquete["checklist"].read_bytes(),
+                       paquete["checklist"].name, _X, width="stretch")
+    c2.download_button("📑 Revisión de pruebas Anexo 5 (.xlsx)",
+                       paquete["revision_anexo5"].read_bytes(),
+                       paquete["revision_anexo5"].name, _X, width="stretch")
+    c3, c4 = st.columns(2)
+    c3.download_button("📘 Protocolo de Pruebas (.docx)",
+                       paquete["protocolo"].read_bytes(),
+                       paquete["protocolo"].name, _W, width="stretch")
+    c4.download_button("📝 Anexo de Revisiones y Comentarios (.xlsx)",
+                       paquete["revisiones"].read_bytes(),
+                       paquete["revisiones"].name, _X, width="stretch")
+    st.caption(f"{len(pruebas_ids)} pruebas incluidas · clasificación "
+               f"{inst.category.value if inst.category else '—'} calculada de la "
+               "capacidad y área síncrona (Tabla 1.1).")
+
+
 def _tab_historico() -> None:
     from gcv.reporting.repositorio import cargar_figura, listar_centrales, listar_graficas
 
@@ -307,16 +363,19 @@ def main() -> None:
         badge=f"{inst.nombre} — {clasificacion}")
     st.markdown('<p class="gcv-foot">Los criterios no validados documentalmente producen '
                 'NO EVALUABLE: el sistema nunca inventa límites.</p>', unsafe_allow_html=True)
-    tabs = st.tabs(["📥 Datos", "🧪 Pruebas", "📈 Resultados", "📤 Reportes", "📚 Histórico"])
+    tabs = st.tabs(["📄 Documentos", "📥 Datos", "🧪 Pruebas", "📈 Resultados",
+                    "📤 Reportes", "📚 Histórico"])
     with tabs[0]:
-        _tab_datos(state)
+        _tab_documentos(inst)
     with tabs[1]:
-        _tab_pruebas(state, inst)
+        _tab_datos(state)
     with tabs[2]:
-        _tab_resultados(state)
+        _tab_pruebas(state, inst)
     with tabs[3]:
-        _tab_reportes(state, inst)
+        _tab_resultados(state)
     with tabs[4]:
+        _tab_reportes(state, inst)
+    with tabs[5]:
         _tab_historico()
 
 
