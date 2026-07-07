@@ -157,6 +157,51 @@ div[data-testid="stDataFrame"]{border:1px solid var(--line);
   border-radius:10px; overflow:hidden;}
 
 .gcv-foot{color:var(--ink-2); font-size:.78rem; margin:2px 0 10px;}
+
+/* ── ajustes de acabado ─────────────────────────────────────────────── */
+/* vista limpia: se oculta el cromo de Streamlit (toolbar/Deploy/menú/pie) */
+[data-testid="stToolbar"], [data-testid="stDecoration"], #MainMenu, footer{
+  visibility:hidden; height:0;}
+
+/* multiselección: fichas sobrias del sistema (no el azul saturado por defecto)
+   — 24 pruebas deben leerse como un grupo tranquilo, no como un mosaico) */
+span[data-baseweb="tag"]{
+  background:#dce8fa !important; color:var(--navy) !important;
+  border:1px solid rgba(42,120,214,.35) !important; border-radius:8px !important;
+  font-weight:600 !important; box-shadow:none !important;}
+span[data-baseweb="tag"] span{color:var(--navy) !important;}
+span[data-baseweb="tag"] svg{fill:var(--navy-2) !important; opacity:.75;}
+span[data-baseweb="tag"]:hover svg{opacity:1;}
+div[data-baseweb="select"]>div, div[data-baseweb="input"]>div{
+  border-radius:10px !important; border-color:var(--line) !important;}
+div[data-baseweb="select"]>div:focus-within{
+  border-color:var(--accent) !important; box-shadow:0 0 0 3px rgba(42,120,214,.15) !important;}
+
+/* barra lateral: entradas con superficie clara para contraste sobre el marino */
+section[data-testid="stSidebar"] div[data-baseweb="select"]>div,
+section[data-testid="stSidebar"] div[data-baseweb="input"]>div,
+section[data-testid="stSidebar"] input{
+  background:#fff !important; border-color:rgba(255,255,255,.25) !important;}
+section[data-testid="stSidebar"] .stRadio [role="radiogroup"] label{
+  padding:2px 0;}
+
+/* cabecera: emblema con placa translúcida y micro-jerarquía */
+.gcv-header{align-items:center;}
+.gcv-header .gcv-emblem{background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:6px;}
+.gcv-header .badge{backdrop-filter:blur(2px);}
+
+/* pestañas: realce inferior sutil en la activa + transición */
+.stTabs [data-baseweb="tab"]{transition:all .15s ease;}
+.stTabs [data-baseweb="tab"]:hover{border-color:var(--accent); color:var(--navy);}
+.stTabs [aria-selected="true"]{box-shadow:0 3px 10px rgba(42,63,84,.22);}
+
+/* botones de descarga: acento a la izquierda para lectura de "documento" */
+.stDownloadButton>button{border-left:3px solid var(--accent);}
+
+/* separadores y foco general más suaves */
+hr{border-color:var(--line);}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 </style>
 """
 
