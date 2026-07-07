@@ -100,7 +100,7 @@ def export_docx(ctx: ReportContext, path: Path) -> Path:
                 [m.nombre, None if m.valor is None else f"{m.valor:.6g}", m.unidad, m.detalle]
                 for m in r.measured_values])
         for w in r.warnings:
-            doc.add_paragraph(f"⚠ {w}")
+            doc.add_paragraph(f"Advertencia: {w}")
         for fig in ctx.figuras.get(r.test_id, []):
             png = _fig_png(fig)
             if png:

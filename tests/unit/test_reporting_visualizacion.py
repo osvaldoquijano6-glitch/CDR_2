@@ -195,3 +195,30 @@ def test_paquete_documentos_iniciales(tmp_path):
     h2 = [p.text for p in doc.paragraphs if p.style.name == "Heading 2"]
     assert any("Rango de frecuencia" in h for h in h2)
     assert len([h for h in h2 if h.startswith("4.")]) == 3  # solo las seleccionadas
+
+
+def test_protocolo_sincrona_con_figuras_y_unidad(tmp_path):
+    from docx import Document
+    from gcv.models import SyncArea
+    from gcv.reporting.documentos_iniciales import generar_paquete
+
+    inst = Installation(nombre="Central Demo Sur", kind=InstallationKind.CENTRAL_ELECTRICA,
+                        tech=Technology.SINCRONA, category=Category.D,
+                        area_sincrona=SyncArea.SIN)
+    p = generar_paquete(inst, ["CE-F-03", "CE-V-07"], tmp_path)
+    doc = Document(str(p["protocolo"]))
+    h1 = [x.text for x in doc.paragraphs if x.style.name == "Heading 1"]
+    assert "5. Pruebas por Unidad" in h1        # capítulo por unidad (síncronas)
+    assert len(doc.inline_shapes) >= 4          # figuras normativas insertadas
+    h3 = [x.text for x in doc.paragraphs if x.style.name == "Heading 3"]
+    assert len(h3) == 20                        # las 20 pruebas por unidad
+
+
+def test_figuras_normativas_mapa():
+    from gcv.reporting.figuras_normativas import figuras_para
+
+    sinc = figuras_para("CE-V-07", "SINCRONA")
+    asinc = figuras_para("CE-V-07", "ASINCRONA")
+    assert sinc and all(r.exists() for _, r in sinc)
+    assert {r.name for _, r in sinc} != {r.name for _, r in asinc}
+    assert figuras_para("CE-Q-01", "SINCRONA") == []  # sin figura asociada

@@ -101,6 +101,11 @@ _TEMPLATE = """<!doctype html>
   · Estado del criterio: {{ r.estado_normativo }}</p>
  {% if objetivos.get(r.test_id) %}<p><b>Objetivo:</b> {{ objetivos[r.test_id] }}</p>{% endif %}
 
+ {% for tit, b64 in figuras_norma.get(r.test_id, []) %}
+ <div class="figure"><img src="data:image/png;base64,{{ b64 }}" style="max-width:100%">
+ <p class="small" style="font-style:italic">{{ tit }} (referencia normativa)</p></div>
+ {% endfor %}
+
  {% if r.pass_fail_details %}
  <table><tr><th>Criterio</th><th>Medido</th><th>Límite</th><th>Unidad</th><th>Cumple</th><th>Detalle</th></tr>
  {% for c in r.pass_fail_details %}
@@ -118,7 +123,7 @@ _TEMPLATE = """<!doctype html>
  {% endfor %}</table>
  {% endif %}
 
- {% for w in r.warnings %}<div class="warns">⚠ {{ w }}</div>{% endfor %}
+ {% for w in r.warnings %}<div class="warns">Advertencia: {{ w }}</div>{% endfor %}
  {% for fig_html in figuras.get(r.test_id, []) %}<div class="figure">{{ fig_html }}</div>{% endfor %}
  <p><b>Conclusión:</b> {{ conclusiones[r.test_id] }}</p>
 {% endfor %}
@@ -157,9 +162,15 @@ Los resultados NO EVALUABLE por criterio normativo pendiente no constituyen dict
 def render_html(ctx: ReportContext) -> str:
     from gcv.reporting import plantillas
 
+    from gcv.reporting.figuras_normativas import figura_b64, figuras_para
+
     nombre = ctx.installation.nombre
+    tec = ctx.installation.tech.value if ctx.installation.tech else None
     objetivos = {r.test_id: plantillas.objetivo(r.test_id, nombre) for r in ctx.resultados}
     conclusiones = {r.test_id: plantillas.conclusion(r, nombre) for r in ctx.resultados}
+    figuras_norma = {r.test_id: [(t, figura_b64(p)) for t, p in
+                                 figuras_para(r.test_id, tec)]
+                     for r in ctx.resultados}
     figuras: dict[str, list[str]] = {}
     first = True
     for tid, figs in ctx.figuras.items():
@@ -174,7 +185,8 @@ def render_html(ctx: ReportContext) -> str:
     env = Environment(loader=BaseLoader(), autoescape=False)
     return env.from_string(_TEMPLATE).render(
         ctx=ctx, figuras=figuras, status_class=_STATUS_CLASS,
-        objetivos=objetivos, conclusiones=conclusiones)
+        objetivos=objetivos, conclusiones=conclusiones,
+        figuras_norma=figuras_norma)
 
 
 def export_html(ctx: ReportContext, path: Path) -> Path:

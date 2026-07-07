@@ -237,6 +237,19 @@ def generar_protocolo_docx(inst: Installation, pruebas_ids: list[str],
         c[2].text = spec.numeral or ""
         c[3].text = "SÍ"
 
+    from docx.shared import Inches
+
+    from gcv.reporting.figuras_normativas import figuras_para
+
+    def _tabla_resultados():
+        t = doc.add_table(rows=1, cols=5); t.style = "Light Grid Accent 1"
+        for i, h in enumerate(["PASO", "HORA INICIO", "HORA FIN",
+                               "VARIABLE DE EXCITACIÓN", "POTENCIA / RESPUESTA"]):
+            t.rows[0].cells[i].text = h
+        for _ in range(4):
+            t.add_row()
+
+    tec = inst.tech.value if inst.tech else None
     doc.add_heading("4. Desarrollo de las pruebas", level=1)
     for n, spec in enumerate(seleccion, start=1):
         doc.add_heading(f"4.{n}. {spec.nombre}", level=2)
@@ -246,25 +259,51 @@ def generar_protocolo_docx(inst: Installation, pruebas_ids: list[str],
                           f"{spec.cita()}.")
         doc.add_paragraph("Criterio de aceptación").runs[0].bold = True
         doc.add_paragraph((spec.criterio_aceptacion or "").strip())
+        for titulo_fig, ruta in figuras_para(spec.id, tec):
+            doc.add_picture(str(ruta), width=Inches(5.6))
+            cap = doc.add_paragraph(titulo_fig)
+            cap.runs[0].italic = True; cap.runs[0].font.size = Pt(9)
         doc.add_paragraph("Metodología").runs[0].bold = True
         doc.add_paragraph((spec.formula_algoritmo or "").strip() or "Conforme al protocolo acordado con CENACE.")
         doc.add_paragraph("Señales requeridas").runs[0].bold = True
         for v in spec.variables_requeridas:
             doc.add_paragraph(v, style="List Bullet")
         doc.add_paragraph("Tabla de resultados").runs[0].bold = True
-        t = doc.add_table(rows=1, cols=5); t.style = "Light Grid Accent 1"
-        for i, h in enumerate(["PASO", "HORA INICIO", "HORA FIN",
-                               "VARIABLE DE EXCITACIÓN", "POTENCIA / RESPUESTA"]):
-            t.rows[0].cells[i].text = h
-        for _ in range(4):
-            t.add_row()
+        _tabla_resultados()
 
-    doc.add_heading("5. Datos de pruebas", level=1)
+    # Capítulo de Pruebas por Unidad (síncronas): universo del Checklist REV3
+    cap = 5
+    if inst.tech == Technology.SINCRONA:
+        doc.add_heading("5. Pruebas por Unidad", level=1)
+        doc.add_paragraph(
+            "Pruebas por unidad de generación conforme al Anexo 5 (síncronas 1 a 20), "
+            "con criterios del checklist de pruebas del proyecto. Se ejecutan por cada "
+            "unidad antes de las pruebas por central.")
+        unidad = [f for f in _checklist_rev3()
+                  if f["categoria"] == "PRUEBAS POR UNIDAD"]
+        sistema_actual = None
+        for k, fila in enumerate(unidad, start=1):
+            if fila["sistema"] and fila["sistema"] != sistema_actual:
+                sistema_actual = fila["sistema"]
+                doc.add_heading(f"{sistema_actual} — {fila['condicion'] or ''}".strip(" —"),
+                                level=2)
+            doc.add_heading(f"5.{k}. {fila['prueba']}", level=3)
+            doc.add_paragraph("Criterio de aceptación").runs[0].bold = True
+            doc.add_paragraph(fila["criterio"] or "Conforme al protocolo de la unidad.")
+            if fila["senales"]:
+                doc.add_paragraph("Señales requeridas").runs[0].bold = True
+                for s in str(fila["senales"]).splitlines():
+                    if s.strip():
+                        doc.add_paragraph(s.strip(), style="List Bullet")
+            _tabla_resultados()
+        cap = 6
+
+    doc.add_heading(f"{cap}. Datos de pruebas", level=1)
     doc.add_paragraph("Registros de medición con estampa de tiempo HH:MM:SS.mmm, muestreo "
                       "≥ 20 muestras/s en pruebas dinámicas, adjuntos al reporte de resultados.")
-    doc.add_heading("6. Certificados de Calibración de Equipos de Medición", level=1)
+    doc.add_heading(f"{cap + 1}. Certificados de Calibración de Equipos de Medición", level=1)
     doc.add_paragraph("Anexar certificados vigentes del equipo de medición Clase A utilizado.")
-    doc.add_heading("7. Referencias", level=1)
+    doc.add_heading(f"{cap + 2}. Referencias", level=1)
     for ref in ("Código de Red 2.0 — RES/550/2021 (DOF 31-dic-2021)",
                 "Manual Regulatorio INTE / CONE",
                 "POC — Anexo 5, CENACE",

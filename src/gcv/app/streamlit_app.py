@@ -32,10 +32,11 @@ from gcv.reporting.html_report import export_html
 from gcv.visualization.evidence import build_figures
 from gcv.app import ui_theme
 
-st.set_page_config(page_title="Verificación Código de Red", layout="wide", page_icon="⚡")
+st.set_page_config(page_title="Verificación Código de Red", layout="wide")
 
-_STATUS_ICON = {"CUMPLE": "✅", "NO_CUMPLE": "❌",
-                "NO_EVALUABLE": "⚠️", "PENDIENTE_DOCUMENTAL": "📄"}
+_STATUS_TXT = {"CUMPLE": "CUMPLE", "NO_CUMPLE": "NO CUMPLE",
+               "NO_EVALUABLE": "NO EVALUABLE",
+               "PENDIENTE_DOCUMENTAL": "PENDIENTE"}
 
 # Parámetros de protocolo sugeridos por prueba (el usuario los edita como JSON)
 _PARAM_HINTS = {
@@ -119,9 +120,9 @@ def _tab_datos(state: dict) -> None:
 
     for i, ds in enumerate(state["datasets"]):
         q = ds.quality
-        with st.expander(f"📄 {Path(ds.source_path).name} — {q.n_filas} filas, "
+        with st.expander(f"{Path(ds.source_path).name} — {q.n_filas} filas, "
                          f"fs {q.fs_detectada_hz:.4g} Hz" if q.fs_detectada_hz
-                         else f"📄 {Path(ds.source_path).name} — {q.n_filas} filas"):
+                         else f"{Path(ds.source_path).name} — {q.n_filas} filas"):
             c1, c2, c3, c4 = st.columns(4)
             c1.metric("Duplicados", q.timestamps_duplicados)
             c2.metric("Huecos", len(q.huecos))
@@ -176,7 +177,7 @@ def _tab_pruebas(state: dict, inst: Installation) -> None:
             except json.JSONDecodeError as exc:
                 st.error(f"JSON inválido: {exc}")
 
-    if params_por_prueba and st.button("▶ Ejecutar análisis", type="primary"):
+    if params_por_prueba and st.button("Ejecutar análisis", type="primary"):
         state["results"], state["figs"] = {}, {}
         barra = st.progress(0.0)
         items = list(params_por_prueba.items())
@@ -207,8 +208,9 @@ def _tab_resultados(state: dict) -> None:
     ui_theme.summary_cards(resumen)
 
     for tid, (r, _) in state["results"].items():
-        with st.expander(f"{_STATUS_ICON.get(r.status.value,'')} {tid} — {r.test_name} · "
-                         f"{r.status.value.replace('_',' ')}", expanded=True):
+        with st.expander(f"{tid} — {r.test_name} · "
+                         f"[{_STATUS_TXT.get(r.status.value, r.status.value)}]",
+                         expanded=True):
             refs = "; ".join(f"{n.documento} {n.numeral or '(numeral pendiente)'}"
                              for n in r.normative_reference) or "—"
             st.markdown(ui_theme.chip(r.status.value), unsafe_allow_html=True)
@@ -261,15 +263,15 @@ def _tab_reportes(state: dict, inst: Installation) -> None:
     bitacora = json.dumps([json.loads(d.log.to_json()) for d in state["datasets"]],
                           indent=2, ensure_ascii=False)
     c1, c2, c3, c4 = st.columns(4)
-    c1.download_button("📊 Excel (matriz)", p_xlsx.read_bytes(), p_xlsx.name,
+    c1.download_button("Excel — matriz de cumplimiento", p_xlsx.read_bytes(), p_xlsx.name,
                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                        width="stretch")
-    c2.download_button("🌐 Informe HTML", p_html.read_bytes(), p_html.name,
+    c2.download_button("Informe técnico HTML", p_html.read_bytes(), p_html.name,
                        "text/html", width="stretch")
-    c3.download_button("📝 Informe Word", p_docx.read_bytes(), p_docx.name,
+    c3.download_button("Informe técnico Word", p_docx.read_bytes(), p_docx.name,
                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                        width="stretch")
-    c4.download_button("🧾 Bitácora JSON", bitacora, "bitacora.json",
+    c4.download_button("Bitácora JSON", bitacora, "bitacora.json",
                        "application/json", width="stretch")
     st.caption("El informe HTML se abre en el navegador (doble clic). Las gráficas de "
                "cada corrida quedan además en el Histórico por central.")
@@ -305,17 +307,17 @@ def _tab_documentos(inst: Installation) -> None:
     _X = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     _W = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     c1, c2 = st.columns(2)
-    c1.download_button("📋 Checklist de Pruebas (.xlsx)",
+    c1.download_button("Checklist de Pruebas (.xlsx)",
                        paquete["checklist"].read_bytes(),
                        paquete["checklist"].name, _X, width="stretch")
-    c2.download_button("📑 Revisión de pruebas Anexo 5 (.xlsx)",
+    c2.download_button("Revisión de pruebas Anexo 5 (.xlsx)",
                        paquete["revision_anexo5"].read_bytes(),
                        paquete["revision_anexo5"].name, _X, width="stretch")
     c3, c4 = st.columns(2)
-    c3.download_button("📘 Protocolo de Pruebas (.docx)",
+    c3.download_button("Protocolo de Pruebas (.docx)",
                        paquete["protocolo"].read_bytes(),
                        paquete["protocolo"].name, _W, width="stretch")
-    c4.download_button("📝 Anexo de Revisiones y Comentarios (.xlsx)",
+    c4.download_button("Anexo de Revisiones y Comentarios (.xlsx)",
                        paquete["revisiones"].read_bytes(),
                        paquete["revisiones"].name, _X, width="stretch")
     st.caption(f"{len(pruebas_ids)} pruebas incluidas · clasificación "
@@ -341,8 +343,9 @@ def _tab_historico() -> None:
                "(los .html se abren directo con doble clic)")
     for e in entradas[:60]:
         fecha = f"{e['fecha'][:4]}-{e['fecha'][4:6]}-{e['fecha'][6:8]} {e['fecha'][9:11]}:{e['fecha'][11:13]}"
-        icono = {"CUMPLE": "✅", "NO_CUMPLE": "❌"}.get(e.get("resultado") or "", "⚠️")
-        with st.expander(f"{icono} {fecha} · {e['prueba']} — {e['titulo']}"):
+        estado = _STATUS_TXT.get(e.get("resultado") or "", "")
+        with st.expander(f"{fecha} · {e['prueba']} — {e['titulo']}"
+                         + (f" [{estado}]" if estado else "")):
             if e.get("ruta_json") and Path(e["ruta_json"]).exists():
                 st.plotly_chart(cargar_figura(e["ruta_json"]), width="stretch",
                                 key=f"hist_{e['archivo']}")
@@ -363,8 +366,8 @@ def main() -> None:
         badge=f"{inst.nombre} — {clasificacion}")
     st.markdown('<p class="gcv-foot">Los criterios no validados documentalmente producen '
                 'NO EVALUABLE: el sistema nunca inventa límites.</p>', unsafe_allow_html=True)
-    tabs = st.tabs(["📄 Documentos", "📥 Datos", "🧪 Pruebas", "📈 Resultados",
-                    "📤 Reportes", "📚 Histórico"])
+    tabs = st.tabs(["Documentos", "Datos", "Pruebas", "Resultados",
+                    "Reportes", "Histórico"])
     with tabs[0]:
         _tab_documentos(inst)
     with tabs[1]:
