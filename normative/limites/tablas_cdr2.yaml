@@ -38,6 +38,8 @@ rango_regulacion_p_pct:
   nucleoelectrica: [50, 100]
 
 # ── Huecos de tensión: Zona A, puntos (t_s, v_pu) (Cap. 4 Manual INTE) ───────
+# Cotejado contra Código de Red 2.0 oficial (DOF 31-dic-2021, págs. 1065-1069):
+# las 4 tablas (4.1.1.A/B y 4.2.1.A/B) y la recuperación post-falla coinciden.
 huecos_zona_a:
   sincrona_BC:    # Tabla 4.1.1.A
     inferior: [[0.00, 0.00], [0.25, 0.00], [0.25, 0.70], [0.70, 0.70], [1.50, 0.90]]

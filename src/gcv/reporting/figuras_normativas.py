@@ -21,8 +21,8 @@ TITULOS = {
     "figura_3_5_1": "Figura 3.5.1 — Perfil P-Q/Pmáx (asíncronas)",
     "figura_3_5_2": "Figura 3.5.2 — Perfil V-P-Q/Pmáx (asíncronas)",
     "figura_4_1_1_a": "Figura 4.1.1.A — Zona A ante huecos de tensión (síncronas B/C)",
-    "figura_4_1_1_b": "Figura 4.1.1.B — Zona A ante huecos de tensión (asíncronas B/C; "
-                      "reconstrucción a partir de la Tabla 4.1.1.B)",
+    # extraída del Código de Red 2.0 oficial (DOF 31-dic-2021, pág. 1066)
+    "figura_4_1_1_b": "Figura 4.1.1.B — Zona A ante huecos de tensión (asíncronas B/C)",
     "figura_4_2_1": "Figura 4.2.1 — Zona A ante huecos de tensión (síncronas D)",
     "figura_4_2_1_b": "Figura 4.2.1.B — Zona A ante huecos de tensión (asíncronas D)",
 }

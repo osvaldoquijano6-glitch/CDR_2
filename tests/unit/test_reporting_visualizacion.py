@@ -240,6 +240,5 @@ def test_figuras_huecos_por_tipo():
         assert figs[0][1].exists()
     # sin tipo conocido: ambas variantes como referencia
     assert len(figuras_para("CE-V-07", "ASINCRONA")) == 2
-    # la reconstrucción queda identificada en el título
     titulo = figuras_para("CE-V-07", "ASINCRONA", "B")[0][0]
-    assert "reconstrucción" in titulo and "4.1.1.B" in titulo
+    assert "4.1.1.B" in titulo
