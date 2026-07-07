@@ -209,7 +209,7 @@ def test_protocolo_sincrona_con_figuras_y_unidad(tmp_path):
     doc = Document(str(p["protocolo"]))
     h1 = [x.text for x in doc.paragraphs if x.style.name == "Heading 1"]
     assert "5. Pruebas por Unidad" in h1        # capítulo por unidad (síncronas)
-    assert len(doc.inline_shapes) >= 4          # figuras normativas insertadas
+    assert len(doc.inline_shapes) >= 3          # CPF (2) + hueco síncrona D (1)
     h3 = [x.text for x in doc.paragraphs if x.style.name == "Heading 3"]
     assert len(h3) == 20                        # las 20 pruebas por unidad
 
@@ -222,3 +222,24 @@ def test_figuras_normativas_mapa():
     assert sinc and all(r.exists() for _, r in sinc)
     assert {r.name for _, r in sinc} != {r.name for _, r in asinc}
     assert figuras_para("CE-Q-01", "SINCRONA") == []  # sin figura asociada
+
+
+def test_figuras_huecos_por_tipo():
+    """La curva de huecos (CE-V-07) se selecciona por tecnología Y tipo."""
+    from gcv.reporting.figuras_normativas import figuras_para
+
+    casos = {
+        ("SINCRONA", "B"): "figura_4_1_1_a.png",
+        ("SINCRONA", "D"): "figura_4_2_1.png",
+        ("ASINCRONA", "C"): "figura_4_1_1_b.png",
+        ("ASINCRONA", "D"): "figura_4_2_1_b.png",
+    }
+    for (tec, tipo), esperado in casos.items():
+        figs = figuras_para("CE-V-07", tec, tipo)
+        assert [r.name for _, r in figs] == [esperado], (tec, tipo)
+        assert figs[0][1].exists()
+    # sin tipo conocido: ambas variantes como referencia
+    assert len(figuras_para("CE-V-07", "ASINCRONA")) == 2
+    # la reconstrucción queda identificada en el título
+    titulo = figuras_para("CE-V-07", "ASINCRONA", "B")[0][0]
+    assert "reconstrucción" in titulo and "4.1.1.B" in titulo

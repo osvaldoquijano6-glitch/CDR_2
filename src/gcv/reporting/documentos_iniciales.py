@@ -250,6 +250,7 @@ def generar_protocolo_docx(inst: Installation, pruebas_ids: list[str],
             t.add_row()
 
     tec = inst.tech.value if inst.tech else None
+    tipo = inst.category.value if inst.category else None
     doc.add_heading("4. Desarrollo de las pruebas", level=1)
     for n, spec in enumerate(seleccion, start=1):
         doc.add_heading(f"4.{n}. {spec.nombre}", level=2)
@@ -259,7 +260,7 @@ def generar_protocolo_docx(inst: Installation, pruebas_ids: list[str],
                           f"{spec.cita()}.")
         doc.add_paragraph("Criterio de aceptación").runs[0].bold = True
         doc.add_paragraph((spec.criterio_aceptacion or "").strip())
-        for titulo_fig, ruta in figuras_para(spec.id, tec):
+        for titulo_fig, ruta in figuras_para(spec.id, tec, tipo):
             doc.add_picture(str(ruta), width=Inches(5.6))
             cap = doc.add_paragraph(titulo_fig)
             cap.runs[0].italic = True; cap.runs[0].font.size = Pt(9)

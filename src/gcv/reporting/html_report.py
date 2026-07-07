@@ -166,10 +166,11 @@ def render_html(ctx: ReportContext) -> str:
 
     nombre = ctx.installation.nombre
     tec = ctx.installation.tech.value if ctx.installation.tech else None
+    tipo = ctx.installation.category.value if ctx.installation.category else None
     objetivos = {r.test_id: plantillas.objetivo(r.test_id, nombre) for r in ctx.resultados}
     conclusiones = {r.test_id: plantillas.conclusion(r, nombre) for r in ctx.resultados}
     figuras_norma = {r.test_id: [(t, figura_b64(p)) for t, p in
-                                 figuras_para(r.test_id, tec)]
+                                 figuras_para(r.test_id, tec, tipo)]
                      for r in ctx.resultados}
     figuras: dict[str, list[str]] = {}
     first = True
