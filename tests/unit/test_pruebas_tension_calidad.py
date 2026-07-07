@@ -113,6 +113,47 @@ def test_armonicos_no_cumple():
     assert result.status == TestStatus.NO_CUMPLE
 
 
+def test_interarmonicos_evaluados():
+    """Con señal interharmonic_voltage_<n>: el peor grupo se compara vs 0.2 %."""
+    df = pd.DataFrame({
+        "timestamp": ts(20), "thd_voltage": [2.0] * 20,
+        "interharmonic_voltage_3": [0.05] * 20,
+        "interharmonic_voltage_7": [0.15] * 20,
+    })
+    spec = make_spec("CE-Q-04", ["timestamp", "thd_v"], limites={
+        "thd_max_pct": 5.0, "interarmonico_max_pct": 0.2})
+    result = ArmonicosTension(spec).run(make_dataset(df))
+    assert result.status == TestStatus.CUMPLE
+    check = {c.nombre: c for c in result.pass_fail_details}["interarmonico_max_p95"]
+    assert check.cumple is True and check.valor_medido == 0.15
+    assert "grupo interarmónico 7" in check.detalle
+
+    df.loc[:, "interharmonic_voltage_7"] = 0.35   # excede 0.2 %
+    result = ArmonicosTension(make_spec("CE-Q-04", ["timestamp", "thd_v"], limites={
+        "thd_max_pct": 5.0, "interarmonico_max_pct": 0.2})).run(make_dataset(df))
+    assert result.status == TestStatus.NO_CUMPLE
+
+
+def test_interarmonicos_sin_senal_no_bloquean():
+    """Límite exigido sin medición: check no evaluable + advertencia, THD dictamina."""
+    df = pd.DataFrame({"timestamp": ts(20), "thd_voltage": [2.0] * 20})
+    spec = make_spec("CE-Q-04", ["timestamp", "thd_v"], limites={
+        "thd_max_pct": 5.0, "interarmonico_max_pct": 0.2})
+    result = ArmonicosTension(spec).run(make_dataset(df))
+    assert result.status == TestStatus.CUMPLE
+    check = {c.nombre: c for c in result.pass_fail_details}["interarmonicos"]
+    assert check.cumple is None
+    assert any("no evaluables" in w for w in result.warnings)
+
+
+def test_alias_interarmonico():
+    from gcv.normalization.aliases import match_signal
+
+    assert match_signal("IH5 V [%]").señal == "interharmonic_voltage_5"
+    assert match_signal("Interarmonico 12 corriente").señal == "interharmonic_current_12"
+    assert match_signal("H5 V [%]").señal == "harmonic_voltage_5"  # no se confunde
+
+
 # ─── CE-Q-02 Flicker ─────────────────────────────────────────────────────────
 def test_flicker_cumple():
     df = pd.DataFrame({"timestamp": ts(20), "pst": [0.7] * 20, "plt": [0.5] * 20})

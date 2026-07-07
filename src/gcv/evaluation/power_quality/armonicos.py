@@ -16,7 +16,8 @@ from gcv.evaluation.base import BaseTest, Calculation, WorkingData
 from gcv.evaluation.registry import register
 from gcv.evaluation.result import CriterionCheck, Evidence, MeasuredValue
 from gcv.models import NormRef
-from gcv.quality_power.harmonics import percentile_by_harmonic, series_percentile
+from gcv.quality_power.harmonics import (
+    percentile_by_harmonic, percentile_by_interharmonic, series_percentile)
 
 
 class _ArmonicosBase(BaseTest):
@@ -58,6 +59,17 @@ class _ArmonicosBase(BaseTest):
             calc.tables.append(Evidence(
                 tipo="tabla", titulo=f"Percentil {pct:g} por armónico ({self.kind})",
                 data={"percentiles_pct": individual}))
+
+        inter = percentile_by_interharmonic(df, self.kind, pct)
+        calc.extra["interarmonicos"] = inter
+        if inter:
+            peor = max(inter, key=inter.get)
+            calc.measured.append(MeasuredValue(
+                nombre=f"interarmonico_max_p{pct:g}", valor=inter[peor], unidad="%",
+                detalle=f"grupo interarmónico {peor} (de {len(inter)} medidos)"))
+            calc.tables.append(Evidence(
+                tipo="tabla", titulo=f"Percentil {pct:g} por grupo interarmónico ({self.kind})",
+                data={"percentiles_pct": inter}))
         return calc
 
     def evaluate(self, calc: Calculation, wd: WorkingData) -> list[CriterionCheck]:
@@ -97,6 +109,27 @@ class _ArmonicosBase(BaseTest):
                 cumple=bool(medido <= float(limite)) if medido is not None else None,
                 referencia=ref,
                 detalle=None if medido is not None else "Armónico exigido sin medición"))
+
+        inter_max = lim.get("interarmonico_max_pct")
+        if inter_max is not None:
+            inter = calc.extra.get("interarmonicos", {})
+            if inter:
+                peor = max(inter, key=inter.get)
+                checks.append(CriterionCheck(
+                    nombre=f"interarmonico_max_p{pct:g}",
+                    valor_medido=inter[peor], limite=float(inter_max), unidad="%",
+                    comparacion="<=",
+                    cumple=bool(inter[peor] <= float(inter_max)),
+                    referencia=ref,
+                    detalle=f"máximo en el grupo interarmónico {peor} "
+                            f"({len(inter)} grupos medidos)"))
+            else:
+                checks.append(CriterionCheck(
+                    nombre="interarmonicos", valor_medido=None,
+                    limite=float(inter_max), unidad="%", comparacion="<=",
+                    cumple=None, referencia=ref,
+                    detalle="Límite exigido sin medición de interarmónicos "
+                            "(interharmonic_*_<n>) del analizador"))
 
         if not checks:
             checks.append(CriterionCheck(

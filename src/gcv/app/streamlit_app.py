@@ -29,6 +29,7 @@ from gcv.reporting.context import ReportContext
 from gcv.reporting.docx_report import export_docx
 from gcv.reporting.excel import export_excel
 from gcv.reporting.html_report import export_html
+from gcv.reporting.pdf_report import export_pdf, pdf_disponible
 from gcv.visualization.evidence import build_figures
 from gcv.app import ui_theme
 
@@ -87,7 +88,33 @@ def _sidebar() -> Installation:
             f'Clasificación automática: <b>Tipo {categoria.value}</b><br>'
             f'<span style="font-size:.75rem;color:#a9bacb">Tabla 1.1 Manual INTE '
             f'({cin:g} MW · {area})</span></div>', unsafe_allow_html=True)
+    _sidebar_reabrir()
     return Installation(nombre=nombre, kind=InstallationKind(kind), **kwargs)
+
+
+def _sidebar_reabrir() -> None:
+    """Reabre un proyecto guardado: carga resultados y gráficas al estado."""
+    from gcv.config.settings import PROJECTS_DIR
+    from gcv.persistence import cargar_proyecto, listar_proyectos
+
+    proyectos = listar_proyectos()
+    if not proyectos:
+        return
+    st.sidebar.divider()
+    st.sidebar.subheader("Reabrir proyecto")
+    etiquetas = {p["slug"]: f"{p['nombre']} · {(p['guardado'] or '')[:16]}"
+                 for p in proyectos}
+    slug = st.sidebar.selectbox("Corrida guardada", list(etiquetas),
+                                format_func=etiquetas.get, key="reabrir_slug")
+    if st.sidebar.button("Cargar corrida"):
+        pj = cargar_proyecto(PROJECTS_DIR / slug)
+        state = _state()
+        state["datasets"] = pj.datasets
+        state["results"] = {r.test_id: (r, pj.result_ds_index.get(r.test_id, 0))
+                            for r in pj.resultados}
+        state["figs"] = pj.figuras
+        st.sidebar.success(f"Cargado: {pj.installation.nombre} "
+                           f"({len(pj.resultados)} pruebas). Revisa Resultados y Reportes.")
 
 
 def _tab_datos(state: dict) -> None:
@@ -252,6 +279,7 @@ def _tab_reportes(state: dict, inst: Installation) -> None:
     # Descarga en un solo clic: los artefactos se generan al entrar a la pestaña
     # (el patrón botón→botón perdía el estado entre reruns y mostraba errores).
     outdir = Path(tempfile.mkdtemp(prefix="gcv_rep_"))
+    p_pdf = None
     with st.spinner("Generando informes..."):
         try:
             p_xlsx = export_excel(ctx, outdir / "matriz_cumplimiento.xlsx")
@@ -260,6 +288,11 @@ def _tab_reportes(state: dict, inst: Installation) -> None:
         except Exception as exc:
             st.error(f"Error al generar informes: {exc}")
             return
+        if pdf_disponible():
+            try:
+                p_pdf = export_pdf(ctx, outdir / "informe_tecnico.pdf")
+            except Exception:
+                p_pdf = None
     bitacora = json.dumps([json.loads(d.log.to_json()) for d in state["datasets"]],
                           indent=2, ensure_ascii=False)
     c1, c2, c3, c4 = st.columns(4)
@@ -273,8 +306,28 @@ def _tab_reportes(state: dict, inst: Installation) -> None:
                        width="stretch")
     c4.download_button("Bitácora JSON", bitacora, "bitacora.json",
                        "application/json", width="stretch")
+    if p_pdf is not None:
+        st.download_button("Informe técnico PDF", p_pdf.read_bytes(), p_pdf.name,
+                           "application/pdf", width="stretch")
+    else:
+        st.caption("PDF no disponible en este entorno (sin Chromium/weasyprint); "
+                   "use el informe HTML, que es autocontenido.")
     st.caption("El informe HTML se abre en el navegador (doble clic). Las gráficas de "
                "cada corrida quedan además en el Histórico por central.")
+
+    st.divider()
+    ui_theme.eyebrow("Proyecto")
+    st.write("Guarda esta corrida (instalación, resultados y gráficas) para "
+             "reabrirla más adelante desde la barra lateral.")
+    if st.button("Guardar proyecto", type="primary"):
+        from gcv.persistence import guardar_proyecto
+
+        carpeta = guardar_proyecto(
+            inst, [r for r, _ in state["results"].values()], state["datasets"],
+            figuras=state["figs"],
+            result_ds_index={tid: idx for tid, (_, idx) in state["results"].items()},
+            responsable=responsable or None)
+        st.success(f"Proyecto guardado en {carpeta}")
 
 
 def _tab_documentos(inst: Installation) -> None:
@@ -320,6 +373,12 @@ def _tab_documentos(inst: Installation) -> None:
     c4.download_button("Anexo de Revisiones y Comentarios (.xlsx)",
                        paquete["revisiones"].read_bytes(),
                        paquete["revisiones"].name, _X, width="stretch")
+    if "plan_trabajo" in paquete:
+        st.download_button("Plan de Trabajo CRE (.docx)",
+                           paquete["plan_trabajo"].read_bytes(),
+                           paquete["plan_trabajo"].name, _W, width="stretch")
+        st.caption("Plan de Trabajo en el formato del Capítulo 4.1 (Centros de Carga) "
+                   "con los rangos obligatorios prellenados.")
     st.caption(f"{len(pruebas_ids)} pruebas incluidas · clasificación "
                f"{inst.category.value if inst.category else '—'} calculada de la "
                "capacidad y área síncrona (Tabla 1.1).")

@@ -197,6 +197,24 @@ def test_paquete_documentos_iniciales(tmp_path):
     assert len([h for h in h2 if h.startswith("4.")]) == 3  # solo las seleccionadas
 
 
+def test_plan_trabajo_cre_centro_de_carga(tmp_path):
+    from docx import Document
+    from gcv.reporting.documentos_iniciales import generar_paquete
+
+    inst = Installation(nombre="Centro de Carga Demo", kind=InstallationKind.CENTRO_DE_CARGA,
+                        tension_poi_kv=115.0)
+    paquete = generar_paquete(inst, ["CC-01", "CC-02", "CC-04"], tmp_path)
+    # el Plan de Trabajo solo aparece para Centros de Carga
+    assert "plan_trabajo" in paquete and paquete["plan_trabajo"].exists()
+    doc = Document(str(paquete["plan_trabajo"]))
+    h1 = [p.text for p in doc.paragraphs if p.style.name == "Heading 1"]
+    assert "4. Plan de Trabajo" in h1 and "4.1 Cronograma" in h1
+    textos = "\n".join(p.text for p in doc.paragraphs)
+    assert "Alta Tensión" in textos          # 115 kV ≥ 69 → AT, prellenado
+    assert "0.97 en atraso" in textos         # vigencia FP del catálogo
+    assert "{{NOMBRE_CC}}" in textos          # placeholder, sin nombre de empresa
+
+
 def test_protocolo_sincrona_con_figuras_y_unidad(tmp_path):
     from docx import Document
     from gcv.models import SyncArea

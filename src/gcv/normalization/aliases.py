@@ -75,6 +75,8 @@ TOKEN_GROUPS: dict[str, list[tuple[str, ...]]] = {
 }
 
 _HARMONIC_RE = re.compile(r"^(h|arm(?:onico)?|harmonic)\s*_?(\d{1,2})\b", re.IGNORECASE)
+_INTERHARMONIC_RE = re.compile(
+    r"^(ih|inter\s*_?arm(?:onico)?s?|inter\s*_?harmonic)\s*_?(\d{1,2})\b", re.IGNORECASE)
 _UNIT_SUFFIX_RE = re.compile(r"[\[\(][^\]\)]*[\]\)]")
 
 
@@ -104,6 +106,12 @@ def match_signal(header: object) -> SignalMatch | None:
     for signal, aliases in ALIASES.items():
         if norm in aliases:
             return SignalMatch(signal, 1.0, "alias_exacto")
+
+    m = _INTERHARMONIC_RE.match(norm)
+    if m:
+        order = int(m.group(2))
+        kind = "voltage" if any(k in norm for k in ("v", "tension", "volt")) else "current"
+        return SignalMatch(f"interharmonic_{kind}_{order}", 0.6, "armonico")
 
     m = _HARMONIC_RE.match(norm)
     if m:

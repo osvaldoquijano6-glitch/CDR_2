@@ -3,6 +3,8 @@
 # Fuente: catálogos de pruebas validados por el usuario (01/02/03 *.md),
 # que transcriben el Manual INTE, POC/Anexo 5 y Manual CONE.
 # Estado: VALIDADO (transcripción de fuente primaria vía catálogo propio).
+# Cotejo muestral contra el DOF oficial (Codigo_de_Red_2_0 (1).pdf) 2026-07-07:
+# 13/13 criterios coinciden — ver docs/COTEJO_DOF.md.
 # Estas tablas alimentan etapas E3/E4; las pruebas ya implementadas llevan
 # sus límites inline en matriz_pruebas.yaml.
 # =============================================================================
