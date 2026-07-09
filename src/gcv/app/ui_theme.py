@@ -119,19 +119,6 @@ section[data-testid="stFileUploaderDropzone"]{
   border-radius:var(--radius);
 }
 
-/* barra lateral */
-section[data-testid="stSidebar"]{background:var(--navy);}
-section[data-testid="stSidebar"] *{color:#e8eef5;}
-section[data-testid="stSidebar"] .sb-logo{display:flex; justify-content:center; margin:8px 0 2px;}
-section[data-testid="stSidebar"] .sb-logo svg{display:block;}
-section[data-testid="stSidebar"] hr{border-color:rgba(255,255,255,.18);}
-section[data-testid="stSidebar"] div[data-baseweb="select"] *,
-section[data-testid="stSidebar"] input{color:var(--ink) !important;}
-section[data-testid="stSidebar"] small,
-section[data-testid="stSidebar"] .stCaption p{color:#a9bacb !important;}
-section[data-testid="stSidebar"] label p{font-size:.8rem; font-weight:600;
-  text-transform:uppercase; letter-spacing:.06em; color:#c7d5e4 !important;}
-
 /* chips de estado */
 .chip{display:inline-block; padding:4px 14px; border-radius:999px;
   font-weight:700; font-size:.78rem; letter-spacing:.02em; vertical-align:middle;}
@@ -176,14 +163,6 @@ div[data-baseweb="select"]>div, div[data-baseweb="input"]>div{
   border-radius:10px !important; border-color:var(--line) !important;}
 div[data-baseweb="select"]>div:focus-within{
   border-color:var(--accent) !important; box-shadow:0 0 0 3px rgba(42,120,214,.15) !important;}
-
-/* barra lateral: entradas con superficie clara para contraste sobre el marino */
-section[data-testid="stSidebar"] div[data-baseweb="select"]>div,
-section[data-testid="stSidebar"] div[data-baseweb="input"]>div,
-section[data-testid="stSidebar"] input{
-  background:#fff !important; border-color:rgba(255,255,255,.25) !important;}
-section[data-testid="stSidebar"] .stRadio [role="radiogroup"] label{
-  padding:2px 0;}
 
 /* cabecera: emblema con placa translúcida y micro-jerarquía */
 .gcv-header{align-items:center;}
@@ -230,11 +209,6 @@ def header(subtitle: str, badge: str) -> None:
         <div class="s">{subtitle}</div></div>
         <div class="badge">{badge}</div></div>""",
         unsafe_allow_html=True)
-
-
-def sidebar_logo() -> None:
-    emblem = _emblem(56, "#ffffff", "#2a3f54")
-    st.sidebar.markdown(f'<div class="sb-logo">{emblem}</div>', unsafe_allow_html=True)
 
 
 def eyebrow(texto: str) -> None:

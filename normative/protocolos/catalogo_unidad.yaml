@@ -1,0 +1,1614 @@
+origen: Protocolo_Unidad_v1.2.1.docx
+capitulo: 4. Pruebas Por Unidad
+preambulo: []
+tabla_maestra:
+- - PRUEBAS DE CENTRALES ELÉCTRICAS SINCRONAS
+- - Prueba
+  - Descripción
+  - Criterio de aceptación
+  - Aplica
+- - '1'
+  - Rango Operativo de Tensión
+  - 'Debe controlar
+
+    90% < V < 110%'
+  - Si Aplica
+- - '2'
+  - Escalón de Tensión
+  - 'tr < 0.25 s
+
+    0.7s < ts < 1.0s
+
+    SP < 15%
+
+    Tipo estático
+
+
+    tr < 0.5 s
+
+    Ts < 2.0s
+
+    SP < 15%
+
+    Tipo Brushless'
+  - Si aplica
+- - '3'
+  - Limitador V/Hz
+  - 1.07 – 1.12 p. u
+  - Si aplica
+- - '4'
+  - Secuencia Exc-Desexc. (auto y manual)
+  - Verificar secuencia
+  - Si aplica
+- - '5'
+  - 'Seguidor auto.
+
+    Entre canales y UCE´s'
+  - Error al transferir < 1 %
+  - Si aplica
+- - '6'
+  - PSS
+  - Amortiguar oscilaciones locales al menos al 30%
+  - No aplica
+- - '7'
+  - Limitador de mínima excitación (MEL)
+  - 5% de la potencia base arriba del límite
+  - No aplica
+- - '8'
+  - Limitador de máxima excitación (OEL)
+  - Entre 0.95 y 1.05 p.u. de corriente nominal de campo
+  - No aplica
+- - '9'
+  - Compensador de MVAr
+  - ±1 del valor de ajuste (+12%)
+  - Si aplica
+- - '10'
+  - Apertura y cierre de elementos finales de control
+  - Verificar carrera y medir tiempos
+  - Si aplica
+- - '11'
+  - Secuencia de arranque
+  - Verificar secuencia y medir tiempos
+  - Si aplica
+- - '12'
+  - Variador de velocidad
+  - Controlar de 57 Hz a 63 Hz
+  - Si aplica
+- - '13'
+  - Escalones de velocidad
+  - Respuesta estable a escalones
+  - Si aplica
+- - '14'
+  - Protección por sobre velocidad
+  - Disparo correcto por sobre velocidad
+  - Si aplica
+- - '15'
+  - Variador de carga
+  - Controlar potencia activa
+  - Si aplica
+- - '16'
+  - Limitador de carga
+  - Limitar potencia activa a consigna
+  - Si aplica
+- - '17'
+  - Estatismo
+  - Estatismo del 5% ± tolerancia
+  - Si aplica
+- - '18'
+  - Escalones de potencia (10% de Pnom)
+  - 'SP<30%
+
+    Ts< 30s'
+  - SI
+- - '19'
+  - Rechazo de Carga
+  - 'Ts < 90s
+
+    Quedar excitada y a velocidad nominal'
+  - SI
+- - '20'
+  - Operación en isla
+  - Autoabastecida, cambia a modo isócrono
+  - No Aplica
+pruebas:
+- grupo: Sistema de Control de Tensión, Pruebas en Vacio
+- seccion: '1'
+  titulo: Rango Operativo de Tensión
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica que la Unidad de Generación mantenga el voltaje en terminales del generador
+      dentro del rango operativo permitido, mediante la actuación del Regulador Automático de Tensión
+      (AVR/RAT).
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la prueba de Rango Operativo
+      de Tensión con el criterio de control dentro del rango 90% < V < 110%.
+  - estilo: p1
+    texto: Asimismo, la prueba se sustenta dentro del Código de Red 2.0, particularmente con el Manual
+      Regulatorio de Requerimientos Técnicos para la Interconexión de Centrales Eléctricas al Sistema
+      Eléctrico Nacional, Capítulo 3, relativo a los requerimientos de interconexión ante variaciones
+      de tensión, y con la Sección 3.2.2, correspondiente al sistema de control de tensión para Centrales
+      Eléctricas Síncronas tipo B.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre en operación estable, con el sistema de excitación habilitado
+      y el AVR en modo automático.
+  - estilo: List Paragraph
+    texto: Ajustar la consigna de voltaje conforme a las condiciones operativas definidas para la prueba.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación de la unidad, incluyendo voltaje en terminales
+      del generador, potencia activa y frecuencia.
+  - estilo: List Paragraph
+    texto: Modificar la consigna del AVR para comprobar la capacidad de control del voltaje en terminales
+      del generador dentro del rango permitido.
+  - estilo: List Paragraph
+    texto: Ejecutar la prueba en condición de vacío y, cuando aplique, en diferentes puntos de carga.
+  - estilo: List Paragraph
+    texto: Registrar al menos tres condiciones representativas de operación, cuando la prueba se realice
+      con carga.
+  - estilo: List Paragraph
+    texto: Verificar que la respuesta del generador sea estable durante cada punto evaluado, sin pérdida
+      de control del AVR, sin oscilaciones anormales y sin actuación indebida de protecciones.
+  - estilo: List Paragraph
+    texto: Confirmar que el voltaje en terminales del generador permanezca dentro del rango operativo
+      requerido durante toda la prueba.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Voltaje de generador (Vg)
+  - estilo: List Paragraph
+    texto: Potencia activa (P)
+  - estilo: List Paragraph
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando el voltaje en terminales del generador permanece
+      dentro del siguiente rango:'
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: Los resultados de la prueba deberán registrarse una vez ejecutada la medición en campo, documentando
+      los valores obtenidos de voltaje en terminales del generador, potencia activa, frecuencia y, en
+      caso de estar disponible, la consigna aplicada al AVR.
+  - estilo: Normal
+    texto: La información registrada deberá permitir verificar que la unidad mantiene el voltaje en terminales
+      dentro del rango permitido de 0.90 a 1.10 pu, sin pérdida de control del AVR, sin oscilaciones anormales
+      y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Una vez concluida la prueba, los resultados se integrarán en formato tabular y gráfico para
+      sustentar la evaluación del cumplimiento.
+  - placeholder: 'Gráfica: Desempeño del control de tensión —CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Normal
+    texto: Figura 1.2 Desempeño del control de tensión
+- seccion: '2.1'
+  titulo: Escalón de Tensión 5%
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica la respuesta dinámica del sistema de control de excitación de la Unidad
+      de Generación ante cambios escalonados de ±5% en la consigna de voltaje, con el AVR/RAT en modo
+      automático.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la prueba de Escalón
+      de Tensión para el sistema de control de tensión.
+  - estilo: p1
+    texto: La prueba se sustenta dentro del Código de Red 2.0, particularmente en el Manual Regulatorio
+      de Requerimientos Técnicos para la Interconexión de Centrales Eléctricas al Sistema Eléctrico Nacional,
+      Capítulo 3, relativo a los requerimientos de interconexión ante variaciones de tensión, y en la
+      Sección 3.2.2, correspondiente al sistema de control de tensión para Centrales Eléctricas Síncronas
+      tipo B.
+  - estilo: Normal
+    texto: Para el protocolo se documentan escalones de tensión de ±5% y ±10%. En caso de que CENACE,
+      el fabricante o el procedimiento específico solicite una verificación adicional de ±20%, esta deberá
+      integrarse como prueba complementaria previa validación de los límites operativos del AVR y de la
+      unidad generadora.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre sincronizada, en operación estable y con el AVR en modo
+      automático.
+  - estilo: List Paragraph
+    texto: Operar el generador aproximadamente al 50% de carga nominal, conforme a las condiciones operativas
+      disponibles para la prueba.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación de la unidad, incluyendo voltaje en terminales
+      del generador, corriente de campo y potencia reactiva.
+  - estilo: List Paragraph
+    texto: Con el generador estabilizado, aplicar un escalón positivo de +5% sobre la consigna de voltaje.
+  - estilo: List Paragraph
+    texto: Registrar la respuesta dinámica del sistema de excitación hasta que el voltaje del generador
+      alcance una condición estable.
+  - estilo: List Paragraph
+    texto: Una vez estabilizada la respuesta, aplicar un escalón negativo de –5% sobre la consigna de
+      voltaje.
+  - estilo: List Paragraph
+    texto: Registrar nuevamente la respuesta dinámica del sistema hasta alcanzar una condición estable.
+  - estilo: List Paragraph
+    texto: 'Determinar los parámetros de desempeño de la respuesta: tiempo de respuesta (Tr), tiempo de
+      estabilización (Ts), sobrepaso (SP) y constante de amortiguamiento (ε).'
+  - estilo: Normal
+    texto: Para efectos de esta evaluación, ε corresponde al coeficiente de amortiguamiento de la respuesta
+      dinámica del sistema de excitación; se utiliza para verificar que las oscilaciones posteriores al
+      escalón se atenúan dentro del rango permitido.
+  - estilo: List Paragraph
+    texto: Verificar que la respuesta del sistema sea estable, sin oscilaciones anormales, sin pérdida
+      de control del AVR y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Voltaje de generador (Vg)
+  - estilo: List Paragraph
+    texto: Corriente de campo (If)
+  - estilo: List Paragraph
+    texto: "Potencia reactiva \n(Q)"
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando los parámetros de respuesta dinámica se encuentran
+      dentro de los siguientes límites:'
+  - estilo: Normal
+    texto: 'Tiempo de respuesta (Tr): Tr < 0.25 s para sistema estático; Tr < 0.5 s para sistema brushless.'
+  - estilo: Normal
+    texto: 'Tiempo de estabilización (Ts): 0.7 s < Ts < 1.0 s para sistema estático; Ts < 2.0 s para sistema
+      brushless.'
+  - estilo: Normal
+    texto: 'Sobrepaso (SP): SP < 15%.'
+  - estilo: Normal
+    texto: 'Coeficiente de amortiguamiento (ε):'
+  - estilo: Normal
+    texto: 0.5 ≤ ε ≤ 1.0.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: Los resultados se registrarán una vez ejecutada la medición en campo, documentando la respuesta
+      dinámica del sistema de excitación ante el escalón positivo de +5% y el escalón negativo de –5%
+      en la consigna de voltaje.
+  - estilo: Normal
+    texto: La información obtenida permitirá determinar el tiempo de respuesta (Tr), tiempo de estabilización
+      (Ts), sobrepaso (SP) y constante de amortiguamiento (ε), con el propósito de verificar su cumplimiento
+      respecto a los criterios de aceptación establecidos.
+  - placeholder: 'Gráfica: Escalón de Tensión +5% — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.3 Escalón de Tensión +5%
+- seccion: '2.2'
+  titulo: Escalón de Tensión 10%
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica la respuesta dinámica del sistema de control de excitación de la Unidad
+      de Generación ante cambios escalonados de ±10% en la consigna de voltaje, con el AVR/RAT en modo
+      automático.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la prueba de Escalón
+      de Tensión para el sistema de control de tensión.
+  - estilo: p1
+    texto: La prueba se sustenta dentro del Código de Red 2.0, particularmente en el Manual Regulatorio
+      de Requerimientos Técnicos para la Interconexión de Centrales Eléctricas al Sistema Eléctrico Nacional,
+      Capítulo 3, relativo a los requerimientos de interconexión ante variaciones de tensión, y en la
+      Sección 3.2.2, correspondiente al sistema de control de tensión para Centrales Eléctricas Síncronas
+      tipo B.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre sincronizada, en operación estable y con el AVR en modo
+      automático.
+  - estilo: List Paragraph
+    texto: Operar el generador aproximadamente al 50% de carga nominal, conforme a las condiciones operativas
+      disponibles para la prueba.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación de la unidad, incluyendo voltaje en terminales
+      del generador, corriente de campo y potencia reactiva.
+  - estilo: List Paragraph
+    texto: Con el generador estabilizado, aplicar un escalón positivo de +10% sobre la consigna de voltaje.
+  - estilo: List Paragraph
+    texto: Registrar la respuesta dinámica del sistema de excitación hasta alcanzar una condición estable.
+  - estilo: List Paragraph
+    texto: Una vez estabilizada la respuesta, aplicar un escalón negativo de –10% sobre la consigna de
+      voltaje.
+  - estilo: List Paragraph
+    texto: Registrar nuevamente la respuesta dinámica del sistema hasta alcanzar una condición estable.
+  - estilo: List Paragraph
+    texto: 'Determinar los parámetros de desempeño de la respuesta: tiempo de respuesta (Tr), tiempo de
+      estabilización (Ts), sobrepaso (SP) y constante de amortiguamiento (ε).'
+  - estilo: Normal
+    texto: Para efectos de esta evaluación, ε corresponde al coeficiente de amortiguamiento de la respuesta
+      dinámica del sistema de excitación; se utiliza para verificar que las oscilaciones posteriores al
+      escalón se atenúan dentro del rango permitido.
+  - estilo: List Paragraph
+    texto: Verificar que la respuesta del sistema sea estable, sin oscilaciones anormales, sin pérdida
+      de control del AVR y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Voltaje de generador (Vg)
+  - estilo: List Paragraph
+    texto: Corriente de campo (If)
+  - estilo: List Paragraph
+    texto: "Potencia reactiva \n(Q)"
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando los parámetros de respuesta dinámica se encuentran
+      dentro de los siguientes límites:'
+  - estilo: Normal
+    texto: 'Tiempo de respuesta (Tr): Tr < 0.25 s para sistema estático; Tr < 0.5 s para sistema brushless.'
+  - estilo: Normal
+    texto: 'Tiempo de estabilización (Ts): 0.7 s < Ts < 1.0 s para sistema estático; Ts < 2.0 s para sistema
+      brushless.'
+  - estilo: Normal
+    texto: 'Sobrepaso (SP): SP < 15%.'
+  - estilo: Normal
+    texto: 'Coeficiente de amortiguamiento (ε): 0.5 ≤ ε ≤ 1.0.'
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: Los resultados se registrarán posterior a la medición en campo, considerando la respuesta dinámica
+      del sistema de excitación ante el escalón positivo de +10% y el escalón negativo de –10% en la consigna
+      de voltaje.
+  - estilo: Normal
+    texto: La información obtenida permitirá determinar el tiempo de respuesta (Tr), tiempo de estabilización
+      (Ts), sobrepaso (SP) y constante de amortiguamiento (ε), así como verificar su cumplimiento respecto
+      a los criterios de aceptación establecidos.
+  - placeholder: "Gráfica: Escalón de Tensión -10% — CNK \n[Espacio reservado para gráfica / captura]"
+  - estilo: Subtitle
+    texto: Figura 1.4 Escalón de Tensión -10%
+- seccion: '3'
+  titulo: Limitador V/Hz
+  no_aplica_en_plantilla: false
+  flujo:
+  - estilo: Normal
+    texto: Aplicabilidad de las Pruebas
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica el funcionamiento del limitador Volts/Hertz (V/Hz) de la Unidad de Generación,
+      asociado a la protección contra sobreflujo magnético del generador. El propósito es comprobar que
+      el sistema limite la excitación y mantenga la relación V/Hz dentro del rango permitido.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la prueba de Limitador
+      V/Hz con un rango de actuación de 1.07 a 1.12 pu.
+  - estilo: p1
+    texto: La prueba se vincula técnicamente con los requerimientos del sistema de excitación y control
+      de tensión establecidos para Centrales Eléctricas Síncronas tipo B, ya que el limitador V/Hz forma
+      parte de las funciones de protección y limitación asociadas al Regulador Automático de Tensión (AVR/RAT)
+      y al sistema de excitación del generador.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre en operación estable, con el sistema de excitación habilitado
+      y el AVR en modo automático.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación de la unidad, incluyendo voltaje en terminales
+      del generador y frecuencia.
+  - estilo: List Paragraph
+    texto: Con el generador estabilizado, reducir gradualmente la frecuencia simulada de forma controlada.
+  - estilo: List Paragraph
+    texto: Evaluar la relación V/Hz durante cada punto de frecuencia definido.
+  - estilo: List Paragraph
+    texto: Registrar los valores de voltaje, frecuencia y relación V/Hz en los puntos de 60 Hz, 59 Hz,
+      58 Hz y 57 Hz.
+  - estilo: List Paragraph
+    texto: Verificar la actuación del limitador V/Hz conforme al ajuste configurado en el sistema de excitación.
+  - estilo: List Paragraph
+    texto: Regresar la unidad a condiciones nominales de operación.
+  - estilo: List Paragraph
+    texto: Confirmar que la unidad mantenga una respuesta estable, sin pérdida de control del AVR, sin
+      oscilaciones anormales y sin actuación indebida de protecciones no asociadas a la prueba.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Voltaje de generador (Vg)
+  - estilo: List Paragraph
+    texto: Frecuencia (f)
+  - estilo: List Paragraph
+    texto: Relación V/Hz
+  - estilo: List Paragraph
+    texto: Activación del limitador V/Hz
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A
+      y el analizador de redes correspondiente, mediante los cuales se registrarán las señales eléctricas
+      requeridas durante la ejecución de la prueba.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando la relación V/Hz se mantiene dentro del siguiente
+      rango de actuación:'
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: Los resultados se registrarán posterior a la medición en campo, considerando los valores de
+      voltaje, frecuencia, relación V/Hz y condición de actuación del limitador en cada punto evaluado.
+  - estilo: Normal
+    texto: La información obtenida permitirá verificar que el limitador mantiene la relación V/Hz dentro
+      del rango de 1.07 a 1.12 pu, así como confirmar la estabilidad del sistema de excitación durante
+      la prueba.
+  - estilo: Normal
+    texto: La evidencia de la prueba se presentará en formato tabular y gráfico para sustentar la evaluación
+      correspondiente.
+  - placeholder: 'Gráfica: Característica V/Hz del Limitador — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.5 Característica V/Hz del Limitador
+- seccion: '4.1'
+  titulo: Secuencia Exc y Desexc Auto
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica que la secuencia automática de excitación y desexcitación del generador
+      se realice de forma ordenada, segura y conforme a la lógica operativa del sistema de excitación.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la verificación de la
+      Secuencia Excitación–Desexcitación del sistema de control de tensión.
+  - estilo: p1
+    texto: La prueba se vincula técnicamente con la correcta operación del sistema de excitación del generador,
+      al validar que las órdenes automáticas de excitación y desexcitación se ejecuten en la secuencia
+      esperada, sin pérdida de control, sin condiciones anormales y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que el generador se encuentre parado o en condición segura para inicio de secuencia,
+      conforme a la condición operativa definida para la prueba.
+  - estilo: List Paragraph
+    texto: Confirmar que el sistema de excitación se encuentre disponible y habilitado para operación
+      automática.
+  - estilo: List Paragraph
+    texto: Iniciar la secuencia automática de excitación del generador.
+  - estilo: List Paragraph
+    texto: Registrar el comportamiento del voltaje en terminales del generador y la corriente de campo
+      durante la secuencia.
+  - estilo: List Paragraph
+    texto: Medir el tiempo requerido desde el inicio de la secuencia de excitación hasta alcanzar la tensión
+      nominal del generador.
+  - estilo: List Paragraph
+    texto: Con la unidad excitada y en condición estable, iniciar la secuencia automática de desexcitación.
+  - estilo: List Paragraph
+    texto: Registrar la disminución del voltaje del generador y de la corriente de campo durante la desexcitación.
+  - estilo: List Paragraph
+    texto: Medir el tiempo requerido desde el inicio de la secuencia de desexcitación hasta alcanzar tensión
+      cero o la condición final definida por el sistema.
+  - estilo: List Paragraph
+    texto: Verificar que ambas secuencias se ejecuten de forma ordenada, sin bloqueos, sin alarmas anormales
+      y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Voltaje de generador (Vg)
+  - estilo: List Paragraph
+    texto: Corriente de campo (If)
+  - estilo: List Paragraph
+    texto: Señales de secuencia del AVR
+  - estilo: List Paragraph
+    texto: Estado de excitación / desexcitación
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales requeridas durante la ejecución de la prueba, con capacidad
+      de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando la secuencia automática de excitación y desexcitación
+      se realiza de manera ordenada y correcta, conforme a la lógica operativa del sistema de excitación,
+      sin interrupciones anormales, sin pérdida de control y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro temporal de la secuencia automática de
+      excitación y desexcitación del generador, identificando el instante de inicio de cada orden, la
+      evolución del voltaje en terminales y la corriente de campo hasta alcanzar la condición final correspondiente.
+  - estilo: Normal
+    texto: Para la excitación automática, se documentará el tiempo requerido para alcanzar la tensión
+      nominal del generador. Para la desexcitación automática, se documentará el tiempo requerido para
+      llevar el voltaje del generador a la condición de tensión cero o al valor final definido por el
+      sistema.
+  - estilo: Normal
+    texto: Los registros permitirán confirmar que ambas secuencias se ejecutan de forma ordenada, sin
+      bloqueos, alarmas anormales, pérdida de control del sistema de excitación o actuación indebida de
+      protecciones.
+  - placeholder: "Gráfica: Secuencia Excitación Automática — CNK \n[Espacio reservado para gráfica / captura]"
+  - estilo: Subtitle
+    texto: Figura 1.6 Secuencia Excitación Automática
+  - placeholder: "Gráfica: Secuencia Desexcitación Automática — CNK \n[Espacio reservado para gráfica\
+      \ / captura]"
+  - estilo: Subtitle
+    texto: Figura 1.7 Secuencia Desexcitación Automática
+- seccion: '4.2'
+  titulo: Secuencia Desexcitación con Paro de Emergencia
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica que, ante la activación de un paro de emergencia, la secuencia de desexcitación
+      del generador se ejecute de forma ordenada y segura hasta alcanzar la condición final definida por
+      el sistema.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se considera la verificación de la
+      secuencia de excitación y desexcitación.
+  - estilo: p1
+    texto: La prueba se enfoca en confirmar la respuesta del sistema de excitación ante una condición
+      de emergencia, verificando la descarga del campo, la reducción del voltaje del generador y la correcta
+      ejecución de las señales asociadas al paro.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que el generador se encuentre operando en condiciones nominales o en la condición
+      definida para la prueba.
+  - estilo: List Paragraph
+    texto: Confirmar que el sistema de excitación se encuentre habilitado y operando correctamente.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación, incluyendo voltaje en terminales del generador
+      y corriente de campo.
+  - estilo: List Paragraph
+    texto: Activar la señal de paro de emergencia conforme al procedimiento operativo establecido.
+  - estilo: List Paragraph
+    texto: Registrar la secuencia completa de desexcitación posterior a la activación del paro.
+  - estilo: List Paragraph
+    texto: Medir el tiempo transcurrido desde la activación del paro de emergencia hasta la condición
+      final de desexcitación.
+  - estilo: List Paragraph
+    texto: Verificar la reducción del voltaje del generador y de la corriente de campo durante la secuencia.
+  - estilo: List Paragraph
+    texto: Confirmar la apertura del interruptor principal o la condición final definida por la lógica
+      de protección y control.
+  - estilo: List Paragraph
+    texto: Verificar que la secuencia se ejecute sin bloqueos, sin operación incompleta y sin condiciones
+      anormales adicionales.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Voltaje de generador (Vg)
+  - estilo: List Paragraph
+    texto: Corriente de campo (If)
+  - estilo: List Paragraph
+    texto: Señal de paro de emergencia
+  - estilo: List Paragraph
+    texto: Estado del interruptor principal
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales requeridas durante la ejecución de la prueba.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando la secuencia de desexcitación ante paro de emergencia
+      se realiza de manera ordenada, conforme a la lógica de protección y control de la unidad, hasta
+      alcanzar la condición segura definida por el sistema.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro temporal de la activación del paro de
+      emergencia y la respuesta del sistema de excitación hasta completar la desexcitación del generador.
+  - estilo: Normal
+    texto: El registro deberá permitir identificar el tiempo de desexcitación, la evolución del voltaje
+      en terminales, la corriente de campo y la condición del interruptor principal o señal final asociada
+      a la secuencia.
+  - estilo: Normal
+    texto: La información presentada permitirá confirmar que la desexcitación por paro de emergencia se
+      ejecuta de forma ordenada, sin bloqueos ni interrupciones anormales de la secuencia.
+  - placeholder: 'Gráfica: Secuencia Desexcitación con Paro de Emergencia — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.7 Secuencia Desexcitación con Paro de Emergencia
+- seccion: '5'
+  titulo: Seguidor Auto entre Canales y UCE's
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica la correcta operación de la función Seguidor Automático entre canales
+      del sistema de excitación y entre las Unidades de Control de Excitación, con el propósito de confirmar
+      que la transferencia entre canales se realice sin desviaciones significativas en la referencia de
+      control.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la verificación del Seguidor
+      Auto entre canales y UCE’s, considerando como criterio que el error al transferir sea menor al 1%.
+  - estilo: p1
+    texto: La prueba se enfoca en comprobar que los canales de control del sistema de excitación mantengan
+      seguimiento entre sí, permitiendo una transferencia automática o manual sin cambios bruscos en el
+      voltaje del generador ni pérdida de control del AVR.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre en operación estable, con el sistema de excitación habilitado
+      y el AVR en modo automático.
+  - estilo: List Paragraph
+    texto: Confirmar que los canales de control del sistema de excitación se encuentren disponibles y
+      sin alarmas activas.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación, incluyendo voltaje en terminales del generador,
+      corriente de campo y canal activo del AVR.
+  - estilo: List Paragraph
+    texto: Verificar el seguimiento entre el canal activo y el canal en reserva, observando la diferencia
+      entre sus señales de referencia o salida.
+  - estilo: List Paragraph
+    texto: Ejecutar la transferencia entre canales conforme al procedimiento operativo del sistema de
+      excitación.
+  - estilo: List Paragraph
+    texto: Registrar el comportamiento del voltaje del generador, corriente de campo y señal de canal
+      activo durante la transferencia.
+  - estilo: List Paragraph
+    texto: Verificar que la transferencia se realice sin variaciones bruscas, sin pérdida de control del
+      AVR y sin actuación indebida de protecciones.
+  - estilo: List Paragraph
+    texto: Determinar el error de transferencia entre canales y confirmar que se mantenga dentro del criterio
+      permitido.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Voltaje de generador (Vg)
+  - estilo: List Paragraph
+    texto: Corriente de campo (If)
+  - estilo: List Paragraph
+    texto: Señal de canal activo del AVR
+  - estilo: List Paragraph
+    texto: Señal de canal en seguimiento / reserva
+  - estilo: List Paragraph
+    texto: Referencia o salida de control de cada canal
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales requeridas durante la ejecución de la prueba.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando la transferencia entre canales y UCE’s se realiza
+      correctamente, manteniendo un error de transferencia menor al:'
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de la condición previa, el instante de
+      transferencia entre canales y la respuesta del sistema de excitación durante el cambio de canal.
+  - estilo: Normal
+    texto: El registro permitirá evaluar la diferencia entre las señales de seguimiento y confirmar que
+      la transferencia se realiza con un error menor al 1%, manteniendo estabilidad en el voltaje del
+      generador y continuidad en la operación del sistema de excitación.
+- grupo: Sistema de Control de Tensión, Pruebas con Carga
+- seccion: '6'
+  titulo: PSS — No aplica
+  no_aplica_en_plantilla: true
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: N/A. La prueba no aplica a este tipo de central.
+- seccion: '7'
+  titulo: Limitador de Mínima Excitación (MEL) — No aplica
+  no_aplica_en_plantilla: true
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: N/A. La prueba no aplica a este tipo de central.
+- seccion: '8'
+  titulo: Limitador de Máxima Excitación (OEL) — No aplica
+  no_aplica_en_plantilla: true
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: N/A. La prueba no aplica a este tipo de central.
+- seccion: '9'
+  titulo: Compensador de Reactivos
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica el funcionamiento del compensador de reactivos del AVR/RAT, evaluando
+      la respuesta del sistema de control de tensión ante distintos ajustes de compensación.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la prueba de Compensador
+      de MVAr con un rango de evaluación de ±12%.
+  - estilo: p1
+    texto: La prueba permite confirmar que el AVR modifica adecuadamente su referencia de control en función
+      del ajuste del compensador de reactivos, manteniendo una respuesta estable del voltaje del generador
+      y de la potencia reactiva.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: Normal
+    texto: 1. Verificar que la unidad se encuentre en operación estable, con carga y con el AVR en modo
+      automático.
+  - estilo: Normal
+    texto: 2. Registrar la condición inicial de operación, incluyendo voltaje en terminales del generador,
+      potencia reactiva y ajuste inicial del compensador.
+  - estilo: Normal
+    texto: 3. Ajustar el compensador de reactivos al valor de 0% y registrar la condición estable.
+  - estilo: Normal
+    texto: 4. Ajustar el compensador a +4%, +8% y +12%, cuando el diseño del AVR lo permita, registrando
+      la respuesta del sistema en cada punto.
+  - estilo: Normal
+    texto: 5. Ajustar el compensador a –4%, –8% y –12%, registrando la respuesta del sistema en cada punto.
+  - estilo: Normal
+    texto: 6. Verificar la variación del voltaje del generador respecto al valor esperado para cada ajuste
+      del compensador.
+  - estilo: Normal
+    texto: 7. Confirmar que la unidad mantenga una operación estable, sin pérdida de control del AVR,
+      sin oscilaciones anormales y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: 8. En caso de que algún rango de ajuste no sea soportado por diseño del AVR, documentar la
+      condición observada y justificar su exclusión dentro de los resultados.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Voltaje de generador (Vg)
+  - estilo: List Paragraph
+    texto: "Potencia reactiva \n(Q)"
+  - estilo: List Paragraph
+    texto: Ajuste del compensador (%)
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando el voltaje del generador presenta una variación
+      dentro de la tolerancia permitida para cada ajuste del compensador:'
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro del voltaje del generador, potencia reactiva
+      y ajuste del compensador en cada punto evaluado.
+  - estilo: Normal
+    texto: La información obtenida permitirá verificar que el compensador de reactivos responde conforme
+      a los ajustes aplicados y que la variación del voltaje se mantiene dentro de la tolerancia establecida.
+  - estilo: Normal
+    texto: En caso de que el diseño del AVR no permita operar en ajustes positivos del compensador, dicha
+      condición será documentada como parte de la evaluación, indicando el comportamiento observado, tal
+      como inestabilidad o pérdida de control en dichos ajustes.
+  - placeholder: 'Gráfica: Compensador de Reactivos — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.7 Compensador de Reactivos
+- grupo: Sistema de Control de Velocidad en Vacio
+- seccion: '10'
+  titulo: Apertura y Cierre de Elementos Finales de Control
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica la correcta operación de los elementos finales de control asociados al
+      sistema de control de velocidad de la Unidad de Generación, comprobando su capacidad de apertura
+      y cierre conforme a la lógica de mando establecida.
+  - estilo: Normal
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la prueba de Apertura
+      / Cierre de elementos finales de control, cuyo propósito es verificar la carrera de los elementos
+      de actuación y medir sus tiempos de respuesta.
+  - estilo: Normal
+    texto: La prueba permite confirmar que los actuadores, válvulas, compuertas o mecanismos equivalentes
+      responden correctamente a las órdenes del sistema de control, sin bloqueos, retrasos anormales o
+      pérdida de seguimiento.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre en condición segura para la ejecución de la prueba.
+  - estilo: List Paragraph
+    texto: Confirmar que el sistema de control de velocidad se encuentre disponible y habilitado para
+      el mando de los elementos finales de control.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de los elementos finales de control, identificando su posición
+      o estado previo.
+  - estilo: List Paragraph
+    texto: Emitir la orden de apertura conforme al procedimiento operativo definido.
+  - estilo: List Paragraph
+    texto: Registrar la posición alcanzada y el tiempo de respuesta correspondiente.
+  - estilo: List Paragraph
+    texto: Emitir la orden de cierre conforme al procedimiento operativo definido.
+  - estilo: List Paragraph
+    texto: Registrar la posición final y el tiempo de respuesta correspondiente.
+  - estilo: List Paragraph
+    texto: Verificar que la carrera de apertura y cierre se complete de forma correcta, sin bloqueos,
+      señales erráticas o desviaciones anormales.
+  - estilo: List Paragraph
+    texto: Confirmar que las señales de retroalimentación de posición correspondan con las órdenes emitidas
+      por el sistema de control.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Orden de apertura / cierre
+  - estilo: List Paragraph
+    texto: Posición del elemento final de control
+  - estilo: List Paragraph
+    texto: Señal de retroalimentación de posición
+  - estilo: List Paragraph
+    texto: Tiempo de apertura
+  - estilo: List Paragraph
+    texto: Tiempo de cierre
+  - estilo: List Paragraph
+    texto: Velocidad del rotor, si aplica
+  - estilo: List Paragraph
+    texto: Frecuencia, si aplica
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando los elementos finales de control ejecutan correctamente
+      las órdenes de apertura y cierre, completan su carrera conforme a la lógica operativa del sistema
+      y presentan señales de retroalimentación consistentes con la posición alcanzada.
+  - estilo: Normal
+    texto: Asimismo, los tiempos de apertura y cierre deberán quedar registrados para su validación contra
+      los valores esperados o configurados en el sistema de control.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de las órdenes de apertura y cierre,
+      la posición de los elementos finales de control y los tiempos de respuesta asociados a cada maniobra.
+  - estilo: Normal
+    texto: La información presentada permitirá verificar la correcta actuación de los elementos finales
+      de control, la correspondencia entre orden y posición, así como la ausencia de bloqueos, retrasos
+      anormales o señales inconsistentes durante la prueba.
+  - placeholder: 'Gráfica: Apertura y Cierre de Elementos Finales de Control — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.8 Apertura y Cierre de Elementos Finales de Control
+- seccion: '11'
+  titulo: Secuencia de Arranque
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica que la secuencia de arranque de la Unidad de Generación se ejecute de
+      manera correcta, ordenada y conforme a la lógica operativa del sistema de control, desde la condición
+      inicial de unidad parada hasta alcanzar la condición requerida para sincronización.
+  - estilo: Normal
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la verificación de la
+      Secuencia de Arranque.
+  - estilo: Normal
+    texto: La prueba se enfoca en comprobar la correcta ejecución de los permisos, etapas, señales y tiempos
+      asociados al arranque de la unidad, sin bloqueos, alarmas anormales o interrupciones no esperadas.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre parada y disponible para inicio de arranque.
+  - estilo: List Paragraph
+    texto: Confirmar que los permisos de arranque se encuentren habilitados conforme a la lógica de control
+      de la unidad.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de la unidad antes de iniciar la secuencia.
+  - estilo: List Paragraph
+    texto: Iniciar la secuencia de arranque desde el panel de control correspondiente.
+  - estilo: List Paragraph
+    texto: Registrar cada etapa de la secuencia de arranque, incluyendo señales de control, cambios de
+      estado y tiempos asociados.
+  - estilo: List Paragraph
+    texto: Verificar el incremento progresivo de la velocidad del rotor hasta alcanzar la condición requerida
+      de operación.
+  - estilo: List Paragraph
+    texto: Registrar la evolución del voltaje del generador durante la secuencia, cuando aplique.
+  - estilo: List Paragraph
+    texto: Confirmar que la unidad alcance la condición de sincronización o la condición final definida
+      para la prueba.
+  - estilo: List Paragraph
+    texto: Verificar que la secuencia se ejecute de forma ordenada, sin bloqueos, alarmas anormales o
+      actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Velocidad del rotor (n)
+  - estilo: List Paragraph
+    texto: Voltaje de generador (Vg)
+  - estilo: List Paragraph
+    texto: Señales de secuencia del controlador
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando la secuencia de arranque se ejecuta de manera correcta
+      y ordenada, conforme a la lógica de control de la unidad, hasta alcanzar la condición de sincronización
+      o la condición operativa definida para la prueba.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de las etapas de arranque, señales de
+      control y tiempos asociados, desde la orden inicial de arranque hasta la condición final definida.
+  - estilo: Normal
+    texto: La información presentada permitirá verificar la continuidad de la secuencia, la correcta transición
+      entre etapas y la ausencia de bloqueos, alarmas anormales o interrupciones no esperadas durante
+      el arranque.
+  - placeholder: 'Gráfica: Secuencia de Arranque — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.9 Secuencia de Arranque
+- seccion: '12'
+  titulo: Variador de Velocidad
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica que el sistema de control de velocidad de la Unidad de Generación permita
+      modificar y controlar la frecuencia dentro del rango operativo requerido de 57 Hz a 63 Hz.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la prueba de Variador
+      de Velocidad 65F con un rango de control de 57 Hz a 63 Hz.
+  - estilo: p1
+    texto: La prueba se enfoca en comprobar que el control de velocidad responda adecuadamente a los cambios
+      de consigna, permitiendo alcanzar los valores de frecuencia definidos sin pérdida de control ni
+      comportamiento inestable.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre en operación estable, en modo isla o bajo la condición
+      operativa definida para la prueba.
+  - estilo: List Paragraph
+    texto: Confirmar que el sistema de control de velocidad se encuentre habilitado y disponible.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación con frecuencia cercana a 60 Hz.
+  - estilo: List Paragraph
+    texto: Ajustar la consigna de velocidad hacia el límite inferior del rango, correspondiente a 57 Hz.
+  - estilo: List Paragraph
+    texto: Registrar la respuesta del controlador de velocidad hasta alcanzar una condición estable.
+  - estilo: List Paragraph
+    texto: Restablecer la consigna hacia la condición nominal de 60 Hz, cuando aplique.
+  - estilo: List Paragraph
+    texto: Ajustar la consigna de velocidad hacia el límite superior del rango, correspondiente a 63 Hz.
+  - estilo: List Paragraph
+    texto: Registrar nuevamente la respuesta del controlador hasta alcanzar una condición estable.
+  - estilo: List Paragraph
+    texto: Confirmar que el sistema de control de velocidad permita alcanzar el rango evaluado sin pérdida
+      de control, oscilaciones anormales o actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Frecuencia (f)
+  - estilo: List Paragraph
+    texto: "Potencia activa \n(P)"
+  - estilo: List Paragraph
+    texto: Consigna de velocidad
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando la unidad demuestra capacidad de control de frecuencia
+      dentro del siguiente rango:'
+  - estilo: Normal
+    texto: sin pérdida de estabilidad del sistema de control de velocidad.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de la frecuencia, potencia activa y consigna
+      de velocidad durante el recorrido del rango evaluado.
+  - estilo: Normal
+    texto: La información presentada permitirá verificar que el sistema de control de velocidad alcanza
+      los valores definidos entre 57 Hz y 63 Hz, manteniendo una respuesta estable y continua del controlador.
+  - placeholder: 'Gráfica: Variador de Velocidad — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.9 Variador de Velocidad
+- seccion: '13'
+  titulo: Escalones de Velocidad
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica la respuesta dinámica del sistema de control de velocidad de la Unidad
+      de Generación ante cambios escalonados en la consigna de velocidad/frecuencia.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la prueba de Escalones
+      de Velocidad, considerando como parámetros de evaluación el sobrepaso y el tiempo de estabilización.
+  - estilo: p1
+    texto: La prueba se enfoca en comprobar que el controlador de velocidad responda de forma estable
+      ante cambios súbitos de consigna, sin oscilaciones anormales, pérdida de control o actuación indebida
+      de protecciones..
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre en operación estable, en vacío o bajo la condición operativa
+      definida para la prueba.
+  - estilo: List Paragraph
+    texto: Confirmar que el sistema de control de velocidad se encuentre habilitado y disponible.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación, incluyendo velocidad/frecuencia, potencia activa
+      cuando aplique y consigna de velocidad.
+  - estilo: List Paragraph
+    texto: Aplicar un escalón positivo en la consigna de velocidad/frecuencia conforme al valor definido
+      para la prueba.
+  - estilo: List Paragraph
+    texto: Registrar la respuesta del controlador hasta alcanzar una condición estable.
+  - estilo: List Paragraph
+    texto: Restablecer la consigna a la condición inicial o nominal, cuando aplique.
+  - estilo: List Paragraph
+    texto: Aplicar un escalón negativo en la consigna de velocidad/frecuencia conforme al valor definido
+      para la prueba.
+  - estilo: List Paragraph
+    texto: Registrar nuevamente la respuesta del controlador hasta alcanzar una condición estable.
+  - estilo: List Paragraph
+    texto: Determinar los parámetros de desempeño de la respuesta, principalmente sobrepaso (SP) y tiempo
+      de estabilización (Ts).
+  - estilo: List Paragraph
+    texto: Verificar que la respuesta del sistema de control de velocidad sea estable, sin oscilaciones
+      anormales, pérdida de control o actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Velocidad del rotor]
+  - estilo: Normal
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Potencia activa (P), cuando aplique
+  - estilo: Normal
+    texto: Consigna de velocidad/frecuencia
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando la respuesta dinámica del sistema de control de
+      velocidad cumple con los siguientes parámetros:'
+  - estilo: Normal
+    texto: sin pérdida de estabilidad del sistema de control de velocidad.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de la velocidad/frecuencia, consigna
+      de velocidad y variables eléctricas asociadas durante los escalones aplicados.
+  - estilo: Normal
+    texto: La información presentada permitirá determinar el sobrepaso (SP) y el tiempo de estabilización
+      (Ts), así como verificar que la unidad mantiene una respuesta estable ante los cambios escalonados
+      de velocidad.
+  - placeholder: 'Gráfica: Escalones de Velocidad ±1 Hz — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.9 Escalones de Velocidad ±1 Hz
+- seccion: '14'
+  titulo: Protección por Sobre Velocidad
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica el funcionamiento de la protección por sobrevelocidad de la Unidad de
+      Generación, confirmando que el sistema emita la señal de disparo cuando la velocidad supera el umbral
+      configurado.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la verificación de la
+      protección por sobrevelocidad con referencia a los umbrales 110% / 112%
+  - estilo: p1
+    texto: La prueba se enfoca en validar la correcta detección de una condición de sobrevelocidad mediante
+      señal simulada, evitando llevar físicamente la unidad a una condición de riesgo.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que el generador se encuentre desconectado de la red y en condición segura para la
+      prueba.
+  - estilo: List Paragraph
+    texto: Confirmar que el sistema de control de velocidad se encuentre disponible y con los parámetros
+      de protección configurados.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de velocidad, frecuencia y estado de la protección.
+  - estilo: List Paragraph
+    texto: Inyectar una señal simulada de sobrevelocidad al sistema de control de velocidad.
+  - estilo: List Paragraph
+    texto: Verificar la detección de la condición de sobrevelocidad conforme al umbral configurado.
+  - estilo: List Paragraph
+    texto: Registrar la emisión de la señal de disparo por sobrevelocidad.
+  - estilo: List Paragraph
+    texto: Confirmar que la actuación se realice dentro del tiempo y lógica establecidos por la configuración
+      de protección.
+  - estilo: List Paragraph
+    texto: Restablecer la condición normal del sistema posterior a la prueba.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: List Paragraph
+    texto: Voltaje de generador (Vg)
+  - estilo: List Paragraph
+    texto: Potencia activa (P)
+  - estilo: List Paragraph
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando la protección por sobrevelocidad emite la señal
+      de disparo al alcanzar los umbrales configurados de protección:'
+  - estilo: Normal
+    texto: conforme a la lógica de protección establecida para la Unidad de Generación.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de la señal simulada de sobrevelocidad,
+      la respuesta del sistema de control de velocidad y la activación de la señal de disparo correspondiente.
+  - estilo: Normal
+    texto: La información presentada permitirá confirmar que la protección por sobrevelocidad actúa conforme
+      a los umbrales 110% / 112%, sin operación errática ni bloqueo de la función de protección.
+  - placeholder: 'Gráfica: Protección Sobre Velocidad — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.9 Protección Sobre Velocidad
+- grupo: Sistema de Control de Velocidad con Carga
+- seccion: '15'
+  titulo: Variador de Carga
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica el funcionamiento de la protección por sobrevelocidad asociada al gobernador,
+      confirmando que el sistema emita la señal de disparo cuando la velocidad de la unidad supera el
+      umbral configurado.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la verificación de la
+      protección por sobrevelocidad.
+  - estilo: p1
+    texto: La prueba se enfoca en validar la correcta detección de una condición de sobrevelocidad mediante
+      señal simulada, sin necesidad de llevar físicamente la unidad a una condición de riesgo.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que el generador se encuentre desconectado de la red y en condición segura para la
+      prueba.
+  - estilo: List Paragraph
+    texto: Confirmar que el gobernador se encuentre disponible y con los parámetros de protección configurados.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de velocidad, frecuencia y estado de la protección.
+  - estilo: List Paragraph
+    texto: Inyectar una señal simulada de sobrevelocidad al gobernador.
+  - estilo: List Paragraph
+    texto: Verificar la detección de la condición de sobrevelocidad conforme al umbral configurado.
+  - estilo: List Paragraph
+    texto: Registrar la emisión de la señal de disparo por sobrevelocidad.
+  - estilo: List Paragraph
+    texto: Confirmar que la actuación se realice dentro del tiempo y lógica establecidos por la configuración
+      del gobernador.
+  - estilo: List Paragraph
+    texto: Restablecer la condición normal del sistema posterior a la prueba.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Velocidad del rotor (n)
+  - estilo: Normal
+    texto: Señal de disparo por sobrevelocidad
+  - estilo: Normal
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando la protección por sobrevelocidad emite la señal
+      de disparo al superar el umbral configurado, conforme a la lógica de protección establecida.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de la señal simulada de sobrevelocidad,
+      la respuesta del sistema de control de velocidad y la activación de la señal de disparo correspondiente.
+  - estilo: Normal
+    texto: La información presentada permitirá confirmar que la protección por sobrevelocidad actúa conforme
+      al umbral y tiempo configurados, sin operación errática ni bloqueo de la función de protección.
+  - placeholder: 'Gráfica: Variador de Carga — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.10 Variador de Carga
+- seccion: '16'
+  titulo: Limitador de Carga
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica que el sistema de control de carga limite correctamente la potencia activa
+      de la Unidad de Generación conforme a una consigna máxima configurada.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la verificación del Limitador
+      de Carga desde potencia mínima hasta potencia máxima.
+  - estilo: p1
+    texto: La prueba se enfoca en confirmar que la unidad respete el límite de potencia activa configurado,
+      evitando que la generación supere la consigna máxima establecida por el sistema de control.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre en operación estable y con el sistema de control de carga
+      habilitado.
+  - estilo: List Paragraph
+    texto: Confirmar que el limitador de carga se encuentre activo y disponible para la prueba.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación, incluyendo potencia activa, consigna de potencia
+      y estado del limitador.
+  - estilo: List Paragraph
+    texto: Configurar el limitador de carga a un valor inferior a la capacidad máxima disponible de la
+      unidad.
+  - estilo: List Paragraph
+    texto: Incrementar la consigna de potencia activa con el propósito de alcanzar el límite configurado.
+  - estilo: List Paragraph
+    texto: Verificar que el sistema de control limite la potencia activa al valor establecido.
+  - estilo: List Paragraph
+    texto: Intentar superar la consigna máxima configurada y confirmar que la potencia activa no exceda
+      el límite.
+  - estilo: List Paragraph
+    texto: Registrar la respuesta del controlador y la señal de limitador activo durante la prueba.
+  - estilo: List Paragraph
+    texto: Verificar que la unidad mantenga una operación estable, sin oscilaciones anormales, pérdida
+      de control o actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Potencia activa (P)
+  - estilo: Normal
+    texto: Consigna de potencia
+  - estilo: Normal
+    texto: Señal de limitador activo
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando la potencia activa de la unidad no supera el valor
+      configurado en el limitador de carga:'
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de la potencia activa, la consigna de
+      potencia y la señal de limitador activo durante la evaluación.
+  - estilo: Normal
+    texto: La información presentada permitirá confirmar que el sistema de control restringe la potencia
+      activa conforme al valor configurado, evitando que la unidad supere la consigna máxima establecida..
+  - placeholder: 'Gráfica: Limitador de Carga — CNK
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.11 Limitador de Carga
+- seccion: '17'
+  titulo: Estatismo
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica la característica de estatismo o droop del sistema de control de velocidad
+      de la Unidad de Generación, confirmando que la variación de potencia activa sea consistente con
+      el ajuste de regulación configurado.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la verificación de la
+      característica de regulación del sistema de control de velocidad.
+  - estilo: p1
+    texto: La prueba se enfoca en comprobar que la unidad no modifique su potencia activa ante variaciones
+      de frecuencia dentro de la banda muerta configurada y que responda de forma proporcional cuando
+      la frecuencia simulada salga de dicha banda.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre sincronizada y operando en condición estable.
+  - estilo: List Paragraph
+    texto: Operar el generador aproximadamente al 80% de carga nominal, conforme a las condiciones operativas
+      disponibles para la prueba.
+  - estilo: List Paragraph
+    texto: Confirmar que el modo de control de frecuencia se encuentre habilitado.
+  - estilo: List Paragraph
+    texto: Verificar que la banda muerta se encuentre configurada en ±30 mHz.
+  - estilo: List Paragraph
+    texto: Verificar que la característica de regulación del sistema de control de velocidad corresponda
+      a un estatismo del 5%.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación, incluyendo frecuencia, frecuencia simulada, potencia
+      activa, velocidad del rotor y voltaje del generador.
+  - estilo: List Paragraph
+    texto: Inyectar escalones de frecuencia simulada dentro de la banda muerta.
+  - estilo: List Paragraph
+    texto: Verificar que los cambios de frecuencia dentro de la banda muerta no produzcan variaciones
+      significativas en la potencia activa.
+  - estilo: List Paragraph
+    texto: Inyectar escalones de frecuencia simulada fuera de la banda muerta.
+  - estilo: List Paragraph
+    texto: Registrar la respuesta de la potencia activa ante las variaciones de frecuencia aplicadas.
+  - estilo: List Paragraph
+    texto: Confirmar que la respuesta de la unidad sea proporcional al ajuste de estatismo configurado,
+      sin oscilaciones anormales, pérdida de control o actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Velocidad del rotor
+  - estilo: Normal
+    texto: Potencia activa (P)
+  - estilo: Normal
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Frecuencia simulada
+  - estilo: Normal
+    texto: Voltaje del generador
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando se verifica una característica de regulación correspondiente
+      a:'
+  - estilo: Normal
+    texto: conforme a la tolerancia definida para la prueba.
+  - estilo: Normal
+    texto: 'Asimismo, la banda muerta de frecuencia deberá operar correctamente en:  de forma que las
+      variaciones de frecuencia dentro de dicha banda no produzcan cambios significativos en la potencia
+      activa, mientras que las variaciones fuera de la banda generen la respuesta correspondiente del
+      control de velocidad.'
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de la frecuencia simulada, frecuencia
+      real, potencia activa, velocidad del rotor y voltaje del generador durante los escalones aplicados
+      dentro y fuera de la banda muerta.
+  - estilo: Normal
+    texto: La información presentada permitirá verificar la actuación de la banda muerta de ±30 mHz y
+      la respuesta de potencia activa asociada al 5% de estatismo, confirmando la correcta operación del
+      modo de control de frecuencia.
+  - placeholder: 'Gráfica: Estatismo — CNK Unidad 01
+
+      [Espacio reservado para gráfica / captura]'
+  - estilo: Subtitle
+    texto: Figura 1.12 Estatismo
+- seccion: '18'
+  titulo: Escalones de potencia
+  no_aplica_en_plantilla: false
+  flujo:
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica la respuesta dinámica de la Unidad de Generación ante cambios escalonados
+      de potencia activa equivalentes al 10% de la potencia nominal (Pnom).
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la prueba de Escalones
+      de Potencia (10% de Pnom), considerando como parámetros de evaluación el sobrepaso (SP) y el tiempo
+      de estabilización (Ts).
+  - estilo: p1
+    texto: La prueba se enfoca en comprobar que el sistema de control de carga de la unidad responda de
+      forma estable ante incrementos y decrementos de potencia, sin oscilaciones anormales, pérdida de
+      control o actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre sincronizada, en operación estable y con el sistema de
+      control de carga habilitado.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación, incluyendo potencia activa, frecuencia y consigna
+      de potencia.
+  - estilo: List Paragraph
+    texto: Aplicar un escalón positivo de potencia activa equivalente al 10% de Pnom.
+  - estilo: List Paragraph
+    texto: Registrar la respuesta de la unidad hasta alcanzar una condición estable.
+  - estilo: List Paragraph
+    texto: Restablecer la condición de operación definida para la prueba, cuando aplique.
+  - estilo: List Paragraph
+    texto: Aplicar un escalón negativo de potencia activa equivalente al 10% de Pnom.
+  - estilo: List Paragraph
+    texto: Registrar nuevamente la respuesta de la unidad hasta alcanzar una condición estable.
+  - estilo: List Paragraph
+    texto: 'Determinar los parámetros de desempeño de la respuesta: sobrepaso (SP) y tiempo de estabilización
+      (Ts).'
+  - estilo: List Paragraph
+    texto: Verificar que la respuesta de potencia activa sea estable, sin oscilaciones anormales, pérdida
+      de control del sistema de carga o actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Potencia activa (P)
+  - estilo: Normal
+    texto: Consigna de potencia
+  - estilo: Normal
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Velocidad del rotor, si está disponible
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando se verifica una característica de regulación correspondiente
+      a:'
+  - estilo: Normal
+    texto: conforme a la tolerancia definida para la prueba.
+  - estilo: Normal
+    texto: 'Asimismo, la banda muerta de frecuencia deberá operar correctamente en:  de forma que las
+      variaciones de frecuencia dentro de dicha banda no produzcan cambios significativos en la potencia
+      activa, mientras que las variaciones fuera de la banda generen la respuesta correspondiente del
+      control de velocidad.'
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de potencia activa, consigna de potencia
+      y frecuencia durante los escalones aplicados de ±10% de Pnom.
+  - estilo: Normal
+    texto: La información presentada permitirá determinar el sobrepaso (SP) y el tiempo de estabilización
+      (Ts), así como verificar que la unidad mantiene una respuesta estable ante los cambios escalonados
+      de potencia activa.
+  - placeholder: "Gráfica: Escalones de potencia — CNK \n[Espacio reservado para gráfica / captura]"
+  - estilo: Subtitle
+    texto: Figura 1.13 Escalones de potencia
+- seccion: '19'
+  titulo: Rechazo de Carga
+  no_aplica_en_plantilla: false
+  flujo:
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica la respuesta de la Unidad de Generación ante una condición de rechazo
+      de carga, comprobando que el sistema de control de velocidad y excitación mantenga a la unidad en
+      una condición estable posterior a la pérdida súbita de carga.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por unidad para Centrales Eléctricas Síncronas, donde se establece la prueba de Rechazo
+      de Carga, considerando como criterio que la unidad quede excitada, a velocidad nominal y con un
+      tiempo de estabilización menor a 90 s.
+  - estilo: p1
+    texto: La prueba se enfoca en confirmar que, posterior al rechazo de carga, la unidad conserva condiciones
+      operativas adecuadas, sin pérdida de excitación, sin sobrevelocidad sostenida, sin oscilaciones
+      anormales y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la unidad se encuentre sincronizada, en operación estable y con carga conforme
+      a la condición definida para la prueba.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación, incluyendo potencia activa, frecuencia, voltaje
+      del generador y corriente de campo.
+  - estilo: List Paragraph
+    texto: Ejecutar la maniobra de rechazo de carga conforme al procedimiento operativo establecido.
+  - estilo: List Paragraph
+    texto: Registrar la respuesta transitoria de la unidad posterior a la pérdida súbita de carga.
+  - estilo: List Paragraph
+    texto: Verificar la evolución de la frecuencia, velocidad del rotor, voltaje del generador y corriente
+      de campo durante el evento.
+  - estilo: List Paragraph
+    texto: Medir el tiempo requerido para que la unidad alcance una condición estable posterior al rechazo
+      de carga.
+  - estilo: List Paragraph
+    texto: Confirmar que la unidad permanezca excitada y alcance nuevamente una condición cercana a velocidad
+      nominal.
+  - estilo: List Paragraph
+    texto: Verificar que no se presenten oscilaciones anormales, pérdida de control del sistema de velocidad
+      o excitación, ni actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Potencia activa (P)
+  - estilo: Normal
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Velocidad del rotor
+  - estilo: Normal
+    texto: Voltaje de generador (Vg)
+  - estilo: Normal
+    texto: Corriente de campo (If)
+  - estilo: Normal
+    texto: Estado del interruptor / señal de rechazo de carga
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando, posterior al rechazo de carga, la unidad permanece
+      excitada, alcanza condición de velocidad nominal y se estabiliza en un tiempo menor a:'
+  - estilo: Normal
+    texto: sin pérdida de control ni actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de potencia activa, frecuencia, velocidad
+      del rotor, voltaje del generador, corriente de campo y estado del interruptor durante el evento
+      de rechazo de carga.
+  - estilo: Normal
+    texto: La información presentada permitirá verificar la respuesta transitoria de la unidad, el tiempo
+      de estabilización posterior al evento y la permanencia de la unidad excitada y a velocidad nominal.
+  - placeholder: "Gráfica: Rechazo de carga — CNK \n[Espacio reservado para gráfica / captura]"
+  - estilo: Subtitle
+    texto: Figura 1.14 Rechazo de carga

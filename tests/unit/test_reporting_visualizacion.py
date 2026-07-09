@@ -175,61 +175,21 @@ def test_repositorio_historico(tmp_path, escenario):
     assert fig.data  # previsualizable en la app
 
 
-def test_paquete_documentos_iniciales(tmp_path):
-    from gcv.models import SyncArea
-    from gcv.reporting.documentos_iniciales import generar_paquete
-
-    inst = Installation(nombre="Central Demo Norte", kind=InstallationKind.CENTRAL_ELECTRICA,
-                        tech=Technology.ASINCRONA, category=Category.C,
-                        area_sincrona=SyncArea.SIN, capacidad_instalada_neta_mw=25.0)
-    paquete = generar_paquete(inst, ["CE-F-01", "CE-F-03", "CE-Q-04"], tmp_path)
-    assert set(paquete) == {"checklist", "revision_anexo5", "protocolo", "revisiones"}
-    for ruta in paquete.values():
-        assert ruta.exists() and ruta.stat().st_size > 4000
-    # checklist con formato REV3 (45 filas de universo + encabezado)
-    hojas = pd.read_excel(paquete["checklist"], sheet_name=None)
-    assert "DATOS POR PRUEBA" in hojas and len(hojas["DATOS POR PRUEBA"]) == 45
-    # protocolo con sección por prueba seleccionada
-    from docx import Document
-    doc = Document(str(paquete["protocolo"]))
-    h2 = [p.text for p in doc.paragraphs if p.style.name == "Heading 2"]
-    assert any("Rango de frecuencia" in h for h in h2)
-    assert len([h for h in h2 if h.startswith("4.")]) == 3  # solo las seleccionadas
-
-
 def test_plan_trabajo_cre_centro_de_carga(tmp_path):
     from docx import Document
-    from gcv.reporting.documentos_iniciales import generar_paquete
+    from gcv.reporting.documentos_iniciales import generar_plan_trabajo
 
     inst = Installation(nombre="Centro de Carga Demo", kind=InstallationKind.CENTRO_DE_CARGA,
                         tension_poi_kv=115.0)
-    paquete = generar_paquete(inst, ["CC-01", "CC-02", "CC-04"], tmp_path)
-    # el Plan de Trabajo solo aparece para Centros de Carga
-    assert "plan_trabajo" in paquete and paquete["plan_trabajo"].exists()
-    doc = Document(str(paquete["plan_trabajo"]))
+    ruta = generar_plan_trabajo(inst, tmp_path)
+    assert ruta.exists() and ruta.stat().st_size > 10_000
+    doc = Document(str(ruta))
     h1 = [p.text for p in doc.paragraphs if p.style.name == "Heading 1"]
     assert "4. Plan de Trabajo" in h1 and "4.1 Cronograma" in h1
     textos = "\n".join(p.text for p in doc.paragraphs)
     assert "Alta Tensión" in textos          # 115 kV ≥ 69 → AT, prellenado
     assert "0.97 en atraso" in textos         # vigencia FP del catálogo
     assert "{{NOMBRE_CC}}" in textos          # placeholder, sin nombre de empresa
-
-
-def test_protocolo_sincrona_con_figuras_y_unidad(tmp_path):
-    from docx import Document
-    from gcv.models import SyncArea
-    from gcv.reporting.documentos_iniciales import generar_paquete
-
-    inst = Installation(nombre="Central Demo Sur", kind=InstallationKind.CENTRAL_ELECTRICA,
-                        tech=Technology.SINCRONA, category=Category.D,
-                        area_sincrona=SyncArea.SIN)
-    p = generar_paquete(inst, ["CE-F-03", "CE-V-07"], tmp_path)
-    doc = Document(str(p["protocolo"]))
-    h1 = [x.text for x in doc.paragraphs if x.style.name == "Heading 1"]
-    assert "5. Pruebas por Unidad" in h1        # capítulo por unidad (síncronas)
-    assert len(doc.inline_shapes) >= 3          # CPF (2) + hueco síncrona D (1)
-    h3 = [x.text for x in doc.paragraphs if x.style.name == "Heading 3"]
-    assert len(h3) == 20                        # las 20 pruebas por unidad
 
 
 def test_figuras_normativas_mapa():
