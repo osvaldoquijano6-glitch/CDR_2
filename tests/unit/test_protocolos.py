@@ -145,6 +145,37 @@ def test_protocolo_v2_central(proyecto, tmp_path):
     assert fila27.cells[3].text.strip() == "No se cuenta con la infraestructura"
 
 
+def test_protocolo_v2_conserva_estructura_completa(proyecto, tmp_path):
+    """Reestructurar no es eliminar: todos los capítulos H1 de la plantilla
+    original deben existir en el v2, y las fuentes deben ser universales."""
+    import re
+    import zipfile
+
+    from gcv.config.settings import NORMATIVE_DIR
+
+    def norm(s):
+        return re.sub(r"\W", "", s).lower()
+
+    for clase in ("central", "unidad"):
+        ruta = generar_protocolo_v2(clase, proyecto, tmp_path / clase)
+        plantilla = (NORMATIVE_DIR / "plantillas_usuario" /
+                     f"Protocolo_{clase.capitalize()}_v1.2.1.docx")
+        h1_orig = [p.text.strip() for p in Document(str(plantilla)).paragraphs
+                   if p.style.name == "Heading 1"]
+        gen = Document(str(ruta))
+        h1_gen = [norm(p.text) for p in gen.paragraphs
+                  if p.style.name == "Heading 1"]
+        faltantes = [h for h in h1_orig if norm(h) not in h1_gen]
+        assert not faltantes, f"{clase}: capítulos eliminados {faltantes}"
+        # tablas de definiciones y abreviaciones conservadas
+        assert any("Término" in t.rows[0].cells[0].text for t in gen.tables)
+        assert any("Abreviación" in t.rows[0].cells[0].text for t in gen.tables)
+        # fuentes universales: sin tipografías que el revisor deba instalar
+        xml = zipfile.ZipFile(str(ruta)).read("word/document.xml").decode()
+        assert "Montserrat" not in xml and "Helvetica" not in xml
+        assert 'w:ascii="Arial"' in xml and 'w:ascii="Calibri"' in xml
+
+
 def test_protocolo_v2_unidad_sin_notas(tmp_path):
     p = ProyectoProtocolo(nombre_central="Demo", codigo="DMO", tipo="B",
                           tecnologia="SINCRONA", pruebas_aplican={1, 2, 6})
