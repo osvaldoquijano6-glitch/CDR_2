@@ -76,8 +76,14 @@ proyecto = ProyectoProtocolo(
 
 1. **Portada y encabezados/pies** — proyecto, código, tipo, tecnología,
    ubicación, fechas (`_portada`, `_encabezados_pies`).
-2. **Tabla maestra** — columna "APLICA (SI/NO)": `SI`, `No Aplica` o la nota
-   libre (`_tabla_maestra`).
+2. **Tabla maestra** — columna "APLICA (SI/NO)": **únicamente** `SI`, `NO`,
+   `APLICA` o `NO APLICA` (`_tabla_maestra`). **REGLA DURA**: las notas libres
+   (p.ej. "No se cuenta con la infraestructura") corresponden a datos de
+   visita en sitio, solicitud de CENACE o dictamen de un profesional — el
+   asistente NUNCA las redacta ni excluye pruebas por iniciativa propia;
+   solo las estampa si el usuario las entrega textualmente en
+   `proyecto.notas`. El asistente se limita a los lineamientos del Código
+   de Red.
 3. **Capítulo de pruebas** — se reconstruye desde el YAML: las seleccionadas con
    su texto completo (objetivo, condiciones, señales, criterio, marcos de
    gráfica); las no seleccionadas quedan `(no aplica)` con su nota. Tablas de
