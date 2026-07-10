@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.8 Calidad de la Potencia — Manual CONE | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+<style>
+.nota.cone   { border-left-color: #0077b6; }
+.nota.cone .nota-title { background: rgba(0,119,182,.12); color: #0077b6; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual CONE — Centros de Carga</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual CONE — Capítulos</span>
+    <a href="cone_c1.html" class="sb-cap">Cap. 1 — Criterios de Conexión</a>
+    <a href="cap8.html" class="sb-cap active" aria-current="page">Cap. 2 2.8 — Calidad de la Potencia</a>
+    <a href="#scope"         class="sb-sub">Aplicabilidad</a>
+    <a href="#sec-armonicos" class="sb-sub">2.8.d Armónicas de corriente</a>
+    <a href="#tbl-a"         class="sb-sub" style="padding-left:2.2rem">Tabla 2.8.A — ≤ 69 kV</a>
+    <a href="#tbl-b"         class="sb-sub" style="padding-left:2.2rem">Tabla 2.8.B — 69–161 kV</a>
+    <a href="#tbl-c"         class="sb-sub" style="padding-left:2.2rem">Tabla 2.8.C — &gt; 161 kV</a>
+    <a href="#sec-flicker"   class="sb-sub">2.8.e Parpadeo (flicker)</a>
+    <a href="#sec-desbalance" class="sb-sub">2.8.f Desbalance V e I</a>
+    <a href="#sec-29"        class="sb-sub">2.9 Modelos de simulación</a>
+    <a href="#sec-verificacion" class="sb-sub">Cap. 3 — Verificación</a>
+    <a href="#sec-ptrabajo"  class="sb-sub">Cap. 4 — Plan de Trabajo</a>
+    <a href="#comparativa"   class="sb-sub">Comparativa INTE vs. CONE</a>
+    <span class="sb-section-lbl">Manual INTE — Centrales Eléctricas</span>
+    <a href="cap7.html" class="sb-cap">Cap. 7 — Calidad de la Potencia</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+    <a href="https://www.cenace.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CENACE — SIM</a>
+    <a href="https://www.cre.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CRE</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb">
+      <a href="../index_cdr_2v4.html">Código de Red 2.0</a> ›
+      Manual CONE ›
+      <strong>Cap. 2 2.8 — Calidad de la Potencia</strong>
+    </div>
+    <span class="pg-pill">Manual CONE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual CONE · Cap. 2 2.8 — Centros de Carga al SEN</span>
+    <h1 class="titulo">Capítulo 2. Requerimientos técnicos · 2.8 Calidad de la Potencia</h1>
+
+    <details>
+      <summary>Marco normativo y referencias del 2.8</summary>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:#0077b6">RES/550/2021 — CRE.</strong> Manual CONE, Cap. 2 2.8 y 2.9, Cap. 3 y Cap. 4. DOF, 31 de diciembre de 2021, págs. 246–257. <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" target="_blank" rel="noopener">Texto oficial (PDF)</a>.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:#0077b6">IEEE Std 519-2014.</strong> Recommended Practice and Requirements for Harmonic Control in Electric Power Systems. Las Tablas 2.8.A, 2.8.B y 2.8.C reproducen las tablas 2 y 3 de este estándar.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:#0077b6">IEC 61000-4-30 Clase A / NMX-J-610-4-30-ANCE-2018 Clase A / NOM-001-CRE/SCFI-2019.</strong> Métodos de medición. Instrumentos requeridos para medición en Punto de Conexión.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:#0077b6">IEC 61000-3-7.</strong> Sección 7 (regla de sumatoria de fuentes) citada en 2.8.e para atribución de flicker entre múltiples fuentes.
+        </li>
+      </ul>
+    </details>
+
+    <!-- Texto literal 2.8 incisos a-c -->
+    <blockquote>
+      Los Centros de Carga deberán cumplir con los siguientes criterios:
+      <br><br>
+      a. Todos los Centros de Carga conectados en niveles de Media Tensión con una demanda contratada igual o superior a 1 MW y los Centros de Carga conectados en niveles de Alta Tensión deberán asegurarse de que en los Puntos de Conexión a la red no existan distorsiones armónicas en corriente, desbalances de tensión y corriente, ni fluctuaciones en la tensión del Suministro Eléctrico causadas por sus instalaciones más allá de lo especificado en los incisos d, e y f, que se muestran en este apartado.
+      <br><br>
+      b. Los Centros de Carga que se encuentren conectados en Media Tensión con una demanda contratada igual o superior a 1 MW, a la entrada en vigor de las presentes disposiciones, tendrán un periodo transitorio no mayor a dos años, contados a partir de la publicación del presente documento en el DOF, para asegurar el cumplimiento con el requerimiento de Calidad de la potencia.
+      <br><br>
+      c. Los Centros de Carga en Media Tensión, con una demanda contratada menor a 1 MW, sólo deberán cumplir con el requerimiento de desbalance de tensión y de corriente.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.8, incisos a–c — DOF 31-dic-2021 · PDF p. 246</cite>
+    </blockquote>
+
+    <!-- Tabla aplicabilidad -->
+    <div class="tbl-wrap full-w" id="scope">
+      <div class="tbl-caption">Aplicabilidad del 2.8 según nivel de tensión y demanda contratada
+        <span class="tbl-sub">Elaboración con base en incisos a, b y c — RES/550/2021 Manual CONE 2.8</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Punto de Conexión</th>
+            <th>Demanda contratada</th>
+            <th>Armónicas (d)</th>
+            <th>Parpadeo (e)</th>
+            <th>Desbalance V e I (f)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alta Tensión (&gt; 69 kV)</td>
+            <td>Cualquiera</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+          </tr>
+          <tr>
+            <td>Media Tensión (≤ 69 kV)</td>
+            <td>≥ 1 MW</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+          </tr>
+          <tr>
+            <td>Media Tensión (≤ 69 kV)</td>
+            <td>&lt; 1 MW</td>
+            <td style="text-align:center;color:#c0392b">✗</td>
+            <td style="text-align:center;color:#c0392b">✗</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ref-nota">Periodo transitorio del inciso b: venció aproximadamente el 31 de diciembre de 2023 (dos años desde la publicación en el DOF).</p>
+
+    <!-- ═══════════════════════════════
+ 2.8.d ARMÓNICAS
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec-armonicos"><span class="snum">2.8.d</span>Distorsión Armónica de Corriente</h2>
+
+    <p>
+      A diferencia del Manual INTE (que limita la distorsión <em>en tensión</em>), el Manual CONE controla la calidad midiendo la distorsión <strong>en corriente</strong>. La métrica base es la <strong>Corriente Máxima de Carga I<sub>L</sub></strong> —promedio de los 12 meses anteriores de corriente máxima mensual demandada—, a la que se refieren todos los porcentajes de las Tablas 2.8.A/B/C.
+    </p>
+
+    <blockquote>
+      Los Centros de Carga no deben exceder los niveles de distorsión armónica de corriente establecidos en las Tablas 2.8.A, 2.8.B y 2.8.C.
+      <br><br>
+      i. Los Centros de Carga deberán cumplir con los límites de acuerdo con el nivel de tensión al que se conectan y con el valor de la Impedancia Relativa o razón de corto circuito (I<sub>cc</sub>/I<sub>L</sub>) en el Punto de Conexión. I<sub>cc</sub> es la Corriente Máxima de Corto Circuito. I<sub>L</sub> es la Corriente Máxima de Carga (corriente de línea a frecuencia fundamental), la cual será el valor promedio para los 12 meses anteriores, de los valores de corriente máxima demandada, o en su defecto la corriente nominal de las unidades de transformación.
+      <br><br>
+      ii. El valor a considerar para la evaluación de cada componente armónica individual (I<sub>h</sub>) será el percentil 95 de los registros semanales (o 7 días naturales), de la medición de agregación de 10 minutos conforme a la NOM-001-CRE/SCFI-2019 vigente o la NMX-J-610-4-30-ANCE-2018 Clase A o IEC 61000-4-30 Clase A, expresado en porcentaje de I<sub>L</sub>.
+      <br><br>
+      iii. La Distorsión Armónica Total de Demanda (%DATD) deberá calcularse para cada registro de 10 minutos, y deberá mantenerse por debajo de los límites indicados al menos el 95% del tiempo durante un periodo semanal.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.8 inciso d (i–iii) — DOF 31-dic-2021 · PDF p. 246</cite>
+    </blockquote>
+
+    <h4 class="subsubsec">Fórmula de la Distorsión Armónica Total de Demanda (%DATD)</h4>
+    <p>
+      El Código de Red adopta la definición IEEE-519 del <em>Total Demand Distortion</em> (TDD). Al referenciar la distorsión a la carga máxima en lugar del fundamental instantáneo, los límites se vuelven más restrictivos en periodos de baja carga.
+    </p>
+    <div class="formula-wrap">
+      <div>
+        $$\%\text{DATD} = \frac{\sqrt{\displaystyle\sum_{h=2}^{50} I_h^2}}{I_L} \times 100\,\%$$
+      </div>
+    </div>
+    <div class="formula-leyenda">
+      <span><strong>I<sub>h</sub></strong> = corriente armónica de orden h (A rms)</span>
+      <span><strong>I<sub>L</sub></strong> = corriente máxima de carga (A rms) — promedio 12 meses</span>
+    </div>
+
+    <!-- Tabla 2.8.A -->
+    <div class="tbl-wrap full-w" id="tbl-a">
+      <div class="tbl-caption">Tabla 2.8.A — Distorsión armónica máxima permisible en corriente · Tensiones ≤ 69 kV
+        <span class="tbl-sub">% de I<sub>L</sub> · Componentes de orden impar · P95 semanal · Ref: IEEE-519-2014 / RES/550/2021 Manual CONE 2.8</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th rowspan="2">I<sub>cc</sub>/I<sub>L</sub></th>
+            <th colspan="5">Armónicas impares (% I<sub>L</sub>)</th>
+            <th rowspan="2">%DATD</th>
+          </tr>
+          <tr>
+            <th>2 &lt; h &lt; 11</th><th>11 ≤ h &lt; 17</th><th>17 ≤ h &lt; 23</th>
+            <th>23 ≤ h &lt; 35</th><th>35 ≤ h &lt; 50</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">&lt; 20</td>
+            <td style="text-align:center;font-family:var(--mono)">4.0</td><td style="text-align:center;font-family:var(--mono)">2.0</td>
+            <td style="text-align:center;font-family:var(--mono)">1.5</td><td style="text-align:center;font-family:var(--mono)">0.6</td>
+            <td style="text-align:center;font-family:var(--mono)">0.3</td><td style="text-align:center;font-family:var(--mono);font-weight:700">5.0</td></tr>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">20 ≤ x &lt; 50</td>
+            <td style="text-align:center;font-family:var(--mono)">7.0</td><td style="text-align:center;font-family:var(--mono)">3.5</td>
+            <td style="text-align:center;font-family:var(--mono)">2.5</td><td style="text-align:center;font-family:var(--mono)">1.0</td>
+            <td style="text-align:center;font-family:var(--mono)">0.5</td><td style="text-align:center;font-family:var(--mono);font-weight:700">8.0</td></tr>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">50 ≤ x &lt; 100</td>
+            <td style="text-align:center;font-family:var(--mono)">10.0</td><td style="text-align:center;font-family:var(--mono)">4.5</td>
+            <td style="text-align:center;font-family:var(--mono)">4.0</td><td style="text-align:center;font-family:var(--mono)">1.5</td>
+            <td style="text-align:center;font-family:var(--mono)">0.7</td><td style="text-align:center;font-family:var(--mono);font-weight:700">12.0</td></tr>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">100 ≤ x &lt; 1000</td>
+            <td style="text-align:center;font-family:var(--mono)">12.0</td><td style="text-align:center;font-family:var(--mono)">5.5</td>
+            <td style="text-align:center;font-family:var(--mono)">5.0</td><td style="text-align:center;font-family:var(--mono)">2.0</td>
+            <td style="text-align:center;font-family:var(--mono)">1.0</td><td style="text-align:center;font-family:var(--mono);font-weight:700">15.0</td></tr>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">≥ 1000</td>
+            <td style="text-align:center;font-family:var(--mono)">15.0</td><td style="text-align:center;font-family:var(--mono)">7.0</td>
+            <td style="text-align:center;font-family:var(--mono)">6.0</td><td style="text-align:center;font-family:var(--mono)">2.5</td>
+            <td style="text-align:center;font-family:var(--mono)">1.4</td><td style="text-align:center;font-family:var(--mono);font-weight:700">20.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tabla 2.8.B -->
+    <div class="tbl-wrap full-w" id="tbl-b">
+      <div class="tbl-caption">Tabla 2.8.B — Distorsión armónica máxima permisible en corriente · Tensiones &gt; 69 kV a 161 kV
+        <span class="tbl-sub">% de I<sub>L</sub> · Componentes de orden impar · P95 semanal · Ref: IEEE-519-2014 / RES/550/2021 Manual CONE 2.8</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th rowspan="2">I<sub>cc</sub>/I<sub>L</sub></th>
+            <th colspan="5">Armónicas impares (% I<sub>L</sub>)</th>
+            <th rowspan="2">%DATD</th>
+          </tr>
+          <tr>
+            <th>2 &lt; h &lt; 11</th><th>11 ≤ h &lt; 17</th><th>17 ≤ h &lt; 23</th>
+            <th>23 ≤ h &lt; 35</th><th>35 ≤ h &lt; 50</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">&lt; 20</td>
+            <td style="text-align:center;font-family:var(--mono)">2.0</td><td style="text-align:center;font-family:var(--mono)">1.0</td>
+            <td style="text-align:center;font-family:var(--mono)">0.75</td><td style="text-align:center;font-family:var(--mono)">0.3</td>
+            <td style="text-align:center;font-family:var(--mono)">0.15</td><td style="text-align:center;font-family:var(--mono);font-weight:700">2.5</td></tr>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">20 ≤ x &lt; 50</td>
+            <td style="text-align:center;font-family:var(--mono)">3.5</td><td style="text-align:center;font-family:var(--mono)">1.75</td>
+            <td style="text-align:center;font-family:var(--mono)">1.25</td><td style="text-align:center;font-family:var(--mono)">0.5</td>
+            <td style="text-align:center;font-family:var(--mono)">0.25</td><td style="text-align:center;font-family:var(--mono);font-weight:700">4.0</td></tr>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">50 ≤ x &lt; 100</td>
+            <td style="text-align:center;font-family:var(--mono)">5.0</td><td style="text-align:center;font-family:var(--mono)">2.25</td>
+            <td style="text-align:center;font-family:var(--mono)">2.0</td><td style="text-align:center;font-family:var(--mono)">0.75</td>
+            <td style="text-align:center;font-family:var(--mono)">0.35</td><td style="text-align:center;font-family:var(--mono);font-weight:700">6.0</td></tr>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">100 ≤ x &lt; 1000</td>
+            <td style="text-align:center;font-family:var(--mono)">6.0</td><td style="text-align:center;font-family:var(--mono)">2.75</td>
+            <td style="text-align:center;font-family:var(--mono)">2.5</td><td style="text-align:center;font-family:var(--mono)">1.0</td>
+            <td style="text-align:center;font-family:var(--mono)">0.5</td><td style="text-align:center;font-family:var(--mono);font-weight:700">7.5</td></tr>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">≥ 1000</td>
+            <td style="text-align:center;font-family:var(--mono)">7.5</td><td style="text-align:center;font-family:var(--mono)">3.5</td>
+            <td style="text-align:center;font-family:var(--mono)">3.0</td><td style="text-align:center;font-family:var(--mono)">1.25</td>
+            <td style="text-align:center;font-family:var(--mono)">0.7</td><td style="text-align:center;font-family:var(--mono);font-weight:700">10.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tabla 2.8.C -->
+    <div class="tbl-wrap full-w" id="tbl-c">
+      <div class="tbl-caption">Tabla 2.8.C — Distorsión armónica máxima permisible en corriente · Tensiones &gt; 161 kV
+        <span class="tbl-sub">% de I<sub>L</sub> · Componentes de orden impar · P95 semanal · Ref: IEEE-519-2014 / RES/550/2021 Manual CONE 2.8</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th rowspan="2">I<sub>cc</sub>/I<sub>L</sub></th>
+            <th colspan="5">Armónicas impares (% I<sub>L</sub>)</th>
+            <th rowspan="2">%DATD</th>
+          </tr>
+          <tr>
+            <th>2 &lt; h &lt; 11</th><th>11 ≤ h &lt; 17</th><th>17 ≤ h &lt; 23</th>
+            <th>23 ≤ h &lt; 35</th><th>35 ≤ h &lt; 50</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">&lt; 25</td>
+            <td style="text-align:center;font-family:var(--mono)">1.0</td><td style="text-align:center;font-family:var(--mono)">0.5</td>
+            <td style="text-align:center;font-family:var(--mono)">0.38</td><td style="text-align:center;font-family:var(--mono)">0.15</td>
+            <td style="text-align:center;font-family:var(--mono)">0.10</td><td style="text-align:center;font-family:var(--mono);font-weight:700">1.5</td></tr>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">25 ≤ x &lt; 50</td>
+            <td style="text-align:center;font-family:var(--mono)">2.0</td><td style="text-align:center;font-family:var(--mono)">1.0</td>
+            <td style="text-align:center;font-family:var(--mono)">0.75</td><td style="text-align:center;font-family:var(--mono)">0.3</td>
+            <td style="text-align:center;font-family:var(--mono)">0.15</td><td style="text-align:center;font-family:var(--mono);font-weight:700">2.5</td></tr>
+          <tr><td style="font-family:var(--mono);font-size:.82rem">≥ 50</td>
+            <td style="text-align:center;font-family:var(--mono)">3.0</td><td style="text-align:center;font-family:var(--mono)">1.5</td>
+            <td style="text-align:center;font-family:var(--mono)">1.15</td><td style="text-align:center;font-family:var(--mono)">0.45</td>
+            <td style="text-align:center;font-family:var(--mono)">0.22</td><td style="text-align:center;font-family:var(--mono);font-weight:700">3.75</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="subsubsec">Notas aplicables a las tres tablas</h4>
+    <blockquote>
+      Nota 1. En el caso de las componentes armónicas de orden par, los límites se reducen al 25% de los correspondientes a las armónicas de orden impar.
+      <br><br>
+      Nota 2. Los límites mostrados deben ser utilizados como el caso más desfavorable de operación normal. Para arranque de hornos de arco eléctrico, que toman un tiempo máximo de un minuto, se permite exceder los límites en un 50%. Asimismo, durante la operación de los hornos de arco eléctrico se permite que el límite para la componente armónica de segundo orden sea igual al límite establecido para las componentes armónicas de orden impar en el intervalo 2 &lt; h &lt; 11, según corresponda.
+      <br><br>
+      Nota 3. En ningún caso se permiten corrientes de carga con componentes de corriente directa en el Punto de Conexión. Referencia: IEEE-519-2014.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.8 inciso d, Notas 1–3 — DOF 31-dic-2021 · PDF p. 247</cite>
+    </blockquote>
+
+    <div class="advertencia">
+      <strong>Prohibición de componente de corriente directa (Nota 3 2.8.d).</strong> El Código de Red prohíbe absolutamente la inyección de CC en el Punto de Conexión para todos los Centros de Carga, sin excepción por nivel de tensión ni demanda contratada. Esta misma prohibición aplica en el Manual INTE 7.5 para todas las Centrales Eléctricas (tipos A, B, C y D).
+    </div>
+
+    <!-- ═══════════════════════════════
+ 2.8.e PARPADEO
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec-flicker"><span class="snum">2.8.e</span>Fluctuaciones de Tensión (Parpadeo / Flicker)</h2>
+
+    <blockquote>
+      La fluctuación de tensión, en los Puntos de Conexión de los Centros de Carga conectados en Media o Alta Tensión, debe limitarse de acuerdo con la Tabla 3.8.D.
+      <br><br>
+      Los Centros de Carga son los responsables de no provocar fluctuaciones de tensión fuera de los rangos que indica la Tabla 3.8.D. Los valores de Pst y Plt serán monitoreados y medidos conforme a la NOM-001-CRE/SCFI-2019 vigente o la NMX-J-610-4-30-ANCE-2018 Clase A o IEC 61000-4-30 Clase A. El valor a considerar para la evaluación de cada indicador será el percentil 95 de los registros semanales (o 7 días naturales).
+      <br><br>
+      En caso de que el Transportista o Distribuidor observe indicios de incumplimiento del requerimiento de flicker, lo notificará al CENACE para que evalúe cuál es la fuente que está provocando dicha fluctuación, de acuerdo con la formulación establecida en la sección 7 del estándar IEC-61000-3-7, referente a la regla de la sumatoria de fuentes.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.8 inciso e — DOF 31-dic-2021 · PDF p. 247</cite>
+    </blockquote>
+
+    <div class="tbl-wrap" style="max-width:460px">
+      <div class="tbl-caption">Tabla 3.8.D — Límites de fluctuaciones de tensión
+        <span class="tbl-sub">Media y Alta Tensión · P95 de registros semanales · RES/550/2021 Manual CONE 2.8.e</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Indicador</th><th>Descripción</th><th>Límite</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-family:var(--mono);font-weight:700">Pst</td>
+            <td>Severidad parpadeo corto plazo — ventana 10 min</td>
+            <td style="text-align:center;font-family:var(--mono);font-weight:700">&lt; 1</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-weight:700">Plt</td>
+            <td>Severidad parpadeo largo plazo — ventana 2 h</td>
+            <td style="text-align:center;font-family:var(--mono);font-weight:700">&lt; 0.8</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="nota cone">
+      <span class="nota-title">Diferencia con Manual INTE Cap. 7 7.2</span>
+      El INTE fija Pst ≤ 1.0 y Plt ≤ 0.65. El CONE fija Pst &lt; 1 y Plt &lt; 0.8. El límite de Plt es más permisivo para los Centros de Carga. Fuentes típicas de parpadeo en Centros de Carga: hornos de arco eléctrico, soldadoras industriales, grandes motores de arranque directo y ascensores. La regla de sumatoria IEC 61000-3-7 7 permite al CENACE desagregar la contribución de cada fuente al Pst/Plt medido en el Punto de Conexión.
+    </div>
+
+    <!-- ═══════════════════════════════
+ 2.8.f DESBALANCE
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec-desbalance"><span class="snum">2.8.f</span>Desbalances de Tensión y de Corriente</h2>
+
+    <blockquote>
+      El desbalance de tensión en los Puntos de Conexión de los Centros de Carga conectados en Media o Alta Tensión debe limitarse a 2%, considerando el desbalance de secuencia negativa valor resultado de la agregación de 10 minutos. El percentil 95 de los registros de medición durante un periodo semanal (o 7 días naturales) no deberá exceder el límite establecido.
+      <br><br>
+      El desbalance de corriente en los Puntos de Conexión de los Centros de Carga conectados en Media o Alta Tensión debe limitarse a 15%, considerando el desbalance de secuencia negativa valor resultado de la agregación de 10 minutos. El valor promedio de los registros de medición durante un periodo semanal (o 7 días naturales) no deberá exceder el límite establecido.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.8 inciso f — DOF 31-dic-2021 · PDF p. 247–249</cite>
+    </blockquote>
+
+    <h4 class="subsubsec">Desbalance de tensión D<sub>V</sub></h4>
+    <div class="formula-wrap">
+      <div>
+        $$D_V = \frac{V_2^{-}}{V_1^{+}} \times 100\,\%\quad\leq 2\,\%\quad(\text{P95 semanal})$$
+      </div>
+    </div>
+    <div class="formula-leyenda">
+      <span><strong>V₂⁻</strong> = componente de secuencia negativa de tensión (V rms)</span>
+      <span><strong>V₁⁺</strong> = componente de secuencia positiva de tensión (V rms)</span>
+    </div>
+    <p>
+      Para Centros de Carga en Media Tensión con demanda &lt; 1 MW, fórmula simplificada por valores de fase:
+    </p>
+    <div class="formula-wrap">
+      <div>
+        $$D_V^{\text{aprox}} = \frac{\max(V_{ab},\,V_{bc},\,V_{ca}) - \min(V_{ab},\,V_{bc},\,V_{ca})}{\bar{V}} \times 100\,\%$$
+      </div>
+    </div>
+
+    <h4 class="subsubsec">Desbalance de corriente D<sub>I</sub></h4>
+    <div class="formula-wrap">
+      <div>
+        $$D_I = \frac{I_2^{-}}{I_1^{+}} \times 100\,\%\quad\leq 15\,\%\quad(\text{promedio semanal})$$
+      </div>
+    </div>
+    <div class="formula-leyenda">
+      <span><strong>I₂⁻</strong> = componente de secuencia negativa de corriente (A rms)</span>
+      <span><strong>I₁⁺</strong> = componente de secuencia positiva de corriente (A rms)</span>
+    </div>
+    <p>
+      Para Centros de Carga en Media Tensión con demanda &lt; 1 MW, fórmula simplificada por valores de fase:
+    </p>
+    <div class="formula-wrap">
+      <div>
+        $$D_I^{\text{aprox}} = \frac{\max(I_a,\,I_b,\,I_c) - \min(I_a,\,I_b,\,I_c)}{\bar{I}} \times 100\,\%$$
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="max-width:620px">
+      <div class="tbl-caption">Resumen de límites de desbalance — Manual CONE 2.8.f</div>
+      <table>
+        <thead>
+          <tr><th>Indicador</th><th>Límite</th><th>Régimen estadístico</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Desbalance de tensión D<sub>V</sub></td>
+            <td style="text-align:center;font-family:var(--mono);font-weight:700">≤ 2 %</td>
+            <td style="font-family:var(--mono);font-size:.8rem">P95 semanal · 10 min</td>
+          </tr>
+          <tr>
+            <td>Desbalance de corriente D<sub>I</sub></td>
+            <td style="text-align:center;font-family:var(--mono);font-weight:700">≤ 15 %</td>
+            <td style="font-family:var(--mono);font-size:.8rem"><strong>Promedio</strong> semanal · 10 min</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota cone">
+      <span class="nota-title">Régimen estadístico: promedio vs. P95</span>
+      El desbalance de corriente usa el <strong>promedio</strong> semanal (no el P95). Un evento aislado de alto desbalance en corriente desplaza el promedio sin necesariamente superar el P95. Esto hace el criterio de corriente efectivamente más exigente que el de tensión para distribuciones con colas largas.
+    </div>
+
+    <!-- ═══════════════════════════════
+ 2.9 MODELOS
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec-29"><span class="snum">2.9</span>Modelos de Simulación</h2>
+
+    <blockquote>
+      A petición del CENACE, el Centro de Carga proporcionará modelos de simulación que cumplan con la normatividad vigente.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.9 — DOF 31-dic-2021 · PDF p. 249</cite>
+    </blockquote>
+    <p>
+      Obligación contingente —solo a petición del CENACE—, a diferencia del Manual INTE Cap. 6 que exige entrega proactiva de modelos como condición previa a la EOC.
+    </p>
+
+    <!-- ═══════════════════════════════
+         CAP 3 VERIFICACIÓN
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec-verificacion"><span class="snum">Cap. 3</span>Verificación de la Conformidad</h2>
+
+    <blockquote>
+      La vigilancia y el monitoreo se realizará tanto para los Centros de Carga en proceso de Conexión o Modificación Técnica, así como para los que ya se encuentren conectados al SEN.
+      <br><br>
+      La evaluación para los Centros de Carga se podrá realizar con las mediciones de los equipos de medición del Centro de Carga que se encuentren instalados.
+      <br><br>
+      Sin menoscabo de lo anterior, la CRE podrá apoyarse del CENACE, Transportista y Distribuidor para llevar a cabo los actos de monitoreo y vigilancia del cumplimiento de los requerimientos de este Manual. Asimismo, la CRE podrá llevar a cabo los actos de inspección que determine necesarios por conducto de los servidores públicos que tenga adscritos o mediante Unidades de Inspección.
+      <cite>RES/550/2021, Manual CONE, Cap. 3 (texto íntegro) — DOF 31-dic-2021 · PDF p. 249</cite>
+    </blockquote>
+
+    <!-- ═══════════════════════════════
+         CAP 4 PLAN DE TRABAJO
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec-ptrabajo"><span class="snum">Cap. 4</span>Plan de Trabajo</h2>
+
+    <blockquote>
+      Cuando los Centros de Carga identifiquen que se encuentran en incumplimiento respecto a alguno de los requerimientos del Capítulo 2, tendrán la obligación de entregar un Plan de Trabajo señalando las causas asociadas al incumplimiento, así como las acciones y tiempos analizados para observar el cumplimiento.
+      <cite>RES/550/2021, Manual CONE, Cap. 4 — DOF 31-dic-2021 · PDF p. 249</cite>
+    </blockquote>
+
+    <div class="advertencia">
+      <strong>El Plan de Trabajo no exime del cumplimiento.</strong> La entrega es de carácter informativo. No suspende, no prorroga ni exime el cumplimiento de las obligaciones del Capítulo 2. Un Centro de Carga en incumplimiento que entregue Plan de Trabajo sigue sujeto a sanciones conforme a la normativa vigente.
+    </div>
+
+    <!-- ═══════════════════════════════
+         COMPARATIVA INTE vs CONE
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="comparativa"><span class="snum">Ref.</span>Comparativa INTE Cap. 7 vs. CONE 2.8</h2>
+
+    <div class="tbl-wrap full-w">
+      <div class="tbl-caption">Diferencias clave entre los requerimientos de Calidad de la Potencia del Manual INTE y del Manual CONE
+        <span class="tbl-sub">RES/550/2021 — Elaboración comparativa</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Parámetro</th>
+            <th>Manual INTE — Cap. 7 · Centrales Eléctricas</th>
+            <th>Manual CONE — 2.8 · Centros de Carga</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Nivel de aplicación</strong></td>
+            <td>Alta Tensión exclusivamente</td>
+            <td>AT (todas) + MT ≥ 1 MW + MT &lt; 1 MW (solo desbalance)</td></tr>
+          <tr><td><strong>Variable de armónicas</strong></td>
+            <td>Tensión en el PI — %V</td>
+            <td>Corriente en el PC — %I<sub>L</sub> (%DATD)</td></tr>
+          <tr><td><strong>Estructura de límites</strong></td>
+            <td>Por tipo de CE (B / C–D) y por orden armónico</td>
+            <td>Por nivel de tensión (3 tablas) y por I<sub>cc</sub>/I<sub>L</sub></td></tr>
+          <tr><td><strong>Desbalance de tensión</strong></td>
+            <td>B ≤ 1.8 % · C y D ≤ 1.4 % · P95 semanal</td>
+            <td>≤ 2 % · P95 semanal</td></tr>
+          <tr><td><strong>Desbalance de corriente</strong></td>
+            <td>No aplica</td>
+            <td>≤ 15 % · promedio semanal</td></tr>
+          <tr><td><strong>Parpadeo Pst / Plt</strong></td>
+            <td>Pst ≤ 1.0 / Plt ≤ 0.65 · P95 semanal</td>
+            <td>Pst &lt; 1 / Plt &lt; 0.8 · P95 semanal</td></tr>
+          <tr><td><strong>VRT / variaciones rápidas</strong></td>
+            <td>Conteo diario máximo (7.3)</td>
+            <td>No aparece como parámetro explícito</td></tr>
+          <tr><td><strong>Componente de CC</strong></td>
+            <td>Prohibición absoluta 7.5 — Tipos A, B, C, D</td>
+            <td>Prohibición absoluta Nota 3 2.8.d — todos los CdC</td></tr>
+          <tr><td><strong>Régimen estadístico armónicas</strong></td>
+            <td>P95 individual + P99 ≤ 1.5×límite</td>
+            <td>P95 individual · sin requisito P99 explícito</td></tr>
+          <tr><td><strong>Verificación</strong></td>
+            <td>Previa EOC obligatoria + continua CENACE/CRE</td>
+            <td>Equipos propios del CdC aceptados · EOC si aplica</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="cap7.html">
+        <span class="nd">← Paralelo INTE</span>
+        <span class="nt">Cap. 7 — Calidad de la Potencia (Centrales Eléctricas)</span>
+      </a>
+      <a href="../index_cdr_2v4.html" class="n-next">
+        <span class="nd">Volver al índice →</span>
+        <span class="nt">Portada — Código de Red 2.0</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual CO — Coordinación Operativa | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+/* tarjetas auxiliares (rojas / amarillas) */
+.tarjetas { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; margin:18px 0; }
+.tarjeta { border:1px solid var(--border); border-radius:var(--r-lg); padding:13px 15px; background:var(--white); }
+.tarjeta .tj-h { display:flex; align-items:center; gap:8px; font-weight:700; font-size:.86rem; margin-bottom:5px; }
+.tarjeta .tj-dot { width:14px; height:14px; border-radius:3px; flex-shrink:0; }
+.tarjeta .tj-d { font-size:.76rem; color:var(--text-secondary); line-height:1.5; }
+.dot-rojo { background:#c0392b; } .dot-amar { background:#d4a017; }
+/* unifilares */
+.unifilar { margin:16px 0; border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; background:#fff; box-shadow:var(--shadow); }
+.unifilar img { width:100%; height:auto; display:block; }
+.unifilar .uf-cap { font-family:var(--mono); font-size:9px; letter-spacing:.06em; color:var(--text-muted); padding:8px 14px; border-top:1px solid var(--border-light); background:var(--cream); }
+/* codigo nomenclatura */
+.codebox { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; font-family:var(--mono); }
+.cb { border:1px solid var(--blue); border-radius:var(--r); padding:8px 12px; text-align:center; background:var(--blue-light); min-width:64px; }
+.cb .cb-n { font-size:1.1rem; font-weight:700; color:var(--blue); }
+.cb .cb-l { font-size:.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; margin-top:3px; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual de Coordinación Operativa</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual CO — Capítulos</span>
+    <a href="#sec-intro" class="sb-sub">Objetivo · introducción</a>
+    <a href="#sec-c1" class="sb-cap active" aria-current="page">Cap. 1 — Responsabilidades</a>
+    <a href="#sec-c2" class="sb-cap">Cap. 2 — Fronteras operativas</a>
+    <a href="#sec-c3" class="sb-cap">Cap. 3 — Control de variables</a>
+    <a href="#sec-c4" class="sb-cap">Cap. 4 — Instrucciones de Despacho</a>
+    <a href="#sec-c5" class="sb-cap">Cap. 5 — Administración de Licencias</a>
+    <a href="#sec-c6" class="sb-cap">Cap. 6 — Atención de Disturbios</a>
+    <a href="#sec-c7" class="sb-cap">Cap. 7 — Nomenclatura</a>
+    <a href="#sec-anexos" class="sb-cap">Anexos 1–4</a>
+    <span class="sb-section-lbl">Manuales Regulatorios</span>
+    <a href="disposiciones_sen.html" class="sb-cap">Disposiciones Generales SEN</a>
+    <a href="manual_pse.html" class="sb-cap">Manual PSE — Planeación</a>
+    <a href="cap1.html" class="sb-cap">Manual INTE — Centrales</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Disposiciones Operativas › <strong>Manual de Coordinación Operativa (CO)</strong></div>
+    <span class="pg-pill">Manual CO</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">PDF p. 119–174</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Disposiciones Operativas · Manual Regulatorio — DOF 31-dic-2021</span>
+    <h1 class="titulo">Manual Regulatorio de Coordinación Operativa</h1>
+
+    <p id="sec-intro">Define a detalle los lineamientos que deben cumplir el <strong>CENACE</strong>, Transportista, Distribuidor, Centrales Eléctricas, Centros de Carga y sus representantes en el MEM que intervienen en la operación del SEN, con la finalidad de garantizar la seguridad del personal, de las instalaciones y del propio SEN. Establece niveles operativos y los lineamientos para la comunicación, flujo de información, coordinación e interacción operativa de los Usuarios del SEN.</p>
+
+    <div class="nota">
+      <div class="nota-title">Estructura del CENACE para el Control Operativo</div>
+      Para ejercer el control operativo del SEN, el CENACE está conformado por la <strong>Gerencia de Control Nacional (GCN)</strong>, la <strong>Gerencia del Centro Alterno (GCA)</strong> y las <strong>Gerencias de Control Regionales (GCR)</strong>: Baja California, Noroeste, Norte, Noreste, Oriental, Occidental, Central y Peninsular; más los Centros de Control de La Paz y Santa Rosalía para la operación del SIBCS y el SIM respectivamente.
+    </div>
+
+    <!-- ═══════════ CAPÍTULO 1 ═══════════ -->
+    <h2 class="sec" id="sec-c1"><span class="snum">Cap. 1</span>Responsabilidades</h2>
+
+    <h3 class="subsec">1.1 CENACE — carácter y observancia</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Carácter</span> Manual de carácter técnico-operativo; establece las reglas a las que deben sujetarse los Operadores que intervengan en el Control Operativo del SEN.</li>
+      <li><span class="lbl">Vigilancia</span> Corresponde a la <strong>CRE</strong> la vigilancia de la aplicación de las reglas, así como su revisión y actualización permanente acorde con la LIE, pudiendo apoyarse en CENACE, Transportista y Distribuidor.</li>
+      <li><span class="lbl">Facultad</span> El CENACE ejerce el <strong>control operativo</strong> del SEN; Transportista, Distribuidor, Centrales Eléctricas y Centros de Carga ejercen el <strong>control físico</strong> de sus instalaciones, mediante la coordinación del CENACE.</li>
+    </ul>
+
+    <h3 class="subsec">Niveles operativos jerárquicos (1.1.3)</h3>
+    <p>Coordinados por la GCN/GCA y subordinados técnicamente entre sí. <strong>Cada nivel tiene autoridad técnica sobre los niveles inferiores</strong> o con los que debe coordinarse.</p>
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Niveles operativos del Control Operativo del SEN
+        <span class="tbl-sub">RES/550/2021, Manual CO, Cap. 1 1.1.3 — DOF 31-dic-2021 · PDF p. 120–121</span>
+      </div>
+      <table>
+        <thead><tr><th>Nivel</th><th>Entidad responsable</th><th>Funciones principales</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Primer</strong></td><td>GCN / GCA</td><td style="text-align:left">Ajustes a programas de Generación, RDC y porteo; límites de Transmisión; dirige la operación ante Disturbios que cubren varias GCR; activa EPS y EAR; coordina las GCR.</td></tr>
+          <tr><td><strong>Segundo</strong></td><td>GCR</td><td style="text-align:left">Calidad, seguridad y Confiabilidad del SEN en su ámbito geográfico; Control Operativo de Generación, RDC, Usuarios Calificados y seguridad de la RNT/RGD del MEM. Se subordina al 1er nivel.</td></tr>
+          <tr><td><strong>Tercer</strong></td><td>Centros de Control del Transportista · Centrales Eléctricas y Centros de Carga en Alta Tensión</td><td style="text-align:left">Control físico de sus instalaciones; filtrado preliminar de solicitudes de Licencia; coordinación con 2do y 4to nivel para Disturbios y control de tensión.</td></tr>
+          <tr><td><strong>Cuarto</strong></td><td>Centros de Control del Distribuidor · Centrales Eléctricas y Centros de Carga en Media Tensión</td><td style="text-align:left">Control físico en su área; coordinación con el 3er nivel (salvo Centrales interconectadas a las RGD, que se comunican directamente con el CENACE).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec">1.2 Sistemas de información, comunicación y control</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Registro</span> El CENACE debe registrar en forma digital y guardar, por al menos <strong>10 años</strong>, la información de planeación operativa, ejecución del Control Operativo y Operación del MEM.</li>
+      <li><span class="lbl">Grabación</span> Los Centros de Control del CENACE graban los canales de voz dedicados al Control Operativo, manteniendo los registros por <strong>2 años</strong>.</li>
+      <li><span class="lbl">Compatibilidad</span> Debe existir coordinación y compatibilidad informática entre los Centros de Control y el <strong>EMS</strong> del CENACE, conforme al Manual de TIC.</li>
+      <li><span class="lbl">Información operativa</span> Transportista, Distribuidor, Centrales y Cargas mantienen actualizado ante el CENACE: diagrama unifilar y de protecciones, puntos de sincronización, EAR/EPS, capacidades de Elementos, ajustes de protecciones, parámetros del Anexo 3 y sistemas de comunicación.</li>
+      <li><span class="lbl">Parámetros</span> Las Centrales, previo a la primera sincronización, entregan todos sus datos; las correcciones por divergencia con eventos reales se hacen en un máximo de <strong>180 días</strong>; el ajuste de controles se ratifica al menos cada <strong>5 años</strong> o ante Modernización.</li>
+      <li><span class="lbl">Emergencia TIC</span> El tiempo máximo de restablecimiento de infraestructura que provocó una emergencia es de <strong>1 año</strong>, con informes trimestrales de avance al CENACE.</li>
+    </ul>
+
+    <h3 class="subsec">1.3 Operadores</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Relatorio</span> En Centros de Control y Subestaciones se lleva un libro o sistema de captura llamado <strong>"Relatorio"</strong>, con carácter probatorio; se conserva por al menos <strong>10 años</strong> sin daños ni mutilaciones, en horario de 0 a 24 horas.</li>
+      <li><span class="lbl">Turno</span> El Operador entrante es informado verbalmente por el saliente y por la lectura del Relatorio; si está incapacitado, no se le entrega el turno.</li>
+      <li><span class="lbl">Jerarquía</span> Las instrucciones del Operador de la GCN prevalecen sobre las de la GCR, y las del CENACE sobre las de Transportista, Distribuidor, Centrales y Cargas.</li>
+      <li><span class="lbl">Islas</span> En caso de disturbio, el Operador del CENACE puede ordenar la formación de <strong>islas eléctricas</strong> para el restablecimiento del Estado Operativo Normal.</li>
+      <li><span class="lbl">Comunicación</span> El Operador se identifica por lugar, puesto y nombre; <strong>repite las instrucciones</strong> que recibe y pide que le repitan las que transmite, para confirmar el entendimiento.</li>
+    </ul>
+
+    <h3 class="subsec">1.4–1.6 Transportista, Distribuidor, RDC y respaldo</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Salidas</span> Transportista y Distribuidor atienden los lineamientos del CENACE para sus programas de salidas; informan con <strong>90 días hábiles</strong> de anticipación las obras que afecten la disponibilidad de la RNT/RGD del MEM.</li>
+      <li><span class="lbl">RDC Garantizada</span> Un Recurso de Demanda Controlable Garantizada entrega al CENACE sus periodos de paro total o parcial con <strong>36 meses</strong> de anticipación.</li>
+      <li><span class="lbl">Respaldo</span> Los Centros de Control del CENACE, Transportista y Distribuidor pueden celebrar convenios de respaldo temporal ante caso fortuito que impida operar desde sus propios Centros de Control.</li>
+    </ul>
+
+    <!-- ═══════════ CAPÍTULO 2 ═══════════ -->
+    <h2 class="sec" id="sec-c2"><span class="snum">Cap. 2</span>Fronteras operativas de responsabilidad</h2>
+    <ul class="incisos">
+      <li><span class="lbl">Personal</span> Los responsables de los Centros de Control envían al CENACE el listado de personal designado (<strong>Anexo 1</strong>), actualizado en diciembre de cada año o ante altas/bajas.</li>
+      <li><span class="lbl">Enlace directo</span> La comunicación entre el personal operativo se efectúa por enlace directo, instalado y mantenido conforme al Manual de TIC.</li>
+      <li><span class="lbl">Emergencia</span> Al presentarse un Estado Operativo de Emergencia, las redes de comunicación de todos los Centros de Control deben quedar totalmente disponibles.</li>
+      <li><span class="lbl">Fronteras</span> Se completa el <strong>Anexo 2</strong> (Enlaces de Fronteras Operativas entre Centros de Control), entregado al CENACE de forma anual o ante cada cambio, acompañado de un diagrama unifilar que indique las fronteras e instalaciones bajo responsabilidad.</li>
+    </ul>
+
+    <!-- ═══════════ CAPÍTULO 3 ═══════════ -->
+    <h2 class="sec" id="sec-c3"><span class="snum">Cap. 3</span>Control de variables del SEN</h2>
+    <p>El CENACE es el responsable del control de tensión, frecuencia y flujos de potencia del SEN.</p>
+
+    <h3 class="subsec">3.1 Control de tensión</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Reactiva</span> El CENACE usa los recursos de potencia reactiva de la RNT, RGD del MEM, Centrales y Cargas; ningún operador puede cambiar el estado de elementos de compensación reactiva sin autorización del CENACE.</li>
+      <li><span class="lbl">Coordinación</span> Transportista y Distribuidor se coordinan para conexión/desconexión de compensación fija y cambios de Tap en bancos con baja tensión ≤ <strong>35 kV</strong>.</li>
+      <li><span class="lbl">EPS</span> El CENACE define y coordina los EPS para control automático de tensión (<strong>PR-27</strong> baja tensión / <strong>PR-59</strong> alta tensión); su implementación y disponibilidad corresponden a Transportista, Distribuidor, Centrales y Cargas.</li>
+      <li><span class="lbl">Central Eléctrica</span> El CENACE envía consigna de factor de potencia (FP), potencia reactiva (MVAr) o tensión a la UTR de la Central, replicada a todas sus Unidades de manera automática.</li>
+    </ul>
+
+    <h3 class="subsec">3.2 Control de frecuencia</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Disponibilidad</span> La Central pone a disposición del CENACE el despacho de sus Unidades, manteniendo su participación en el control de frecuencia.</li>
+      <li><span class="lbl">Acatar</span> Centrales, Cargas, Transportista y Distribuidor acatan inmediatamente las instrucciones de conexión/desconexión de carga emitidas por el CENACE para el control de la frecuencia.</li>
+      <li><span class="lbl">Disparos</span> Ante disparo por esquemas de baja/alta frecuencia, se informa de inmediato al CENACE los Elementos disparados y protecciones operadas; el restablecimiento queda sujeto a instrucciones del CENACE.</li>
+    </ul>
+
+    <h3 class="subsec">3.3 Control de Flujos de Potencia</h3>
+    <ul class="incisos">
+      <li><span class="lbl">EAR</span> El CENACE administra, define y coordina la implementación, modificación, retiro y validación de los <strong>EAR</strong>; su mantenimiento y disponibilidad corresponden a Transportista, Distribuidor, Centrales y Cargas.</li>
+      <li><span class="lbl">Seguridad RT</span> El CENACE evalúa la seguridad del SEN en tiempo real, establece los Límites Operativos de seguridad con base en los límites físicos del Transportista/Distribuidor y publica las compuertas de flujo.</li>
+      <li><span class="lbl">Asíncronas</span> El CENACE puede solicitar a Centrales Asíncronas limitar su generación a un valor (set point de MW enviado a la UTR), replicado a todas sus Unidades.</li>
+    </ul>
+
+    <!-- ═══════════ CAPÍTULO 4 ═══════════ -->
+    <h2 class="sec" id="sec-c4"><span class="snum">Cap. 4</span>Instrucciones de Despacho de Central Eléctrica y RDC</h2>
+
+    <h3 class="subsec">4.1 Central Eléctrica</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Modificación</span> La potencia activa y reactiva de las Centrales sincronizadas <strong>sólo</strong> puede modificarse por autorización o instrucción del Operador del CENACE.</li>
+      <li><span class="lbl">Pruebas</span> El CENACE realiza pruebas de Control Primario con o sin aviso previo; todas las Centrales participan. Las Centrales ≥ <strong>30 MW (Tipo D)</strong> instalan registradores para verificar su desempeño en Control Primario y Secundario.</li>
+      <li><span class="lbl">Licencias CE</span> Las Licencias por mantenimiento, salida forzada o disparo se otorgan al iniciar el decremento de generación y finalizan al reconectarse la Unidad y alcanzar su valor de despacho. Existen Licencias de generación de prueba (puesta en servicio, régimen térmico, control de tensión/velocidad, verificación de capacidad).</li>
+      <li><span class="lbl">Capabilidad</span> El CENACE opera la Unidad dentro de sus curvas de capabilidad; puede solicitar su incorporación al esquema de disparo automático de generación.</li>
+      <li><span class="lbl">Internacionales</span> Según el Estado Operativo, el CENACE autoriza, restringe o solicita transacciones por los enlaces internacionales (Manual de Importaciones y Exportaciones).</li>
+    </ul>
+
+    <h3 class="subsec">4.2–4.3 Despacho de Generación y de Carga</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Sincronismo</span> Cualquier Unidad se sincroniza al SEN sólo con autorización del Operador del CENACE; el operador de la Unidad sólo modifica generación por instrucción del CENACE (Sistema de Información del Mercado en tiempo real o vía voz) o ante emergencia.</li>
+      <li><span class="lbl">No despachable</span> En Estado Normal no se sujeta a despacho económico la generación nuclear, geotérmica e intermitente; en Alerta o Emergencia toda esa generación acata la instrucción del CENACE por Confiabilidad.</li>
+      <li><span class="lbl">Hidráulica</span> El despacho respeta los valores de generación hidráulica de los estudios de planeación y los gastos de agua de la CONAGUA, manteniendo márgenes de reserva en los embalses.</li>
+      <li><span class="lbl">RDC</span> Los Recursos de Demanda Controlable cumplen las instrucciones de reducción de carga del CENACE y atienden de inmediato las modificaciones de lógica de los EAR.</li>
+    </ul>
+
+    <!-- ═══════════ CAPÍTULO 5 ═══════════ -->
+    <h2 class="sec" id="sec-c5"><span class="snum">Cap. 5</span>Administración de Licencias</h2>
+
+    <p>Define los lineamientos para solicitar, autorizar, conceder y retirar <strong>Licencias</strong>, garantizando la seguridad del personal, las instalaciones y el SEN. Las Licencias se clasifican en <strong>vivo o muerto</strong> (según el Elemento esté energizado o no) y pueden ser <strong>Programadas, No Programadas y de Emergencia</strong>.</p>
+
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Estatus de un Elemento entregado a operación (5.1.4)
+        <span class="tbl-sub">RES/550/2021, Manual CO, Cap. 5 — DOF 31-dic-2021 · PDF p. 133</span>
+      </div>
+      <table>
+        <thead><tr><th>Estatus</th><th>Significado</th></tr></thead>
+        <tbody>
+          <tr><td>En servicio</td><td style="text-align:left">El Elemento y sus Equipos Asociados están en funcionamiento en el SEN.</td></tr>
+          <tr><td>Disponible</td><td style="text-align:left">Listos para entrar en servicio en cualquier momento.</td></tr>
+          <tr><td>En Licencia</td><td style="text-align:left">No disponibles; pueden realizarse trabajos o maniobras en ellos.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec">Gestión de solicitudes (5.1.4–5.1.6)</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Trazabilidad</span> La Solicitud de Licencia (corto plazo) proviene de una Solicitud de Salida autorizada (mediano plazo); se convierte en Licencia si cumple los lineamientos del CENACE en tiempo, forma y condiciones del SEN.</li>
+      <li><span class="lbl">Anticipación</span> Las Licencias en troncal de <strong>400 y 230 kV</strong> o de maniobras complicadas se solicitan con mínimo <strong>4 días hábiles</strong> y un análisis técnico documentado.</li>
+      <li><span class="lbl">Resolución</span> El CENACE resuelve a más tardar a las <strong>12:00 h de dos días laborables previos</strong>; las solicitudes para sábado, domingo y lunes se resuelven el jueves a las 12:00 h.</li>
+      <li><span class="lbl">Usuarios Finales</span> Si la Licencia interrumpe a Usuarios Finales o servicios de TIC, se solicita con mínimo <strong>4 días hábiles</strong> para avisar conforme al Art. 66 del Reglamento.</li>
+      <li><span class="lbl">Inicio</span> Tras autorizar la Licencia, no deben pasar más de <strong>5 minutos</strong> para iniciar las maniobras.</li>
+    </ul>
+
+    <h3 class="subsec">Tarjetas auxiliares (5.1.12)</h3>
+    <div class="tarjetas">
+      <div class="tarjeta">
+        <div class="tj-h"><span class="tj-dot dot-rojo"></span> Tarjeta roja — Licencia en muerto</div>
+        <div class="tj-d">Se coloca en los manerales de los interruptores del equipo bajo Licencia. Indica que el equipo <strong>no debe operarse</strong> (no cambia posición ni estado).</div>
+      </div>
+      <div class="tarjeta">
+        <div class="tj-h"><span class="tj-dot dot-amar"></span> Tarjeta amarilla — Licencia en vivo</div>
+        <div class="tj-d">Se coloca en el maneral del interruptor del circuito o línea bajo Licencia; el recierre se bloquea previamente. En subestaciones telecontroladas se usan etiquetas en el Sistema de Información Remoto.</div>
+      </div>
+    </div>
+
+    <h3 class="subsec">Maniobras (5.2)</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Catálogo</span> Cada Centro de Control mantiene un <strong>Catálogo de Maniobras</strong> de sus instalaciones (libranza, normalización, maniobras de seguridad y especiales), actualizado y enviado al CENACE.</li>
+      <li><span class="lbl">Confirmación</span> Las maniobras se transmiten por canal de voz, identificando el equipo por su nomenclatura; el Operador las dicta y el ejecutor las <strong>repite</strong> como confirmación, ejecutándose en la secuencia del Catálogo.</li>
+      <li><span class="lbl">Librado</span> Para librar un equipo se desconectan bobinas de cierre, se cierran válvulas de aire, se bloquean mecanismos y se pone a tierra; los interruptores de equipo blindado se desacoplan.</li>
+      <li><span class="lbl">Emergencia</span> El Operador del CENACE es el único que autoriza la ejecución de maniobras y la desconexión/reconexión de carga en condiciones de Emergencia. Ante operación de relevador de reposición manual, el Operador de Subestación <strong>no reconecta en ninguna circunstancia</strong>.</li>
+      <li><span class="lbl">CENAGAS</span> Ante emergencia en gasoductos, el CENAGAS se coordina con el CENACE para minimizar impactos a la Generación.</li>
+    </ul>
+    <p class="ref-nota">La programación, autorización, ejecución o cancelación de mantenimientos (5.3) se realiza conforme al Manual de Programación de Salidas de las Reglas del MEM. El CENACE autoriza una sola Licencia por Elemento librado y por Centro de Control (5.4).</p>
+
+    <!-- ═══════════ CAPÍTULO 6 ═══════════ -->
+    <h2 class="sec" id="sec-c6"><span class="snum">Cap. 6</span>Prevención y atención de Disturbios</h2>
+
+    <p>Los Operadores del CENACE supervisan y controlan operativamente la RNT y las RGD del MEM; los Centros de Control del Transportista, Distribuidor, Centrales y Cargas supervisan variables eléctricas y ejercen el Control Físico de sus redes. Ante un disturbio existe la obligación de restablecer de forma coordinada, ordenada, segura y confiable, debiendo: minimizar el tiempo de interrupción a Usuarios Finales, minimizar la desconexión de elementos, proteger los Elementos del SEN, respetar los límites de seguridad y proteger al personal.</p>
+
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Secuencia de coordinación operativa para la atención de Disturbios (6.2)
+        <span class="tbl-sub">RES/550/2021, Manual CO, Cap. 6 — DOF 31-dic-2021 · PDF p. 143</span>
+      </div>
+      <table>
+        <thead><tr><th>Paso</th><th>Acción</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td style="text-align:left">El Operador (Transportista/Distribuidor/Central/Carga) informa de inmediato al CENACE: hora, Elementos disparados y protecciones operadas.</td></tr>
+          <tr><td>2</td><td style="text-align:left">Revisa protecciones, aplica su procedimiento interno y declara qué Elementos quedan indisponibles.</td></tr>
+          <tr><td>3</td><td style="text-align:left">Junto con el CENACE define la estrategia de restablecimiento.</td></tr>
+          <tr><td>4</td><td style="text-align:left">Con autorización del CENACE sigue el Procedimiento de Restablecimiento.</td></tr>
+          <tr><td>5</td><td style="text-align:left">El CENACE instruye la secuencia de restablecimiento (maximizando carga restablecida).</td></tr>
+          <tr><td>6</td><td style="text-align:left">El Operador ejecuta la secuencia instruida por el CENACE.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ref-nota">Para el disparo de un banco de transformación con baja tensión ≤ 35 kV, si no es posible la prueba de energización el CENACE solicita al Transportista coordinarse con el Distribuidor para transferir la carga; si la prueba de cierre por el lado de alta es exitosa, se autoriza el restablecimiento por el lado de baja.</p>
+
+    <!-- ═══════════ CAPÍTULO 7 — NOMENCLATURA ═══════════ -->
+    <h2 class="sec" id="sec-c7"><span class="snum">Cap. 7</span>Nomenclatura</h2>
+
+    <p>La nomenclatura para identificar tensiones, Subestaciones, Elementos y Equipos Asociados es <strong>uniforme en todo el SEN</strong> y definida por el CENACE; su uso es obligatorio en la operación. Para la representación gráfica en diagramas de protecciones se usa el <strong>Estándar ANSI</strong>.</p>
+
+    <h3 class="subsec">Identificación de Subestaciones</h3>
+    <p>Número de la GCR + combinación de <strong>tres letras</strong>: abreviatura del nombre más conocido (Querétaro → QRO), las tres primeras letras (Pitirera → PIT), iniciales de las tres primeras sílabas (Mazatepec → MZT), o combinaciones para nombres de dos palabras (Río Bravo → RIB, Puerto Escondido → PES).</p>
+
+    <h3 class="subsec">Código de equipo — 5 dígitos</h3>
+    <p>La identificación del equipo de una instalación se hace con cinco dígitos, de izquierda a derecha:</p>
+    <div class="codebox">
+      <div class="cb"><div class="cb-n">1.º</div><div class="cb-l">Tensión</div></div>
+      <div class="cb"><div class="cb-n">2.º</div><div class="cb-l">Tipo equipo</div></div>
+      <div class="cb"><div class="cb-n">3.º</div><div class="cb-l">N.º asignado</div></div>
+      <div class="cb"><div class="cb-n">4.º</div><div class="cb-l">N.º asignado</div></div>
+      <div class="cb"><div class="cb-n">5.º</div><div class="cb-l">Dispositivo</div></div>
+    </div>
+    <p class="ref-nota">Todo el equipo se antecede por la abreviatura de la instalación, p. ej. <strong>VAE 92120</strong>. Barras: <strong>B1</strong> (barra uno), <strong>B2</strong> (barra dos), <strong>BT</strong> (barra de transferencia), seguidas de la tensión en kV.</p>
+
+    <h3 class="subsec">1.er dígito — Tensión de operación</h3>
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Tensión de operación → carácter asignado (Cap. 7, inciso j)
+        <span class="tbl-sub">RES/550/2021, Manual CO — DOF 31-dic-2021 · PDF p. 145</span>
+      </div>
+      <table>
+        <thead><tr><th>Desde (kV)</th><th>Hasta (kV)</th><th>Carácter</th></tr></thead>
+        <tbody>
+          <tr><td>0.00</td><td>2.40</td><td style="font-weight:700;color:var(--blue)">1</td></tr>
+          <tr><td>2.41</td><td>4.16</td><td style="font-weight:700;color:var(--blue)">2</td></tr>
+          <tr><td>4.17</td><td>6.99</td><td style="font-weight:700;color:var(--blue)">3</td></tr>
+          <tr><td>7.00</td><td>16.50</td><td style="font-weight:700;color:var(--blue)">4</td></tr>
+          <tr><td>16.60</td><td>44.00</td><td style="font-weight:700;color:var(--blue)">5</td></tr>
+          <tr><td>44.10</td><td>70.00</td><td style="font-weight:700;color:var(--blue)">6</td></tr>
+          <tr><td>70.10</td><td>115.00</td><td style="font-weight:700;color:var(--blue)">7</td></tr>
+          <tr><td>115.10</td><td>161.00</td><td style="font-weight:700;color:var(--blue)">8</td></tr>
+          <tr><td>161.10</td><td>230.00</td><td style="font-weight:700;color:var(--blue)">9</td></tr>
+          <tr><td>230.10</td><td>500.00</td><td style="font-weight:700;color:var(--blue)">A</td></tr>
+          <tr><td>500.10</td><td>700.00</td><td style="font-weight:700;color:var(--blue)">B</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec">2.º dígito — Tipo de equipo · 5.º dígito — Dispositivo</h3>
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Tipo de equipo (2.º) y tipo de dispositivo (5.º)
+        <span class="tbl-sub">RES/550/2021, Manual CO — DOF 31-dic-2021 · PDF p. 146</span>
+      </div>
+      <table>
+        <thead><tr><th>N.º</th><th>2.º — Tipo de equipo</th><th>5.º — Dispositivo</th></tr></thead>
+        <tbody>
+          <tr><td>0</td><td style="text-align:left">Esquema doble interruptor lado barra 2</td><td style="text-align:left">Interruptor</td></tr>
+          <tr><td>1</td><td style="text-align:left">Grupo Central–Transformador y colectores</td><td style="text-align:left">Cuchillas a barra uno</td></tr>
+          <tr><td>2</td><td style="text-align:left">Transformadores o autotransformadores</td><td style="text-align:left">Cuchillas a barra dos</td></tr>
+          <tr><td>3</td><td style="text-align:left">Líneas de Transmisión o alimentadores</td><td style="text-align:left">Cuchillas adicionales</td></tr>
+          <tr><td>4</td><td style="text-align:left">Reactores</td><td style="text-align:left">Cuchillas fusibles</td></tr>
+          <tr><td>5</td><td style="text-align:left">Capacitores (serie o paralelo)</td><td style="text-align:left">Interruptor en gabinete blindado</td></tr>
+          <tr><td>6</td><td style="text-align:left">Equipo especial</td><td style="text-align:left">Cuchillas de enlace</td></tr>
+          <tr><td>7</td><td style="text-align:left">Interruptor de transferencia / comodín</td><td style="text-align:left">Cuchillas de puesta a tierra</td></tr>
+          <tr><td>8</td><td style="text-align:left">Esquema interruptor y medio</td><td style="text-align:left">Cuchillas de transferencia</td></tr>
+          <tr><td>9</td><td style="text-align:left">Esquema interruptor de amarre de barras</td><td style="text-align:left">Cuchillas lado equipo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ref-nota">Identificadores de equipo: <strong>U</strong> Unidad de Central, <strong>T</strong> Transformador, <strong>AT</strong> Autotransformador, <strong>R</strong> Reactor, <strong>C</strong> Capacitor, <strong>CEV</strong> Compensador Estático de VAR's, <strong>STC</strong> STATCOM, <strong>SA</strong> Sistema de Almacenamiento. El grupo Unidad–transformador comparte número (U 10 → T 10). Las cuchillas de puesta a tierra en encapsulado SF6 usan la letra "C" en el segundo dígito.</p>
+
+    <!-- ═══════════ ANEXOS ═══════════ -->
+    <h2 class="sec" id="sec-anexos"><span class="snum">Anexos</span>Formatos y Diagramas Unifilares</h2>
+    <ul class="incisos">
+      <li><span class="lbl">Anexo 1</span> Relación de Personal Designado por el Centro de Control (nombre, puesto, clave de personal designado, teléfonos).</li>
+      <li><span class="lbl">Anexo 2</span> Enlaces Frontera entre Centros de Control (equipo, frontera, descripción del punto), acompañado de diagrama unifilar.</li>
+      <li><span class="lbl">Anexo 3</span> Capacidad del Equipo Primario — formatos de datos por equipo: interruptores, cuchillas, transformadores de potencia, bancos de capacitores, reactores, apartarrayos, banco de baterías, transformadores de corriente y de potencial, curva de capabilidad, embalse, entre otros.</li>
+      <li><span class="lbl">Anexo 4</span> Diagramas Unifilares y Nomenclatura — ejemplos de aplicación del código de 5 dígitos (abajo, reproducidos del texto oficial).</li>
+    </ul>
+
+    <h3 class="subsec">Anexo 4 — Diagramas Unifilares (ejemplos oficiales)</h3>
+    <div class="unifilar"><img src="../assets/co/unifilar_p169.png" alt="Diagramas unifilares 1 y 2: barras B1/B2 230 kV y BT/B1 115 kV con secciones SEC A–D y nomenclatura de equipos" loading="lazy"><div class="uf-cap">Anexo 4 · Diagramas 1 y 2 — barras 230 kV y 115 kV seccionadas (pág. 169)</div></div>
+    <div class="unifilar"><img src="../assets/co/unifilar_p170.png" alt="Diagrama unifilar con nomenclatura de interruptores, cuchillas y transformadores" loading="lazy"><div class="uf-cap">Anexo 4 · pág. 170</div></div>
+    <div class="unifilar"><img src="../assets/co/unifilar_p171.png" alt="Diagrama unifilar de esquema de interruptor y medio" loading="lazy"><div class="uf-cap">Anexo 4 · pág. 171</div></div>
+    <div class="unifilar"><img src="../assets/co/unifilar_p172.png" alt="Diagrama unifilar de subestación encapsulada SF6 con elementos múltiples de puesta a tierra" loading="lazy"><div class="uf-cap">Anexo 4 · pág. 172</div></div>
+    <div class="unifilar"><img src="../assets/co/unifilar_p173.png" alt="Diagrama unifilar de esquema en anillo" loading="lazy"><div class="uf-cap">Anexo 4 · pág. 173</div></div>
+    <div class="unifilar"><img src="../assets/co/unifilar_p174.png" alt="Diagrama unifilar de nomenclatura de líneas y equipos" loading="lazy"><div class="uf-cap">Anexo 4 · pág. 174</div></div>
+
+    <!-- ═══════════ NAV ═══════════ -->
+    <nav class="nav-footer" aria-label="Navegación entre secciones">
+      <a href="manual_pse.html" class="n-prev">
+        <span class="nd">← Anterior</span>
+        <span class="nt">Manual PSE — Planeación</span>
+      </a>
+      <a href="../index_cdr_2v4.html" class="n-next">
+        <span class="nd">Índice →</span>
+        <span class="nt">Código de Red 2.0</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

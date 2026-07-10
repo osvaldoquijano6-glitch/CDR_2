@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capítulo 6 — Administración del SEN | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual INTE — Centrales Eléctricas</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual INTE — Capítulos</span>
+    <a href="cap1.html" class="sb-cap">Cap. 1 — Tipos de Centrales Eléctricas</a>
+    <a href="cap2.html" class="sb-cap">Cap. 2 — Frecuencia y Control Primario</a>
+    <a href="cap3.html" class="sb-cap">Cap. 3 — Variaciones de Tensión</a>
+    <a href="cap4.html" class="sb-cap">Cap. 4 — Control Dinámico de Tensión</a>
+    <a href="cap5.html" class="sb-cap">Cap. 5 — Restauración del SEN</a>
+    <a href="cap6.html" class="sb-cap active" aria-current="page">Cap. 6 — Administración del SEN</a>
+    <a href="#sec61"    class="sb-sub">6.1 Tipo B</a>
+    <a href="#sec611"   class="sb-sub" style="padding-left:2.2rem">6.1.1 Esquemas de control</a>
+    <a href="#sec612"   class="sb-sub" style="padding-left:2.2rem">6.1.2 Protecciones</a>
+    <a href="#sec613"   class="sb-sub" style="padding-left:2.2rem">6.1.3 Prioridad P/Q</a>
+    <a href="#sec614"   class="sb-sub" style="padding-left:2.2rem">6.1.4 Intercambio info</a>
+    <a href="#sec615"   class="sb-sub" style="padding-left:2.2rem">6.1.5 Instrumentación</a>
+    <a href="#sec616"   class="sb-sub" style="padding-left:2.2rem">6.1.6 Modelos de simulación</a>
+    <a href="#sec62"    class="sb-sub">6.2 Tipo C (adicional)</a>
+    <a href="#sec63"    class="sb-sub">6.3 Tipo D (adicional)</a>
+    <a href="cap7.html" class="sb-cap">Cap. 7 — Calidad de la Potencia</a>
+    <a href="cap8.html" class="sb-cap">Cap. 8 CONE — Calidad CdC</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Manual INTE › <strong>Capítulo 6 — Administración del SEN</strong></div>
+    <span class="pg-pill">Manual INTE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual INTE · Cap. 6 de 8 — Administración y soporte técnico</span>
+    <h1 class="titulo">Capítulo 6. Requerimientos generales de administración del SEN</h1>
+
+    <p>
+      El Capítulo 6 agrupa los requerimientos que permiten al CENACE <strong>operar, supervisar y controlar</strong> las Centrales Eléctricas como recursos del sistema —no solo como generadores de energía. Cubre cuatro áreas: esquemas de control y protecciones, prioridad de actuación, intercambio de información en tiempo real, instrumentación, y modelos de simulación. El capítulo sigue la estructura acumulativa del Manual INTE: los tipos C y D heredan todo lo del tipo B y añaden requerimientos específicos.
+    </p>
+
+    <!-- ═══════════ 6.1 TIPO B ═══════════ -->
+    <h2 class="sec" id="sec61"><span class="snum">6.1</span>Requerimientos para Centrales Eléctricas Tipo B</h2>
+
+    <!-- 6.1.1 ESQUEMAS DE CONTROL -->
+    <h3 class="subsec" id="sec611">6.1.1 Esquemas de Control y Ajustes</h3>
+
+    <blockquote>
+      i. Los esquemas y ajustes de los equipos de control de la Central Eléctrica que tienen impacto en la estabilidad del sistema, así como aquellos necesarios para emprender acciones de emergencia, tales como Esquemas de Acción Remedial (EAR), deben ser determinados y especificados por el CENACE y la Central Eléctrica; y
+      <br><br>
+      ii. cualquier cambio en los esquemas y ajustes mencionados en el subinciso anterior debe ser coordinado por el CENACE y posteriormente deben ser acordadas con la Central Eléctrica.
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.1.1 — DOF 31-dic-2021 · PDF p. 235</cite>
+    </blockquote>
+
+    <p>
+      Los <strong>Esquemas de Acción Remedial (EAR)</strong> son automatismos que permiten desconectar generación, abrir líneas o modificar la configuración del sistema en tiempo real ante contingencias específicas, sin intervención humana. Son elementos críticos para la seguridad del SEN en escenarios de contingencia N-1 o N-2. El CENACE define los criterios de activación; la Central Eléctrica los implementa en sus equipos de control. Cualquier modificación posterior requiere coordinación bilateral.
+    </p>
+
+    <!-- 6.1.2 PROTECCIONES -->
+    <h3 class="subsec" id="sec612">6.1.2 Esquemas de Protección y Ajustes</h3>
+
+    <blockquote>
+      iii. Las protecciones de la Central Eléctrica deberán estar priorizadas de la siguiente forma:
+      <br>A. Preservar la seguridad del personal, visitantes y de las poblaciones cercanas a la Central Eléctrica;
+      <br>B. Reducción de un posible daño al equipo de la misma; y
+      <br>C. Preservar la seguridad del SEN.
+      <br><br>
+      iv. Los esquemas de protección, que apliquen por tipo de tecnología, deberán cubrir al menos contra las siguientes perturbaciones:
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.1.2 iii-iv — DOF 31-dic-2021 · PDF p. 235–236</cite>
+    </blockquote>
+
+    <h4 class="subsubsec">Lista mínima de funciones de protección requeridas (6.1.2.iv)</h4>
+
+    <div class="incisos">
+      <span>A. Cortocircuito externo e interno</span>
+      <span>B. Carga asimétrica (secuencia de fase negativa)</span>
+      <span>C. Sobrecarga del estator o del rotor</span>
+      <span>D. Sobre o baja excitación</span>
+      <span>E. Sobretensión o baja tensión en terminales de la Central Eléctrica</span>
+      <span>F. Sobretensión o baja tensión en el Punto de Interconexión</span>
+      <span>G. Sobretensión o baja tensión en servicios auxiliares</span>
+      <span>H. Oscilaciones de potencia entre áreas</span>
+      <span>I. Corriente de energización (inrush)</span>
+      <span>J. Operación asíncrona</span>
+      <span>K. Protección contra esfuerzos torsionales inadmisibles (resonancia subsíncrona)</span>
+      <span>L. Protección de la línea de Interconexión entre la Central Eléctrica y la Red Eléctrica</span>
+      <span>M. Protección del transformador de Unidad de Central Eléctrica</span>
+      <span>N. Esquemas de protección de respaldo y ante falla de equipo de seccionamiento</span>
+      <span>O. Sobreflujo magnético (V/f)</span>
+      <span>P. Potencia inversa</span>
+      <span>Q. Razón de cambio de la frecuencia (ROCOF)</span>
+      <span>R. Desplazamiento de tensión del neutro</span>
+      <span>S. Verificación de sincronismo</span>
+      <span>T. Pérdida de campo</span>
+    </div>
+
+    <div class="nota">
+      <span class="nota-title">«Al menos» — no es lista exhaustiva</span>
+      El inciso iv usa la expresión "deberán cubrir <em>al menos</em> contra las siguientes perturbaciones". El CENACE puede requerir funciones adicionales en los Estudios de Interconexión según el tipo de tecnología, nivel de tensión o configuración de la subestación. Las protecciones K (resonancia subsíncrona) y J (operación asíncrona) son particularmente relevantes para centrales de ciclo combinado y motores síncronos grandes.
+    </div>
+
+    <!-- 6.1.3 PRIORIDAD -->
+    <h3 class="subsec" id="sec613">6.1.3 Prioridad de Protección y Control</h3>
+
+    <blockquote>
+      La Central Eléctrica debe organizar sus protecciones y equipos de control en conformidad con la siguiente prioridad de actuación, organizados en orden decreciente de importancia:
+      <br><br>
+      A. Protecciones del sistema y protecciones de la Central Eléctrica;
+      <br>B. Control de frecuencia (ajuste de potencia activa);
+      <br>C. Restricción de potencia activa; y
+      <br>D. Limitación de rampa de potencia activa.
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.1.3 — DOF 31-dic-2021 · PDF p. 236</cite>
+    </blockquote>
+
+    <p>
+      Esta jerarquía resuelve conflictos cuando varias funciones de control desean actuar simultáneamente sobre la potencia activa. La seguridad (protecciones) siempre prevalece; la respuesta de frecuencia tiene prioridad sobre la restricción de potencia contratada; y la limitación de rampa —un requerimiento de menor urgencia— actúa en último lugar. Este orden es coherente con el 2.2.2 (Control Primario de frecuencia) que establece que el valor de consigna del Control Primario debe prevalecer sobre cualquier otro.
+    </p>
+
+    <!-- 6.1.4 INTERCAMBIO DE INFORMACIÓN -->
+    <h3 class="subsec" id="sec614">6.1.4 Intercambio de Información</h3>
+
+    <blockquote>
+      En relación con la regulación aplicable en materia de Seguridad de la Información y TIC, la Central Eléctrica debe intercambiar información de tiempo real o bajo demanda con el CENACE con una estampa de tiempo. El contenido de la información a ser intercambiada con la Central Eléctrica, la definirá el CENACE, durante la Validación de Requerimientos Técnicos.
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.1.4 — DOF 31-dic-2021 · PDF p. 236</cite>
+    </blockquote>
+
+    <p>
+      El intercambio de información se rige por el <strong>Manual de Requerimientos de TIC para el SEN y el MEM</strong> (publicado DOF 4 de diciembre de 2017). El Manual TIC especifica los protocolos de comunicación (IEC 61968/61970, DNP3, IEC 60870-5-101/104), frecuencias de actualización, requisitos de ciberseguridad y disponibilidad del enlace de telemetría. La estampa de tiempo es obligatoria para correlacionar mediciones distribuidas en el SEN.
+    </p>
+
+    <!-- 6.1.5 INSTRUMENTACIÓN -->
+    <h3 class="subsec" id="sec615">6.1.5 Instrumentación</h3>
+
+    <blockquote>
+      i. La Central Eléctrica, a solicitud del CENACE, debe estar equipada con dispositivos de registro de fallas y monitoreo del comportamiento dinámico del sistema. La Central Eléctrica debe registrar al menos los siguientes parámetros:
+      <br>A. Tensión;  B. Potencia activa;  C. Potencia reactiva;  D. Frecuencia.
+      <br><br>
+      ii. Los criterios de activación a configurar en los dispositivos de registradores de disturbios serán acordados entre la Central Eléctrica y el CENACE. La frecuencia de muestreo debe cumplir con la especificación técnica vigente;
+      <br><br>
+      iii. El dispositivo de monitoreo de comportamiento dinámico del SEN incluirá un criterio de activación especificado por el CENACE, durante el desarrollo de la Validación de Requerimientos Técnicos;
+      <br><br>
+      iv. Los dispositivos para Calidad del Suministro Eléctrico y monitoreo de comportamiento dinámico del SEN deben incluir los medios para que el CENACE pueda recibir la información. Los protocolos de comunicación para los datos registrados serán definidos en el Manual de TIC; y
+      <br><br>
+      v. El analizador o medidor de Calidad de la potencia debe cumplir con los requerimientos de la NOM en materia de sistemas de medición de energía eléctrica que emita la CRE y con los requerimientos que establece el Manual de TIC o la regulación vigente.
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.1.5 — DOF 31-dic-2021 · PDF p. 236–237</cite>
+    </blockquote>
+
+    <div class="tbl-wrap" style="max-width:680px">
+      <div class="tbl-caption">Instrumentos de medición y monitoreo — 6.1.5 en contexto</div>
+      <table>
+        <thead><tr><th>Instrumento</th><th>Función</th><th>Referencia normativa</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Registrador de disturbios (DFR)</td>
+            <td>Registra formas de onda de alta resolución durante fallas y perturbaciones</td>
+            <td style="font-family:var(--mono);font-size:.8rem">6.1.5.i–ii · Manual TIC</td>
+          </tr>
+          <tr>
+            <td>PMU — Unidad de Medición Fasorial</td>
+            <td>Registra fasores síncronos (magnitud + ángulo) con tiempo GPS, 30–60 fps</td>
+            <td style="font-family:var(--mono);font-size:.8rem">6.1.5.iii · IEEE C37.118</td>
+          </tr>
+          <tr>
+            <td>Analizador/medidor de Calidad de la potencia</td>
+            <td>Mide índices de calidad de la potencia del Cap. 7 (armónicas, flicker, desbalance)</td>
+            <td style="font-family:var(--mono);font-size:.8rem">6.1.5.v · NOM-001-CRE/SCFI-2019</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 6.1.6 MODELOS -->
+    <h3 class="subsec" id="sec616">6.1.6 Modelos de Simulación</h3>
+
+    <blockquote>
+      i. La Central Eléctrica tipo B, debe proporcionar modelos de simulación que reflejen adecuadamente el comportamiento de la Central Eléctrica en las simulaciones en estado estacionario, dinámico y de transitorios electromagnéticos de conformidad con el Manual para la Interconexión de Centrales Eléctricas y Conexión de Centros de Carga;
+      <br><br>
+      iii. Los modelos proporcionados por la Central Eléctrica deben contener al menos los siguientes submodelos, dependiendo de la existencia de los componentes individuales:
+      <br>A. Central Eléctrica y fuente primaria de energía;
+      <br>B. Control de velocidad y control de potencia activa;
+      <br>C. El sistema de control de tensión, incluyendo si es aplicable, el sistema estabilizador de potencia para Centrales Eléctricas síncronas (PSS) o amortiguador de oscilaciones de potencia para Centrales Eléctricas asíncronas (POD);
+      <br>D. Modelos de protección de la Central Eléctrica; y
+      <br>E. Modelos de convertidores/inversores, controladores de planta, sistemas de compensación de potencia activa y reactiva para centrales basadas en inversores.
+      <br><br>
+      vi. Los modelos proporcionados por la Central Eléctrica deben ser validados de conformidad con el Manual para la Interconexión de Centrales Eléctricas y Conexión de Centros de Carga. Este requerimiento es indispensable para la declaratoria de entrada en operación comercial.
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.1.6 i–vi — DOF 31-dic-2021 · PDF p. 237–238</cite>
+    </blockquote>
+
+    <div class="advertencia">
+      <strong>Requisito indispensable para la EOC.</strong> La validación de los modelos de simulación (6.1.6.vi) es condición necesaria para la declaratoria de Entrada en Operación Comercial. Una Central que no haya entregado y validado sus modelos no puede obtener la EOC, independientemente del resultado de las demás pruebas técnicas.
+    </div>
+
+    <h4 class="subsubsec">Formatos de entrega y documentación requerida</h4>
+    <p>
+      El CENACE especifica en la solicitud de modelos: el formato de entrega compatible con las herramientas de simulación del SEN (PSS/E, PSCAD, EMTP, DigSILENT PowerFactory u otras autorizadas), la documentación adicional requerida (diagramas de bloques de los controladores, código fuente si no es librería estándar, manuales de operación del fabricante) y el protocolo de validación contra registros de campo.
+    </p>
+
+    <!-- ═══════════ 6.2 TIPO C ═══════════ -->
+    <h2 class="sec" id="sec62"><span class="snum">6.2</span>Requerimientos Adicionales para Centrales Eléctricas Tipo C</h2>
+
+    <p>
+      Aplican todos los requerimientos del 6.1 para Centrales tipo B, más los siguientes:
+    </p>
+
+    <h3 class="subsec" id="sec621">6.2.1 Pérdida de Estabilidad o Control Angular</h3>
+
+    <blockquote>
+      La Central Eléctrica debe ser capaz de desconectarse automáticamente de la Red Eléctrica con el fin de ayudar a preservar la Confiabilidad y seguridad del SEN o para evitar que la Central Eléctrica sufra daños. El CENACE especificará en el Estudio de Impacto los criterios para la detección de pérdida de estabilidad angular.
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.2.1 — DOF 31-dic-2021 · PDF p. 237</cite>
+    </blockquote>
+
+    <p>
+      La pérdida de estabilidad angular (también llamada pérdida de sincronismo o out-of-step) ocurre cuando el ángulo de carga del rotor supera el ángulo crítico de estabilidad transitoria. Las Centrales de tipo C y D deben detectar esta condición automáticamente e iniciar la desconexión antes de que el generador pueda dañarse o propagar la inestabilidad al SEN. Los criterios de detección (locus de impedancia, diferencial de ángulo, ROCOF) son definidos por el CENACE en el Estudio de Impacto.
+    </p>
+
+    <h3 class="subsec" id="sec622">6.2.2 Equipos para Operación o Seguridad del Sistema</h3>
+
+    <blockquote>
+      Si el CENACE considera necesaria la instalación de dispositivos adicionales en una Central Eléctrica con el fin de preservar o restaurar la seguridad operativa del sistema, el CENACE y la Central Eléctrica deben investigar la problemática y acordar una solución apropiada.
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.2.2 — DOF 31-dic-2021 · PDF p. 237</cite>
+    </blockquote>
+
+    <p>
+      Este inciso habilita al CENACE a requerir instalaciones adicionales —compensación de reactivos, baterías de almacenamiento, condensadores síncronos, sistemas de amortiguamiento de oscilaciones— cuando un estudio de red identifique que la Central Eléctrica específica introduce problemas de estabilidad que no pueden resolverse con los ajustes normales. El CENACE y la Central acuerdan la solución; ninguna de las partes puede imponerla unilateralmente.
+    </p>
+
+    <h3 class="subsec" id="sec623">6.2.3 Tasas de Cambio de Potencia Activa (Rampas)</h3>
+
+    <blockquote>
+      El CENACE debe especificar los límites mínimos y máximos de las tasas de cambio de potencia activa (límites de rampa) tanto en dirección hacia arriba y hacia abajo para las Centrales Eléctricas, teniendo en cuenta las características específicas de la fuente primaria de energía, durante la Validación de Requerimientos Técnicos.
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.2.3 — DOF 31-dic-2021 · PDF p. 237</cite>
+    </blockquote>
+
+    <p>
+      Los límites de rampa son críticos para la seguridad operativa: una Central que cambia su generación demasiado rápido puede provocar oscilaciones de frecuencia o sobrecargar líneas de transmisión. El CENACE fija los límites (en MW/min) para cada CE tipo C y D considerando la fuente primaria —el gas natural permite rampas más rápidas que el carbón; la fotovoltaica puede variar a decenas de MW/s si no se limita; la hidroeléctrica depende de la disponibilidad hídrica.
+    </p>
+
+    <h3 class="subsec" id="sec624">6.2.4 Método de Aterrizado del Neutro</h3>
+
+    <blockquote>
+      La disposición de puesta a tierra del punto neutro en el lado de la red, de los transformadores elevadores de la Central Eléctrica debe cumplir con las especificaciones técnicas vigentes o las autorizadas por la CRE.
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.2.4 — DOF 31-dic-2021 · PDF p. 238</cite>
+    </blockquote>
+
+    <p>
+      La puesta a tierra del neutro del transformador elevador determina las corrientes de falla monofásica a tierra y el comportamiento del sistema de protecciones ante fallas asimétricas. Los esquemas típicos incluyen: tierra sólida (alta impedancia de falla de arco), tierra por resistencia (limita la corriente de falla), tierra por reactancia, y flotante (alta impedancia). El CENACE y la CRE definen el esquema apropiado para cada nivel de tensión y configuración de red.
+    </p>
+
+    <!-- ═══════════ 6.3 TIPO D ═══════════ -->
+    <h2 class="sec" id="sec63"><span class="snum">6.3</span>Requerimientos Adicionales para Centrales Eléctricas Tipo D</h2>
+
+    <p>
+      Aplican todos los requerimientos del 6.2 para Centrales tipo C, más los siguientes:
+    </p>
+
+    <h3 class="subsec" id="sec631">6.3.1 Sincronización</h3>
+
+    <blockquote>
+      i. La sincronización de la Central Eléctrica se realizará sólo después de que se hayan completado las obras especificadas por el CENACE en los Estudios de Interconexión, se haya certificado por una Unidad de Inspección, según corresponda, y con la autorización del CENACE;
+      <br><br>
+      ii. La Central Eléctrica debe estar equipada con las instalaciones necesarias para sincronización; y
+      <br><br>
+      iii. Previo a la puesta en servicio, el CENACE y la Central Eléctrica acordarán la configuración de los dispositivos de sincronización.
+      <cite>RES/550/2021, Manual INTE, Cap. 6 6.3.1 — DOF 31-dic-2021 · PDF p. 238</cite>
+    </blockquote>
+
+    <div class="nota">
+      <span class="nota-title">Triple condición previa para la primera sincronización tipo D</span>
+      El 6.3.1.i establece tres condiciones concurrentes para que una Central tipo D pueda sincronizarse por primera vez: (1) obras completadas según Estudios de Interconexión, (2) certificación por Unidad de Inspección acreditada, y (3) autorización expresa del CENACE. Ninguna condición es suficiente por sí sola. Esta secuencia conecta directamente con el Cap. 8 (Verificación de Conformidad) y el Procedimiento EOC.
+    </div>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="cap5.html">
+        <span class="nd">← Capítulo anterior</span>
+        <span class="nt">Cap. 5 — Restauración del SEN</span>
+      </a>
+      <a href="cap7.html" class="n-next">
+        <span class="nd">Capítulo siguiente →</span>
+        <span class="nt">Cap. 7 — Calidad de la Potencia</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

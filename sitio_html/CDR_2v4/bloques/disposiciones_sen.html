@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disposiciones Generales del SEN — 6 Capítulos | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+/* Figura A — Prelación Jerárquica */
+.jerarquia { margin: 22px 0 8px; }
+.jq-tier {
+  border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 14px 18px; background: var(--white); position: relative;
+}
+.jq-tier.top { border-color: var(--blue); background: var(--blue-light); }
+.jq-tier-lbl { font-family: var(--mono); font-size: 8.5px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 8px; display:flex; align-items:center; gap:7px; }
+.jq-tier.op .jq-tier-lbl { color: var(--text-muted); }
+.jq-tier-title { font-family: var(--serif); font-weight: 700; font-size: .98rem; color: var(--text-dark); margin-bottom: 4px; }
+.jq-tier-desc { font-size: .76rem; color: var(--text-secondary); line-height: 1.5; }
+.jq-chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.jq-chip { font-family: var(--mono); font-size: 9px; letter-spacing:.04em; padding: 4px 10px; border-radius: 12px;
+  background: rgba(0,102,204,.08); color: var(--blue); border: 1px solid rgba(0,102,204,.2); }
+.jq-arrow { text-align:center; color: var(--blue-mid); font-size: 18px; margin: 4px 0; }
+.jq-note { font-size: .72rem; color: var(--text-muted); font-style: italic; margin-top: 6px; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Disposiciones Generales del SEN</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Disposiciones Generales — Capítulos</span>
+    <a href="#sec-intro" class="sb-sub">Introducción · estructura · gestión</a>
+    <a href="#sec-c1" class="sb-cap active" aria-current="page">Cap. 1 — Planeación (P)</a>
+    <a href="#sec-c2" class="sb-cap">Cap. 2 — Operación del SEN (OP)</a>
+    <a href="#sec-c3" class="sb-cap">Cap. 3 — Interconexión (INTE)</a>
+    <a href="#sec-c4" class="sb-cap">Cap. 4 — Conexión de Cargas (CONE)</a>
+    <a href="#sec-c5" class="sb-cap">Cap. 5 — Red Inteligente · TIC (REI)</a>
+    <a href="#sec-c6" class="sb-cap">Cap. 6 — Sistemas Aislados (SEA)</a>
+    <span class="sb-section-lbl">Manuales Regulatorios</span>
+    <a href="disposiciones.html" class="sb-cap">Disposiciones y Glosario</a>
+    <a href="cap1.html" class="sb-cap">Manual INTE — Centrales</a>
+    <a href="cone_c1.html" class="sb-cap">Manual CONE — Cargas</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › <strong>Disposiciones Generales del SEN</strong></div>
+    <span class="pg-pill">Disposiciones Generales</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">PDF p. 18–64</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Disposiciones Generales del SEN · 6 Capítulos — DOF 31-dic-2021</span>
+    <h1 class="titulo">Disposiciones Generales del Sistema Eléctrico Nacional</h1>
+
+    <p>Las Disposiciones Generales integran los requerimientos técnicos mínimos para el desarrollo eficiente de los procesos de <strong>Planeación, Control Operativo, Control Físico, acceso y uso</strong> de la infraestructura eléctrica del SEN. Su finalidad es que el SEN alcance y mantenga un <strong>nivel adecuado de Confiabilidad</strong>: operar sin violar límites operativos y con márgenes de reserva suficientes para soportar la Contingencia Sencilla más Severa (CSMS) sin violación de límites en post-Disturbio.</p>
+
+    <details>
+      <summary>Estructura del Código de Red y prelación jerárquica</summary>
+      <p style="font-size:.85rem;color:var(--text-secondary);line-height:1.6;margin-top:4px">El Código de Red se compone de las <strong>Disposiciones Generales del SEN</strong> y de las <strong>Disposiciones Operativas del SEN</strong>, estas últimas conformadas por seis Manuales Regulatorios y los Procedimientos. Las Disposiciones Generales tienen <strong>prelación jerárquica</strong>: los documentos de menor jerarquía deben guardar consistencia con ellas.</p>
+
+      <div class="jerarquia">
+        <div class="jq-tier top">
+          <div class="jq-tier-lbl"><i class="ti ti-arrow-big-up-lines" aria-hidden="true"></i> Mayor jerarquía</div>
+          <div class="jq-tier-title">Disposiciones Generales del SEN</div>
+          <div class="jq-tier-desc">Criterios técnicos mínimos de eficiencia, Calidad, Confiabilidad, Continuidad, seguridad y sustentabilidad.</div>
+          <div class="jq-chips">
+            <span class="jq-chip">Cap. 1 · P</span>
+            <span class="jq-chip">Cap. 2 · OP</span>
+            <span class="jq-chip">Cap. 3 · INTE</span>
+            <span class="jq-chip">Cap. 4 · CONE</span>
+            <span class="jq-chip">Cap. 5 · REI</span>
+            <span class="jq-chip">Cap. 6 · SEA</span>
+            <span class="jq-chip">Cap. 7 · SE Baja California</span>
+          </div>
+        </div>
+        <div class="jq-arrow"><i class="ti ti-chevron-down" aria-hidden="true"></i></div>
+        <div class="jq-tier op">
+          <div class="jq-tier-lbl"><i class="ti ti-stack-2" aria-hidden="true"></i> Deben guardar consistencia</div>
+          <div class="jq-tier-title">Disposiciones Operativas del SEN</div>
+          <div class="jq-tier-desc">Reglas, requerimientos, instrucciones y procedimientos de carácter específico.</div>
+          <div class="jq-chips">
+            <span class="jq-chip">6 Manuales Regulatorios</span>
+            <span class="jq-chip">Procedimientos 6.1–6.9</span>
+          </div>
+        </div>
+        <div class="jq-note">Figura A. Prelación Jerárquica en el Código de Red (RES/550/2021, Disposiciones Generales, A.2.3).</div>
+      </div>
+    </details>
+
+    <div class="nota">
+      <div class="nota-title">Cumplimiento obligatorio</div>
+      El Código de Red es de cumplimiento obligatorio para todos los Usuarios del SEN: CENACE, Transportistas, Distribuidores, Centrales Eléctricas, Centros de Carga, Generadores, Suministradores, Usuarios Calificados Participantes del Mercado, Comercializadores no Suministradores y Contratistas.
+    </div>
+
+    <!-- ═══════════ CAPÍTULO 1 — PLANEACIÓN ═══════════ -->
+    <h2 class="sec" id="sec-c1"><span class="snum">Cap. 1</span>Disposiciones Generales para el proceso de Planeación (P)</h2>
+
+    <p>Definen los criterios técnicos que deben observarse durante la <strong>Planeación para la Ampliación y Modernización</strong> de la Red Nacional de Transmisión (RNT) y de las Redes Generales de Distribución (RGD), de modo que el SEN se diseñe, desarrolle y opere en Estado Operativo Normal. Aplica a los Usuarios responsables de elaborar los programas <strong>PAMRNT</strong> (RNT y RGD del MEM, autorizados por la SENER a propuesta del CENACE) y <strong>PAMRGD</strong> (RGD fuera del MEM, a propuesta de los Distribuidores).</p>
+
+    <h3 class="subsec">Fronteras eléctricas</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Operativas</span> El CENACE identifica los componentes de la RNT y RGD del MEM. La RNT comprende de <strong>69 kV a 400 kV</strong> en CA, redes de CD y enlaces internacionales; las RGD fuera del MEM corresponden a niveles <strong>menores de 69 kV</strong>.</li>
+      <li><span class="lbl">Activos Fijos</span> Conforme al RLIE (Arts. 81 y 82): la SENER ordena la separación legal y la CRE establece la separación contable, operativa o funcional de los Integrantes de la Industria Eléctrica.</li>
+    </ul>
+
+    <h3 class="subsec">Criterios técnicos generales (P-1 a P-27)</h3>
+    <blockquote>
+      Criterio P-2. El CENACE será responsable de la planeación de la RNT y de las RGD que pertenecen al MEM, con la participación de Transportistas y Distribuidores. El Distribuidor será responsable de la planeación de las RGD que no pertenezcan al MEM.
+      <cite>RES/550/2021, Disposiciones Generales, Cap. 1 1.4 — DOF 31-dic-2021 · PDF p. 33</cite>
+    </blockquote>
+    <ul class="incisos">
+      <li><span class="lbl">P-9 / P-10</span> Pronósticos de demanda y consumo en escenarios <strong>alto, de planeación (medio) y bajo a 15 años</strong>; se toma en cuenta el PIIRCE y el pronóstico de precios de combustibles y PIB de la SENER.</li>
+      <li><span class="lbl">P-16</span> Se considera el criterio de seguridad <strong>N-1</strong> (contingencia sencilla); ante N-1-1 o N-2 (P-17) y eventos extremos N-≥3 (P-18) se mantiene estabilidad con EAR/EPS.</li>
+      <li><span class="lbl">P-22 / P-44</span> Los PAMRNT/PAMRGD incluyen <strong>análisis costo-beneficio</strong> integral y eligen la alternativa de mayor relación B/C o mayor beneficio neto para el SEN.</li>
+      <li><span class="lbl">P-25</span> El CENACE determina el <strong>Margen de Reserva Mínimo de Planeación</strong> con base en la política de Confiabilidad de la SENER (probabilidad de pérdida de carga y Energía No Suministrada).</li>
+      <li><span class="lbl">P-27</span> Se incluye un listado de los <strong>diez proyectos más importantes</strong> ordenados por prioridad, con descripción, alternativas, costos e indicadores.</li>
+    </ul>
+
+    <h3 class="subsec">Estudios de Planeación (P-28 a P-33)</h3>
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Horizontes y categorías de los Estudios de Planeación
+        <span class="tbl-sub">RES/550/2021, Disposiciones Generales, Cap. 1 1.4.1 — DOF 31-dic-2021 · PDF p. 35</span>
+      </div>
+      <table>
+        <thead><tr><th>Concepto</th><th>Definición</th></tr></thead>
+        <tbody>
+          <tr><td>Corto plazo</td><td>n a n+4 (hasta 5 años)</td></tr>
+          <tr><td>Mediano plazo</td><td>n+5 a n+9 (6 a 10 años)</td></tr>
+          <tr><td>Largo plazo</td><td>n+10 a n+14 (11 a 15 años)</td></tr>
+          <tr><td>Categoría A</td><td>Estado Operativo Normal, sin Contingencia</td></tr>
+          <tr><td>Categoría B</td><td>Post-Falla de un elemento (N-1)</td></tr>
+          <tr><td>Categoría C</td><td>Post-Falla de dos elementos (N-1-1 ó N-2)</td></tr>
+          <tr><td>Categoría D</td><td>Eventos críticos extremos (pérdida de dos o más elementos principales)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ref-nota">Las propuestas del Transportista para Ampliación y Modernización de la RNT deben considerar al menos las Categorías A y B. Los criterios adicionales (P-43 a P-54) cubren impacto ambiental, FEOF, Pronóstico de Demanda por Subestaciones (PDS) y diseño de RGD de Baja Tensión.</p>
+
+    <!-- ═══════════ CAPÍTULO 2 — OPERACIÓN ═══════════ -->
+    <h2 class="sec" id="sec-c2"><span class="snum">Cap. 2</span>Disposiciones Generales para la Operación del SEN (OP)</h2>
+
+    <p>Establecen los criterios de operación que el CENACE, las Unidades de Central Eléctrica, el Transportista y el Distribuidor deben observar para mantener la Confiabilidad y Calidad del SEN. Los rangos numéricos de tensión y frecuencia se remiten al <strong>Manual Regulatorio de Estados Operativos</strong> (Tabla 2.1.2).</p>
+
+    <h3 class="subsec">Criterios de Operación</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Tensión (OP-8 a OP-19)</span> El CENACE usa de forma óptima los recursos de potencia reactiva (cambiadores de derivación, compensación) para mantener la tensión dentro de límites. Todo cambio o nuevo dispositivo de control de tensión requiere instrucción del CENACE con <strong>10 días</strong> de anticipación (reajuste) o <strong>90 días</strong> (elemento nuevo).</li>
+      <li><span class="lbl">Frecuencia (OP-20 a OP-27)</span> Todas las Unidades de Central Eléctrica (Síncronas y Asíncronas) que inyecten potencia activa deben participar <strong>obligatoriamente en el Control Primario</strong>. El CENACE supervisa el desempeño en Control Primario y Secundario.</li>
+      <li><span class="lbl">Sobrecarga (OP-28 a OP-32)</span> En Estado Operativo Normal ningún elemento opera por encima de sus Límites de Cargabilidad, incluso ante la CSMS.</li>
+    </ul>
+
+    <h3 class="subsec">Reserva Operativa (OP-33 a OP-39)</h3>
+    <blockquote>
+      La Reserva Operativa es la suma de la Reserva Rodante más la Reserva No Rodante. El CENACE debe mantenerla compuesta al menos en un <strong>50% por Reserva Rodante</strong> y distribuida a lo largo de todo el SEN.
+      <cite>RES/550/2021, Disposiciones Generales, Cap. 2 2.4.4 — DOF 31-dic-2021 · PDF p. 41</cite>
+    </blockquote>
+
+    <h3 class="subsec">Desconexión de cargas (OP-40 a OP-48)</h3>
+    <p>La desconexión de Centros de Carga es el <strong>último recurso</strong> para el control de variables eléctricas y siempre se asocia a una prioridad que minimice la afectación de cargas críticas. La reconexión solo se realiza bajo supervisión y autorización del CENACE.</p>
+    <div class="advertencia">
+      <strong>Centros de Carga críticos (lista enunciativa, no limitativa).</strong> Comunicaciones · Hospitales · Centros de readaptación social · Estaciones de bomberos y de policía · Bombeo de agua potable · Aeropuertos · Sitios de concentración masiva · Instalaciones de seguridad Nacional.
+    </div>
+    <p class="ref-nota">El Capítulo continúa con Disponibilidad de Reserva Reactiva (OP-49+), Despacho de Generación, Coordinación y control de la operación, programas de Mantenimiento, disponibilidad de elementos de la RNT, Calidad de la potencia y Servicios Conexos no incluidos en el MEM (arranque de emergencia, Operación en Isla, asignación fuera de mérito), hasta el Criterio OP-122.</p>
+
+    <!-- ═══════════ CAPÍTULO 3 — INTE ═══════════ -->
+    <h2 class="sec" id="sec-c3"><span class="snum">Cap. 3</span>Disposiciones Generales de Interconexión para Centrales Eléctricas (INTE)</h2>
+
+    <p>Definen los criterios que cualquier Central Eléctrica debe cumplir para su Interconexión al SEN, aplicables o referidos al <strong>Punto de Interconexión</strong>. Aplican a proyectos con permiso de generación y <strong>Capacidad Instalada Neta ≥ 0.5 MW</strong>, así como a modernizaciones, repotenciaciones, cambios de tecnología o nuevos Puntos de Interconexión (tipos B, C o D). Se complementan con el Manual Regulatorio INTE.</p>
+
+    <h3 class="subsec">Familias de requerimientos (INTE-3 a INTE-9)</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Frecuencia</span> Rangos, ROCOF, respuesta ante baja/alta frecuencia, control primario y secundario, desconexión por frecuencia, amortiguamiento de oscilaciones, monitoreo en tiempo real.</li>
+      <li><span class="lbl">Tensión</span> Rangos del Punto de Interconexión y tiempo de operación, capacidad de potencia reactiva, sistemas de control de tensión, respuesta de corriente ante Fallas, modos de control, amortiguamiento (POD).</li>
+      <li><span class="lbl">Dinámico / Falla</span> Respuesta ante Fallas, estabilidad en estado estable, recuperación de potencia activa post-Falla, aportación de Nivel de Corto Circuito.</li>
+      <li><span class="lbl">Restauración</span> Reconexión tras evento, arranque de emergencia (arranque negro), operación en isla y resincronización.</li>
+      <li><span class="lbl">Administración</span> Esquemas de control, protección, EAR/EPS, prioridad de protección y control, intercambio de información, modelos de simulación, aterrizaje de neutro, sincronización y filtros para armónicos.</li>
+    </ul>
+
+    <h3 class="subsec">Arreglos de Subestaciones (INTE-13 a INTE-20)</h3>
+    <div class="advertencia">
+      <strong>Prohibición de Interconexiones en T o TAP.</strong> Criterio INTE-16. En ningún caso se permiten Interconexiones en T o TAP en la RNT. La Interconexión a una línea de Transmisión solo procede mediante una <strong>Subestación Eléctrica de Maniobras</strong>, nunca con derivación sólida (TAP).
+    </div>
+    <p class="ref-nota">El arreglo de una nueva bahía debe ser igual o mejor en Confiabilidad al existente; el encapsulado en SF6 solo procede por razones ambientales o sociales. INTE-20 lista las fuentes primarias de los Sistemas de Almacenamiento de Energía (químico, eléctrico, térmico, electroquímico —baterías clásicas y de flujo—, mecánico).</p>
+
+    <!-- ═══════════ CAPÍTULO 4 — CONE ═══════════ -->
+    <h2 class="sec" id="sec-c4"><span class="snum">Cap. 4</span>Disposiciones Generales de Conexión de Centros de Carga (CONE)</h2>
+
+    <p>Definen los criterios técnicos para los Centros de Carga conectados en <strong>Media y Alta Tensión</strong>, aplicables o referidos al <strong>Punto de Conexión</strong>, de observancia obligatoria. Se asocian al Manual Regulatorio CONE.</p>
+
+    <h3 class="subsec">Criterios para la Conexión (CONE-1 a CONE-11)</h3>
+    <ul class="incisos">
+      <li><span class="lbl">CONE-2 / CONE-3</span> Soportar variaciones de tensión dentro de rangos máximos/mínimos del Manual CONE, incluso variaciones temporales <strong>hasta por 20 minutos</strong>, permaneciendo conectados.</li>
+      <li><span class="lbl">CONE-4 / CONE-6</span> Soportar variaciones de frecuencia y cumplir requerimientos de <strong>factor de potencia</strong> conforme al Manual CONE.</li>
+      <li><span class="lbl">CONE-5</span> Coordinar Esquemas de Protección usando niveles de cortocircuito (trifásico/monofásico) máximos y mínimos publicados anualmente por CENACE y Distribuidor.</li>
+      <li><span class="lbl">CONE-9</span> Cumplir indicadores de Calidad de la potencia: distorsión armónica de corriente, fluctuaciones de tensión (flicker), desbalance de tensión y corriente.</li>
+    </ul>
+    <p class="ref-nota">Los arreglos de Subestaciones (CONE-12 a CONE-17) replican los criterios de Confiabilidad de INTE, con la misma prohibición de conexiones en T/TAP en la RNT (salvo casos autorizados por CFE previos al Código de Red).</p>
+
+    <!-- ═══════════ CAPÍTULO 5 — REI ═══════════ -->
+    <h2 class="sec" id="sec-c5"><span class="snum">Cap. 5</span>Red Eléctrica Inteligente — Telemetría, Interoperabilidad y Seguridad de la Información (REI)</h2>
+
+    <p>Establecen los criterios de telemetría en tiempo real, integración de equipos de medición/monitoreo con Infraestructura de TIC bajo estándares abiertos, y administración de la <strong>Seguridad de la Información</strong> del SEN. Los criterios <strong>REI-1 a REI-15</strong> aplican a Transportista, Distribuidor y Participante del Mercado; del <strong>REI-16</strong> en adelante, a los responsables de la infraestructura de TIC.</p>
+
+    <h3 class="subsec">Medición y monitoreo (REI-1 a REI-14)</h3>
+    <ul class="incisos">
+      <li><span class="lbl">REI-2</span> Cada punto de medición tiene un <strong>código único permanente</strong> asignado por el CENACE; sin registro no se reconoce para ningún efecto.</li>
+      <li><span class="lbl">REI-4 / REI-7</span> Sincronización de reloj y selección de medidores conforme a la <strong>NOM-001-CRE/SCFI-2019</strong> y el Manual de TIC.</li>
+      <li><span class="lbl">REI-9</span> El CENACE define la ubicación de las <strong>Unidades de Medición Fasorial (PMU)</strong> sincronizadas para la observabilidad del SEN en condiciones normales y de emergencia.</li>
+    </ul>
+
+    <h3 class="subsec">Principios de Interoperabilidad y Seguridad (REI-17 a REI-23)</h3>
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Principios generales de Interoperabilidad y Seguridad de la Información
+        <span class="tbl-sub">RES/550/2021, Disposiciones Generales, Cap. 5 5.5 — DOF 31-dic-2021 · PDF p. 58</span>
+      </div>
+      <table>
+        <thead><tr><th>Principio</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr><td>Confidencialidad</td><td>Impedir la divulgación de datos a terceros o sistemas no autorizados</td></tr>
+          <tr><td>Conservación</td><td>Mantener la Infraestructura de TIC en condiciones adecuadas de operación</td></tr>
+          <tr><td>Disponibilidad</td><td>Información accesible y recuperable por usuarios o procesos autorizados</td></tr>
+          <tr><td>Equilibrio</td><td>Balance entre seguridad de datos y acceso, sin obstruir la Interoperabilidad</td></tr>
+          <tr><td>Integridad</td><td>Validez y consistencia de los datos compartidos entre infraestructuras</td></tr>
+          <tr><td>Bidireccionalidad</td><td>Flujo bidireccional de información entre infraestructura autorizada</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ref-nota">Los mecanismos de Seguridad (REI-21) incluyen un modelo de gestión, catálogo de infraestructuras críticas, administración de riesgos, respuesta inmediata a incidentes y mecanismos de recuperación ante desastres. La CRE (REI-23, Art. 132 LIE) emite documentos técnicos y disposiciones para habilitar la transición hacia la REI.</p>
+
+    <!-- ═══════════ CAPÍTULO 6 — SEA ═══════════ -->
+    <h2 class="sec" id="sec-c6"><span class="snum">Cap. 6</span>Disposiciones Generales aplicables a Sistemas Eléctricamente Aislados (SEA)</h2>
+
+    <p>Establecen los criterios de operación de los <strong>Sistemas Eléctricamente Aislados</strong> del SIN —como el Sistema Interconectado Baja California Sur (SIBCS) y el Sistema Interconectado Mulegé (SIM)— para maximizar su operación en Estado Operativo Normal y minimizar el riesgo de daño a sus elementos. El Operador del SEA coordina generación, Transmisión y despacho de carga en tiempo real a mínimo costo.</p>
+
+    <h3 class="subsec">Rangos permisibles en Estado Operativo Normal</h3>
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Rangos de tensión y frecuencia — SEA (Criterios SEA-9 y SEA-14)
+        <span class="tbl-sub">RES/550/2021, Disposiciones Generales, Cap. 6 6.3 — DOF 31-dic-2021 · PDF p. 61–62</span>
+      </div>
+      <table>
+        <thead><tr><th>Variable</th><th>Sistema</th><th>Rango en Estado Operativo Normal</th></tr></thead>
+        <tbody>
+          <tr><td>Tensión (MT y AT)</td><td>Todos los SEA</td><td style="font-family:var(--mono)">−5 % a +5 % de la tensión nominal</td></tr>
+          <tr><td rowspan="2">Frecuencia</td><td>SIM</td><td style="font-family:var(--mono)">59.7 a 60.3 Hz</td></tr>
+          <tr><td>SIBC y SIBCS</td><td style="font-family:var(--mono)">59.8 a 60.2 Hz</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec">Criterios de operación (SEA-1 a SEA-22)</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Operación</span> El Operador del SEA coordina recursos de generación, Márgenes de Reserva, Demanda Controlable y EAR para mantener el control de la frecuencia y la cargabilidad dentro de Límites Operativos.</li>
+      <li><span class="lbl">SEA-19</span> El SEA se planea y opera bajo el criterio de seguridad determinístico <strong>N-1</strong> para mantener Continuidad y Calidad del Suministro.</li>
+      <li><span class="lbl">Control Primario (SEA-22)</span> Se realiza mediante la actuación de los gobernadores de velocidad y los controles de las Centrales Eléctricas Asíncronas, ante desviaciones de frecuencia.</li>
+    </ul>
+    <p class="ref-nota">Fuera de banda, los Centros de Carga y las Unidades de Central Eléctrica se desconectan o reconectan según los tiempos de retraso y rangos definidos en los Manuales Regulatorios CONE e INTE. El Capítulo continúa con reservas de potencia activa y reactiva y coordinación de programas de Mantenimiento (hasta SEA-9.x).</p>
+
+    <!-- ═══════════ NAV ═══════════ -->
+    <nav class="nav-footer" aria-label="Navegación entre secciones">
+      <a href="../index_cdr_2v4.html" class="n-prev">
+        <span class="nd">← Volver</span>
+        <span class="nt">Índice general</span>
+      </a>
+      <a href="disposiciones.html" class="n-next">
+        <span class="nd">Siguiente →</span>
+        <span class="nt">Disposiciones y Glosario</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

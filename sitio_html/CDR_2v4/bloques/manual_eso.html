@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual ESO — Estados Operativos del SEN | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+/* Diagrama de Estados Operativos */
+.estados { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:22px 0 6px; align-items:stretch; }
+.est { border:1px solid var(--border); border-top:4px solid var(--est-c,#888); border-radius:0 0 var(--r) var(--r);
+  padding:13px 14px; background:var(--white); position:relative; }
+.est .e-h { display:flex; align-items:center; gap:7px; font-family:var(--serif); font-weight:700; font-size:.92rem; color:var(--text-dark); margin-bottom:5px; }
+.est .e-h i { color:var(--est-c,#888); font-size:17px; }
+.est .e-r { font-family:var(--mono); font-size:.72rem; color:var(--est-c,#888); font-weight:700; margin-bottom:6px; }
+.est .e-d { font-size:.73rem; color:var(--text-secondary); line-height:1.5; }
+.est.normal { --est-c:#3b6d11; }
+.est.alerta { --est-c:#ba7517; }
+.est.emerg  { --est-c:#a32d2d; }
+.est.restau { --est-c:#185fa5; }
+.est-flow { font-family:var(--mono); font-size:.74rem; color:var(--text-muted); margin:6px 0 0; text-align:center; font-style:italic; }
+@media(max-width:720px){ .estados{ grid-template-columns:1fr 1fr; } }
+@media(max-width:420px){ .estados{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual de Estados Operativos</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual ESO — Capítulos</span>
+    <a href="#sec-intro" class="sb-sub">Objetivo · alcance</a>
+    <a href="#sec-c1" class="sb-cap active" aria-current="page">Cap. 1 — Estados Operativos</a>
+    <a href="#sec-t112" class="sb-sub">Tabla 1.1.2 — Tensión y frecuencia</a>
+    <a href="#sec-t116" class="sb-sub">Tabla 1.1.6 — Reservas</a>
+    <a href="#sec-c2" class="sb-cap">Cap. 2 — Responsabilidades</a>
+    <a href="#sec-c4" class="sb-cap">Cap. 4 — Criterios de Confiabilidad</a>
+    <span class="sb-section-lbl">Manuales Regulatorios</span>
+    <a href="disposiciones_sen.html" class="sb-cap">Disposiciones Generales SEN</a>
+    <a href="manual_pse.html" class="sb-cap">Manual PSE — Planeación</a>
+    <a href="manual_co.html" class="sb-cap">Manual CO — Coordinación</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Disposiciones Operativas › <strong>Manual de Estados Operativos (ESO)</strong></div>
+    <span class="pg-pill">Manual ESO</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">PDF p. 111–116</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Disposiciones Operativas · Manual Regulatorio — DOF 31-dic-2021</span>
+    <h1 class="titulo">Manual Regulatorio de Estados Operativos del SEN</h1>
+
+    <p id="sec-intro">Define los distintos <strong>Estados Operativos</strong> en los que puede incurrir el SEN o parte del mismo, así como las acciones y responsabilidades de los Integrantes de la Industria Eléctrica para mantener una condición estable y reducir el impacto cuando un disturbio provoque una condición operativa insegura. El SEN debe operarse minimizando la probabilidad de que, ante la <strong>Contingencia Sencilla más Severa (CSMS)</strong>, existan problemas de estabilidad angular, de tensión o de frecuencia que ocasionen pérdida en cascada de elementos.</p>
+
+    <!-- ═══════════ CAPÍTULO 1 ═══════════ -->
+    <h2 class="sec" id="sec-c1"><span class="snum">Cap. 1</span>Estados Operativos del SEN</h2>
+
+    <p>De las restricciones operativas y de diseño (estabilidad transitoria angular, de tensión y de largo plazo) se identifican <strong>cuatro Estados de Operación</strong>. Pueden definirse a nivel global del SEN o por Sistema Interconectado.</p>
+
+    <div class="estados">
+      <div class="est normal">
+        <div class="e-h"><i class="ti ti-circle-check" aria-hidden="true"></i> Normal</div>
+        <div class="e-r">RO &gt;6% SIN · &gt;11% Otros</div>
+        <div class="e-d">Todas las variables dentro de Límites Operativos; capacidad y reserva suficientes para soportar la CSMS sin pérdida de carga.</div>
+      </div>
+      <div class="est alerta">
+        <div class="e-h"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Alerta</div>
+        <div class="e-r">3%&lt;RO&lt;6% SIN</div>
+        <div class="e-d">Ante la CSMS, una o más variables quedan fuera de límites, pudiendo afectar carga u operar un EAR/EPS. El CENACE aplica acciones preventivas.</div>
+      </div>
+      <div class="est emerg">
+        <div class="e-h"><i class="ti ti-alert-octagon" aria-hidden="true"></i> Emergencia</div>
+        <div class="e-r">RO &lt;3% SIN</div>
+        <div class="e-d">Variables fuera de Límites Operativos con posible afectación al Suministro por operación de EAR/EPS. Puede requerir desconexión de carga.</div>
+      </div>
+      <div class="est restau">
+        <div class="e-h"><i class="ti ti-refresh" aria-hidden="true"></i> Restaurativo</div>
+        <div class="e-r">Islas activas</div>
+        <div class="e-d">El Sistema Interconectado está separado en islas eléctricas. Todo el control se enfoca en reintegrar el SEN y suministrar la demanda total.</div>
+      </div>
+    </div>
+    <p class="est-flow">Normal → Alerta → Emergencia → Restaurativo · todas las acciones de control buscan recuperar el Estado Operativo Normal</p>
+
+    <h3 class="subsec" id="sec-t112">1.1.2 Tabla 1.1.2 — Niveles de Tensión y Frecuencia en Estado Operativo Normal</h3>
+    <p>En Estado Operativo Normal la frecuencia se mantiene dentro de la banda de calidad y las tensiones en barras dentro de los rangos siguientes. El CENACE determina el rango de tensión de cada nodo dentro de estos límites.</p>
+
+    <div class="tbl-wrap full-w" id="t112">
+      <div class="tbl-caption">Tabla 1.1.2 — Tensión en Estado Operativo Normal
+        <span class="tbl-sub">RES/550/2021, Manual ESO, Cap. 1 1.1.2 — DOF 31-dic-2021 · PDF p. 111–112</span>
+      </div>
+      <table>
+        <thead><tr><th>Tensión Nominal entre fases (kV)</th><th>Tipo de sistema</th><th>Tensión mín. (%)</th><th>Tensión máx. (%)</th></tr></thead>
+        <tbody>
+          <tr><td>400</td><td>3 fases · 3 hilos</td><td style="font-family:var(--mono)">−5%</td><td style="font-family:var(--mono)">+5%</td></tr>
+          <tr><td>230</td><td>3 fases · 3 hilos</td><td style="font-family:var(--mono)">−5%</td><td style="font-family:var(--mono)">+5%</td></tr>
+          <tr><td>161</td><td>3 fases · 3 hilos</td><td style="font-family:var(--mono)">−5%</td><td style="font-family:var(--mono)">+5%</td></tr>
+          <tr><td>138</td><td>3 fases · 3 hilos</td><td style="font-family:var(--mono)">−5%</td><td style="font-family:var(--mono)">+5%</td></tr>
+          <tr><td>115</td><td>3 fases · 3 hilos</td><td style="font-family:var(--mono)">−5%</td><td style="font-family:var(--mono)">+5%</td></tr>
+          <tr><td>85</td><td>3 fases · 3 hilos</td><td style="font-family:var(--mono)">−5%</td><td style="font-family:var(--mono)">+5%</td></tr>
+          <tr><td>69</td><td>3 fases · 3 hilos</td><td style="font-family:var(--mono)">−5%</td><td style="font-family:var(--mono)">+5%</td></tr>
+          <tr><td>34.5</td><td>3 fases · 3 o 4 hilos</td><td style="font-family:var(--mono)">−5%</td><td style="font-family:var(--mono)">+5%</td></tr>
+          <tr><td>23</td><td>3 fases · 3 o 4 hilos</td><td style="font-family:var(--mono)">−5%</td><td style="font-family:var(--mono)">+5%</td></tr>
+          <tr><td>13.8</td><td>3 fases · 3 o 4 hilos</td><td style="font-family:var(--mono)">−5%</td><td style="font-family:var(--mono)">+5%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap full-w">
+      <div class="tbl-caption">Tabla 1.1.2 — Frecuencia en Estado Operativo Normal
+        <span class="tbl-sub">RES/550/2021, Manual ESO, Cap. 1 1.1.2 — DOF 31-dic-2021 · PDF p. 112</span>
+      </div>
+      <table>
+        <thead><tr><th>Frecuencia nominal</th><th>Sistema Interconectado</th><th>Frecuencia mín. (Hz)</th><th>Frecuencia máx. (Hz)</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="2">60 Hz</td><td>SIN, SIBC y SIBCS</td><td style="font-family:var(--mono)">59.8</td><td style="font-family:var(--mono)">60.2</td></tr>
+          <tr><td>SIM</td><td style="font-family:var(--mono)">59.7</td><td style="font-family:var(--mono)">60.3</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec" id="sec-t116">1.1.6 Tabla 1.1.6 — Requerimientos de Reserva por Estado Operativo</h3>
+    <p>La Reserva Rodante (RR) debe ser al menos el <strong>50% de la Reserva Operativa (RO)</strong>; la RO es la suma de la Reserva Rodante más la Reserva No Rodante. "SIN" = Sistema Interconectado Nacional; "Otros" = Baja California, Baja California Sur y Mulegé.</p>
+
+    <div class="tbl-wrap full-w">
+      <div class="tbl-caption">Tabla 1.1.6 — Reserva Operativa (RO) y de Planeación (RP) por Estado
+        <span class="tbl-sub">RES/550/2021, Manual ESO, Cap. 1 1.1.6 — DOF 31-dic-2021 · PDF p. 113–114</span>
+      </div>
+      <table>
+        <thead><tr><th>Estado</th><th>RO — SIN</th><th>RO — Otros</th><th>RP — SIN</th><th>RP — Otros</th><th>Acciones principales</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Normal</strong></td>
+            <td style="font-family:var(--mono)">&gt;6%</td><td style="font-family:var(--mono)">&gt;11%</td>
+            <td style="font-family:var(--mono)">&gt;13%</td><td style="font-family:var(--mono)">&gt;15%</td>
+            <td style="text-align:left">Operación dentro de Límites; reserva suficiente para la CSMS.</td>
+          </tr>
+          <tr>
+            <td><strong>Alerta</strong></td>
+            <td style="font-family:var(--mono)">3–6%</td><td style="font-family:var(--mono)">4–11%</td>
+            <td style="font-family:var(--mono)">6–13%</td><td style="font-family:var(--mono)">&lt;15%</td>
+            <td style="text-align:left">Modificar mantenimientos y despacho · recuperar elementos · Demanda Controlable · Subasta por Confiabilidad · Protocolo Correctivo.</td>
+          </tr>
+          <tr>
+            <td><strong>Emergencia</strong></td>
+            <td style="font-family:var(--mono)">&lt;3%</td><td style="font-family:var(--mono)">&lt;4%</td>
+            <td style="font-family:var(--mono)">&lt;6%</td><td style="font-family:var(--mono)">&lt;15%</td>
+            <td style="text-align:left">Aplicación de EAR y EPS · Subasta por Confiabilidad · Protocolo Correctivo · tiro de carga manual para recuperar la RO a valor de Alerta.</td>
+          </tr>
+          <tr>
+            <td><strong>Restaurativo</strong></td>
+            <td style="font-family:var(--mono)">—</td><td style="font-family:var(--mono)">—</td>
+            <td style="font-family:var(--mono)">—</td><td style="font-family:var(--mono)">—</td>
+            <td style="text-align:left">Procedimientos de Restablecimiento para reintegrar el SEN.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══════════ CAPÍTULO 2 ═══════════ -->
+    <h2 class="sec" id="sec-c2"><span class="snum">Cap. 2</span>Responsabilidades</h2>
+    <p>Para que el SEN se mantenga el mayor tiempo posible en Estado Operativo Normal, se establecen responsabilidades para el CENACE, Transportista, Distribuidor, Central Eléctrica y demás Usuarios del SEN, incluida la de mantenerse informados mediante consulta permanente al Área Pública del Sistema de Información de Mercado.</p>
+
+    <h3 class="subsec">2.1 CENACE</h3>
+    <p>Dirige la operación de la RNT y las RGD del MEM conforme a los procedimientos operativos aplicables para mantener la Confiabilidad: supervisión y emisión de órdenes e instrucciones de despacho de Generación, administración de Recursos de Demanda Controlable, y de instalaciones de Distribución y Transmisión bajo su responsabilidad. Mantiene procedimientos e instructivos actualizados, disponibles para consulta de los Usuarios del SEN.</p>
+
+    <h3 class="subsec">2.2 Transportista · 2.3 Distribuidor</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Corte de carga</span> Asegurar que los sistemas y procedimientos de desconexión de carga ante emergencias se realizan conforme a lo especificado por el CENACE.</li>
+      <li><span class="lbl">Información</span> Proporcionar las características, capacidades y restricciones operativas de sus Elementos (Anexo 3 del Manual CO) e informar a la brevedad cualquier cambio que afecte la Confiabilidad.</li>
+      <li><span class="lbl">Instrucciones</span> Cumplir puntualmente las instrucciones del CENACE, incluida la desconexión controlada de Elementos con propósitos de Confiabilidad.</li>
+      <li><span class="lbl">Servicios propios</span> Asegurar la disponibilidad de la infraestructura de Servicios Propios de Subestaciones, Centros de Control y Sistemas de Comunicación de Voz y Datos.</li>
+    </ul>
+
+    <h3 class="subsec">2.4 Central Eléctrica · 2.5 Usuarios del SEN</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Restablecimiento</span> Asegurar sistemas de control, supervisión y comunicación segura para iniciar, en coordinación con el CENACE, el proceso de restablecimiento ante interrupción extrema o emergencia.</li>
+      <li><span class="lbl">Capacidad máxima</span> Proporcionar al CENACE la capacidad máxima por Unidad (consistente con la Capacidad Instalada, no limitada a la oferta del MDA) para uso ante Emergencia.</li>
+      <li><span class="lbl">Disponibilidad</span> Informar a la brevedad si alguna Unidad es incapaz de operar con el esquema programado, y cumplir las instrucciones de desconexión del CENACE por Confiabilidad.</li>
+    </ul>
+
+    <!-- ═══════════ CAPÍTULO 4 ═══════════ -->
+    <h2 class="sec" id="sec-c4"><span class="snum">Cap. 4</span>Identificación de los Criterios de Confiabilidad</h2>
+    <p>El CENACE mantiene un registro con los <strong>criterios de Confiabilidad</strong> que debe aplicar cada Usuario del SEN según los Estados Operativos que se presenten, e informa cuando un criterio cambia o entra en vigor uno nuevo.</p>
+    <p>El CENACE debe publicar la lista de requerimientos de información relacionada con la Confiabilidad, los plazos y la forma de entrega, así como los indicadores de monitoreo. Dicha información busca:</p>
+    <ul class="incisos">
+      <li><span class="lbl">a</span> Permitir a Transportista, Distribuidor y Participante del Mercado administrar el riesgo de acciones tomadas por el CENACE.</li>
+      <li><span class="lbl">b</span> Apoyarlos en el cumplimiento de sus obligaciones del Manual.</li>
+      <li><span class="lbl">c</span> Notificarles cambios operativos o decisiones que impacten sus operaciones, Elementos o equipos.</li>
+    </ul>
+    <p class="ref-nota">Transportista, Distribuidor y Participante del Mercado facilitan al CENACE dicha información en el plazo y forma que establezca el Manual de TIC.</p>
+
+    <!-- ═══════════ NAV ═══════════ -->
+    <nav class="nav-footer" aria-label="Navegación entre secciones">
+      <a href="manual_co.html" class="n-prev">
+        <span class="nd">← Anterior</span>
+        <span class="nt">Manual CO — Coordinación Operativa</span>
+      </a>
+      <a href="../index_cdr_2v4.html" class="n-next">
+        <span class="nd">Índice →</span>
+        <span class="nt">Código de Red 2.0</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

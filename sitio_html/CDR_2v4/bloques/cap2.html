@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capítulo 2 — Frecuencia y Control Primario | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual INTE — Centrales Eléctricas</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual INTE — Capítulos</span>
+    <a href="cap1.html" class="sb-cap">Cap. 1 — Tipos de Centrales Eléctricas</a>
+    <a href="cap2.html" class="sb-cap active" aria-current="page">Cap. 2 — Frecuencia y Control Primario</a>
+    <a href="#sec21"    class="sb-sub">2.1 Tabla 2.1 — Zonas de frecuencia</a>
+    <a href="#sec22"    class="sb-sub">2.2 Tipo B — Requerimientos base</a>
+    <a href="#sec221"   class="sb-sub" style="padding-left:2.2rem">2.2.1 ROCOF</a>
+    <a href="#sec222"   class="sb-sub" style="padding-left:2.2rem">2.2.2 Control Primario</a>
+    <a href="#sec223"   class="sb-sub" style="padding-left:2.2rem">2.2.3-4 Alta/Baja frecuencia</a>
+    <a href="#sec225"   class="sb-sub" style="padding-left:2.2rem">2.2.5-10 Restricción · Rampa · Reconexión</a>
+    <a href="#sec23"    class="sb-sub">2.3 Tipo C — Control Secundario</a>
+    <a href="#sec24"    class="sb-sub">2.4 Tipo D — Telemetría obligatoria</a>
+    <a href="cap3.html"         class="sb-cap">Cap. 3 — Variaciones de Tensión</a>
+    <a href="cap4.html" class="sb-cap">Cap. 4 — Control Dinámico de Tensión</a>
+    <a href="cap5.html" class="sb-cap">Cap. 5 — Restauración del SEN</a>
+    <a href="cap6.html" class="sb-cap">Cap. 6 — Administración del SEN</a>
+    <a href="cap7.html" class="sb-cap">Cap. 7 — Calidad de la Potencia</a>
+    <a href="cap8.html" class="sb-cap">Cap. 8 CONE — Calidad CdC</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Manual INTE › <strong>Capítulo 2 — Frecuencia y Control Primario</strong></div>
+    <span class="pg-pill">Manual INTE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual INTE · Cap. 2 de 8 — Frecuencia y respuesta activa</span>
+    <h1 class="titulo">Capítulo 2. Requerimientos de Interconexión ante variaciones de frecuencia de la red, control primario y secundario de la frecuencia</h1>
+
+    <p>
+      El Capítulo 2 establece los requerimientos que permiten al SEN mantener la frecuencia dentro de márgenes seguros mediante la participación de todas las Centrales Eléctricas. Cubre tres niveles: la capacidad de <strong>sobrevivir</strong> excursiones de frecuencia (2.1), la capacidad de <strong>responder activamente</strong> con Control Primario (2.2, todos los tipos), y la capacidad de participar en el <strong>Control Secundario</strong> centralizado del CENACE (2.3–2.4, tipos C y D).
+    </p>
+
+    <!-- ═══════════ 2.1 TABLA 2.1 ═══════════ -->
+    <h2 class="sec" id="sec21"><span class="snum">2.1</span>Zonas de Frecuencia — Requerimiento Mínimo de Operación sin Desconexión</h2>
+
+    <blockquote>
+      Para cada área síncrona, todas las Centrales Eléctricas, durante su vida útil, deben permanecer en operación, sin desconectarse, dentro de los rangos de frecuencia y tiempos mínimos que se muestran en la Tabla 2.1.
+      <cite>RES/550/2021, Manual INTE, Cap. 2 2.1 — DOF 31-dic-2021 · PDF p. 218</cite>
+    </blockquote>
+
+    <div class="tbl-wrap full-w" id="tabla21">
+      <div class="tbl-caption">Tabla 2.1 — Tiempos mínimos de operación sin desconexión ante desviaciones de frecuencia
+        <span class="tbl-sub">RES/550/2021, Manual INTE, Cap. 2 2.1 — DOF 31-dic-2021 · PDF p. 218</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Área Síncrona</th>
+            <th>Rango de frecuencias</th>
+            <th>Tiempo mínimo acumulado de operación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="5"><strong>SIN y Sistema Interconectado Baja California (SIBC)</strong></td>
+            <td style="font-family:var(--mono);text-align:center">61.8 Hz &lt; f &lt; 62.4 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">15 minutos</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);text-align:center">61.2 Hz &lt; f &lt; 61.8 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">30 minutos</td>
+          </tr>
+          <tr style="background:rgba(0,102,204,.06)">
+            <td style="font-family:var(--mono);text-align:center;font-weight:700">58.8 Hz &lt; f &lt; 61.2 Hz</td>
+            <td style="font-family:var(--mono);text-align:center;font-weight:700;color:var(--blue)">Ilimitado (zona nominal)</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);text-align:center">58.2 Hz &lt; f &lt; 58.8 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">30 minutos</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);text-align:center">57.0 Hz &lt; f &lt; 58.2 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">15 minutos</td>
+          </tr>
+          <tr>
+            <td rowspan="5"><strong>Sistema Interconectado Baja California Sur (SIBCS) y Sistema Interconectado Mulegé (SIM)</strong></td>
+            <td style="font-family:var(--mono);text-align:center">61.8 Hz &lt; f &lt; 63.0 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">15 minutos</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);text-align:center">61.2 Hz &lt; f &lt; 61.8 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">30 minutos</td>
+          </tr>
+          <tr style="background:rgba(0,102,204,.06)">
+            <td style="font-family:var(--mono);text-align:center;font-weight:700">58.8 Hz &lt; f &lt; 61.2 Hz</td>
+            <td style="font-family:var(--mono);text-align:center;font-weight:700;color:var(--blue)">Ilimitado (zona nominal)</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);text-align:center">58.2 Hz &lt; f &lt; 58.8 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">30 minutos</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);text-align:center">57.0 Hz &lt; f &lt; 58.2 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">15 minutos</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="nota">
+      <span class="nota-title">Tiempos acumulativos e independientes</span>
+      Los tiempos son <em>acumulativos</em> en cada rango de frecuencia (no por evento). Si la CE puede técnica y económicamente operar en rangos más amplios, estos no deben limitarse (inciso ii). La diferencia entre SIN/SIBC y SIBCS/SIM en alta frecuencia refleja que los sistemas insulares o pequeños pueden tolerar excursiones de sobrefrequencia más prolongadas sin comprometer la seguridad del sistema.
+    </div>
+
+    <!-- ═══════════ 2.2 TIPO B ═══════════ -->
+    <h2 class="sec" id="sec22"><span class="snum">2.2</span>Requerimientos para Centrales Eléctricas Tipo B</h2>
+
+    <h3 class="subsec" id="sec221">2.2.1 Razón de Cambio de la Frecuencia (ROCOF)</h3>
+
+    <blockquote>
+      Las Centrales Eléctricas deberán mantenerse interconectadas a la Red Eléctrica y operando ante razones de cambio de la frecuencia respecto al tiempo (ROCOF) de hasta 2.5 Hz/s, medidas en una ventana de tiempo de 200 milisegundos.
+      <cite>RES/550/2021, Manual INTE, Cap. 2 2.2.1 — DOF 31-dic-2021 · PDF p. 219</cite>
+    </blockquote>
+
+    <p>
+      El ROCOF mide la velocidad con que cambia la frecuencia, no la frecuencia misma. Un ROCOF elevado (p.ej. ≥ 2 Hz/s) indica pérdida brusca de generación o una falla de separación. El límite de <strong>2.5 Hz/s medido en ventana de 200 ms</strong> es el umbral que toda CE debe soportar sin desconectarse. Si la tecnología lo justifica, el CENACE puede adecuar este límite. Las protecciones de ROCOF instaladas para detección de islamiento (5.2.2) deben ajustarse por encima de este umbral para evitar disparos no deseados.
+    </p>
+
+    <!-- 2.2.2 CONTROL PRIMARIO -->
+    <h3 class="subsec" id="sec222">2.2.2 Control Primario de Frecuencia</h3>
+
+    <blockquote>
+      La Central Eléctrica debe proveer una respuesta de potencia activa a la frecuencia de acuerdo con los parámetros especificados por el CENACE dentro de los rangos de la Tabla 2.2.2.A. Cuando el modo de Control Primario esté activo, su valor de consigna debe prevalecer sobre cualquier otro valor de consigna.
+      <cite>RES/550/2021, Manual INTE, Cap. 2 2.2.2 — DOF 31-dic-2021 · PDF p. 219</cite>
+    </blockquote>
+
+    <div class="tbl-wrap" style="max-width:680px">
+      <div class="tbl-caption">Tabla 2.2.2.A — Parámetros de respuesta del Control Primario de frecuencia
+        <span class="tbl-sub">RES/550/2021, Manual INTE, Cap. 2 2.2.2 — DOF 31-dic-2021 · PDF p. 219</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Parámetro</th><th>Rango configurable</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Intervalo de potencia activa en relación con P<sub>ref</sub></td>
+            <td style="font-family:var(--mono);text-align:center">3 – 10 %</td>
+          </tr>
+          <tr>
+            <td>Insensibilidad propia del control (deadband tipo A)</td>
+            <td style="font-family:var(--mono);text-align:center">0 – 15 mHz / 0 – 0.025 %</td>
+          </tr>
+          <tr>
+            <td>Banda muerta de respuesta a la frecuencia</td>
+            <td style="font-family:var(--mono);text-align:center">± 30 mHz (valor fijo)</td>
+          </tr>
+          <tr>
+            <td>Característica de regulación (droop)</td>
+            <td style="font-family:var(--mono);text-align:center">3 – 8 %</td>
+          </tr>
+          <tr>
+            <td>Tiempo máximo de retardo a la respuesta t₁ — CE Síncrona</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 2 segundos</td>
+          </tr>
+          <tr>
+            <td>Tiempo máximo de retardo a la respuesta t₁ — CE Asíncrona</td>
+            <td style="font-family:var(--mono);text-align:center">&lt; 2 segundos</td>
+          </tr>
+          <tr>
+            <td>Tiempo máximo de respuesta completa t₂</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 30 segundos</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="subsubsec">Zona activa del Control Primario</h4>
+    <p>
+      El Control Primario se activa cuando la frecuencia sale de la zona muerta (±30 mHz alrededor de 60 Hz). Para el <strong>SIN, SIBC y SIBCS</strong>, la respuesta de alta frecuencia se activa a partir de 60.2 Hz y la de baja frecuencia a partir de 59.8 Hz. Para el <strong>SIM</strong>, a partir de 60.3 Hz y 59.7 Hz respectivamente. La característica de regulación (droop) define la pendiente: con un 5% de droop, una caída de frecuencia del 5% lleva a la CE a entregar su plena banda de regulación (hasta el 10% de P<sub>ref</sub> adicional).
+    </p>
+
+    <h4 class="subsubsec">Tabla 2.2.2.B — Rangos de Regulación de Potencia Activa por Tecnología</h4>
+
+    <div class="tbl-wrap full-w">
+      <div class="tbl-caption">Tabla 2.2.2.B — Rango de Regulación de Potencia Activa referido a la P<sub>ref</sub>
+        <span class="tbl-sub">RES/550/2021, Manual INTE, Cap. 2 2.2.2.v — DOF 31-dic-2021 · PDF p. 220–221</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Tecnología / Combustible principal</th><th>Rango de regulación (%P<sub>ref</sub>)</th><th>Notas</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Carboeléctrica — carbón pulverizado</td><td style="font-family:var(--mono);text-align:center">35 – 100 %</td><td style="font-size:.8rem">Sujeto a emisiones GEI <sup>2/</sup></td></tr>
+          <tr><td>Termoeléctrica — combustóleo</td><td style="font-family:var(--mono);text-align:center">20 – 100 %</td><td style="font-size:.8rem">Sujeto a emisiones GEI <sup>2/</sup></td></tr>
+          <tr><td>Termoeléctrica — gas</td><td style="font-family:var(--mono);text-align:center">20 – 100 %</td><td style="font-size:.8rem">Sujeto a emisiones GEI <sup>2/</sup></td></tr>
+          <tr><td>Termoeléctrica — biogás</td><td style="font-family:var(--mono);text-align:center">35 – 100 %</td><td></td></tr>
+          <tr><td>Termoeléctrica — paja o madera</td><td style="font-family:var(--mono);text-align:center">50 – 100 %</td><td></td></tr>
+          <tr><td>Carboeléctrica — carbón sólido</td><td style="font-family:var(--mono);text-align:center">50 – 100 %</td><td style="font-size:.8rem">Sujeto a emisiones GEI <sup>2/</sup></td></tr>
+          <tr><td>Termoeléctrica — biomasa</td><td style="font-family:var(--mono);text-align:center">70 – 100 %</td><td></td></tr>
+          <tr><td>Motor de gas</td><td style="font-family:var(--mono);text-align:center">30 % (35 % mín. 5 min) – 100 %</td><td style="font-size:.8rem">Sujeto a emisiones GEI <sup>2/</sup></td></tr>
+          <tr><td>Turbina de gas</td><td style="font-family:var(--mono);text-align:center">30 – 95 %</td><td style="font-size:.8rem">Sujeto a emisiones GEI <sup>2/</sup></td></tr>
+          <tr><td>Ciclo combinado</td><td style="font-family:var(--mono);text-align:center">35 – 95 %</td><td style="font-size:.8rem">En medio ciclo: acordar con CENACE <sup>1/</sup></td></tr>
+          <tr><td>Motor Diésel</td><td style="font-family:var(--mono);text-align:center">30 % (20 % mín. 5 min) – 100 %</td><td style="font-size:.8rem">Sujeto a emisiones GEI <sup>2/</sup></td></tr>
+          <tr><td>Central Geotérmica</td><td style="font-family:var(--mono);text-align:center">50 – 100 %</td><td></td></tr>
+          <tr style="background:rgba(26,118,26,.06)"><td>Central Eólica</td><td style="font-family:var(--mono);text-align:center">0 – 100 %</td><td style="font-size:.8rem;color:#0077b6">Sujeto a disponibilidad del recurso</td></tr>
+          <tr style="background:rgba(26,118,26,.06)"><td>Central Fotovoltaica</td><td style="font-family:var(--mono);text-align:center">0 – 100 %</td><td style="font-size:.8rem;color:#0077b6">Sujeto a disponibilidad del recurso</td></tr>
+          <tr style="background:rgba(26,118,26,.06)"><td>Hidroeléctrica</td><td style="font-family:var(--mono);text-align:center">0 – 100 %</td><td style="font-size:.8rem;color:#0077b6">Sujeto a disponibilidad hídrica</td></tr>
+          <tr><td>Nucleoeléctrica</td><td style="font-family:var(--mono);text-align:center">50 – 100 %</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ref-nota"><sup>1/</sup> Los rangos de regulación cuando la CE esté operando con medio ciclo serán acordados con el CENACE. <sup>2/</sup> El rango de regulación puede estar sujeto a restricciones de emisiones de gases de efecto invernadero.</p>
+
+    <figure class="figura">
+      <img src="../assets/figuras/figura_2.2.2.A.png" alt="Figura 2.2.2.A — Capacidad de respuesta de la Potencia activa ante variaciones de frecuencia" loading="lazy">
+      <figcaption><b>Figura 2.2.2.A.</b> Capacidad de respuesta de la Potencia activa ante variaciones de frecuencia.</figcaption>
+    </figure>
+
+    <figure class="figura">
+      <img src="../assets/figuras/figura_2.2.2.B.png" alt="Figura 2.2.2.B — Activación del Control Primario de frecuencia" loading="lazy">
+      <figcaption><b>Figura 2.2.2.B.</b> Activación del Control Primario de frecuencia.</figcaption>
+    </figure>
+
+    <!-- 2.2.3–2.2.4 -->
+    <h3 class="subsec" id="sec223">2.2.3 Respuesta ante Alta Frecuencia · 2.2.4 Respuesta ante Baja Frecuencia</h3>
+
+    <div class="tbl-wrap" style="max-width:680px">
+      <div class="tbl-caption">Umbrales de activación del Control Primario por área síncrona</div>
+      <table>
+        <thead>
+          <tr><th>Evento</th><th>SIN · SIBC · SIBCS</th><th>SIM — Mulegé</th><th>t₁ máx.</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Activación alta frecuencia (reducción de P)</td>
+            <td style="font-family:var(--mono);text-align:center">&gt; 60.2 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">&gt; 60.3 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">&lt; 2 s</td>
+          </tr>
+          <tr>
+            <td>Activación baja frecuencia (incremento de P)</td>
+            <td style="font-family:var(--mono);text-align:center">&lt; 59.8 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">&lt; 59.7 Hz</td>
+            <td style="font-family:var(--mono);text-align:center">&lt; 2 s</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Cuando el Control Primario de alta o baja frecuencia está activo, su consigna <strong>prevalece sobre cualquier otro valor de consigna</strong> (6.1.3). En baja frecuencia, las Centrales Eléctricas Asíncronas (eólica, fotovoltaica) deben participar entregando potencia activa en tanto las condiciones ambientales lo permitan —es decir, si el recurso (viento, sol) está disponible y el operador ha solicitado previamente operar por debajo de la potencia de referencia.
+    </p>
+
+    <!-- 2.2.5–2.2.10 -->
+    <h3 class="subsec" id="sec225">2.2.5–2.2.10 Restricción · Control de P · Reconexión · Desconexión ante Baja f</h3>
+
+    <div class="incisos">
+      <span><strong>2.2.5 Restricción total de P (puerto de entrada):</strong> La CE debe tener una interfaz lógica que permita detener la aportación total de potencia activa en &lt; 5 s a instrucción del CENACE. Permanece activa hasta confirmación de reactivación.</span>
+      <span><strong>2.2.6 Control de P y rampa:</strong> La CE implementará el valor de consigna con rampa, tolerancia y tiempo de respuesta definidos por el CENACE en los Estudios de Interconexión. Pueden modificarse en VRT o posterior a EOC.</span>
+      <span><strong>2.2.7 Potencia activa constante:</strong> La CE debe mantener constante su aportación de potencia activa ante cambios de frecuencia, salvo cuando el Control Primario (2.2.2–2.2.4) lo demande.</span>
+      <span><strong>2.2.8 Reconexión automática:</strong> Permitida cuando: (A) f en rango 58.8–60.2 Hz y V en ±5% nominal, ambas durante al menos 5 minutos; (B) rampa de incremento de P ≤ 10% CIN/min. La reconexión automática está permitida salvo que el CENACE especifique lo contrario.</span>
+      <span><strong>2.2.9 Desconexión ante baja frecuencia:</strong> La CE que no alimente carga crítica debe desconectar su propia carga ante baja frecuencia de red conforme a los ajustes del CENACE. No aplica a servicios auxiliares de la CE.</span>
+      <span><strong>2.2.10 Tiempo máximo de regulación completa:</strong> La CE debe responder desde su límite máximo hasta el mínimo de regulación (o viceversa) en ≤ 15 minutos. El CENACE considera el margen de P activa y la fuente primaria al especificar el tiempo.</span>
+    </div>
+
+    <!-- ═══════════ 2.3 TIPO C ═══════════ -->
+    <h2 class="sec" id="sec23"><span class="snum">2.3</span>Requerimientos Adicionales para Centrales Eléctricas Tipo C</h2>
+
+    <p>Aplican todos los requerimientos de 2.2, más los siguientes:</p>
+
+    <h3 class="subsec" id="sec231">2.3.1 Control Secundario de Frecuencia (AGC)</h3>
+
+    <blockquote>
+      Las Centrales Eléctricas tipo C deben contar con el equipamiento necesario, para participar en el Control Secundario de frecuencia de acuerdo con las características especificadas en el Manual de TIC y con la regulación aplicable en la materia.
+      <cite>RES/550/2021, Manual INTE, Cap. 2 2.3.1 — DOF 31-dic-2021 · PDF p. 223</cite>
+    </blockquote>
+
+    <p>
+      El Control Secundario —también denominado Regulación Automática de Generación (AGC, Automatic Generation Control)— es el sistema centralizado del CENACE que envía señales de ajuste de potencia activa a las Centrales para restaurar la frecuencia al valor nominal (60.0 Hz) y eliminar los flujos de energía en desequilibrio entre áreas. Las Centrales tipo C deben instalar el hardware y software de comunicación conforme al Manual TIC. Las CE tipo C que tecnológicamente no cuenten con estas capacidades deben manifestarlo al CENACE para su análisis —no es una exención automática.
+    </p>
+
+    <h3 class="subsec" id="sec232">2.3.2 Monitoreo en Tiempo Real del Control Primario y Secundario</h3>
+
+    <p>
+      Con base en los Estudios de Interconexión y los requerimientos del MEM, el CENACE podrá solicitar el monitoreo de tiempo real supervisando las siguientes señales:
+    </p>
+
+    <div class="incisos">
+      <span>A. Señal de estado del Control Primario (activo/inactivo)</span>
+      <span>B. Consigna de potencia activa</span>
+      <span>C. Valor actual de potencia activa</span>
+      <span>D. Parámetros de ajuste actuales de respuesta a la frecuencia</span>
+      <span>E. Rango de potencia activa en relación con la Capacidad Instalada</span>
+      <span>F. Característica de regulación (droop %)</span>
+      <span>G. Ajuste de insensibilidad de respuesta a la frecuencia</span>
+      <span>H. Banda muerta de frecuencia</span>
+      <span>I. Umbrales de desactivación de respuesta ante baja o alta frecuencia</span>
+    </div>
+
+    <p>El CENACE puede especificar señales adicionales en cualquier momento si las condiciones del SEN lo requieren.</p>
+
+    <!-- ═══════════ 2.4 TIPO D ═══════════ -->
+    <h2 class="sec" id="sec24"><span class="snum">2.4</span>Requerimientos Adicionales para Centrales Eléctricas Tipo D</h2>
+
+    <p>Aplican los requerimientos de 2.3 (tipo C), más los siguientes:</p>
+
+    <h3 class="subsec" id="sec241">2.4.1 Monitoreo en Tiempo Real — Obligatorio con Telemetría Segura</h3>
+
+    <blockquote>
+      La Central Eléctrica tipo D deberá contar con el equipamiento necesario para el monitoreo y envío en tiempo real y de manera segura al CENACE la información correspondiente al Control Primario y Secundario de frecuencia de acuerdo con las características especificadas en el Manual de TIC. Al menos se requieren las señales definidas en el apartado 2.3.2 de este Manual Regulatorio.
+      <cite>RES/550/2021, Manual INTE, Cap. 2 2.4.1 — DOF 31-dic-2021 · PDF p. 224</cite>
+    </blockquote>
+
+    <p>
+      La diferencia con tipo C es que para el tipo D el monitoreo es <strong>obligatorio</strong> (no a solicitud) y debe incluir el <strong>envío activo al CENACE</strong> mediante telemetría segura conforme al Manual TIC. Una CE tipo D debe estar siempre conectada al SIM (Sistema de Información del Mercado) del CENACE con las señales A–I del 2.3.2 transmitidas en tiempo real.
+    </p>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="cap1.html">
+        <span class="nd">← Capítulo anterior</span>
+        <span class="nt">Cap. 1 — Tipos de Centrales Eléctricas</span>
+      </a>
+      <a href="cap3.html" class="n-next">
+        <span class="nd">Capítulo siguiente →</span>
+        <span class="nt">Cap. 3 — Variaciones de Tensión</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

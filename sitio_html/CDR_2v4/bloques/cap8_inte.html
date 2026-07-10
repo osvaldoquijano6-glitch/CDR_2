@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capítulo 8 — Verificación de la Conformidad | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual INTE — Centrales Eléctricas</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual INTE — Capítulos</span>
+    <a href="cap1.html"      class="sb-cap">Cap. 1 — Tipos de Centrales Eléctricas</a>
+    <a href="cap2.html"      class="sb-cap">Cap. 2 — Frecuencia y Control Primario</a>
+    <a href="cap3.html"      class="sb-cap">Cap. 3 — Variaciones de Tensión</a>
+    <a href="cap4.html"      class="sb-cap">Cap. 4 — Control Dinámico de Tensión</a>
+    <a href="cap5.html"      class="sb-cap">Cap. 5 — Restauración del SEN</a>
+    <a href="cap6.html"      class="sb-cap">Cap. 6 — Administración del SEN</a>
+    <a href="cap7.html"      class="sb-cap">Cap. 7 — Calidad de la Potencia</a>
+    <a href="cap8_inte.html" class="sb-cap active" aria-current="page">Cap. 8 — Verificación de la Conformidad</a>
+    <a href="#sec81"  class="sb-sub">8.1 Procedimiento EOC — CENACE</a>
+    <a href="#sec82"  class="sb-sub">8.2 Unidades de Inspección</a>
+    <a href="#sec83"  class="sb-sub">8.3 Telemetría SCADA</a>
+    <a href="#sec84"  class="sb-sub">8.4 PMU — Medición Fasorial</a>
+    <a href="#sec85"  class="sb-sub">8.5 Analizadores de calidad</a>
+    <a href="#sec86"  class="sb-sub">8.6 Registradores de disturbios</a>
+    <a href="#sec87"  class="sb-sub">8.7 Monitoreo y vigilancia — CRE</a>
+    <a href="#sec88"  class="sb-sub">8.8 Marco institucional</a>
+    <span class="sb-section-lbl">Manual CONE</span>
+    <a href="cone_c1.html" class="sb-cap">Cap. 1 — Criterios de Conexión</a>
+    <a href="cap8.html"    class="sb-cap">Cap. 2 — Calidad de la Potencia CdC</a>
+    <a href="cone_c2.html" class="sb-cap">Cap. 2 — Requerimientos Técnicos</a>
+    <a href="cone_c3.html" class="sb-cap">Cap. 3 — Verificación de Conformidad</a>
+    <a href="cone_c4.html" class="sb-cap">Cap. 4 — Plan de Trabajo</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+    <a href="https://www.cenace.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CENACE — SIM</a>
+    <a href="https://www.cre.gob.mx"   class="sb-cap" target="_blank" rel="noopener">↗ CRE</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Manual INTE › <strong>Capítulo 8 — Verificación de la Conformidad</strong></div>
+    <span class="pg-pill">Manual INTE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual Regulatorio INTE · Capítulo 8 de 8 — Capítulo final</span>
+    <h1 class="titulo">Capítulo 8. Verificación de la Conformidad</h1>
+
+    <details>
+      <summary>Marco normativo y documentos de referencia aplicables al Capítulo 8</summary>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">RES/550/2021 — CRE.</strong> Código de Red 2.0. Manual INTE, Capítulo 8: Verificación de la Conformidad. DOF, 31 de diciembre de 2021, pág. 241. <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" target="_blank" rel="noopener">Texto oficial (PDF)</a>.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">CENACE — Sistema de Información del Mercado (SIM).</strong> Procedimiento de Operación para la Declaración de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga. <a href="https://www.cenace.gob.mx" target="_blank" rel="noopener">cenace.gob.mx</a>.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">Ley de la Industria Eléctrica (LIE).</strong> DOF, 11 de agosto de 2014; reformada DOF, 06 de noviembre de 2020. Fundamento legal de las facultades de regulación, inspección, monitoreo y sanción de la CRE sobre los participantes del SEN.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">Ley Orgánica de los Organismos Reguladores Coordinados en Materia Energética (LORCME).</strong> DOF, 11 de agosto de 2014. Define carácter jurídico, autonomía y atribuciones de la CRE como Órgano Regulador Coordinado.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">NOM-001-CRE/SCFI-2019.</strong> Sistemas de medición de energía eléctrica — calidad de la potencia. Define los requisitos de los instrumentos de medición para la verificación de los parámetros del Capítulo 7.
+        </li>
+      </ul>
+    </details>
+
+    <p>
+      El Capítulo 8 cierra el ciclo regulatorio del Manual INTE: una vez establecido en los Capítulos 1 al 7 <em>qué</em> debe cumplir una Central Eléctrica, el Capítulo 8 establece <em>cómo y quién</em> verifica ese cumplimiento. Tres actores articulan esta cadena institucional de verificación.
+    </p>
+
+    <!-- ── DIAGRAMA DE ACTORES ── -->
+    <div class="full-w" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0 32px">
+      <div style="background:var(--blue-light);border:1px solid rgba(0,102,204,.25);border-radius:9px;padding:16px 14px;text-align:center">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:6px">CENACE</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--text-dark);margin-bottom:4px">Operador del SEN</div>
+        <div style="font-size:.75rem;color:var(--text-secondary);line-height:1.5">Publica Procedimiento EOC · Evalúa telemetría SCADA, PMU, analizadores y registradores · Verifica conformidad continua post-EOC</div>
+      </div>
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:16px 14px;text-align:center">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">Unidad de Inspección</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--text-dark);margin-bottom:4px">Organismo Acreditado (EMA)</div>
+        <div style="font-size:.75rem;color:var(--text-secondary);line-height:1.5">Certifica infraestructura, normas técnicas, Código de Red y Manual INTE. Dictamen previo indispensable para la EOC</div>
+      </div>
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:16px 14px;text-align:center">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">CRE</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--text-dark);margin-bottom:4px">Comisión Reguladora</div>
+        <div style="font-size:.75rem;color:var(--text-secondary);line-height:1.5">Monitoreo y vigilancia suprema · Actos de inspección directa en cualquier momento · Facultad sancionadora</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+ 8.1 PROCEDIMIENTO EOC
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec81"><span class="snum">8.1</span>Procedimiento de Operación para la Declaración de Entrada en Operación Comercial</h2>
+
+    <blockquote>
+      Para la Interconexión de las Centrales Eléctricas, se deberá atender lo previsto en el Procedimiento de Operación para la Declaración de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, publicado por el CENACE en el Sistema de Información del Mercado.
+      <cite>RES/550/2021, Manual INTE, Cap. 8 — DOF 31-dic-2021 · PDF p. 241</cite>
+    </blockquote>
+
+    <p>
+      El Procedimiento EOC es el instrumento operativo central de este capítulo. Emitido y actualizado por el CENACE en el ejercicio de sus atribuciones como Operador del Sistema y Operador del Mercado, establece la secuencia de pasos, los plazos, los formatos de documentación, los criterios de aceptación y los actores responsables para que el CENACE declare la Entrada en Operación Comercial de una Central Eléctrica. La declaratoria de EOC es el acto administrativo que habilita formalmente a la Central Eléctrica para participar como Generador en el Mercado Eléctrico Mayorista (MEM).
+    </p>
+
+    <p>
+      La versión vigente del Procedimiento EOC publicada en el SIM es la referencia aplicable en todo momento. Cualquier actualización del procedimiento por parte del CENACE es de cumplimiento obligatorio para las Centrales en proceso de interconexión, con independencia de la versión vigente en la fecha de firma del Contrato de Interconexión.
+    </p>
+
+    <div class="nota">
+      <span class="nota-title">Enlace con 6.1.6 — Validación de modelos</span>
+      El 6.1.6.vi establece que la validación de los modelos de simulación es "indispensable para la declaratoria de entrada en operación comercial". El Procedimiento EOC del CENACE es el marco donde esa condición se hace exigible en la práctica.
+    </div>
+
+    <!-- ═══════════════════════════════
+ 8.2 UNIDADES DE INSPECCIÓN
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec82"><span class="snum">8.2</span>Certificación por Unidad de Inspección</h2>
+
+    <blockquote>
+      Una Unidad de Inspección deberá certificar que la instalación para la Interconexión cumple con las características específicas de la infraestructura requerida establecidas por el CENACE, las normas, estándares y especificaciones técnicas aplicables, el Código de Red y los requerimientos técnicos definidos en este Manual.
+      <cite>RES/550/2021, Manual INTE, Cap. 8 — DOF 31-dic-2021 · PDF p. 241</cite>
+    </blockquote>
+
+    <p>
+      Las <strong>Unidades de Inspección (UI)</strong> son organismos de tercera parte acreditados por la Entidad Mexicana de Acreditación (EMA) conforme a la norma NMX-EC-17020-IMNC (equivalente a ISO/IEC 17020) y los esquemas de acreditación de la EMA para el sector eléctrico. Su condición de tercera parte independiente —con respecto al desarrollador, al propietario de la Central, al operador de la red y al regulador— es el elemento que otorga validez jurídica y técnica al dictamen de conformidad.
+    </p>
+
+    <p>
+      El dictamen cubre la verificación física e instrumental de los elementos de infraestructura especificados por el CENACE en el Estudio de Impacto de Interconexión (EII) y en el Contrato de Interconexión. El alcance abarca: equipos de medición de energía y calidad de la potencia; transformadores de conexión —relación, grupo de conexión, impedancia, aterrizado del neutro—; sistemas de protección —coincidencia de relés, ajustes autorizados, pruebas de puesta en servicio—; sistemas de control —parámetros del AVR, gobernador o inversor—; telemetría y comunicaciones; y filtros de armónicos o bancos de compensación reactiva del Capítulo 7.
+    </p>
+
+    <p>
+      Cualquier no conformidad identificada debe ser corregida antes de que la UI pueda emitir el dictamen favorable definitivo. El dictamen favorable es un requisito previo indispensable para la declaratoria de EOC.
+    </p>
+
+    <div class="nota">
+      <span class="nota-title">Relevancia para Centrales tipo D — 6.3.1</span>
+      El 6.3.1.i requiere que la certificación por la UI sea una de las tres condiciones concurrentes para la primera sincronización de una Central tipo D: sin el dictamen emitido, el CENACE no puede autorizar la sincronización.
+    </div>
+
+    <!-- ═══════════════════════════════
+ 8.3 TELEMETRÍA / SCADA
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec83"><span class="snum">8.3</span>Verificación continua mediante telemetría SCADA</h2>
+
+    <blockquote>
+      Una vez realizada la Interconexión, con la información de la telemetría (SCADA), de las unidades de medición fasorial (PMU), de los analizadores o medidores de Calidad de la potencia y de registradores de disturbios, el CENACE podrá evaluar el comportamiento de las Centrales Eléctricas y verificar su conformidad respecto a los requerimientos de este Manual.
+      <cite>RES/550/2021, Manual INTE, Cap. 8 — DOF 31-dic-2021 · PDF p. 241</cite>
+    </blockquote>
+
+    <p>
+      La <strong>telemetría SCADA</strong> (<em>Supervisory Control and Data Acquisition</em>) es el sistema primario de monitoreo en tiempo real. A través del enlace SCADA, el CENACE recibe de forma continua: potencia activa generada, potencia reactiva intercambiada, tensión en el Punto de Interconexión, corriente de interconexión y estado de los equipos de maniobra y protecciones. Los protocolos de comunicación admitidos y los requisitos de disponibilidad del enlace son definidos en el Manual TIC (parte del Código de Red 2.0).
+    </p>
+
+    <p>
+      El SCADA permite verificar en tiempo real que la Central opera dentro de los límites de potencia autorizados, respeta las instrucciones de despacho, no opera fuera de las bandas de tensión del Capítulo 3, y que las variaciones de potencia se producen dentro de los límites de rampa para Centrales tipo C y D (Cap. 6, 6.2.3).
+    </p>
+
+    <!-- ═══════════════════════════════
+ 8.4 PMU
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec84"><span class="snum">8.4</span>Unidades de Medición Fasorial (PMU)</h2>
+
+    <p>
+      Las <strong>Unidades de Medición Fasorial</strong> (PMU, <em>Phasor Measurement Units</em>) registran fasores de tensión y corriente —magnitud y ángulo de fase— con estampado de tiempo GPS de alta resolución (precisión de 1 microsegundo). Esta sincronización permite la comparación directa de mediciones simultáneas tomadas en puntos geográficamente distantes del SEN, lo que las diferencia fundamentalmente de los medidores SCADA convencionales.
+    </p>
+
+    <p>
+      La velocidad de muestreo típica es de 30 o 60 muestras por segundo (norma IEEE C37.118.1), lo que permite capturar oscilaciones electromecánicas de 0.1–2 Hz —características de las regiones del SEN— y los transitorios asociados a la operación de protecciones y reconexión de líneas. Las PMU son el instrumento clave para el análisis post-disturbio: permiten reconstruir la secuencia temporal de fasores, identificar la Central que comenzó a perder sincronismo, y verificar si el comportamiento dinámico de tensión fue conforme a los requerimientos de LVRT/HVRT (Cap. 3) e inyección de corriente reactiva (Cap. 4).
+    </p>
+
+    <p>
+      Una discrepancia significativa entre el comportamiento real registrado por la PMU y el predicho por el modelo del Cap. 6 puede motivar que el CENACE solicite la revisión y recalibración del modelo.
+    </p>
+
+    <!-- ═══════════════════════════════
+ 8.5 ANALIZADORES CALIDAD
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec85"><span class="snum">8.5</span>Analizadores o medidores de Calidad de la potencia</h2>
+
+    <p>
+      Los <strong>analizadores de calidad de la potencia</strong> son los instrumentos específicos para la verificación de los requerimientos del Capítulo 7. A diferencia del SCADA —que provee valores fundamentales con baja resolución temporal— y de las PMU —que proveen fasores a alta velocidad pero sin análisis espectral—, los analizadores miden y registran el espectro completo de la tensión y la corriente, calculando los índices estadísticos de calidad definidos por las normas de referencia.
+    </p>
+
+    <p>
+      Conforme al Capítulo 7, los instrumentos deben cumplir con la NOM-001-CRE/SCFI-2019, la NMX-J-610-4-30-ANCE-2018 Clase A o la IEC 61000-4-30 Clase A. La Clase A es la requerida cuando las mediciones tienen propósito de verificación de conformidad regulatoria. Las mediciones incluyen: desbalance de tensión (7.1); severidad del parpadeo Pst y Plt (7.2); conteo de variaciones rápidas de tensión (7.3); THD y armónicas individuales hasta la 50.ª (7.4); interarmónicos individuales; y presencia de corriente directa en el PI (7.5).
+    </p>
+
+    <p>
+      Cuando el CENACE detecta un incumplimiento sostenido —P95 de una semana por encima del límite nominal—, puede exigir la implementación de la solución técnica de mitigación del 7.4: filtros de armónicos pasivos, filtros activos o modificación de la estrategia de conmutación del inversor.
+    </p>
+
+    <!-- ═══════════════════════════════
+ 8.6 REGISTRADORES
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec86"><span class="snum">8.6</span>Registradores de disturbios</h2>
+
+    <p>
+      Los <strong>registradores de disturbios</strong> (DFR, <em>Digital Fault Recorders</em>) capturan formas de onda de tensión y corriente de alta resolución —1,440 a 7,200 muestras por segundo, equivalentes a 24–120 muestras por ciclo— durante eventos transitorios. La alta velocidad de muestreo permite reproducir transitorios electromagnéticos de alta frecuencia que no son capturables por las PMU ni por los analizadores de calidad.
+    </p>
+
+    <p>
+      Los eventos que disparan el almacenamiento de un registro son: inicio y extinción de una falla, operación de un relé, apertura o cierre de un disyuntor, reconexión automática, transitorios de conexión de la Central al sistema y oscilaciones de potencia de gran amplitud. Los DFR registran también los instantes precisos de cada evento, lo que permite correlacionar los registros de la Central con los de las subestaciones de la Red Nacional de Transmisión para reconstruir la secuencia causal completa de un disturbio.
+    </p>
+
+    <p>
+      Los registros de DFR son el insumo principal para verificar los requerimientos de los Capítulos 3 y 4 —LVRT/HVRT e inyección de corriente reactiva—, dado que estos requerimientos solo se manifiestan durante eventos de falla y no pueden verificarse en condiciones normales. Adicionalmente, se usan para la validación de los modelos de simulación del Cap. 6: una discrepancia significativa puede motivar que el CENACE solicite la revisión del modelo conforme al 6.1.v.
+    </p>
+
+    <!-- ═══════════════════════════════
+ 8.7 MONITOREO CRE
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec87"><span class="snum">8.7</span>Monitoreo, vigilancia e inspección por la CRE</h2>
+
+    <blockquote>
+      Sin menoscabo de lo anterior, la CRE podrá apoyarse del CENACE, Transportista y Distribuidor para llevar a cabo los actos de monitoreo y vigilancia del cumplimiento de los requerimientos de este Manual. Asimismo, la CRE podrá llevar a cabo los actos de inspección que determine necesarios por conducto de los servidores públicos que tenga adscritos o mediante Unidades de Inspección.
+      <cite>RES/550/2021, Manual INTE, Cap. 8 — DOF 31-dic-2021 · PDF p. 241</cite>
+    </blockquote>
+
+    <p>
+      La frase "sin menoscabo de lo anterior" preserva las facultades de la CRE como regulador supremo, por encima de los mecanismos ordinarios de verificación del CENACE y las UI. La CRE puede iniciar inspecciones en cualquier momento —incluso sin que haya una queja o un evento específico— utilizando sus propios servidores públicos o comisionando nuevas UI para auditorías independientes.
+    </p>
+
+    <p>
+      La CRE emitió el Código de Red 2.0 mediante la Resolución RES/550/2021 en ejercicio de la facultad del artículo 12 fracción XXXVII de la LIE. Como emisora del Código de Red, tiene la responsabilidad primaria de vigilar su cumplimiento, apoyándose en el CENACE —que tiene acceso directo a los datos de telemetría, PMU y analizadores de calidad de todas las Centrales conectadas al SEN— así como en el Transportista (CFE Transmisión) y en el Distribuidor (CFE Distribución).
+    </p>
+
+    <p>
+      El incumplimiento detectado mediante cualquiera de los mecanismos del Capítulo 8 puede derivar en la apertura de un procedimiento administrativo sancionador por parte de la CRE, conforme a la LIE. Las sanciones pueden incluir amonestaciones, multas calculadas sobre el valor de la energía no conforme producida y, en casos de incumplimiento grave y reiterado, la suspensión temporal o definitiva de la autorización para operar en el MEM.
+    </p>
+
+    <!-- ═══════════════════════════════
+ 8.8 MARCO INSTITUCIONAL + TABLA
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec88"><span class="snum">8.8</span>Marco institucional de la verificación de conformidad</h2>
+
+    <p>
+      La estructura de verificación del Capítulo 8 es escalonada y combina tres dimensiones temporales: la verificación <strong>previa a la EOC</strong> (Procedimiento EOC del CENACE + dictamen de la UI), la <strong>verificación inicial</strong> en el momento de la primera conexión (certificación de la Unidad de Inspección), y la <strong>verificación continua</strong> durante toda la vida operativa de la Central (telemetría, PMU, analizadores y DFR).
+    </p>
+
+    <p>
+      En la <strong>fase EOC</strong>, el CENACE administra la secuencia de pruebas que la Central debe superar antes de entrar en operación comercial: validación de modelos del Capítulo 6, pruebas de respuesta en frecuencia del Capítulo 2, pruebas de control de tensión del Capítulo 3, y la campaña de medición de calidad de la potencia del Capítulo 7 —duración mínima de una semana— que produce los datos estadísticos de P95 y P99 exigidos por las 7.1 a 7.4. Solo cuando tanto el CENACE como la UI concluyen satisfactoriamente sus procesos, el CENACE declara la EOC.
+    </p>
+
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Tabla 8.1 — Síntesis de instrumentos de verificación por requerimiento del Manual INTE
+        <span class="tbl-sub">Elaboración con base en RES/550/2021, Capítulos 6, 7 y 8 del Manual INTE</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Parámetro / Requerimiento</th>
+            <th>Cap. Manual INTE</th>
+            <th>Instrumento de verificación</th>
+            <th>Fase</th>
+            <th>Régimen de evaluación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Desbalance máximo de tensión</td>
+            <td style="text-align:center;font-family:var(--mono)">7.1</td>
+            <td>Analizador calidad potencia (NOM/IEC Clase A)</td>
+            <td>EOC + continua</td>
+            <td style="font-family:var(--mono);font-size:.8rem">10 min / ≥1 semana · P95 / P99</td>
+          </tr>
+          <tr>
+            <td>Severidad parpadeo — Pst / Plt</td>
+            <td style="text-align:center;font-family:var(--mono)">7.2</td>
+            <td>Analizador calidad potencia (NOM/IEC Clase A)</td>
+            <td>EOC + continua</td>
+            <td style="font-family:var(--mono);font-size:.8rem">10 min (Pst) · 2 h (Plt) / ≥1 semana</td>
+          </tr>
+          <tr>
+            <td>Variaciones rápidas de tensión</td>
+            <td style="text-align:center;font-family:var(--mono)">7.3</td>
+            <td>Analizador calidad potencia</td>
+            <td>EOC + continua</td>
+            <td style="font-family:var(--mono);font-size:.8rem">Conteo diario de eventos · sin P95/P99</td>
+          </tr>
+          <tr>
+            <td>THD + armónicas individuales (2ª–50ª)</td>
+            <td style="text-align:center;font-family:var(--mono)">7.4</td>
+            <td>Analizador calidad potencia (NOM/IEC Clase A)</td>
+            <td>EOC + continua</td>
+            <td style="font-family:var(--mono);font-size:.8rem">10 min / ≥1 semana · P95 / P99</td>
+          </tr>
+          <tr>
+            <td>Interarmónicos individuales de tensión</td>
+            <td style="text-align:center;font-family:var(--mono)">7.4</td>
+            <td>Analizador calidad potencia (NOM/IEC Clase A)</td>
+            <td>EOC + continua</td>
+            <td style="font-family:var(--mono);font-size:.8rem">10 min / ≥1 semana · P95 / P99</td>
+          </tr>
+          <tr>
+            <td>Inyección de corriente directa en PI</td>
+            <td style="text-align:center;font-family:var(--mono)">7.5</td>
+            <td>Medidor CC / analizador · Unidad de Inspección</td>
+            <td>EOC + continua</td>
+            <td style="font-family:var(--mono);font-size:.8rem">Prohibición absoluta · verificación continua</td>
+          </tr>
+          <tr>
+            <td>Respuesta en frecuencia (ROCOF, droop, FCR)</td>
+            <td style="text-align:center;font-family:var(--mono)">Cap. 2</td>
+            <td>PMU + SCADA + DFR</td>
+            <td>EOC (pruebas) + continua</td>
+            <td style="font-family:var(--mono);font-size:.8rem">Pruebas de inyección + monitoreo de eventos</td>
+          </tr>
+          <tr>
+            <td>LVRT / HVRT y control de tensión dinámico</td>
+            <td style="text-align:center;font-family:var(--mono)">Cap. 3–4</td>
+            <td>PMU + Registrador de disturbios (DFR)</td>
+            <td>EOC (pruebas) + post-evento</td>
+            <td style="font-family:var(--mono);font-size:.8rem">Análisis post-falla · comparación con modelo</td>
+          </tr>
+          <tr>
+            <td>Validación de modelos de simulación</td>
+            <td style="text-align:center;font-family:var(--mono)">Cap. 6</td>
+            <td>Comparación modelo vs. registros PMU/DFR</td>
+            <td>EOC (obligatoria)</td>
+            <td style="font-family:var(--mono);font-size:.8rem">Una vez · actualizaciones a requerimiento del CENACE</td>
+          </tr>
+          <tr>
+            <td>Infraestructura física de interconexión</td>
+            <td style="text-align:center;font-family:var(--mono)">Cap. 1–8</td>
+            <td>Unidad de Inspección acreditada (EMA)</td>
+            <td>EOC (obligatoria)</td>
+            <td style="font-family:var(--mono);font-size:.8rem">Dictamen previo a EOC · inspecciones CRE a requerimiento</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ref-nota">Fuente: Elaboración con base en RES/550/2021, CRE. Manual INTE, Capítulos 6, 7 y 8. DOF, 31 de diciembre de 2021. <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" target="_blank" rel="noopener">Texto oficial (PDF)</a>. La columna "Instrumento de verificación" es interpretación técnica del texto normativo; el Procedimiento EOC del CENACE publicado en el SIM puede especificar requisitos adicionales.</p>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="cap7.html">
+        <span class="nd">← Capítulo anterior</span>
+        <span class="nt">Cap. 7 — Calidad de la Potencia (INTE)</span>
+      </a>
+      <a href="cap8.html" class="n-next">
+        <span class="nd">Manual CONE →</span>
+        <span class="nt">CONE 2.8 — Calidad de la Potencia (Centros de Carga)</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>
