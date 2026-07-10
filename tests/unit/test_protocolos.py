@@ -5,8 +5,8 @@ import pytest
 from docx import Document
 
 from gcv.protocolos import (ProyectoProtocolo, generar_checklist,
-                            generar_protocolo, generar_revisiones,
-                            universo_pruebas)
+                            generar_protocolo, generar_protocolo_v2,
+                            generar_revisiones, universo_pruebas)
 
 
 @pytest.fixture
@@ -122,3 +122,35 @@ def test_revisiones_formato_usuario(tmp_path):
 def test_clase_invalida(proyecto, tmp_path):
     with pytest.raises(ValueError):
         generar_protocolo("subestacion", proyecto, tmp_path)
+
+
+def _tabla_maestra_v2(doc):
+    return next(t for t in doc.tables
+                if len(t.columns) == 4 and t.rows[0].cells[0].text.strip() == "No.")
+
+
+def test_protocolo_v2_central(proyecto, tmp_path):
+    ruta = generar_protocolo_v2("central", proyecto, tmp_path)
+    doc = Document(str(ruta))
+    titulo = next(p.text for p in doc.paragraphs if "PROTOCOLO" in p.text)
+    assert "ASÍNCRONAS" in titulo  # tecnología del proyecto en el título
+    maestra = _tabla_maestra_v2(doc)
+    assert len(maestra.rows) - 1 == 25  # universo por central: 21–45
+    numeros = [int(r.cells[0].text) for r in maestra.rows[1:]]
+    assert numeros == list(range(21, 46))
+    estados = {r.cells[3].text.strip() for r in maestra.rows[1:]
+               if int(r.cells[0].text) != 27}
+    assert estados <= {"SI", "NO APLICA"}  # regla dura: sin notas inventadas
+    fila27 = next(r for r in maestra.rows[1:] if r.cells[0].text == "27")
+    assert fila27.cells[3].text.strip() == "No se cuenta con la infraestructura"
+
+
+def test_protocolo_v2_unidad_sin_notas(tmp_path):
+    p = ProyectoProtocolo(nombre_central="Demo", codigo="DMO", tipo="B",
+                          tecnologia="SINCRONA", pruebas_aplican={1, 2, 6})
+    ruta = generar_protocolo_v2("unidad", p, tmp_path)
+    maestra = _tabla_maestra_v2(Document(str(ruta)))
+    assert len(maestra.rows) - 1 == 20  # universo por unidad: 1–20
+    estados = [r.cells[3].text.strip() for r in maestra.rows[1:]]
+    assert set(estados) == {"SI", "NO APLICA"}
+    assert estados.count("SI") == 3

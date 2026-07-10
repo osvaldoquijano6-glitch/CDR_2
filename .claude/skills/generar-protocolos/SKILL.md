@@ -99,11 +99,24 @@ proyecto = ProyectoProtocolo(
 - **Anexo de Revisiones** (`generar_revisiones(destino, proyecto=..., documento_base=...)`):
   solo estampa la portada.
 
+## Dos estilos de salida .docx
+
+1. **Fiel a plantilla** (`generar_protocolo`) — cirugía sobre las plantillas
+   originales del usuario. Para cotejo con revisiones previas ante CENACE.
+2. **Rediseño v2** (`generar_protocolo_v2`, módulo `diseno_v2`) — **formato
+   aprobado por el usuario** que se genera completo desde los datos del
+   proyecto + catálogo YAML. Paleta Variante A: eléctrico `#0EA5D8`, marino
+   `#1B3A6B`, apagado `#7FB8D9` (filas NO APLICA). Elementos: banda de marca,
+   eyebrow normativo, ficha de datos, placas de sección, tabla maestra con
+   cabecera sólida y chips SI / NO APLICA. Tipografías Montserrat/Helvetica
+   Neue. Sin nombre de empresa: solo sus colores.
+
 ## Flujo recomendado
 
 ```python
-generar_protocolo("central", proyecto, "salida/")   # → salida/Protocolo_Central_SNO.docx
-generar_protocolo("unidad",  proyecto, "salida/")
+generar_protocolo_v2("central", proyecto, "salida/")  # rediseño aprobado
+generar_protocolo_v2("unidad",  proyecto, "salida/")
+generar_protocolo("central", proyecto, "salida/")     # variante fiel a plantilla
 generar_checklist("salida/Checklist.xlsx",
                   aplica={n: "SI" for n in proyecto.pruebas_aplican})
 generar_revisiones("salida/Anexo_Revisiones.xlsx", proyecto=proyecto.proyecto)
