@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual — Centros de Carga · Manual CONE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --indigo-900:#312E81; --indigo-800:#3730A3; --indigo-700:#4338CA;
+  --indigo-100:#E0E7FF; --indigo-50:#EEF2FF;
+  --amber-600:#EA580C; --amber-100:#FED7AA; --amber-50:#FFF7ED;
+  --red-500:#DC2626; --red-50:#FEF2F2;
+  --gray-900:#111827; --gray-700:#374151; --gray-500:#6B7280; --gray-400:#9CA3AF; --gray-300:#D1D5DB; --gray-200:#E5E7EB; --gray-100:#F3F4F6; --gray-50:#F9FAFB;
+  --white:#FFFFFF;
+  --f-head:'Montserrat','Helvetica Neue',sans-serif;
+  --f-body:'Inter','Helvetica Neue',-apple-system,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,monospace;
+  --sh-sm:0 1px 2px rgba(17,24,39,.05);
+  --sh-md:0 4px 12px rgba(49,46,129,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--f-body);background:var(--gray-50);color:var(--gray-900);line-height:1.55;font-size:14px}
+
+header.top{position:sticky;top:0;z-index:100;background:var(--indigo-900);color:var(--white);border-bottom:3px solid var(--amber-600);box-shadow:var(--sh-md)}
+.top-inner{max-width:1400px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand-title{font-family:var(--f-head);font-weight:700;font-size:15px;letter-spacing:.02em}
+.brand-sub{font-size:11px;color:var(--indigo-100);letter-spacing:.05em;text-transform:uppercase}
+.top-actions{display:flex;gap:8px}
+.btn{font-family:var(--f-body);font-size:12px;font-weight:500;padding:8px 14px;border:1px solid var(--indigo-700);background:transparent;color:var(--white);border-radius:6px;cursor:pointer;transition:all .15s}
+.btn:hover{background:var(--indigo-800)}
+.btn.primary{background:var(--amber-600);border-color:var(--amber-600)}
+.btn.primary:hover{background:#c2410c}
+
+.wrap{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:260px 1fr;gap:32px}
+@media (max-width:960px){.wrap{grid-template-columns:1fr;padding:16px;gap:16px}}
+
+aside.nav{position:sticky;top:88px;align-self:start;max-height:calc(100vh - 108px);overflow-y:auto;background:var(--white);border:1px solid var(--gray-200);border-radius:12px;padding:16px}
+aside.nav h3{font-family:var(--f-head);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-500);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--gray-200)}
+aside.nav ul{list-style:none}
+aside.nav li{margin-bottom:2px}
+aside.nav a{display:block;padding:6px 10px;color:var(--gray-700);text-decoration:none;font-size:12.5px;border-radius:6px;border-left:2px solid transparent;transition:all .12s}
+aside.nav a:hover{background:var(--indigo-50);color:var(--indigo-900);border-left-color:var(--indigo-100)}
+aside.nav a.sub{padding-left:22px;font-size:12px;color:var(--gray-500)}
+@media (max-width:960px){aside.nav{position:relative;top:0;max-height:none}}
+
+main{min-width:0}
+.hero{background:linear-gradient(135deg,var(--indigo-50) 0%,var(--white) 100%);border:1px solid var(--indigo-100);border-radius:14px;padding:28px 32px;margin-bottom:24px}
+.hero h1{font-family:var(--f-head);font-size:26px;font-weight:700;color:var(--indigo-900);margin-bottom:6px;letter-spacing:-.01em}
+.hero .sub{color:var(--gray-700);font-size:14px}
+.hero .refs{margin-top:14px;padding-top:14px;border-top:1px dashed var(--indigo-100);display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--gray-700)}
+.ref-chip{background:var(--white);border:1px solid var(--indigo-100);padding:4px 10px;border-radius:20px}
+.ref-chip b{color:var(--indigo-900);font-weight:600}
+
+section.block{margin-bottom:36px;scroll-margin-top:80px}
+h2.section{font-family:var(--f-head);font-size:20px;font-weight:700;color:var(--indigo-900);padding-bottom:10px;border-bottom:2px solid var(--indigo-100);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+h2.section .num{background:var(--indigo-900);color:var(--white);width:36px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;font-family:var(--f-mono)}
+h3.sub{font-family:var(--f-head);font-size:15px;font-weight:600;color:var(--indigo-800);margin:20px 0 10px}
+h4.sub2{font-family:var(--f-head);font-size:13px;font-weight:600;color:var(--indigo-700);margin:16px 0 8px}
+
+.card{background:var(--white);border:1px solid var(--gray-200);border-radius:12px;padding:20px;margin-bottom:14px;box-shadow:var(--sh-sm)}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:12px}
+.card-title{font-family:var(--f-head);font-size:14px;font-weight:600;color:var(--indigo-900)}
+.card-tag{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--indigo-50);color:var(--indigo-800);padding:4px 8px;border-radius:4px}
+
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+
+.nota{background:var(--amber-50);border:1px solid var(--amber-100);border-left:4px solid var(--amber-600);border-radius:8px;padding:14px 16px;margin:14px 0;font-size:13px;color:#7c2d12}
+.nota .label{font-family:var(--f-head);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-600);display:block;margin-bottom:6px}
+.nota code{background:#fff}
+.nota.crit{background:var(--red-50);border-color:#fecaca;border-left-color:var(--red-500);color:#7f1d1d}
+.nota.crit .label{color:var(--red-500)}
+
+.tbl-wrap{overflow-x:auto;border:1px solid var(--gray-200);border-radius:8px;margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:var(--indigo-50);color:var(--indigo-900);font-family:var(--f-head);font-weight:600;padding:10px 12px;text-align:left;border-bottom:1px solid var(--indigo-100);white-space:nowrap;font-size:12px;letter-spacing:.01em}
+th.grp{background:var(--indigo-100);text-align:center}
+td{padding:9px 12px;border-bottom:1px solid var(--gray-100);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--gray-50)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--f-mono);font-size:12px}
+td.c,th.c{text-align:center}
+td.chk{text-align:center;font-weight:700;color:var(--indigo-800);font-size:14px}
+td.dash{text-align:center;color:var(--gray-400)}
+
+details.acc{background:var(--white);border:1px solid var(--gray-200);border-radius:10px;margin-bottom:8px;overflow:hidden;box-shadow:var(--sh-sm)}
+details.acc[open]{box-shadow:var(--sh-md);border-color:var(--indigo-100)}
+details.acc summary{padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:14px;font-family:var(--f-body);font-size:13.5px;color:var(--gray-900);user-select:none;transition:background .15s}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";margin-left:auto;color:var(--indigo-800);font-size:20px;font-weight:400;transition:transform .2s;line-height:1;font-family:var(--f-mono)}
+details.acc[open] summary::after{content:"−"}
+details.acc summary:hover{background:var(--indigo-50)}
+details.acc[open] summary{background:var(--indigo-50);border-bottom:1px solid var(--indigo-100)}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:24px;padding:0 8px;border-radius:6px;background:var(--indigo-900);color:var(--white);font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.02em;flex-shrink:0}
+.acc-body{padding:18px 22px;font-size:13px;color:var(--gray-700)}
+.acc-body h4{font-family:var(--f-head);font-size:12px;font-weight:600;color:var(--indigo-900);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px;padding-top:4px}
+.acc-body h4:first-child{margin-top:0;padding-top:0}
+.acc-body ul{margin:4px 0 8px 20px}
+.acc-body li{margin-bottom:3px}
+
+.kv{display:grid;grid-template-columns:1fr auto;gap:6px 16px;font-size:12.5px;background:var(--gray-50);border-radius:8px;padding:12px 14px}
+.kv .k{color:var(--gray-700)}
+.kv .v{color:var(--indigo-900);font-family:var(--f-mono);font-weight:500;text-align:right}
+
+.plantilla{background:var(--indigo-50);border-left:3px solid var(--indigo-700);border-radius:6px;padding:10px 14px;font-family:var(--f-body);font-size:12.5px;color:var(--gray-700);margin:6px 0;line-height:1.55}
+.plantilla em{color:var(--indigo-900);font-style:normal;font-weight:500}
+.tag-line{font-family:var(--f-head);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo-700);margin-bottom:6px;display:block}
+
+code{font-family:var(--f-mono);font-size:12px;background:var(--gray-100);padding:1px 5px;border-radius:3px;color:var(--indigo-900)}
+pre{background:var(--gray-900);color:var(--gray-100);padding:14px 16px;border-radius:8px;overflow-x:auto;font-family:var(--f-mono);font-size:12px;line-height:1.55}
+
+/* KPI banner for FP */
+.kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+@media (max-width:700px){.kpi-row{grid-template-columns:1fr}}
+.kpi{background:var(--white);border:1px solid var(--indigo-100);border-radius:10px;padding:14px 18px}
+.kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-500);font-weight:600;margin-bottom:4px}
+.kpi .val{font-family:var(--f-mono);font-size:22px;font-weight:600;color:var(--indigo-900)}
+.kpi .desc{font-size:11.5px;color:var(--gray-700);margin-top:3px}
+.kpi.warn{border-color:var(--amber-100);background:var(--amber-50)}
+.kpi.warn .val{color:var(--amber-600)}
+
+footer{max-width:1400px;margin:32px auto 24px;padding:20px 24px;color:var(--gray-500);font-size:11.5px;border-top:1px solid var(--gray-200);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+@media print{
+  header.top,aside.nav,.top-actions,footer{display:none}
+  .wrap{grid-template-columns:1fr;padding:0}
+  details.acc{break-inside:avoid;box-shadow:none;border:1px solid #ccc}
+  details.acc summary{display:none}
+  .acc-body{display:block!important;padding:8px}
+  body{background:#fff;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <span class="brand-title">Manual de Consulta · Centros de Carga</span>
+      <span class="brand-sub">Manual CONE · Código de Red 2.0</span>
+    </div>
+    <div class="top-actions">
+      <button class="btn" onclick="toggleAll(true)">Expandir todo</button>
+      <button class="btn" onclick="toggleAll(false)">Colapsar todo</button>
+      <button class="btn primary" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<aside class="nav">
+  <h3>Índice</h3>
+  <ul>
+    <li><a href="#s0">0. Matriz de aplicabilidad</a></li>
+    <li><a href="#s1">1. Tensión (2.1)</a></li>
+    <li><a href="#s2">2. Frecuencia (2.2)</a></li>
+    <li><a href="#s3">3. Corto circuito (2.3)</a></li>
+    <li><a href="#s4">4. Factor de Potencia (2.4)</a></li>
+    <li><a href="#s5">5. Protecciones (2.5)</a></li>
+    <li><a href="#s6">6. Control e Info (2.6 / 2.7)</a></li>
+    <li><a href="#s7">7. Calidad (2.8)</a></li>
+    <li><a href="#s7-1" class="sub">7.1 Armónicos de corriente</a></li>
+    <li><a href="#s7-2" class="sub">7.2 Parpadeo (flicker)</a></li>
+    <li><a href="#s7-3" class="sub">7.3 Desbalance V e I</a></li>
+    <li><a href="#s8">8. Estructura del reporte</a></li>
+    <li><a href="#s9">9. Plan de Trabajo CRE</a></li>
+  </ul>
+</aside>
+
+<main>
+
+<div class="hero">
+  <h1>Centros de Carga — Conexión al SEN</h1>
+  <div class="sub">Requerimientos del Manual Regulatorio de Coordinación Operativa de Centros de Carga (Manual CONE) para conexión y operación conforme al Código de Red 2.0.</div>
+  <div class="refs">
+    <span class="ref-chip"><b>[1]</b> Manual CONE · Código de Red 2.0 (RES/550/2021)</span>
+    <span class="ref-chip"><b>[2]</b> POC Anexo 5 · Verificaciones CC</span>
+  </div>
+</div>
+
+<div class="nota crit">
+  <span class="label">Cambio normativo crítico — 8 de abril de 2026</span>
+  El límite mínimo de <strong>Factor de Potencia en atraso</strong> para Centros de Carga cambia de <strong>0.95</strong> a <strong>0.97</strong> a partir del <strong>8 de abril de 2026</strong>. El generador de reportes debe seleccionar el límite aplicable según la fecha del periodo evaluado. Ver §4.
+</div>
+
+<!-- SECCION 0 -->
+<section id="s0" class="block">
+  <h2 class="section"><span class="num">0</span>Matriz de aplicabilidad de requerimientos</h2>
+  <div class="card">
+    <div class="card-head"><span class="card-title">Tabla 1.1.A — Requerimientos por tipo de tensión de conexión</span><span class="card-tag">Manual CONE</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th class="c">§</th><th>Requerimiento</th><th class="c">MT &lt; 1 MW</th><th class="c">MT ≥ 1 MW</th><th class="c">AT</th></tr></thead>
+        <tbody>
+          <tr><td class="c">2.1</td><td>Tensión — rangos permanente y temporal</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">2.2</td><td>Frecuencia — permanente y temporal</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">2.3</td><td>Corto circuito (Icc, Zth, X/R)</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">2.4</td><td>Factor de Potencia</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">2.5</td><td>Protecciones y coordinación</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">2.6</td><td>Control (RDC)</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">2.7</td><td>Intercambio de información (Manual TIC)</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">2.8</td><td>Calidad de la potencia</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><span class="label">Nota</span>Matriz de referencia general; validar contra el título de conexión específico y las condicionantes del Contrato de Interconexión del centro de carga.</div>
+  </div>
+</section>
+
+<!-- SECCION 1 -->
+<section id="s1" class="block">
+  <h2 class="section"><span class="num">1</span>Tensión</h2>
+
+  <div class="card">
+    <div class="card-head"><span class="card-title">2.1.A — Rango permanente de operación (±5 %)</span><span class="card-tag">Manual CONE 2.1</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Vnom (kV)</th><th class="num">Máx (105 %) kV</th><th class="num">Mín (95 %) kV</th></tr></thead>
+        <tbody>
+          <tr><td class="num">400</td><td class="num">420</td><td class="num">380</td></tr>
+          <tr><td class="num">230</td><td class="num">241</td><td class="num">218</td></tr>
+          <tr><td class="num">161</td><td class="num">169</td><td class="num">153</td></tr>
+          <tr><td class="num">138</td><td class="num">145</td><td class="num">131</td></tr>
+          <tr><td class="num">115</td><td class="num">121</td><td class="num">109</td></tr>
+          <tr><td class="num">85</td><td class="num">89</td><td class="num">81</td></tr>
+          <tr><td class="num">69</td><td class="num">72</td><td class="num">65</td></tr>
+          <tr><td class="num">34.5</td><td class="num">36.2</td><td class="num">32.8</td></tr>
+          <tr><td class="num">23</td><td class="num">24.2</td><td class="num">21.8</td></tr>
+          <tr><td class="num">13.8</td><td class="num">14.5</td><td class="num">13.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="card-title">2.1.B — Rango temporal máx. 20 min por evento (±10 %)</span><span class="card-tag">Manual CONE 2.1</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Vnom (kV)</th><th class="num">Máx (110 %) kV</th><th class="num">Mín (90 %) kV</th></tr></thead>
+        <tbody>
+          <tr><td class="num">400</td><td class="num">440</td><td class="num">360</td></tr>
+          <tr><td class="num">230</td><td class="num">253</td><td class="num">207</td></tr>
+          <tr><td class="num">161</td><td class="num">177</td><td class="num">145</td></tr>
+          <tr><td class="num">138</td><td class="num">152</td><td class="num">124</td></tr>
+          <tr><td class="num">115</td><td class="num">127</td><td class="num">104</td></tr>
+          <tr><td class="num">85</td><td class="num">94</td><td class="num">77</td></tr>
+          <tr><td class="num">69</td><td class="num">76</td><td class="num">62</td></tr>
+          <tr><td class="num">34.5</td><td class="num">37.9</td><td class="num">31.1</td></tr>
+          <tr><td class="num">23</td><td class="num">25.3</td><td class="num">20.7</td></tr>
+          <tr><td class="num">13.8</td><td class="num">15.2</td><td class="num">12.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><span class="label">Nota</span>Ambos rangos aplican en el Punto de Conexión (PC) del centro de carga.</div>
+  </div>
+
+  <details class="acc">
+    <summary><span class="pill">2.1</span> Ficha completa — Verificación de rangos de tensión</summary>
+    <div class="acc-body">
+      <h4>Datos de entrada</h4>
+      <div class="kv"><span class="k">Serie</span><span class="v">V_L-L o V_L-N por fase, agregación ≥ 5 min, periodo ≥ 7 días</span></div>
+      <h4>Tabla de resultados</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Rango</th><th class="c">Límite máx.</th><th class="c">Límite mín.</th><th class="c">V máx. medida</th><th class="c">V mín. medida</th><th class="c">Cumple</th></tr></thead><tbody>
+        <tr><td>Permanente (±5 %)</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Temporal (±10 %, ≤ 20 min)</td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody></table></div>
+      <h4>Gráfica</h4>
+      <p>V(t) por fase con bandas coloreadas de ±5 % y ±10 % del Vnom.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SECCION 2 -->
+<section id="s2" class="block">
+  <h2 class="section"><span class="num">2</span>Frecuencia</h2>
+  <div class="card">
+    <div class="card-head"><span class="card-title">2.2 — Rangos de frecuencia</span><span class="card-tag">Manual CONE 2.2</span></div>
+    <div class="grid-2">
+      <div class="kv"><span class="k">Rango permanente</span><span class="v">59.0 – 61.0 Hz</span></div>
+      <div class="kv"><span class="k">Rango temporal (≤ 30 min)</span><span class="v">58.0 – 62.5 Hz</span></div>
+      <div class="kv"><span class="k">Desviación por conexión del CC</span><span class="v">≤ 0.1 Hz</span></div>
+      <div class="kv"><span class="k">Sistema Interconectado Nacional</span><span class="v">Aplicable a SIN, SIBC, SIBCS, SIM</span></div>
+    </div>
+    <div class="nota"><span class="label">Nota</span>La operación del centro de carga no debe provocar desviaciones de frecuencia superiores a 0.1 Hz al momento de la conexión.</div>
+  </div>
+</section>
+
+<!-- SECCION 3 -->
+<section id="s3" class="block">
+  <h2 class="section"><span class="num">3</span>Corto circuito</h2>
+  <div class="card">
+    <div class="card-head"><span class="card-title">2.3 — Parámetros de cortocircuito en el PC</span><span class="card-tag">Manual CONE 2.3</span></div>
+    <p style="font-size:13px;margin-bottom:10px">CENACE informa los siguientes parámetros para el diseño y coordinación del centro de carga:</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Parámetro</th><th>Símbolo</th><th>Unidad</th></tr></thead>
+        <tbody>
+          <tr><td>Corriente de cortocircuito trifásica</td><td>Icc₃φ</td><td>kA</td></tr>
+          <tr><td>Corriente de cortocircuito monofásica</td><td>Icc₁φ</td><td>kA</td></tr>
+          <tr><td>Impedancia de Thevenin de secuencia positiva</td><td>Zth⁺</td><td>Ω o pu</td></tr>
+          <tr><td>Impedancia de Thevenin de secuencia cero</td><td>Zth⁰</td><td>Ω o pu</td></tr>
+          <tr><td>Relación X/R de secuencia positiva</td><td>(X/R)⁺</td><td>—</td></tr>
+          <tr><td>Relación X/R de secuencia cero</td><td>(X/R)⁰</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><span class="label">Nota</span>Valores emitidos por CENACE mediante oficio al centro de carga. Se documentan tal cual son entregados; el reporte referencia el oficio y su fecha.</div>
+  </div>
+</section>
+
+<!-- SECCION 4 - FP -->
+<section id="s4" class="block">
+  <h2 class="section"><span class="num">4</span>Factor de Potencia</h2>
+
+  <div class="card">
+    <div class="card-head"><span class="card-title">Umbrales normativos y transición</span><span class="card-tag">Manual CONE 2.4</span></div>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="lbl">Vigente hasta 7-abr-2026</div>
+        <div class="val">≥ 0.95</div>
+        <div class="desc">F.P. mínimo en atraso — todos los niveles de tensión</div>
+      </div>
+      <div class="kpi warn">
+        <div class="lbl">A partir del 8-abr-2026</div>
+        <div class="val">≥ 0.97</div>
+        <div class="desc">F.P. mínimo en atraso — todos los niveles de tensión</div>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:12px">
+      <div class="kv"><span class="k">Adelanto</span><span class="v">No permitido</span></div>
+      <div class="kv"><span class="k">Agregación de medida</span><span class="v">5 minutos</span></div>
+      <div class="kv"><span class="k">Criterio mensual</span><span class="v">Cumplimiento ≥ 95 % del tiempo</span></div>
+      <div class="kv"><span class="k">Instrumento</span><span class="v">Medidor Clase A conforme Manual TIC</span></div>
+    </div>
+  </div>
+
+  <details class="acc">
+    <summary><span class="pill">2.4</span> Ficha completa — Verificación mensual de F.P.</summary>
+    <div class="acc-body">
+      <h4>Datos de entrada</h4>
+      <div class="kv"><span class="k">Serie</span><span class="v">FP promedio 5-min y sentido (atraso/adelanto) del periodo mensual</span></div>
+      <h4>Cálculos</h4>
+      <ul>
+        <li>Límite aplicable = <code>0.95 si fecha &lt; 2026-04-08 else 0.97</code>.</li>
+        <li>Ventanas cumplidas = FP en atraso ≥ límite.</li>
+        <li>% cumplimiento = ventanas cumplidas / total × 100.</li>
+        <li>P5, promedio, máx. adelanto observado.</li>
+      </ul>
+      <h4>Tabla de resultados mensuales</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Mes</th><th class="c">Límite</th><th class="c">% cumplimiento</th><th class="c">P5</th><th class="c">Promedio</th><th class="c">Ventanas en adelanto</th><th class="c">Estatus</th></tr></thead><tbody>
+        <tr><td colspan="7" style="text-align:center;color:var(--gray-400);padding:16px">— una fila por mes evaluado —</td></tr>
+      </tbody></table></div>
+      <h4>Gráficas</h4>
+      <ul>
+        <li>Histograma de F.P. 5-min con línea de límite; barras rojas para el segmento de incumplimiento.</li>
+        <li>% cumplimiento por día del mes (barras) con línea de meta 95 %.</li>
+        <li>Perfil temporal F.P.(t) con banda de límite.</li>
+      </ul>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>Durante el periodo <em>{{FECHA_INI}} – {{FECHA_FIN}}</em>, el Factor de Potencia registrado en el Punto de Conexión se mantuvo en atraso ≥ <em>{{LIMITE}}</em> durante el <em>{{PCT}}%</em> del tiempo, superando el criterio del 95 % establecido en la sección 2.4 del Manual Regulatorio [1]. No se registraron ventanas en adelanto. El Centro de Carga cumple con el requerimiento de Factor de Potencia.</div>
+    </div>
+  </details>
+</section>
+
+<!-- SECCION 5 - PROTECCIONES -->
+<section id="s5" class="block">
+  <h2 class="section"><span class="num">5</span>Protecciones y coordinación</h2>
+  <div class="card">
+    <div class="card-head"><span class="card-title">2.5 — Criterios mínimos de coordinación</span><span class="card-tag">Manual CONE 2.5</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th class="c">#</th><th>Criterio</th><th>Funciones ANSI típicas</th></tr></thead>
+        <tbody>
+          <tr><td class="c">1</td><td>Fallas internas del centro de carga</td><td>50/51, 87, 50G/51G, 27, 59</td></tr>
+          <tr><td class="c">2</td><td>Fallas externas al centro de carga (respaldo)</td><td>50/51, 21, 67</td></tr>
+          <tr><td class="c">3</td><td>Sobretensión y baja tensión</td><td>27, 59</td></tr>
+          <tr><td class="c">4</td><td>Sobrefrecuencia y baja frecuencia</td><td>81H, 81L, 81R</td></tr>
+          <tr><td class="c">5</td><td>Sobrecarga de circuitos y equipos</td><td>49, 50/51</td></tr>
+          <tr><td class="c">6</td><td>Sobrecarga de transformadores</td><td>49T, protección térmica</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="sub">Ficha de coordinación</h3>
+    <ul style="font-size:13px;padding-left:20px">
+      <li>Diagrama unifilar con TCs, TPs y relevadores identificados.</li>
+      <li>Tabla de ajustes por relevador (función, pickup, tiempo, curva).</li>
+      <li>Curvas TCC de coordinación.</li>
+      <li>Estudio de cortocircuito de referencia.</li>
+    </ul>
+    <div class="nota"><span class="label">Nota</span>Los ajustes se documentan a partir del estudio de coordinación autorizado; el reporte los reproduce sin modificación y referencia el documento fuente.</div>
+  </div>
+</section>
+
+<!-- SECCION 6 -->
+<section id="s6" class="block">
+  <h2 class="section"><span class="num">6</span>Control (RDC) e Intercambio de Información</h2>
+
+  <div class="card">
+    <div class="card-head"><span class="card-title">2.6 — Requerimientos de control</span><span class="card-tag">Manual CONE 2.6</span></div>
+    <ul style="font-size:13px;padding-left:20px">
+      <li>Sistema de <strong>Reducción de Demanda Coordinada (RDC)</strong> para responder a instrucciones de CENACE.</li>
+      <li>Interfaz de comunicación disponible en operación normal.</li>
+      <li>Pruebas de funcionalidad documentadas.</li>
+    </ul>
+    <div class="nota"><span class="label">Nota</span>Aplica a MT ≥ 1 MW y AT; opcional para MT &lt; 1 MW salvo indicación específica.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="card-title">2.7 — Intercambio de información</span><span class="card-tag">Manual CONE 2.7 · Manual TIC</span></div>
+    <p style="font-size:13px">Envío en tiempo real o bajo demanda de mediciones eléctricas, con estampado de tiempo, de acuerdo con los formatos establecidos por CENACE en el Manual TIC.</p>
+  </div>
+</section>
+
+<!-- SECCION 7 - CALIDAD -->
+<section id="s7" class="block">
+  <h2 class="section"><span class="num">7</span>Calidad de la potencia</h2>
+
+  <div class="card">
+    <div class="card-head"><span class="card-title">Marco general 2.8</span><span class="card-tag">Manual CONE</span></div>
+    <div class="grid-2">
+      <div class="kv"><span class="k">Norma base</span><span class="v">IEEE Std 519-2014</span></div>
+      <div class="kv"><span class="k">Ventana de medición</span><span class="v">10 min · duración ≥ 1 semana</span></div>
+      <div class="kv"><span class="k">Evaluación</span><span class="v">P95 semanal ≤ límite</span></div>
+      <div class="kv"><span class="k">Referencia</span><span class="v">Punto de Conexión (PC)</span></div>
+    </div>
+  </div>
+
+  <!-- 7.1 ARMONICOS -->
+  <div id="s7-1">
+    <h3 class="sub" style="margin-top:22px">7.1 Distorsión armónica en corriente (IEEE 519-2014)</h3>
+
+    <div class="card">
+      <div class="card-head"><span class="card-title">Tabla 2.8.A — V ≤ 69 kV</span><span class="card-tag">% de I<sub>L</sub></span></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th rowspan="2">I<sub>CC</sub>/I<sub>L</sub></th><th class="c grp" colspan="5">Orden armónico impar</th><th class="c" rowspan="2">%DATD</th></tr>
+            <tr><th class="c">2 &lt; h &lt; 11</th><th class="c">11 ≤ h &lt; 17</th><th class="c">17 ≤ h &lt; 23</th><th class="c">23 ≤ h &lt; 35</th><th class="c">35 ≤ h ≤ 50</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="num">&lt; 20</td><td class="num">4.0</td><td class="num">2.0</td><td class="num">1.5</td><td class="num">0.6</td><td class="num">0.3</td><td class="num">5.0</td></tr>
+            <tr><td class="num">20 – 50</td><td class="num">7.0</td><td class="num">3.5</td><td class="num">2.5</td><td class="num">1.0</td><td class="num">0.5</td><td class="num">8.0</td></tr>
+            <tr><td class="num">50 – 100</td><td class="num">10.0</td><td class="num">4.5</td><td class="num">4.0</td><td class="num">1.5</td><td class="num">0.7</td><td class="num">12.0</td></tr>
+            <tr><td class="num">100 – 1 000</td><td class="num">12.0</td><td class="num">5.5</td><td class="num">5.0</td><td class="num">2.0</td><td class="num">1.0</td><td class="num">15.0</td></tr>
+            <tr><td class="num">&gt; 1 000</td><td class="num">15.0</td><td class="num">7.0</td><td class="num">6.0</td><td class="num">2.5</td><td class="num">1.4</td><td class="num">20.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-title">Tabla 2.8.B — 69 kV &lt; V ≤ 161 kV</span><span class="card-tag">% de I<sub>L</sub></span></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th rowspan="2">I<sub>CC</sub>/I<sub>L</sub></th><th class="c grp" colspan="5">Orden armónico impar</th><th class="c" rowspan="2">%DATD</th></tr>
+            <tr><th class="c">2 &lt; h &lt; 11</th><th class="c">11 ≤ h &lt; 17</th><th class="c">17 ≤ h &lt; 23</th><th class="c">23 ≤ h &lt; 35</th><th class="c">35 ≤ h ≤ 50</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="num">&lt; 20</td><td class="num">2.0</td><td class="num">1.0</td><td class="num">0.75</td><td class="num">0.3</td><td class="num">0.15</td><td class="num">2.5</td></tr>
+            <tr><td class="num">20 – 50</td><td class="num">3.5</td><td class="num">1.75</td><td class="num">1.25</td><td class="num">0.5</td><td class="num">0.25</td><td class="num">4.0</td></tr>
+            <tr><td class="num">50 – 100</td><td class="num">5.0</td><td class="num">2.25</td><td class="num">2.0</td><td class="num">0.75</td><td class="num">0.35</td><td class="num">6.0</td></tr>
+            <tr><td class="num">100 – 1 000</td><td class="num">6.0</td><td class="num">2.75</td><td class="num">2.5</td><td class="num">1.0</td><td class="num">0.5</td><td class="num">7.5</td></tr>
+            <tr><td class="num">&gt; 1 000</td><td class="num">7.5</td><td class="num">3.5</td><td class="num">3.0</td><td class="num">1.25</td><td class="num">0.7</td><td class="num">10.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-title">Tabla 2.8.C — V &gt; 161 kV</span><span class="card-tag">% de I<sub>L</sub></span></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th rowspan="2">I<sub>CC</sub>/I<sub>L</sub></th><th class="c grp" colspan="5">Orden armónico impar</th><th class="c" rowspan="2">%DATD</th></tr>
+            <tr><th class="c">2 &lt; h &lt; 11</th><th class="c">11 ≤ h &lt; 17</th><th class="c">17 ≤ h &lt; 23</th><th class="c">23 ≤ h &lt; 35</th><th class="c">35 ≤ h ≤ 50</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="num">&lt; 25</td><td class="num">1.0</td><td class="num">0.5</td><td class="num">0.38</td><td class="num">0.15</td><td class="num">0.10</td><td class="num">1.5</td></tr>
+            <tr><td class="num">25 – 50</td><td class="num">2.0</td><td class="num">1.0</td><td class="num">0.75</td><td class="num">0.3</td><td class="num">0.15</td><td class="num">2.5</td></tr>
+            <tr><td class="num">≥ 50</td><td class="num">3.0</td><td class="num">1.5</td><td class="num">1.15</td><td class="num">0.45</td><td class="num">0.22</td><td class="num">3.75</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nota"><span class="label">Notas — reglas de aplicación de armónicos</span>
+      <ul style="margin-top:6px">
+        <li>Las armónicas pares se limitan al <strong>25 %</strong> del límite de las impares del mismo rango.</li>
+        <li>Las variaciones de corriente de baja frecuencia deben cumplir la Tabla 3 de IEEE 519-2014.</li>
+        <li>Los <strong>hornos de arco</strong> se rigen por la Tabla 6 de IEEE 519-2014 (no aplica esta tabla).</li>
+        <li>La <strong>inyección de corriente directa (CD) no se permite bajo ninguna circunstancia</strong>.</li>
+        <li>I<sub>L</sub> = corriente máxima demandada, promedio de los máximos mensuales de los 12 meses anteriores.</li>
+      </ul>
+    </div>
+
+    <details class="acc">
+      <summary><span class="pill">7.1</span> Ficha completa — Cálculo y verificación de armónicos</summary>
+      <div class="acc-body">
+        <h4>Datos de entrada</h4>
+        <div class="kv"><span class="k">Series</span><span class="v">I₁ (fundamental), I<sub>h</sub> h=2..50 (10-min · 1 semana)</span></div>
+        <div class="kv"><span class="k">Parámetros</span><span class="v">I<sub>CC</sub> (del oficio CENACE), I<sub>L</sub> (histórico)</span></div>
+        <h4>Cálculos por armónica</h4>
+        <ul>
+          <li>%I<sub>h</sub> = I<sub>h</sub> / I<sub>L</sub> × 100.</li>
+          <li>P95 semanal por armónica y por fase.</li>
+          <li>Selección de fila de tabla por I<sub>CC</sub>/I<sub>L</sub> y nivel de tensión.</li>
+          <li>Límite pares = 25 % del límite impar en el mismo rango.</li>
+        </ul>
+        <h4>Cálculo de %DATD</h4>
+        <div class="plantilla" style="font-family:var(--f-mono)">%DATD = √(Σ I<sub>h</sub>² para h=2..50) / I<sub>L</sub> × 100</div>
+        <h4>Tabla de resultados</h4>
+        <div class="tbl-wrap"><table><thead><tr><th class="c">Armónica h</th><th class="c">Tipo</th><th class="c">P95 % I<sub>L</sub></th><th class="c">Límite</th><th class="c">Cumple</th></tr></thead><tbody>
+          <tr><td colspan="5" style="text-align:center;color:var(--gray-400);padding:16px">— filas h = 2 a 50 —</td></tr>
+        </tbody></table></div>
+        <h4>Gráficas</h4>
+        <ul>
+          <li>Barras P95 por orden con línea de límite.</li>
+          <li>Perfil temporal %DATD vs límite.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <!-- 7.2 FLICKER -->
+  <div id="s7-2">
+    <h3 class="sub" style="margin-top:22px">7.2 Parpadeo (flicker)</h3>
+    <div class="card">
+      <div class="card-head"><span class="card-title">Límites y método</span><span class="card-tag">Manual CONE 2.8 · IEC 61000-3-7</span></div>
+      <div class="grid-2">
+        <div class="kv"><span class="k">Pst (severidad corta)</span><span class="v">&lt; 1.0</span></div>
+        <div class="kv"><span class="k">Plt (severidad larga)</span><span class="v">&lt; 0.8</span></div>
+        <div class="kv"><span class="k">Método</span><span class="v">IEC 61000-3-7</span></div>
+        <div class="kv"><span class="k">Evaluación</span><span class="v">P95 semanal por fase</span></div>
+        <div class="kv"><span class="k">Registro</span><span class="v">10-min por fase</span></div>
+      </div>
+      <div class="nota"><span class="label">Nota</span>Los umbrales del Manual CONE (Pst &lt; 1.0 / Plt &lt; 0.8) son distintos a los del Manual INTE (Pst ≤ 0.90 / Plt ≤ 0.70 para tipo B); no confundir marcos.</div>
+    </div>
+  </div>
+
+  <!-- 7.3 DESBALANCES -->
+  <div id="s7-3">
+    <h3 class="sub" style="margin-top:22px">7.3 Desbalance de tensión y de corriente</h3>
+    <div class="card">
+      <div class="card-head"><span class="card-title">Límites</span><span class="card-tag">Manual CONE 2.8</span></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Indicador</th><th class="c">Fórmula</th><th class="c">Límite</th><th class="c">Evaluación</th></tr></thead>
+          <tbody>
+            <tr><td>Desbalance de tensión</td><td class="c">%V₂/V₁ × 100</td><td class="num">≤ 2 %</td><td>P95 semanal</td></tr>
+            <tr><td>Desbalance de corriente</td><td class="c">%I₂/I₁ × 100</td><td class="num">≤ 15 %</td><td>Promedio semanal</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="nota"><span class="label">Nota</span>El desbalance de V utiliza percentil 95; el desbalance de I utiliza promedio. No intercambiar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCION 8 - ESTRUCTURA -->
+<section id="s8" class="block">
+  <h2 class="section"><span class="num">8</span>Estructura del reporte de comportamiento</h2>
+
+  <div class="card">
+    <div class="card-head"><span class="card-title">Sección 5.1 — Requerimientos de Calidad de Potencia</span><span class="card-tag">Estructura sugerida</span></div>
+<pre>5.1  Requerimientos de Calidad de la Potencia
+     ├── 5.1.1 Objetivo (plantilla)
+     ├── 5.1.2 Criterio (tablas 2.8.A/B/C, flicker, desbalances)
+     ├── 5.1.3 Metodología
+     ├── 5.1.4 Resultados por indicador
+     │   ├── Armónicos (P95 vs límite, %DATD)
+     │   ├── Flicker (Pst / Plt P95 por fase)
+     │   ├── Desbalance V (P95)
+     │   └── Desbalance I (promedio)
+     ├── 5.1.5 Gráficas
+     └── 5.1.6 Conclusión (plantilla)</pre>
+    <h4 class="sub2">Plantilla — Objetivo 5.1</h4>
+    <div class="plantilla"><span class="tag-line">objetivo</span>Verificar que el Centro de Carga <em>{{NOMBRE_CC}}</em> cumple con los Requerimientos de Calidad de la Potencia establecidos en la sección 2.8 del Manual Regulatorio [1], incluyendo distorsión armónica en corriente conforme a IEEE Std 519-2014, severidad del parpadeo, desbalance de tensión y desbalance de corriente, evaluados en el Punto de Conexión durante el periodo <em>{{FECHA_INI}}</em> – <em>{{FECHA_FIN}}</em>.</div>
+    <h4 class="sub2">Plantilla — Conclusión 5.1</h4>
+    <div class="plantilla"><span class="tag-line">conclusión</span>Los indicadores evaluados en el Punto de Conexión se mantuvieron dentro de los umbrales establecidos en el Manual Regulatorio para <em>{{PCT}}%</em> del tiempo del periodo, con P95 semanal por debajo de los límites correspondientes. Se concluye que el Centro de Carga cumple los Requerimientos de Calidad de la Potencia.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="card-title">Sección 5.2 — Factor de Potencia</span><span class="card-tag">Estructura sugerida</span></div>
+<pre>5.2  Factor de Potencia
+     ├── 5.2.1 Objetivo (plantilla)
+     ├── 5.2.2 Criterio (limite aplicable segun fecha)
+     ├── 5.2.3 Metodologia (agregacion 5-min)
+     ├── 5.2.4 Resultados
+     │   ├── Tabla mensual (% cumplimiento, P5, promedio, adelanto)
+     │   └── Histograma y perfil temporal
+     └── 5.2.5 Conclusion (plantilla)</pre>
+    <h4 class="sub2">Plantilla — Objetivo 5.2</h4>
+    <div class="plantilla"><span class="tag-line">objetivo</span>Verificar que el Factor de Potencia en el Punto de Conexión del Centro de Carga <em>{{NOMBRE_CC}}</em> se mantenga en atraso ≥ <em>{{LIMITE}}</em> (Manual Regulatorio, sección 2.4 [1]) durante al menos el 95 % del tiempo del periodo mensual evaluado, sin ventanas en adelanto.</div>
+  </div>
+</section>
+
+<!-- SECCION 9 - PLAN CRE -->
+<section id="s9" class="block">
+  <h2 class="section"><span class="num">9</span>Plan de Trabajo CRE — Capítulo 4</h2>
+
+  <div class="card">
+    <div class="card-head"><span class="card-title">Contenido mínimo del Plan de Trabajo CRE</span><span class="card-tag">Manual CONE Cap. 4</span></div>
+
+    <h4 class="sub2">Identificación</h4>
+    <ul style="font-size:13px;padding-left:20px">
+      <li>Razón social del titular del centro de carga.</li>
+      <li>RMU / RPU asignados por CENACE.</li>
+      <li>SCIAN del centro de carga.</li>
+      <li>Ubicación y coordenadas geográficas del PC.</li>
+      <li>Nivel de tensión de conexión y CIN contratada.</li>
+    </ul>
+
+    <h4 class="sub2">Representación legal</h4>
+    <ul style="font-size:13px;padding-left:20px">
+      <li>Datos del representante legal y poder notarial.</li>
+      <li>Firma y designación del responsable técnico.</li>
+    </ul>
+
+    <h4 class="sub2">Diagnóstico por requerimiento</h4>
+    <p style="font-size:13px">Tabla con el estatus actual de cumplimiento por cada requerimiento aplicable (2.1 a 2.8), evidencia y brecha.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th class="c">§</th><th>Requerimiento</th><th class="c">Estatus</th><th>Evidencia</th><th>Brecha</th></tr></thead>
+        <tbody>
+          <tr><td class="c">2.1</td><td>Tensión</td><td class="c">Cumple / No cumple / Parcial</td><td>Reporte medición</td><td></td></tr>
+          <tr><td class="c">2.2</td><td>Frecuencia</td><td class="c"></td><td></td><td></td></tr>
+          <tr><td class="c">2.3</td><td>Corto circuito (informativo)</td><td class="c">N/A</td><td>Oficio CENACE</td><td>—</td></tr>
+          <tr><td class="c">2.4</td><td>Factor de Potencia</td><td class="c"></td><td></td><td></td></tr>
+          <tr><td class="c">2.5</td><td>Protecciones</td><td class="c"></td><td>Estudio de coordinación</td><td></td></tr>
+          <tr><td class="c">2.6</td><td>Control (RDC)</td><td class="c"></td><td>Ficha de pruebas</td><td></td></tr>
+          <tr><td class="c">2.7</td><td>Info (Manual TIC)</td><td class="c"></td><td>Certificado</td><td></td></tr>
+          <tr><td class="c">2.8</td><td>Calidad</td><td class="c"></td><td>Reporte QP semanal</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="sub2">Plan con cronograma</h4>
+    <p style="font-size:13px">Acciones correctivas por brecha, responsable, fecha compromiso e hito verificable.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th class="c">#</th><th>Acción</th><th>Responsable</th><th>Fecha compromiso</th><th>Hito verificable</th></tr></thead>
+        <tbody><tr><td colspan="5" style="text-align:center;color:var(--gray-400);padding:16px">— filas por acción del plan —</td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="nota"><span class="label">Nota</span>El Plan de Trabajo se presenta ante la CRE conforme al procedimiento vigente; sólo se incluyen textos y compromisos autorizados por el titular. No inventar contenidos.</div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <span>Manual de consulta — Centros de Carga · Basado en Manual CONE (Código de Red 2.0, RES/550/2021)</span>
+  <span>Documento técnico interno</span>
+</footer>
+
+<script>
+function toggleAll(open){
+  document.querySelectorAll('details.acc').forEach(d=>{ d.open = open; });
+}
+</script>
+</body>
+</html>

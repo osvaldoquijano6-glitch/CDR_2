@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capítulo 3 — Variaciones de Tensión | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual INTE — Centrales Eléctricas</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual INTE — Capítulos</span>
+    <a href="cap1.html" class="sb-cap">Cap. 1 — Tipos de Centrales Eléctricas</a>
+    <a href="cap2.html" class="sb-cap">Cap. 2 — Frecuencia y Control Primario</a>
+    <a href="cap3.html" class="sb-cap active" aria-current="page">Cap. 3 — Variaciones de Tensión</a>
+    <a href="#sec31"    class="sb-sub">3.1 Rangos de tensión — Tabla 3.1.1</a>
+    <a href="#sec32"    class="sb-sub">3.2 Síncrona B — FP · RAT</a>
+    <a href="#sec33"    class="sb-sub">3.3 Síncrona C — V-Q/Pmáx</a>
+    <a href="#sec331"   class="sb-sub" style="padding-left:2.2rem">3.3.1 Perfil a Pmáx</a>
+    <a href="#sec332"   class="sb-sub" style="padding-left:2.2rem">3.3.2 P &lt; Pmáx</a>
+    <a href="#sec333"   class="sb-sub" style="padding-left:2.2rem">3.3.3 RAT · PSS</a>
+    <a href="#sec34"    class="sb-sub">3.4 Síncrona D — RAT respaldo · PSS dual</a>
+    <a href="#sec35"    class="sb-sub">3.5 Asíncrona B/C/D</a>
+    <a href="#sec351"   class="sb-sub" style="padding-left:2.2rem">3.5.1 P-Q/Pmáx</a>
+    <a href="#sec353"   class="sb-sub" style="padding-left:2.2rem">3.5.3 Modos de control</a>
+    <a href="#sec355"   class="sb-sub" style="padding-left:2.2rem">3.5.5 Prioridad P/Q en falla</a>
+    <a href="cap4.html" class="sb-cap">Cap. 4 — Control Dinámico de Tensión</a>
+    <a href="cap5.html" class="sb-cap">Cap. 5 — Restauración del SEN</a>
+    <a href="cap6.html" class="sb-cap">Cap. 6 — Administración del SEN</a>
+    <a href="cap7.html" class="sb-cap">Cap. 7 — Calidad de la Potencia</a>
+    <a href="cap8.html" class="sb-cap">Cap. 8 CONE — Calidad CdC</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Manual INTE › <strong>Capítulo 3 — Variaciones de Tensión</strong></div>
+    <span class="pg-pill">Manual INTE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual INTE · Cap. 3 de 8 — Tensión · Q/V · RAT · PSS</span>
+    <h1 class="titulo">Capítulo 3. Requerimientos de Interconexión ante variaciones de tensión de la Red Eléctrica</h1>
+
+    <p>
+      El Capítulo 3 establece los límites de tensión que deben tolerar las Centrales Eléctricas en régimen permanente (3.1) y los requerimientos de control de potencia reactiva y tensión diferenciados por tipo de máquina (Síncrona: 3.2–3.4; Asíncrona: 3.5). Su relación con el Capítulo 4 es directa: aquí se definen las bandas de operación en estado estacionario; Cap. 4 define las curvas de ride-through durante fallas transitorias.
+    </p>
+
+    <!-- ═══════════ 3.1 TABLA 3.1.1 ═══════════ -->
+    <h2 class="sec" id="sec31"><span class="snum">3.1</span>Requerimientos Generales — Tipos B, C y D</h2>
+
+    <h3 class="subsec">3.1.1 Rangos de Tensión en Régimen Permanente</h3>
+
+    <div class="tbl-wrap full-w">
+      <div class="tbl-caption">Tabla 3.1.1 — Valores de operación sin desconectarse de la red (todos los sistemas síncronos)
+        <span class="tbl-sub">RES/550/2021, Manual INTE, Cap. 3 3.1.1 — DOF 31-dic-2021 · PDF p. 224</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Área Síncrona</th><th>Rango de tensión en el PI [pu]</th><th>Tiempo mínimo de operación</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3"><strong>Todos los sistemas:</strong> SIN · SIBC · SIBCS · SIM (Mulegé)</td>
+            <td style="font-family:var(--mono);text-align:center">1.05 pu &lt; V &lt; 1.10 pu</td>
+            <td style="font-family:var(--mono);text-align:center">30 minutos</td>
+          </tr>
+          <tr style="background:rgba(0,102,204,.06)">
+            <td style="font-family:var(--mono);text-align:center;font-weight:700">0.95 pu &lt; V &lt; 1.05 pu</td>
+            <td style="font-family:var(--mono);text-align:center;font-weight:700;color:var(--blue)">Ilimitado (operación nominal)</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);text-align:center">0.90 pu &lt; V &lt; 0.95 pu</td>
+            <td style="font-family:var(--mono);text-align:center">30 minutos</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      El CENACE puede establecer períodos más cortos ante condiciones simultáneas adversas —sobretensión con baja frecuencia, o baja tensión con alta frecuencia— que se refuerzan mutuamente en términos de estrés sobre los equipos. La Tabla 3.1.1 aplica igual para los cuatro sistemas interconectados, a diferencia de la Tabla 2.1 (frecuencia) que diferencia SIBCS/SIM en el límite superior.
+    </p>
+
+    <!-- ═══════════ 3.2 SÍNCRONA B ═══════════ -->
+    <h2 class="sec" id="sec32"><span class="snum">3.2</span>Control de Tensión y Potencia Reactiva — CE Síncrona Tipo B</h2>
+
+    <h3 class="subsec">3.2.1 Capacidad de Potencia Reactiva</h3>
+
+    <blockquote>
+      La Central Eléctrica Síncrona tipo B debe tener la capacidad de mantener su potencia reactiva en el Punto de Interconexión en un rango de factor de potencia de al menos 0.95 en atraso y 0.95 en adelanto.
+      <cite>RES/550/2021, Manual INTE, Cap. 3 3.2.1 — DOF 31-dic-2021 · PDF p. 224</cite>
+    </blockquote>
+
+    <p>
+      Un FP de 0.95 en atraso/adelanto equivale a una capacidad reactiva de ±Q/S ≈ ±0.312 (ya que tan(arccos 0.95) ≈ 0.329). Para una CE de 10 MW operando a FP nominal, esto implica poder entregar o absorber ~3.3 MVAr en el PI. Este es el requerimiento <em>mínimo</em>; en la práctica los generadores síncronos modernos tienen capacidades mayores que no deben limitarse.
+    </p>
+
+    <h3 class="subsec">3.2.2 Sistema de Control Automático de Excitación (RAT)</h3>
+
+    <blockquote>
+      La Central Eléctrica Síncrona tipo B debe estar equipada con un sistema de control automático de excitación permanente que pueda proporcionar una tensión constante en el Punto de Interconexión a una consigna seleccionable, sin causar inestabilidad en todo el rango de operación de su Curva de Capabilidad.
+      <cite>RES/550/2021, Manual INTE, Cap. 3 3.2.2 — DOF 31-dic-2021 · PDF p. 224</cite>
+    </blockquote>
+
+    <!-- ═══════════ 3.3 SÍNCRONA C ═══════════ -->
+    <h2 class="sec" id="sec33"><span class="snum">3.3</span>Control de Tensión y Potencia Reactiva — CE Síncrona Tipo C</h2>
+
+    <p>
+      Aplican los requerimientos del 3.2, más los siguientes. El salto del tipo B al tipo C es significativo: la CE pasa de cumplir un simple requisito de FP a demostrar un <strong>perfil V-Q/Pmáx</strong> completo, adaptarse a cualquier punto de ese perfil en tiempo definido, y contar con un RAT con protecciones activas.
+    </p>
+
+    <h3 class="subsec" id="sec331">3.3.1 Capacidad de Potencia Reactiva a Potencia Máxima (Pmáx)</h3>
+
+    <div class="tbl-wrap full-w">
+      <div class="tbl-caption">Tabla 3.3.2 — Parámetros del perfil V-Q/Pmáx (aplica también a Asíncronas — 3.5)
+        <span class="tbl-sub">RES/550/2021, Manual INTE, Cap. 3 3.3.1 — DOF 31-dic-2021 · PDF p. 225</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Zona</th><th>Rango Q/Pmáx</th><th>Rango de tensión V [pu]</th><th>Carácter</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(0,102,204,.06)">
+            <td><strong>Área Blanca</strong></td>
+            <td style="font-family:var(--mono);text-align:center;font-weight:700">± 0.33</td>
+            <td style="font-family:var(--mono);text-align:center">0.95 – 1.05 pu</td>
+            <td style="color:#1a761a;font-weight:700">Requerimiento mínimo obligatorio</td>
+          </tr>
+          <tr>
+            <td><strong>Área Gris</strong></td>
+            <td style="font-family:var(--mono);text-align:center">± 0.50</td>
+            <td style="font-family:var(--mono);text-align:center">0.95 – 1.05 pu</td>
+            <td style="color:var(--text-muted)">Opcional — no debe limitarse si es factible</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure class="figura">
+      <img src="../assets/figuras/figura_3.3.2.png" alt="Figura 3.3.2 — Diagrama V-Q/Pmáx de una Central Eléctrica Síncrona" loading="lazy">
+      <figcaption><b>Figura 3.3.2.</b> Diagrama V-Q/Pmáx de una Central Eléctrica Síncrona (área blanca obligatoria, área gris opcional).</figcaption>
+    </figure>
+
+    <h3 class="subsec" id="sec332">3.3.2 Capacidad Reactiva a P &lt; Pmáx</h3>
+
+    <blockquote>
+      Cuando se opera la Central Eléctrica Síncrona tipo C a una salida de potencia activa por debajo de la potencia máxima (P &lt; Pmáx), esta debe operar en cada punto dentro de la curva de Capabilidad P-Q de la Central Eléctrica, por lo menos hasta el nivel mínimo de la potencia activa (Pmin).
+      <cite>RES/550/2021, Manual INTE, Cap. 3 3.3.2 — DOF 31-dic-2021 · PDF p. 225</cite>
+    </blockquote>
+
+    <p>
+      La Figura 3.3.3 muestra el perfil V-P-Q/Pmáx tridimensional: la zona blanca se extiende a través de todos los niveles de P desde Pmin hasta Pmáx. Una CE síncrona tipo C no puede recortar su capacidad de reactiva simplemente porque está operando a carga parcial —debe mantener la capacidad Q/Pmáx en todo el rango de despacho.
+    </p>
+
+    <figure class="figura">
+      <img src="../assets/figuras/figura_3.3.3.png" alt="Figura 3.3.3 — Diagrama V-P-Q/Pmáx de una Central Eléctrica Síncrona" loading="lazy">
+      <figcaption><b>Figura 3.3.3.</b> Diagrama V-P-Q/Pmáx tridimensional de una Central Eléctrica Síncrona.</figcaption>
+    </figure>
+
+    <h3 class="subsec" id="sec333">3.3.3 Sistema de Control de Tensión — RAT y PSS</h3>
+
+    <blockquote>
+      Los parámetros y ajustes de los componentes del sistema de control de tensión serán determinados por el CENACE y notificados a la Central Eléctrica. Este último debe incluir:
+      <br><br>
+      A. Limitación de ancho de banda de la señal de salida, para asegurar que la respuesta de mayor frecuencia no pueda excitar oscilaciones torsionales en otras Centrales Eléctricas interconectadas a la red;
+      <br>B. Un limitador de baja excitación, para evitar que el RAT reduzca la excitación a un nivel que podría poner en peligro la estabilidad síncrona;
+      <br>C. Un limitador de sobreexcitación, que asegure que la Central Eléctrica está funcionando dentro de sus límites de diseño (curva de Capabilidad P-Q); y
+      <br>D. La funcionalidad del sistema de estabilización de potencia (PSS), para atenuar las oscilaciones de potencia.
+      <cite>RES/550/2021, Manual INTE, Cap. 3 3.3.3 — DOF 31-dic-2021 · PDF p. 226</cite>
+    </blockquote>
+
+    <p>
+      Las cuatro funciones del RAT tipo C son protecciones y controles complementarios: el limitador de baja excitación (UEL, Under-Excitation Limiter) impide que el rotor opere en condiciones subexcitadas donde puede perderse el sincronismo; el limitador de sobreexcitación (OEL) protege al devanado de campo del calentamiento excesivo; la limitación de ancho de banda evita la excitación de resonancias torsionales en cadena turbina-generador; y el PSS agrega amortiguamiento a los modos de oscilación electromecánicos.
+    </p>
+
+    <!-- ═══════════ 3.4 SÍNCRONA D ═══════════ -->
+    <h2 class="sec" id="sec34"><span class="snum">3.4</span>Control de Tensión y Potencia Reactiva — CE Síncrona Tipo D</h2>
+
+    <p>Aplican todos los requerimientos del 3.3 (tipo C), más los siguientes:</p>
+
+    <h3 class="subsec">3.4.1 Sistema de Control de Tensión para Tipo D</h3>
+
+    <blockquote>
+      La Central Eléctrica debe contar con los siguientes sistemas que permitan el funcionamiento continuo en caso de falla del dispositivo principal:
+      <br>i. Un regulador automático de tensión de respaldo (RAT respaldo), el cual deberá tener al menos los mismos ajustes y características que el RAT principal; y
+      <br>ii. Sistema estabilizador de potencia de doble entrada (PSS doble entrada).
+      <cite>RES/550/2021, Manual INTE, Cap. 3 3.4.1 — DOF 31-dic-2021 · PDF p. 227</cite>
+    </blockquote>
+
+    <div class="tbl-wrap full-w" style="max-width:680px;margin-left:0">
+      <div class="tbl-caption">Diferencia clave Síncrona C vs D en control de tensión</div>
+      <table>
+        <thead>
+          <tr><th>Componente</th><th>Tipo C</th><th>Tipo D (adicional)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>RAT principal</td>
+            <td style="text-align:center;color:#1a761a">✓ obligatorio</td>
+            <td style="text-align:center;color:#1a761a">✓ obligatorio</td>
+          </tr>
+          <tr>
+            <td>RAT de respaldo (con ≥ mismos ajustes)</td>
+            <td style="text-align:center;color:#94a3b8">— no requerido</td>
+            <td style="text-align:center;color:#1a761a;font-weight:700">✓ obligatorio</td>
+          </tr>
+          <tr>
+            <td>PSS (amortiguamiento de oscilaciones)</td>
+            <td style="text-align:center;color:#1a761a">✓ funcionalidad incluida en RAT</td>
+            <td style="text-align:center;color:#1a761a;font-weight:700">✓ PSS de doble entrada (dual-input)</td>
+          </tr>
+          <tr>
+            <td>UEL · OEL · limitación BW</td>
+            <td style="text-align:center;color:#1a761a">✓ obligatorios</td>
+            <td style="text-align:center;color:#1a761a">✓ (hereda C)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      El <strong>PSS de doble entrada</strong> (dual-input PSS) combina señales de velocidad del rotor y de potencia eléctrica (o frecuencia) para generar la señal de amortiguamiento, eliminando el problema del washout inadecuado que puede ocurrir con PSS de una sola señal ante excursiones de carga y tensión combinadas. Es el estándar para grandes unidades de generación.
+    </p>
+
+    <!-- ═══════════ 3.5 ASÍNCRONA ═══════════ -->
+    <h2 class="sec" id="sec35"><span class="snum">3.5</span>Control de Tensión y Potencia Reactiva — CE Asíncrona Tipo B, C y D</h2>
+
+    <h3 class="subsec" id="sec351">3.5.1 Capacidad de Potencia Reactiva a Pmáx</h3>
+
+    <blockquote>
+      La Central Eléctrica Asíncrona debe tener la capacidad de mantener su potencia reactiva en un rango de factor de potencia de al menos 0.95 en atraso y 0.95 adelanto en el Punto de Interconexión. La Central Eléctrica Asíncrona tipo B, C o D debe cumplir el perfil V-P-Q/Pmáx de la Figura 3.5.1 y Figura 3.5.2 de conformidad con los valores de la Tabla 3.3.2. La zona gris no es obligatoria; sin embargo, si para alguna tecnología resulta factible, no debe limitarse.
+      <cite>RES/550/2021, Manual INTE, Cap. 3 3.5.1 — DOF 31-dic-2021 · PDF p. 227</cite>
+    </blockquote>
+
+    <figure class="figura">
+      <img src="../assets/figuras/figura_3.5.1.png" alt="Figura 3.5.1 — Diagrama P-Q/Pmáx de una Central Eléctrica Asíncrona" loading="lazy">
+      <figcaption><b>Figura 3.5.1.</b> Diagrama P-Q/Pmáx de una Central Eléctrica Asíncrona.</figcaption>
+    </figure>
+
+    <figure class="figura">
+      <img src="../assets/figuras/figura_3.5.2.png" alt="Figura 3.5.2 — Diagrama V-P-Q/Pmáx de una Central Eléctrica Asíncrona" loading="lazy">
+      <figcaption><b>Figura 3.5.2.</b> Diagrama V-P-Q/Pmáx de una Central Eléctrica Asíncrona.</figcaption>
+    </figure>
+
+    <div class="nota">
+      <span class="nota-title">Misma Tabla 3.3.2 para Síncronas y Asíncronas</span>
+      Los límites de Q/Pmáx del Área Blanca (±0.33) y el Área Gris (±0.50) son iguales para Centrales Eléctricas Síncronas tipo C/D y Asíncronas tipo B/C/D. La diferencia está en el rango de tensión aplicable: el perfil de las asíncronas se expresa como P-Q/Pmáx (eje P explícito), mientras que las síncronas usan V-Q/Pmáx (eje V explícito), ya que las síncronas controlan directamente la tensión vía excitación.
+    </div>
+
+    <h3 class="subsec">3.5.2 Capacidad Reactiva a P &lt; Pmáx</h3>
+
+    <p>
+      La CE Asíncrona tipo B, C o D debe moverse a cualquier punto de operación dentro de su perfil P-Q/Pmáx (Fig. 3.5.1) y V-P-Q/Pmáx (Fig. 3.5.2) en el tiempo definido por el CENACE. Cuando opera con P &lt; Pmáx, debe proporcionar potencia reactiva en cualquier punto dentro de la zona blanca de su perfil P-Q/Pmáx. Si alguna unidad está fuera de servicio por mantenimiento, se permite una capacidad reducida de reactiva considerando la disponibilidad técnica real.
+    </p>
+
+    <h3 class="subsec" id="sec353">3.5.3 Modos de Control de Potencia Reactiva Automático</h3>
+
+    <p>
+      La CE Asíncrona debe regular la potencia reactiva automáticamente en uno de tres modos. El CENACE define la prioridad en los Estudios de Interconexión. Para tipos C y D, el CENACE envía la consigna remotamente; para tipo B, puede hacerlo.
+    </p>
+
+    <div class="tbl-wrap full-w">
+      <div class="tbl-caption">Tabla — Especificaciones de los modos de control reactivo automático (3.5.3)
+        <span class="tbl-sub">RES/550/2021, Manual INTE, Cap. 3 3.5.3.i–v — DOF 31-dic-2021 · PDF p. 228–229</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Modo</th>
+            <th>Consigna / rango</th>
+            <th>T 90%</th>
+            <th>T estabilización</th>
+            <th>Paso máx.</th>
+            <th>Error E/E</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Control de tensión directo</strong></td>
+            <td style="font-family:var(--mono);font-size:.8rem;text-align:center">V 0.95–1.05 pu · banda muerta 0–±1%</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 3 s</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 5 s</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 0.01 pu</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 0.5 %</td>
+          </tr>
+          <tr>
+            <td><strong>Control de tensión QV</strong></td>
+            <td style="font-family:var(--mono);font-size:.8rem;text-align:center">V 0.95–1.05 pu · pendiente definida por CENACE</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 3 s</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 5 s</td>
+            <td style="font-family:var(--mono);text-align:center">—</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 5 % Q<sub>calc</sub></td>
+          </tr>
+          <tr>
+            <td><strong>Control de potencia reactiva (Q)</strong></td>
+            <td style="font-family:var(--mono);font-size:.8rem;text-align:center">Consigna Q enviada por CENACE</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 3 s</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 5 s</td>
+            <td style="font-family:var(--mono);font-size:.8rem;text-align:center">≤ 1 MVAr o ≤ 5% Q<sub>máx</sub></td>
+            <td style="font-family:var(--mono);text-align:center">—</td>
+          </tr>
+          <tr>
+            <td><strong>Control de factor de potencia (FP)</strong></td>
+            <td style="font-family:var(--mono);font-size:.8rem;text-align:center">FP dentro de zona blanca Fig. 3.5.2</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 3 s</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 5 s</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 0.002</td>
+            <td style="font-family:var(--mono);text-align:center">≤ 0.1 %</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec">3.5.4 Prioridad del Modo de Control</h3>
+
+    <p>
+      El CENACE especifica el modo de control prioritario durante la VRT. Todos los modos deben estar disponibles y ser seleccionables a petición del CENACE —incluyendo ambos modos de control de tensión (directo y QV) simultáneamente disponibles aunque solo uno sea el prioritario.
+    </p>
+
+    <h3 class="subsec" id="sec355">3.5.5 Prioridad de Control de P vs Q durante Fallas</h3>
+
+    <blockquote>
+      El CENACE especificará si la contribución de potencia activa, reactiva o una combinación de ambas, tiene prioridad durante fallas.
+      <br><br>
+      Si se da prioridad a la contribución de la potencia activa, esta disposición ha de establecerse a más tardar 0.25 segundos desde el inicio de la falla.
+      <br><br>
+      Si se da prioridad a la contribución de la potencia reactiva, la potencia activa deberá recuperarse en menos de 1 segundo.
+      <cite>RES/550/2021, Manual INTE, Cap. 3 3.5.5 — DOF 31-dic-2021 · PDF p. 229</cite>
+    </blockquote>
+
+    <p>
+      Esta elección es crítica para parques eólicos y fotovoltaicos grandes. En redes con escasez de reactiva durante fallas (zonas débiles, lejos de compensadores), el CENACE puede priorizar la inyección de Q para sostener la tensión —estrategia habitual en estándares europeos (Q-priority). En redes con generación distribuida abundante, puede preferir P-priority para no perder frecuencia durante la recuperación.
+    </p>
+
+    <h3 class="subsec">3.5.6 Amortiguamiento de Oscilaciones de Potencia</h3>
+
+    <p>
+      Con base en los Estudios de Interconexión, si el CENACE lo requiere, la CE Asíncrona contribuirá al amortiguamiento de oscilaciones de potencia mediante un <strong>amortiguador de oscilaciones de potencia (POD)</strong>, equivalente funcional del PSS en máquinas síncronas. El submodelo C de los modelos de simulación (6.1.6) debe incluir el modelo del POD.
+    </p>
+
+    <h3 class="subsec">3.5.7 Respuesta de Corriente ante Fallas Simétricas y Asimétricas</h3>
+
+    <blockquote>
+      En caso de ser necesario, el CENACE especificará que una Central Eléctrica Asíncrona tipo B proporcione respuesta rápida de soporte de tensión ante fallas simétricas (3 fases) y asimétricas (1 fase o 2 fases). El CENACE especificará: A. Los valores de tensión para inyección transitoria de corriente activa, reactiva, o combinada dentro de la Zona A (Figuras 4.1.1.B y 4.2.1.B); y B. Los tiempos de respuesta y la precisión de la corriente de falla transitoria.
+      <cite>RES/550/2021, Manual INTE, Cap. 3 3.5.7 — DOF 31-dic-2021 · PDF p. 229–230</cite>
+    </blockquote>
+
+    <p>
+      La respuesta transitoria de corriente (FRT current injection) es la capacidad de los inversores modernos de inyectar corriente reactiva de forma instantánea durante la falla para sostener la tensión en el PI. El 3.5.7 la convierte en un requerimiento condicional a solicitud del CENACE —no es automático para tipo B, aunque para los tipos C y D los Estudios de Interconexión determinarán su necesidad en función de la fortaleza de la red.
+    </p>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="cap2.html">
+        <span class="nd">← Capítulo anterior</span>
+        <span class="nt">Cap. 2 — Frecuencia y Control Primario</span>
+      </a>
+      <a href="cap4.html" class="n-next">
+        <span class="nd">Capítulo siguiente →</span>
+        <span class="nt">Cap. 4 — Control Dinámico de Tensión (LVRT/HVRT)</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

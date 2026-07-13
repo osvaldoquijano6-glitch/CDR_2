@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap. 2 2.1–2.7 y 2.9 — Requerimientos Técnicos | Manual CONE — Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+.nota.cone   { border-left-color: #0077b6; }
+.nota.cone .nota-title { background: rgba(0,119,182,.12); color: #0077b6; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual CONE — Centros de Carga</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual CONE — Capítulos</span>
+    <a href="cone_c1.html" class="sb-cap">Objetivo · Alcance · Cap. 1</a>
+    <a href="cone_c2.html" class="sb-cap active" aria-current="page">Cap. 2 2.1–2.7 y 2.9</a>
+    <a href="#sec21"        class="sb-sub">2.1 Tensión — Tab. 2.1.A/B</a>
+    <a href="#sec22"        class="sb-sub">2.2 Frecuencia</a>
+    <a href="#sec23"        class="sb-sub">2.3 Corto circuito</a>
+    <a href="#sec24"        class="sb-sub">2.4 Factor de Potencia</a>
+    <a href="#sec25"        class="sb-sub">2.5 Protecciones</a>
+    <a href="#sec26"        class="sb-sub">2.6 Control (RDC)</a>
+    <a href="#sec27"        class="sb-sub">2.7 Intercambio TIC</a>
+    <a href="#sec29"        class="sb-sub">2.9 Modelos</a>
+    <a href="cap8.html"    class="sb-cap">Cap. 2 2.8 — Calidad de la Potencia</a>
+    <a href="cone_c3.html" class="sb-cap">Cap. 3 — Verificación</a>
+    <a href="cone_c4.html" class="sb-cap">Cap. 4 — Plan de Trabajo</a>
+    <span class="sb-section-lbl">Manual INTE — referencia paralela</span>
+    <a href="cap2.html"  class="sb-cap">Cap. 2 — Frecuencia (INTE)</a>
+    <a href="cap3.html"  class="sb-cap">Cap. 3 — Tensión (INTE)</a>
+    <a href="cap7.html"  class="sb-cap">Cap. 7 — Calidad (INTE)</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+    <a href="https://www.cenace.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CENACE — SIM</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Manual CONE › <strong>Cap. 2 — Requerimientos Técnicos 2.1–2.7 y 2.9</strong></div>
+    <span class="pg-pill">Manual CONE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual CONE · Cap. 2 — Requerimientos técnicos (excepto 2.8 Calidad de la Potencia)</span>
+    <h1 class="titulo">Capítulo 2. Requerimientos técnicos — 2.1–2.7 y 2.9</h1>
+
+    <p>
+      El Capítulo 2 del Manual CONE agrupa los ocho requerimientos técnicos que los Centros de Carga deben cumplir en el Punto de Conexión. Esta página cubre 2.1 a 2.7 y 2.9; el 2.8 (Calidad de la Potencia) tiene página dedicada por su extensión y complejidad. La aplicabilidad de cada requerimiento varía según la categoría del CdC definida en la Tabla 1.1.A: algunos aplican universalmente (tensión, frecuencia, corto circuito, protecciones), otros solo a partir de cierta demanda contratada (factor de potencia, calidad) y otros de forma condicional (control, intercambio de información).
+    </p>
+
+    <!-- ═══════════ 2.1 TENSIÓN ═══════════ -->
+    <h2 class="sec" id="sec21"><span class="snum">2.1</span>Tensión</h2>
+
+    <blockquote>
+      En Estado Operativo Normal, los Centros de Carga deberán seguir conectados ante variaciones de tensión de manera permanente y de acuerdo con los rangos de la Tabla 2.1.A.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.1.a — DOF 31-dic-2021 · PDF p. 243</cite>
+    </blockquote>
+
+    <p>
+      La Tabla 2.1.A establece los límites permanentes expresados en kilovoltios (no en pu como el Manual INTE Cap. 3 3.1.1): tensión máxima = 105% del nominal, tensión mínima = 95%. Fuera de ese rango, el CdC puede desconectarse si no es técnicamente factible continuar conectado, con justificación ante la CRE o el CENACE.
+    </p>
+
+    <div class="tbl-wrap full-w" id="tbl-21a">
+      <div class="tbl-caption">Tabla 2.1.A — Valores máximos y mínimos de tensión de operación permanente
+        <span class="tbl-sub">Todos los CdC conectados en MT o AT · V<sub>máx</sub> = 105% V<sub>nom</sub> · V<sub>mín</sub> = 95% V<sub>nom</sub> · RES/550/2021 Manual CONE 2.1 — pág. 243</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Tensión nominal [kV]</th>
+            <th>Tensión mínima permanente [kV]<br><span style="font-weight:400;font-size:.8em">(95% V<sub>nom</sub>)</span></th>
+            <th>Tensión máxima permanente [kV]<br><span style="font-weight:400;font-size:.8em">(105% V<sub>nom</sub>)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-family:var(--mono);text-align:center">400.0</td><td style="font-family:var(--mono);text-align:center">380.0</td><td style="font-family:var(--mono);text-align:center">420.0</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">230.0</td><td style="font-family:var(--mono);text-align:center">218.5</td><td style="font-family:var(--mono);text-align:center">241.5</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">161.0</td><td style="font-family:var(--mono);text-align:center">152.95</td><td style="font-family:var(--mono);text-align:center">169.05</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">138.0</td><td style="font-family:var(--mono);text-align:center">131.1</td><td style="font-family:var(--mono);text-align:center">144.9</td></tr>
+          <tr style="background:rgba(0,102,204,.05)"><td style="font-family:var(--mono);text-align:center">115.0</td><td style="font-family:var(--mono);text-align:center">109.25</td><td style="font-family:var(--mono);text-align:center">120.75</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">85.0</td><td style="font-family:var(--mono);text-align:center">80.75</td><td style="font-family:var(--mono);text-align:center">89.25</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">69.0</td><td style="font-family:var(--mono);text-align:center">65.55</td><td style="font-family:var(--mono);text-align:center">72.45</td></tr>
+          <tr style="background:rgba(0,102,204,.05)"><td style="font-family:var(--mono);text-align:center">34.5</td><td style="font-family:var(--mono);text-align:center">32.775</td><td style="font-family:var(--mono);text-align:center">36.225</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">23.0</td><td style="font-family:var(--mono);text-align:center">21.85</td><td style="font-family:var(--mono);text-align:center">24.15</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">13.8</td><td style="font-family:var(--mono);text-align:center">13.11</td><td style="font-family:var(--mono);text-align:center">14.49</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Para condiciones distintas al Estado Operativo Normal, la Tabla 2.1.B amplía los márgenes a ±10% del nominal, con una tolerancia máxima de 20 minutos. Si el CdC no puede soportar técnicamente estas variaciones temporales, debe justificarlo: los CdC existentes ante la CRE mediante Plan de Trabajo; los CdC en proceso de conexión o modificación técnica ante el CENACE o Distribuidor.
+    </p>
+
+    <div class="tbl-wrap full-w" id="tbl-21b">
+      <div class="tbl-caption">Tabla 2.1.B — Valores máximos y mínimos de tensión de operación temporal (hasta 20 minutos)
+        <span class="tbl-sub">Todos los CdC · V<sub>máx</sub> = 110% V<sub>nom</sub> · V<sub>mín</sub> = 90% V<sub>nom</sub> · RES/550/2021 Manual CONE 2.1.b — pág. 243–244</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Tensión nominal [kV]</th>
+            <th>Tensión mínima temporal [kV]<br><span style="font-weight:400;font-size:.8em">(90% V<sub>nom</sub>)</span></th>
+            <th>Tensión máxima temporal [kV]<br><span style="font-weight:400;font-size:.8em">(110% V<sub>nom</sub>)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-family:var(--mono);text-align:center">400.0</td><td style="font-family:var(--mono);text-align:center">360.0</td><td style="font-family:var(--mono);text-align:center">440.0</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">230.0</td><td style="font-family:var(--mono);text-align:center">207.0</td><td style="font-family:var(--mono);text-align:center">253.0</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">161.0</td><td style="font-family:var(--mono);text-align:center">144.9</td><td style="font-family:var(--mono);text-align:center">177.1</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">138.0</td><td style="font-family:var(--mono);text-align:center">124.2</td><td style="font-family:var(--mono);text-align:center">151.8</td></tr>
+          <tr style="background:rgba(0,102,204,.05)"><td style="font-family:var(--mono);text-align:center">115.0</td><td style="font-family:var(--mono);text-align:center">103.5</td><td style="font-family:var(--mono);text-align:center">126.5</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">85.0</td><td style="font-family:var(--mono);text-align:center">76.5</td><td style="font-family:var(--mono);text-align:center">93.5</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">69.0</td><td style="font-family:var(--mono);text-align:center">62.1</td><td style="font-family:var(--mono);text-align:center">75.9</td></tr>
+          <tr style="background:rgba(0,102,204,.05)"><td style="font-family:var(--mono);text-align:center">34.5</td><td style="font-family:var(--mono);text-align:center">31.05</td><td style="font-family:var(--mono);text-align:center">37.95</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">23.0</td><td style="font-family:var(--mono);text-align:center">20.7</td><td style="font-family:var(--mono);text-align:center">25.3</td></tr>
+          <tr><td style="font-family:var(--mono);text-align:center">13.8</td><td style="font-family:var(--mono);text-align:center">12.42</td><td style="font-family:var(--mono);text-align:center">15.18</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="nota cone">
+      <span class="nota-title">Comparativa con Manual INTE 3.1.1</span>
+      El Manual INTE usa pu: 0.95–1.05 pu ilimitado, 0.90–0.95 / 1.05–1.10 por 30 minutos. El Manual CONE usa kV absolutos y diferencia: operación permanente (±5%) vs. temporal hasta 20 minutos (±10%). Las proporciones son equivalentes pero el CONE no introduce el límite de 30 minutos del INTE: permite hasta 20 minutos a ±10%, sin especificar qué sucede entre 20 y 30 minutos —zona que el Manual para la Interconexión y los Estudios de Conexión deberán aclarar caso a caso.
+    </div>
+
+    <!-- ═══════════ 2.2 FRECUENCIA ═══════════ -->
+    <h2 class="sec" id="sec22"><span class="snum">2.2</span>Frecuencia</h2>
+
+    <blockquote>
+      El Centro de Carga deberá ser capaz de soportar variaciones de frecuencia y permanecer conectados, de acuerdo con los rangos establecidos en la Tabla 2.2.A.
+      <br><br>
+      La infraestructura requerida para los Centros de Carga en proceso de Conexión o Modificación Técnica deberá tener en consideración que la conexión, desconexión o variación de carga no deberá causar desviaciones de frecuencia mayores a 0.1 Hz en los Sistemas Interconectados que componen el SEN. Durante la realización de los Estudios de Conexión el CENACE podrá definir la rampa máxima que podrá tener el Centro de Carga durante sus ciclos de operación para preservar la Confiabilidad del SEN.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.2 — DOF 31-dic-2021 · PDF p. 244</cite>
+    </blockquote>
+
+    <div class="tbl-wrap" style="max-width:500px">
+      <div class="tbl-caption">Tabla 2.2.A — Rangos de frecuencia que debe soportar el Centro de Carga
+        <span class="tbl-sub">RES/550/2021, Manual CONE, Cap. 2 2.2 — DOF 31-dic-2021 · PDF p. 244</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Tiempo de operación</th><th>Frecuencia mínima [Hz]</th><th>Frecuencia máxima [Hz]</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(0,102,204,.06)">
+            <td><strong>Permanente</strong></td>
+            <td style="font-family:var(--mono);text-align:center;font-weight:700">59.0</td>
+            <td style="font-family:var(--mono);text-align:center;font-weight:700">61.0</td>
+          </tr>
+          <tr>
+            <td>30 minutos</td>
+            <td style="font-family:var(--mono);text-align:center">58.0</td>
+            <td style="font-family:var(--mono);text-align:center">62.5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Los rangos de la Tabla 2.2.A son análogos a la Tabla 2.1 del Manual INTE para el SIN —aunque sin la diferenciación SIBCS/SIM que aplica a las CE en esos sistemas aislados—. El 2.2 añade una obligación proactiva que el INTE no contempla para cargas: la conexión, desconexión o variación de carga del CdC no debe causar desviaciones de frecuencia superiores a <strong>0.1 Hz</strong> en el sistema. Esto es particularmente relevante para CdC con ciclos de carga bruscos —hornos de arco eléctrico, laminadoras, grandes compresores— que el CENACE puede condicionar a rampas máximas de cambio de potencia definidas en los Estudios de Conexión.
+    </p>
+
+    <!-- ═══════════ 2.3 CORTO CIRCUITO ═══════════ -->
+    <h2 class="sec" id="sec23"><span class="snum">2.3</span>Corto Circuito</h2>
+
+    <blockquote>
+      a. El CENACE deberá calcular e informar a los Centros de Carga a conectarse en Alta Tensión, la corriente máxima y mínima de corto circuito, trifásica y monofásica, en el Punto de Conexión.
+      <br>b. El Distribuidor deberá calcular e informar a los Centros de Carga a conectarse en Media Tensión, la corriente máxima y mínima de corto circuito, trifásica y monofásica, en el Punto de Conexión.
+      <br>c. Los niveles de corto circuito proporcionados se deben calcular tanto para dimensionar equipo eléctrico como para la coordinación de protecciones.
+      <br>d. Los niveles se deberán entregar a todo Centro de Carga que se conecte a la RNT o a las RGD.
+      <br>e. El CENACE publicará de manera anual durante el último trimestre del año en curso, los niveles de corto circuito en los Puntos de Conexión para la red de Alta Tensión, con un horizonte de 3 años con base en el PRODESEN publicado por la SENER.
+      <br>f. El Distribuidor publicará los niveles de corto circuito de manera anual y a más tardar 60 días después de que el CENACE haya publicado los niveles de corto circuito en Alta Tensión. Los niveles que publique el Distribuidor deben comprender los Puntos de Conexión para la red de Media Tensión, con un horizonte de 3 años con base en el PRODESEN.
+      <br>g. La capacidad interruptiva y la capacidad de corto circuito de las protecciones de los Centros de Carga en el Punto de Conexión debe estar ajustada a los niveles de corto circuito correspondientes al inciso c.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.3 — DOF 31-dic-2021 · PDF p. 244</cite>
+    </blockquote>
+
+    <p>
+      El 2.3 es fundamentalmente un requerimiento de <em>información</em> sobre el sistema, no de rendimiento del CdC: el CENACE y el Distribuidor son los obligados a calcular y publicar los niveles de corto circuito (Icc), y el CdC los usa para dos propósitos: (1) dimensionar sus equipos eléctricos (capacidad de interrupción de interruptores, corriente de diseño de transformadores, BT, cables) y (2) ajustar sus relés de protección. La cadena de publicación es clara: CENACE publica en el cuarto trimestre, Distribuidor publica 60 días después, con 3 años de horizonte prospectivo basado en el PRODESEN.
+    </p>
+
+    <p>
+      El inciso g es el requerimiento exigible al CdC: la capacidad interruptiva de los equipos del Punto de Conexión debe estar ajustada a los niveles de Icc comunicados. Un CdC que opera con un interruptor subdimensionado respecto a la Icc actual en su PC está en incumplimiento del 2.3.g —independientemente del nivel de tensión o demanda contratada (aplica a todos según Tabla 1.1.A).
+    </p>
+
+    <!-- ═══════════ 2.4 FACTOR DE POTENCIA ═══════════ -->
+    <h2 class="sec" id="sec24"><span class="snum">2.4</span>Factor de Potencia</h2>
+
+    <div class="advertencia">
+      <strong>Régimen vigente desde el 8 de abril de 2026: FP ≥ 0.97.</strong> El 2.4 estableció un régimen transitorio (FP ≥ 0.95) hasta el 8 de abril de 2026, fecha que ya ha transcurrido. A partir de ese día, el requerimiento de facto es FP ≥ 0.97 en atraso y ≤ 1.0. Los Centros de Carga que aún cumplan solo el 0.95 están en incumplimiento desde el 8 de abril de 2026.
+    </div>
+
+    <blockquote>
+      En Estado Operativo Normal, los Centros de Carga conectados en niveles de Media Tensión con una demanda contratada mayor o igual a 1 MW y los Centros de Carga conectados en niveles de Alta Tensión deberán mantener un factor de potencia entre 0.95 en atraso y 1.0 en el Punto de Conexión, con medición cinco-minutal conforme a la NOM-001-CRE/SCFI-2019 vigente. Dichos Centros de Carga deberán cumplir con este requerimiento al menos el 95% del tiempo durante un periodo mensual. La vigencia de este requerimiento permanecerá hasta el 8 de abril de 2026.
+      <br><br>
+      Posterior al periodo señalado en el párrafo anterior, el requerimiento del factor de potencia será de 0.97 en atraso y 1.0 en el Punto de Conexión, con medición cinco-minutal conforme a la NOM-001-CRE/SCFI-2019 vigente. Los Centros de Carga deberán cumplir con este requerimiento al menos el 95% del tiempo durante un periodo mensual.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.4 — DOF 31-dic-2021 · PDF p. 244–245</cite>
+    </blockquote>
+
+    <p>
+      La fecha del 8 de abril de 2026 tiene un origen regulatorio específico: el Código de Red original (RES/151/2016, DOF 8 de abril de 2016) estableció requerimientos de FP con un plazo de cumplimiento de 10 años desde su publicación. El Código de Red 2021 heredó ese horizonte manteniendo la fecha de corte exacta de la versión 2016, lo que da continuidad al proceso de transición iniciado hace una década.
+    </p>
+
+    <p>
+      El requerimiento de FP ≥ 0.97 en atraso es exigente respecto al estándar de facturación de la CFE (0.90), pero moderado frente a los requerimientos de FP del Manual INTE para Centrales Eléctricas, que exigen una zona de reactiva mucho más amplia (Q/Pmáx ± 0.33 en Área Blanca). En términos prácticos, un CdC de 10 MW a FP = 0.97 puede demandar hasta Q = 2.5 MVAr en atraso sin incumplimiento; a FP = 0.97, Q/S ≈ 0.243 —lo que equivale a un banco de capacitores de ~2.4 MVAR para compensar una carga natural de FP = 0.85.
+    </p>
+
+    <div class="nota cone">
+      <span class="nota-title">FP en adelanto no está permitido</span>
+      El rango es FP ≥ 0.97 atraso y ≤ 1.0. Esto significa que el CdC no puede operar en <em>adelanto</em> (consumiendo reactiva capacitiva neta) en el Punto de Conexión. Un CdC sobrecompensado con bancos de capacitores que inyecta reactiva capacitiva a la red podría elevar la tensión en el PC y violar simultáneamente el 2.1. El Manual CONE prohíbe el adelanto explícitamente al no incluirlo en el rango aceptable.
+    </div>
+
+    <!-- ═══════════ 2.5 PROTECCIONES ═══════════ -->
+    <h2 class="sec" id="sec25"><span class="snum">2.5</span>Protecciones</h2>
+
+    <blockquote>
+      a. Los Puntos de Conexión de Centros de Carga en la RNT y en las RGD deben contar con esquemas de protección. En tanto no se cuente con Norma Oficial Mexicana o especificación técnica aprobada por la CRE, todos los esquemas de protección deben cumplir con los requerimientos señalados durante los procesos de Conexión o Modificación Técnica conforme al Manual para la Interconexión de Centrales Eléctricas y Conexión de Centros de Carga.
+      <br><br>
+      b. El Transportista y/o Distribuidor deberán verificar los sistemas de protección para asegurar su adecuada coordinación para liberar fallas atendiendo los siguientes criterios:
+      <br>&nbsp;&nbsp;i. Detección de fallas internas y externas a la Red Particular;
+      <br>&nbsp;&nbsp;ii. Operación ante baja y alta tensión;
+      <br>&nbsp;&nbsp;iii. Operación ante baja y alta frecuencia;
+      <br>&nbsp;&nbsp;iv. Operación ante sobrecarga de circuitos;
+      <br>&nbsp;&nbsp;v. Operación ante sobrecarga de transformadores;
+      <br>&nbsp;&nbsp;vi. Operación de protecciones de respaldo.
+      <br><br>
+      c. Adicional a las obras de refuerzo necesarias, los Centros de Carga deberán instalar los equipos necesarios para los Esquemas de Acción Remedial y Esquemas de Protección de Sistema, con base en las condiciones del Punto de Conexión.
+      <br><br>
+      d. Los Centros de Carga deberán coordinar con el Transportista y/o Distribuidor el ajuste de las protecciones en el Punto de Conexión para la puesta en servicio:
+      <br>&nbsp;&nbsp;i. Cualquier cambio o ajuste que el Centro de Carga desee realizar a sus sistemas de protección en el PC deberá notificarlo previamente conforme al Manual Regulatorio de Coordinación Operativa;
+      <br>&nbsp;&nbsp;ii. Los tiempos máximos de liberación de falla por las protecciones primarias en función del nivel de tensión de operación deberán acordarse entre el Centro de Carga, Transportista y/o Distribuidor.
+      <br><br>
+      e. Los Centros de Carga son responsables de la implementación y funcionamiento de sus sistemas de protección. Las protecciones del PC deben estar coordinadas y ser capaces de liberar las fallas causadas en sus instalaciones.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.5 — DOF 31-dic-2021 · PDF p. 245</cite>
+    </blockquote>
+
+    <p>
+      El 2.5 establece que el CdC debe contar con esquemas de protección en el Punto de Conexión que detecten fallas tanto en su Red Particular como en la red del Transportista/Distribuidor (inciso b.i), y que actúen ante perturbaciones de tensión (b.ii), frecuencia (b.iii), sobrecarga de circuitos (b.iv) y transformadores (b.v), y bajo respaldo (b.vi). Esta lista de criterios es la base de las funciones de protección mínimas que el CENACE y el Transportista/Distribuidor verifican en los Estudios de Conexión.
+    </p>
+
+    <p>
+      El inciso c introduce los <strong>Esquemas de Acción Remedial (EAR) y Esquemas de Protección de Sistema (EPS)</strong>: cuando las condiciones del Punto de Conexión así lo exijan —por ejemplo, en zonas de la RNT con alta concentración de carga o riesgo de cascada—, el CENACE puede requerir que el CdC instale equipos de disparo automático coordinado que contribuyan a preservar la estabilidad del SEN. Esto puede implicar esquemas de deslastre automático de carga ante perturbaciones de frecuencia o tensión.
+    </p>
+
+    <!-- ═══════════ 2.6 CONTROL ═══════════ -->
+    <h2 class="sec" id="sec26"><span class="snum">2.6</span>Control</h2>
+
+    <blockquote>
+      El CENACE deberá establecer las características del registro de instrucciones de despacho de los Recursos de Demanda Controlable (RDC). A su vez, el Centro de Carga con Demanda Controlable, deberá adaptar sus sistemas para recibir la instrucción, de conformidad con el Manual de TIC.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.6 — DOF 31-dic-2021 · PDF p. 245</cite>
+    </blockquote>
+
+    <p>
+      El 2.6 aplica únicamente a los CdC registrados como <strong>Recursos de Demanda Controlable (RDC)</strong> en el Mercado Eléctrico Mayorista (MEM). Un RDC es un CdC que ofrece voluntariamente reducción de demanda como servicio al sistema —a cambio de un pago en el mercado—. El requerimiento es que su infraestructura pueda recibir y ejecutar instrucciones de despacho del CENACE de forma automatizada, con las características de protocolo definidas en el Manual de TIC. Para los CdC que no son RDC, el 2.6 no aplica según la Tabla 1.1.A.
+    </p>
+
+    <!-- ═══════════ 2.7 INTERCAMBIO ═══════════ -->
+    <h2 class="sec" id="sec27"><span class="snum">2.7</span>Intercambio de Información</h2>
+
+    <blockquote>
+      a. La información de Telemetría en Tiempo real en forma directa y las características de ésta para los Centros de Carga serán definidas en el Manual de Requerimientos de Tecnologías de la Información y Comunicaciones para el Sistema Eléctrico Nacional y el Mercado Eléctrico Mayorista, publicado el 4 de diciembre de 2017 en el DOF, o el que lo sustituya.
+      <br>b. Las características del protocolo de comunicación para el intercambio de información con los Centros de Carga serán definidas en dicho Manual.
+      <br>c. Las características de los equipos y medios de comunicación requeridos para el envío de información de telemetría en tiempo real hacia el CENACE, así como las responsabilidades de mantenimiento y modernización, serán definidas en dicho Manual.
+      <br>d. El CENACE podrá solicitar al Transportista o al Distribuidor la información de Calidad de la potencia de los sistemas de medición bajo su responsabilidad.
+      <br>e. Los Centros de Carga deben cumplir con lo establecido en el Manual de TIC de acuerdo con sus características.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.7 — DOF 31-dic-2021 · PDF p. 245–246</cite>
+    </blockquote>
+
+    <p>
+      Los incisos a–c del 2.7 son referencias normativas puras: los protocolos, características de equipos y responsabilidades de telemetría se definen íntegramente en el <strong>Manual de Requerimientos de TIC para el SEN y el MEM</strong> (DOF 4-dic-2017). El Manual CONE no los repite sino que delega en ese instrumento. El inciso e ("de acuerdo con sus características") significa que el nivel de requerimiento TIC varía según el tipo de CdC: los de AT conectados directamente a la RNT tienen exigencias más altas que los de MT con demanda moderada.
+    </p>
+
+    <p>
+      El inciso d introduce una obligación sobre los Transportistas y Distribuidores: a petición del CENACE, deben entregar información de calidad de la potencia de sus sistemas de medición. Esto crea una vía de vigilancia indirecta sobre los CdC: aunque el CdC use sus propios medidores para autoevaluarse (Cap. 3), el Transportista/Distribuidor puede tener datos de calidad en el PC que el CENACE puede requerir para comparar o verificar.
+    </p>
+
+    <!-- ═══════════ 2.9 MODELOS ═══════════ -->
+    <h2 class="sec" id="sec29"><span class="snum">2.9</span>Modelos de Simulación</h2>
+
+    <blockquote>
+      A petición del CENACE, el Centro de Carga proporcionará modelos de simulación que cumplan con la normatividad vigente.
+      <cite>RES/550/2021, Manual CONE, Cap. 2 2.9 — DOF 31-dic-2021 · PDF p. 249</cite>
+    </blockquote>
+
+    <p>
+      El 2.9 es la contrapartida del 6.1.6 del Manual INTE, pero con obligación condicional. El INTE exige que las Centrales Eléctricas entreguen modelos de simulación validados como condición previa a la EOC; para los Centros de Carga, la entrega de modelos ocurre solo si el CENACE lo solicita explícitamente. Esta asimetría refleja que el impacto dinámico de un CdC sobre la estabilidad del sistema es generalmente menor —y más predecible— que el de una Central Eléctrica. Sin embargo, para CdC con cargas altamente no lineales (hornos de arco, rectificadores de gran potencia) o con generación detrás del medidor, el CENACE puede solicitar modelos que incluyan los componentes de emisión armónica o de generación.
+    </p>
+
+    <!-- Resumen comparativo final -->
+    <h2 class="sec"><span class="snum">Ref.</span>Resumen de requerimientos 2.1–2.7 y 2.9</h2>
+
+    <div class="tbl-wrap full-w">
+      <div class="tbl-caption">Cuadro resumen — Manual CONE Cap. 2, requerimientos distintos de 2.8
+        <span class="tbl-sub">RES/550/2021 — Elaboración propia con base en 2.1–2.9 del Manual CONE</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Requerimiento</th>
+            <th>Valor / umbral clave</th>
+            <th>Equivalente INTE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-family:var(--mono)">2.1</td>
+            <td>Tensión permanente</td>
+            <td style="font-family:var(--mono);font-size:.82rem">±5% V<sub>nom</sub> (Tab. 2.1.A) · ±10% hasta 20 min (Tab. 2.1.B)</td>
+            <td style="font-size:.8rem;color:var(--text-muted)">3.1.1 INTE — 0.95–1.05 pu ilimitado</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono)">2.2</td>
+            <td>Frecuencia</td>
+            <td style="font-family:var(--mono);font-size:.82rem">59–61 Hz perm. · 58–62.5 Hz / 30 min · ΔF ≤ 0.1 Hz</td>
+            <td style="font-size:.8rem;color:var(--text-muted)">2 INTE — Tabla 2.1 (diferencia SIBCS/SIM)</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono)">2.3</td>
+            <td>Corto circuito</td>
+            <td style="font-family:var(--mono);font-size:.82rem">Icc publicada anualmente · horizonte 3 años · CENACE (AT) + Distribuidor (MT)</td>
+            <td style="font-size:.8rem;color:var(--text-muted)">6.1.5 INTE — equipos deben soportar Icc</td>
+          </tr>
+          <tr style="background:rgba(26,118,26,.05)">
+            <td style="font-family:var(--mono)">2.4</td>
+            <td>Factor de Potencia</td>
+            <td style="font-family:var(--mono);font-size:.82rem;font-weight:700">FP ≥ 0.97 atraso · FP ≤ 1.0 · P95 mensual · 5 min (desde 8-abr-2026)</td>
+            <td style="font-size:.8rem;color:var(--text-muted)">3.3.2 INTE — Q/Pmáx ±0.33 (Área Blanca)</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono)">2.5</td>
+            <td>Protecciones</td>
+            <td style="font-family:var(--mono);font-size:.82rem">6 criterios (i–vi) · EAR/EPS si CENACE lo requiere · Coordinación con T/D</td>
+            <td style="font-size:.8rem;color:var(--text-muted)">6.1.2 INTE — lista A–T de 20 protecciones</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono)">2.6</td>
+            <td>Control (RDC)</td>
+            <td style="font-family:var(--mono);font-size:.82rem">Instrucciones de despacho CENACE · solo si es RDC</td>
+            <td style="font-size:.8rem;color:var(--text-muted)">6.1.4 INTE — telemetría y despacho obligatorios tipo D</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono)">2.7</td>
+            <td>Intercambio TIC</td>
+            <td style="font-family:var(--mono);font-size:.82rem">Telemetría en tiempo real · protocolo y equipo per Manual TIC (DOF 4-dic-2017)</td>
+            <td style="font-size:.8rem;color:var(--text-muted)">6.1.5 INTE — PMU, SCADA, DFR obligatorios</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono)">2.9</td>
+            <td>Modelos</td>
+            <td style="font-family:var(--mono);font-size:.82rem">A petición del CENACE · normatividad vigente</td>
+            <td style="font-size:.8rem;color:var(--text-muted)">6.1.6 INTE — obligatorio pre-EOC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="cone_c1.html">
+        <span class="nd">← Capítulo anterior</span>
+        <span class="nt">Objetivo · Alcance · Cap. 1</span>
+      </a>
+      <a href="cap8.html" class="n-next">
+        <span class="nd">Capítulo siguiente →</span>
+        <span class="nt">Cap. 2 2.8 — Calidad de la Potencia (CONE)</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

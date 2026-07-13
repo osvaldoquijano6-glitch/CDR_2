@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual TIC — Red Eléctrica Inteligente (REI) | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Disposiciones Generales — REI / TIC</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Disposiciones Generales</span>
+    <a href="disposiciones.html"    class="sb-cap">Disposiciones · Glosario</a>
+    <a href="disposiciones_sen.html" class="sb-cap">Disposiciones del SEN</a>
+
+    <span class="sb-section-lbl">Manual TIC (REI) — Secciones</span>
+    <a href="manual_tic.html" class="sb-cap active" aria-current="page">Manual TIC — Red Inteligente</a>
+    <a href="#sec-objetivo"      class="sb-sub">Objetivo y alcance</a>
+    <a href="#sec-medicion"      class="sb-sub">5.3 Medición y monitoreo</a>
+    <a href="#sec-pruebas"       class="sb-sub">5.4 Pruebas (SCADA)</a>
+    <a href="#sec-interop"       class="sb-sub">5.5 y 5.6 Interoperabilidad</a>
+    <a href="#sec-seguridad"     class="sb-sub">5.7 Seguridad de la Información</a>
+    <a href="#sec-responsabilidades" class="sb-sub">5.8 Responsabilidades</a>
+
+    <span class="sb-section-lbl">Disposiciones Operativas</span>
+    <a href="manual_pse.html" class="sb-cap">Manual PSE — Planeación SEN</a>
+    <a href="manual_co.html"  class="sb-cap">Manual CO — Coordinación Operativa</a>
+    <a href="manual_eso.html" class="sb-cap">Manual ESO — Estados Operativos</a>
+    <a href="manual_sea.html" class="sb-cap">Manual SEA — Sistemas Aislados</a>
+
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Disposiciones Generales › <strong>Cap. 5 — Red Eléctrica Inteligente y TIC</strong></div>
+    <span class="pg-pill">Manual TIC (REI)</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Disposiciones Generales · Capítulo 5 — REI y TIC</span>
+    <h1 class="titulo">Manual TIC — Red Eléctrica Inteligente</h1>
+
+    <details>
+      <summary>Referencia normativa y marco del Manual TIC (REI)</summary>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">RES/550/2021 — CRE.</strong> Disposiciones Generales, Capítulo 5: Disposiciones Generales de Red Eléctrica Inteligente en materia de Telemetría, Interoperabilidad y Seguridad de la Información (REI) para la operación del SEN. DOF, 31 de diciembre de 2021, págs. 892–895. <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" target="_blank" rel="noopener">Texto oficial (PDF)</a>.
+        </li>
+      </ul>
+    </details>
+
+    <!-- ═══════════ OBJETIVO ═══════════ -->
+    <h2 class="sec" id="sec-objetivo"><span class="snum">5.1</span>Objetivo y Alcance</h2>
+
+    <blockquote>
+      Con el objeto de asegurar que el Control Operativo del SEN se realice en condiciones de eficiencia, Calidad, Confiabilidad, Continuidad, seguridad y sustentabilidad, se establecen criterios de telemetría en tiempo real, que pueden incluir la medición y el monitoreo de variables físicas para el control del SEN. Para el logro de dicho objetivo, la LIE establece como una herramienta la implementación de la Red Eléctrica Inteligente (REI)...
+      <cite>RES/550/2021, Disposiciones Generales, 5.1 — DOF 31-dic-2021 · PDF p. 892</cite>
+    </blockquote>
+
+    <p>
+      El uso de la infraestructura de TIC debe basarse en arquitecturas y tecnologías de <strong>estándares abiertos</strong>, permitiendo la <strong>Interoperabilidad</strong> y mitigando las crecientes amenazas informáticas que pueden afectar el funcionamiento del SEN.
+    </p>
+
+    <div class="nota">
+      <span class="nota-title">Aplicación de Criterios</span>
+      <strong>REI-1 al REI-15:</strong> Aplican a Transportista, Distribuidor y Participantes del Mercado. Tratan sobre la adquisición de datos de telemetría en tiempo real (SCADA).<br>
+      <strong>REI-16 en adelante:</strong> Aplican a todos los Usuarios responsables de la infraestructura de TIC del SEN, y rigen la Interoperabilidad y Seguridad de la Información.
+    </div>
+
+    <!-- ═══════════ 5.3 MEDICION ═══════════ -->
+    <h2 class="sec" id="sec-medicion"><span class="snum">5.3</span>Medición y Monitoreo</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">REI-1</span>
+        <span>El <strong>CENACE definirá la ubicación</strong> de los puntos de medición suficientes para la operación eficiente y eficaz de la RNT, las RGD y el MEM.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-2</span>
+        <span>Cada punto de medición será identificado por un <strong>código único permanente</strong> asignado por el CENACE. No se reconocerá ningún punto de medición que no esté registrado.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-3</span>
+        <span>Cada punto de medición de Centrales Eléctricas y Centros de Carga debe cumplir con los requerimientos establecidos en el <strong>Manual de TIC</strong>.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-4</span>
+        <span>La medición para el Control Operativo debe cumplir con los requerimientos de <strong>sincronización del reloj</strong> (NOM-001-CRE/SCFI-2019 y Manual de TIC).</span>
+      </li>
+      <li>
+        <span class="lbl">REI-5</span>
+        <span>El registro del esquema de medición ante el CENACE se realizará si cumple con el Manual de TIC y la NOM-001-CRE/SCFI-2019.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-6</span>
+        <span>El CENACE, en coordinación con Transportista y Distribuidor, deberá contar con un <strong>Sistema de Gestión</strong> de los medidores, sellos, blocks de pruebas y transformadores de medida.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-7</span>
+        <span>La selección de medidores y transformadores de medida es <strong>responsabilidad del solicitante</strong> conforme a los Manuales Regulatorios de Conexión e Interconexión.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-8</span>
+        <span>Para garantizar exactitud, la transmisión de valores medidos cumplirá con el Manual de TIC y la NOM-001-CRE/SCFI-2019. En cuanto a <strong>ciberseguridad</strong>, se observará la regulación de la CRE.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-9</span>
+        <span>El CENACE definirá la ubicación de las <strong>Unidades de Medición Fasorial (PMU)</strong> sincronizadas para observar el SEN en tiempo real y evaluar acciones de control.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-10</span>
+        <span>Adicional a la telemetría en tiempo real, el CENACE podrá solicitar <strong>informes y registros por excepción</strong> justificada.</span>
+      </li>
+    </ul>
+
+    <!-- ═══════════ 5.4 PRUEBAS ═══════════ -->
+    <h2 class="sec" id="sec-pruebas"><span class="snum">5.4</span>Procedimientos para Pruebas (SCADA)</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">REI-11</span>
+        <span>Las <strong>verificaciones de los medidores</strong> y transformadores de medida se realizarán conforme a la NOM-001-CRE/SCFI-2019.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-12</span>
+        <span>Transportista, Distribuidor, Centrales y Centros de Carga deben entregar al CENACE la información de <strong>telemetría en tiempo real</strong> conforme al Manual de TIC.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-13</span>
+        <span>Los procedimientos de pruebas para el proceso de <strong>entrega recepción de variables y estados</strong> (protecciones, interruptores, SCADA, alarmas) se harán conforme al Manual de TIC.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-14</span>
+        <span>Los procedimientos de puesta en servicio y los requerimientos de la calidad de la información deben basarse en el Manual de TIC.</span>
+      </li>
+    </ul>
+
+    <!-- ═══════════ 5.5 INTEROPERABILIDAD ═══════════ -->
+    <h2 class="sec" id="sec-interop"><span class="snum">5.5 y 5.6</span>Interoperabilidad de la Infraestructura de TIC</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">REI-15</span>
+        <span>Se deben llevar a cabo acciones para asegurar la <strong>Interoperabilidad</strong> de los sistemas TIC y la <strong>Seguridad de la Información</strong> del SEN.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-16</span>
+        <span>Las acciones de Seguridad de la Información deben concordar con el Código de Red, Manuales de Prácticas del Mercado, y Guías Operativas.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-17</span>
+        <span>Principios generales:
+          <br>a. <strong>Confidencialidad:</strong> Impedir divulgación a sistemas no autorizados.
+          <br>b. <strong>Conservación:</strong> Mantener infraestructura adecuada.
+          <br>c. <strong>Disponibilidad:</strong> Datos accesibles y utilizables.
+          <br>d. <strong>Equilibrio:</strong> Balance entre seguridad y acceso sin obstaculizar la Interoperabilidad.
+          <br>e. <strong>Integración:</strong> Promover compatibilidad con sistemas previos.
+          <br>f. <strong>Integridad:</strong> Comprobar validez de los datos compartidos.
+          <br>g. <strong>Bidireccionalidad:</strong> Permitir flujo en ambas direcciones.
+        </span>
+      </li>
+      <li>
+        <span class="lbl">REI-18</span>
+        <span>Se deben utilizar <strong>normas oficiales o estándares internacionales abiertos</strong>, maduros, libres de condicionamientos de propiedad intelectual y soportados por organismos independientes.</span>
+      </li>
+    </ul>
+
+    <!-- ═══════════ 5.7 SEGURIDAD ═══════════ -->
+    <h2 class="sec" id="sec-seguridad"><span class="snum">5.7</span>Seguridad de la Información del SEN</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">REI-19</span>
+        <span>Entidades de la Administración Pública Federal deben observar la <strong>Estrategia Digital Nacional</strong> y el Manual Administrativo en materia de Seguridad de la Información.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-20</span>
+        <span>Los Usuarios del SEN deben implementar <strong>mecanismos de Seguridad de la Información</strong> para la infraestructura TIC de la cual sean responsables.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-21</span>
+        <span>Los mecanismos de Seguridad de la Información deben:
+          <br>a. Mantener un modelo de gestión.
+          <br>b. Identificar <strong>infraestructuras críticas y activos clave</strong>.
+          <br>c. Administrar riesgos y monitorear <strong>ataques o intrusiones</strong>.
+          <br>d. Proteger la infraestructura crítica.
+          <br>e. Responder inmediatamente a incidentes.
+          <br>f. Vigilar y mejorar continuamente el sistema.
+          <br>g. Fomentar <strong>cultura de ciberseguridad</strong>.
+          <br>h. Establecer mecanismos de <strong>recuperación (desastres)</strong>.
+        </span>
+      </li>
+    </ul>
+
+    <!-- ═══════════ 5.8 RESPONSABILIDADES ═══════════ -->
+    <h2 class="sec" id="sec-responsabilidades"><span class="snum">5.8</span>Responsabilidades</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">REI-22</span>
+        <span>Los Usuarios del SEN responsables de infraestructura TIC deben abstenerse de implementar componentes que no cumplan con estándares y mantener sus sistemas actualizados frente a riesgos cibernéticos.</span>
+      </li>
+      <li>
+        <span class="lbl">REI-23</span>
+        <span>La CRE emitirá documentos técnicos sobre <strong>Interoperabilidad</strong> y disposiciones sobre la administración de la <strong>Seguridad de la Información</strong> del SEN.</span>
+      </li>
+    </ul>
+
+    <nav class="nav-footer" aria-label="Navegación entre manuales">
+      <a href="manual_sea.html">
+        <span class="nd">← Anterior</span>
+        <span class="nt">Manual SEA — Sistemas Aislados</span>
+      </a>
+      <a href="../index_cdr_2v4.html" class="n-next">
+        <span class="nd">Siguiente →</span>
+        <span class="nt">Volver al Índice</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

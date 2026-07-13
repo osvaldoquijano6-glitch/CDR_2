@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capítulo 5 — Restauración del SEN | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual INTE — Centrales Eléctricas</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual INTE — Capítulos</span>
+    <a href="cap1.html" class="sb-cap">Cap. 1 — Tipos de Centrales Eléctricas</a>
+    <a href="cap2.html" class="sb-cap">Cap. 2 — Frecuencia y Control Primario</a>
+    <a href="cap3.html" class="sb-cap">Cap. 3 — Variaciones de Tensión</a>
+    <a href="cap4.html" class="sb-cap">Cap. 4 — Control Dinámico de Tensión</a>
+    <a href="cap5.html" class="sb-cap active" aria-current="page">Cap. 5 — Restauración del SEN</a>
+    <a href="#sec51"    class="sb-sub">5.1 Tipo B — Reconexión</a>
+    <a href="#sec52"    class="sb-sub">5.2 Tipos C y D</a>
+    <a href="#sec521"   class="sb-sub" style="padding-left:2.2rem">5.2.1 Arranque de emergencia</a>
+    <a href="#sec522"   class="sb-sub" style="padding-left:2.2rem">5.2.2 Operación en isla eléctrica</a>
+    <a href="#sec523"   class="sb-sub" style="padding-left:2.2rem">5.2.3 Resincronización rápida</a>
+    <a href="cap6.html" class="sb-cap">Cap. 6 — Administración del SEN</a>
+    <a href="cap7.html" class="sb-cap">Cap. 7 — Calidad de la Potencia</a>
+    <a href="cap8.html" class="sb-cap">Cap. 8 CONE — Calidad CdC</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+    <a href="https://www.cenace.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CENACE — SIM</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Manual INTE › <strong>Capítulo 5 — Restauración del SEN</strong></div>
+    <span class="pg-pill">Manual INTE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual INTE · Cap. 5 de 8 — Requerimientos de restauración</span>
+    <h1 class="titulo">Capítulo 5. Requerimientos generales de restauración del SEN</h1>
+
+    <p>
+      El Capítulo 5 establece las capacidades que deben tener las Centrales Eléctricas para participar activamente en los procesos de <strong>restablecimiento del Sistema Eléctrico Nacional</strong> después de un evento de colapso total o parcial. Las obligaciones son escalonadas: el tipo B tiene el requerimiento mínimo (reconexión a instrucción del CENACE), mientras que los tipos C y D añaden tres capacidades clave —arranque de emergencia, operación en isla y resincronización rápida.
+    </p>
+
+    <div class="tbl-wrap" style="max-width:640px">
+      <div class="tbl-caption">Resumen de requerimientos de restauración por tipo de Central Eléctrica</div>
+      <table>
+        <thead>
+          <tr><th>Requerimiento</th><th>Tipo B</th><th>Tipo C</th><th>Tipo D</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5.1.1 Reconexión post-evento</td>
+            <td style="text-align:center;color:#1a761a">✓ obligatorio</td>
+            <td style="text-align:center;color:#1a761a">✓ (hereda B)</td>
+            <td style="text-align:center;color:#1a761a">✓ (hereda B)</td>
+          </tr>
+          <tr>
+            <td>5.2.1 Arranque de emergencia</td>
+            <td style="text-align:center;color:#94a3b8">— no aplica</td>
+            <td style="text-align:center;color:#b45309">Opcional (a solicitud CENACE)</td>
+            <td style="text-align:center;color:#b45309">Opcional (a solicitud CENACE)</td>
+          </tr>
+          <tr>
+            <td>5.2.2 Operación en isla eléctrica</td>
+            <td style="text-align:center;color:#94a3b8">— no aplica</td>
+            <td style="text-align:center;color:#1a761a">✓ si CENACE requiere y CE puede</td>
+            <td style="text-align:center;color:#1a761a">✓ si CENACE requiere y CE puede</td>
+          </tr>
+          <tr>
+            <td>5.2.3 Resincronización rápida</td>
+            <td style="text-align:center;color:#94a3b8">— no aplica</td>
+            <td style="text-align:center;color:#1a761a">✓ ≤15 min o modo auxiliares</td>
+            <td style="text-align:center;color:#1a761a">✓ ≤15 min o modo auxiliares</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══════════ 5.1 TIPO B ═══════════ -->
+    <h2 class="sec" id="sec51"><span class="snum">5.1</span>Requerimientos para Centrales Eléctricas Síncronas Tipo B</h2>
+
+    <h3 class="subsec" id="sec511">5.1.1 Reconexión después de un evento</h3>
+
+    <blockquote>
+      El CENACE especificará las condiciones bajo las cuales la Central Eléctrica debe reconectarse, después de una desconexión del SEN.
+      <cite>RES/550/2021, Manual INTE, Cap. 5 5.1.1 — DOF 31-dic-2021 · PDF p. 234</cite>
+    </blockquote>
+
+    <p>
+      El requerimiento de reconexión para tipo B es intencionalmente breve: la Central Eléctrica debe estar técnicamente capaz de reconectarse al SEN después de haber sido desconectada, y hacerlo conforme a las condiciones y protocolo que defina el CENACE. Las condiciones específicas —sincronización de frecuencia, rampa de carga, verificación de tensión en el punto de conexión— son acordadas en el proceso de Interconexión.
+    </p>
+
+    <!-- ═══════════ 5.2 TIPOS C y D ═══════════ -->
+    <h2 class="sec" id="sec52"><span class="snum">5.2</span>Requerimientos para Centrales Eléctricas Síncronas Tipo C y D</h2>
+
+    <p>
+      Aplican todos los requerimientos de restauración del 5.1 para Centrales de tipo B, más los siguientes requerimientos específicos de los 5.2.1 a 5.2.3.
+    </p>
+
+    <!-- 5.2.1 BLACK START -->
+    <h3 class="subsec" id="sec521">5.2.1 Arranque de Emergencia (Black Start)</h3>
+
+    <blockquote>
+      i. La capacidad de arranque de emergencia no es obligatoria;
+      <br><br>
+      ii. El CENACE podrá realizar una solicitud de capacidad de arranque para una región del SEN si considera que la seguridad de este podría estar en riesgo; la Central Eléctrica podrá ofrecer la capacidad de arranque de emergencia;
+      <br><br>
+      iii. La Central Eléctrica con capacidad de arranque de emergencia debe estar lista para tomar carga, sin suministro de energía eléctrica externa (con sus propios medios), dentro de un tiempo no mayor a 30 minutos;
+      <br><br>
+      iv. La Central Eléctrica con capacidad de arranque de emergencia debe estar en condiciones para regular dentro de los límites de frecuencia establecidos en la Tabla 2.1 y, en su caso, dentro de los límites de tensión aplicables especificados por el CENACE en la Tabla 3.1.1; dentro de todo el rango de potencia activa entre el nivel de regulación mínimo y máximo, así como, a nivel de operación para auxiliares;
+      <br><br>
+      v. La Central Eléctrica con capacidad de arranque de emergencia debe regular automáticamente la tensión durante el proceso de restauración; y
+      <br><br>
+      vi. La Central Eléctrica con capacidad de arranque de emergencia debe:
+      <br>A. Ser capaz de alimentar los bloques de carga previamente acordados con el CENACE;
+      <br>B. Operar en modo de respuesta a la frecuencia, tanto en alta frecuencia, como en baja frecuencia; y
+      <br>C. Funcionar en paralelo con otras Centrales Eléctricas dentro de una isla.
+      <cite>RES/550/2021, Manual INTE, Cap. 5 5.2.1 — DOF 31-dic-2021 · PDF p. 234</cite>
+    </blockquote>
+
+    <div class="nota">
+      <span class="nota-title">Naturaleza del requerimiento — voluntario con implicaciones</span>
+      La capacidad de black start es <em>voluntaria</em> para la Central Eléctrica, pero el CENACE puede solicitarla cuando la seguridad del sistema lo requiera (inciso ii). Si la Central se compromete a ofrecerla, los incisos iii–vi se vuelven obligatorios. En el MEM, las Centrales con capacidad de black start pueden registrarse para prestar este Servicio Conexo, lo que conlleva una contraprestación económica.
+    </div>
+
+    <!-- 5.2.2 OPERACIÓN EN ISLA -->
+    <h3 class="subsec" id="sec522">5.2.2 Operación en Isla Eléctrica</h3>
+
+    <blockquote>
+      i. La Central Eléctrica debe participar en la operación en isla eléctrica si le es requerido por el CENACE y anteriormente la Central Eléctrica ha manifestado ser apto para ello y el CENACE haberlo comprobado;
+      <br><br>
+      ii. Los límites de frecuencia para la operación en isla eléctrica serán los establecidos de conformidad con la Tabla 2.1 así como con la zona síncrona donde se ubica la Central Eléctrica;
+      <br><br>
+      iii. Los límites de tensión para la operación en isla eléctrica serán los establecidos de conformidad con las Tablas 3.1.1;
+      <br><br>
+      iv. La Central Eléctrica debe poder operar en control primario de frecuencia durante la operación en isla;
+      <br><br>
+      v. La Central Eléctrica debe reducir la potencia activa desde su punto operativo actual a cualquier nuevo punto de funcionamiento dentro de su curva de Capabilidad (diagrama P-Q). La Central Eléctrica debe reducir la producción de potencia activa tanto como le sea inherentemente y técnicamente factible;
+      <br><br>
+      vi. El método para la detección de un cambio en la operación de sistema interconectado a operación en isla eléctrica, se acordará entre la Central Eléctrica y el CENACE. El método convenido no debe basarse únicamente en señales de posición de equipo de seccionamiento o interrupción; y
+      <br><br>
+      vii. La Central Eléctrica debe operar en respuesta a la frecuencia, tanto en alta frecuencia, como en baja frecuencia.
+      <cite>RES/550/2021, Manual INTE, Cap. 5 5.2.2 — DOF 31-dic-2021 · PDF p. 235</cite>
+    </blockquote>
+
+    <h4 class="subsubsec">Detección del islamiento — inciso vi</h4>
+    <p>
+      El inciso vi es técnicamente crítico. La detección de islamiento debe ser robusta y no puede depender exclusivamente de señales de posición de interruptores o cuchillas, que pueden estar erróneas o con retardo. Los métodos aceptados incluyen: medición de ROCOF (Rate of Change of Frequency), desplazamiento de tensión pasiva, vectorshift, métodos activos de inyección de perturbación, o combinaciones. El CENACE y la Central acuerdan el método específico en el proceso de Interconexión.
+    </p>
+
+    <div class="advertencia">
+      <strong>Condición previa indispensable.</strong> La Central Eléctrica solo puede participar en operación en isla si previamente ha manifestado aptitud y el CENACE lo ha comprobado (inciso i). No es un requerimiento de habilitación automática; requiere una comprobación técnica formal durante la Validación de Requerimientos Técnicos.
+    </div>
+
+    <!-- 5.2.3 RESINCRONIZACIÓN -->
+    <h3 class="subsec" id="sec523">5.2.3 Resincronización Rápida</h3>
+
+    <blockquote>
+      i. La Central Eléctrica, con un tiempo máximo de resincronización de 15 minutos, debe ser capaz de una resincronización rápida de acuerdo con la estrategia definida entre el CENACE y la Central Eléctrica;
+      <br><br>
+      ii. La Central Eléctrica, con un tiempo de resincronización mayor a 15 minutos, debe estar diseñada para cambiar desde cualquier punto de operación dentro de su curva de Capabilidad (diagrama P-Q) a una condición de operación alimentando sólo sus servicios auxiliares o carga local. Para esta condición, la identificación de la operación sólo alimentando servicios auxiliares o carga local, no debe basarse únicamente en señales de posición de equipo de seccionamiento o interrupción; y
+      <br><br>
+      iii. La Central Eléctrica después de cambiar al modo para alimentar sólo sus servicios auxiliares o carga local debe continuar operando de forma estable, independientemente de la fuente de alimentación de sus servicios auxiliares. El tiempo de operación mínimo en este modo será acordado entre la Central Eléctrica y el CENACE, tomando en cuenta las características específicas de la fuente primaria de energía.
+      <cite>RES/550/2021, Manual INTE, Cap. 5 5.2.3 — DOF 31-dic-2021 · PDF p. 235</cite>
+    </blockquote>
+
+    <h4 class="subsubsec">Dos trayectorias según tiempo de resincronización</h4>
+
+    <div class="tbl-wrap" style="max-width:660px">
+      <div class="tbl-caption">Alternativas de 5.2.3 según tiempo de resincronización</div>
+      <table>
+        <thead>
+          <tr><th>Condición</th><th>Requerimiento</th><th>Condición adicional</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>T<sub>resincronización</sub> ≤ 15 min</td>
+            <td>Resincronización rápida según estrategia CENACE–CE</td>
+            <td>Sin condición adicional</td>
+          </tr>
+          <tr>
+            <td>T<sub>resincronización</sub> &gt; 15 min</td>
+            <td>Capacidad de reducir a modo auxiliares/carga local desde cualquier punto P-Q</td>
+            <td>Operación estable en modo auxiliares durante tiempo mínimo acordado con CENACE</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      La segunda trayectoría es relevante para centrales de ciclo combinado, nuclear o hidroeléctrica que no pueden sincronizarse en menos de 15 minutos: en lugar de reconectarse rápidamente, deben ser capaces de sostenerse en modo de carga mínima (alimentando solo sus propios servicios auxiliares) mientras el operador del sistema prepara las condiciones para la reconexión al SEN.
+    </p>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="cap1.html">
+        <span class="nd">← Capítulo anterior</span>
+        <span class="nt">Cap. 1 — Tipos de Centrales Eléctricas</span>
+      </a>
+      <a href="cap6.html" class="n-next">
+        <span class="nd">Capítulo siguiente →</span>
+        <span class="nt">Cap. 6 — Administración del SEN</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

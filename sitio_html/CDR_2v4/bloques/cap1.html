@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capítulo 1 — Tipos de Centrales Eléctricas | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual INTE — Centrales Eléctricas</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual INTE — Capítulos</span>
+    <a href="cap1.html" class="sb-cap active" aria-current="page">Cap. 1 — Tipos de Centrales Eléctricas</a>
+    <a href="#sec-objetivo"    class="sb-sub">Objetivo y alcance</a>
+    <a href="#sec-aspectos"   class="sb-sub">Aspectos regulatorios</a>
+    <a href="#sec-estructura" class="sb-sub">Estructura del Manual INTE</a>
+    <a href="#sec-clasif"     class="sb-sub">1.1 Clasificación A/B/C/D</a>
+    <a href="#sec-tabla11"    class="sb-sub" style="padding-left:2.2rem">Tabla 1.1 — por área síncrona</a>
+    <a href="#sec-tipoa"      class="sb-sub">Tipo A — régimen especial</a>
+    <a href="#sec-capabilidad" class="sb-sub">Escalonamiento de requerimientos</a>
+    <a href="cap2.html" class="sb-cap">Cap. 2 — Frecuencia y Control Primario</a>
+    <a href="cap3.html" class="sb-cap">Cap. 3 — Variaciones de Tensión</a>
+    <a href="cap4.html" class="sb-cap">Cap. 4 — Control Dinámico de Tensión</a>
+    <a href="cap5.html" class="sb-cap">Cap. 5 — Restauración del SEN</a>
+    <a href="cap6.html" class="sb-cap">Cap. 6 — Administración del SEN</a>
+    <a href="cap7.html" class="sb-cap">Cap. 7 — Calidad de la Potencia</a>
+    <a href="cap8.html" class="sb-cap">Cap. 8 CONE — Calidad CdC</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Manual INTE › <strong>Capítulo 1 — Tipos de Centrales Eléctricas</strong></div>
+    <span class="pg-pill">Manual INTE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual INTE · Cap. 1 de 8 — Capítulo base</span>
+    <h1 class="titulo">Capítulo 1. Tipos de Centrales Eléctricas</h1>
+
+    <details>
+      <summary>Referencia normativa y marco del Manual INTE</summary>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">RES/550/2021 — CRE.</strong> Manual Regulatorio de Requerimientos Técnicos para la Interconexión de Centrales Eléctricas al SEN, Cap. 1. DOF, 31 de diciembre de 2021, págs. 217–219. <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" target="_blank" rel="noopener">Texto oficial (PDF)</a>.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">Ley de la Industria Eléctrica (LIE).</strong> DOF, 11 de agosto de 2014. Art. 12 Fr. XXXVII: facultad de la CRE para emitir el Código de Red. Arts. sobre Centrales Eléctricas: concepto, tipos, obligaciones.
+        </li>
+      </ul>
+    </details>
+
+    <!-- ═══════════ OBJETIVO ═══════════ -->
+    <h2 class="sec" id="sec-objetivo"><span class="snum">I.</span>Objetivo y Alcance del Manual INTE</h2>
+
+    <blockquote>
+      El presente Manual Regulatorio tiene como objetivo definir los requerimientos técnicos para la Interconexión de las Centrales Eléctricas al SEN, manteniendo en todo momento la eficiencia, Calidad, Confiabilidad, Continuidad, seguridad y sustentabilidad del SEN, así como garantizar condiciones justas de competencia en el MEM.
+      <cite>RES/550/2021, Manual INTE, Sección I. Objetivo — DOF 31-dic-2021 · PDF p. 217</cite>
+    </blockquote>
+
+    <p>
+      El Manual INTE es de aplicación obligatoria para <strong>todas las Centrales Eléctricas</strong> que pretendan la Interconexión al SEN o que ya estén interconectadas y requieran realizar una <strong>modificación técnica</strong>. Las Centrales Eléctricas que a la fecha de publicación del Código de Red tuviesen Contrato de Interconexión sin estar en Operación Comercial tuvieron un <strong>plazo de 18 meses</strong> para cumplir con el Manual.
+    </p>
+
+    <div class="nota">
+      <span class="nota-title">Alcance según tipo</span>
+      La Central Eléctrica de tipo A (P &lt; 0.5 MW) debe cumplir únicamente con las Disposiciones vigentes para Centrales con capacidad menor a 0.5 MW. Los requerimientos del Manual INTE —Capítulos 2 al 8— son de obligación exclusivamente para Centrales de <strong>tipo B, C y D</strong>.
+    </div>
+
+    <!-- ═══════════ ASPECTOS REGULATORIOS ═══════════ -->
+    <h2 class="sec" id="sec-aspectos"><span class="snum">III.</span>Aspectos Regulatorios</h2>
+
+    <blockquote>
+      Los requerimientos de aplicación general que debe establecer el CENACE de conformidad con el presente Manual Regulatorio están sujetos a la aprobación de la CRE.
+      <br><br>
+      En la aplicación del presente Manual Regulatorio, se busca alcanzar los siguientes objetivos específicos:
+      <br><br>
+      a. Aplicar los principios de proporcionalidad y no discriminación;
+      <br>b. Garantizar la transparencia;
+      <br>c. Aplicar el principio de optimización entre la mayor eficiencia general y el menor costo total para todas las partes implicadas;
+      <br>d. Respetar la responsabilidad asignada al CENACE para garantizar la seguridad de la Red Eléctrica;
+      <br>e. Garantizar la participación del Transportista y/o Distribuidor y tener en cuenta el posible impacto en sus Redes Eléctricas; y
+      <br>f. Tener en cuenta las especificaciones y las normas técnicas aplicables.
+      <cite>RES/550/2021, Manual INTE, Sección III. Aspectos Regulatorios — DOF 31-dic-2021 · PDF p. 217</cite>
+    </blockquote>
+
+    <p>
+      El inciso d es particularmente relevante: los requerimientos que el CENACE fije a una Central Eléctrica específica —dentro de los rangos del Manual INTE— están sujetos a la aprobación previa de la CRE, lo que establece un mecanismo de supervisión regulatoria sobre la discrecionalidad técnica del operador del sistema.
+    </p>
+
+    <!-- ═══════════ ESTRUCTURA ═══════════ -->
+    <h2 class="sec" id="sec-estructura"><span class="snum">V.</span>Estructura del Manual INTE</h2>
+
+    <div class="tbl-wrap" style="max-width:640px">
+      <div class="tbl-caption">Capítulos del Manual INTE — RES/550/2021
+        <span class="tbl-sub">8 capítulos · DOF 31-dic-2021 págs. 217–241</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th style="width:70px">Cap.</th><th>Tema</th><th style="width:90px">DOF págs.</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:var(--blue-light)"><td style="font-family:var(--mono);font-weight:700">1</td><td><strong>Tipos de Centrales Eléctricas</strong> — clasificación A/B/C/D</td><td style="font-family:var(--mono);font-size:.8rem">1052–1054</td></tr>
+          <tr><td style="font-family:var(--mono);font-weight:700">2</td><td>Frecuencia y Control Primario — ROCOF · droop · Control Secundario</td><td style="font-family:var(--mono);font-size:.8rem">1054–1059</td></tr>
+          <tr><td style="font-family:var(--mono);font-weight:700">3</td><td>Variaciones de Tensión — LVRT · HVRT · bandas · Q/V</td><td style="font-family:var(--mono);font-size:.8rem">1059–1065</td></tr>
+          <tr><td style="font-family:var(--mono);font-weight:700">4</td><td>Control Dinámico de Tensión en condiciones de falla</td><td style="font-family:var(--mono);font-size:.8rem">1065–1069</td></tr>
+          <tr><td style="font-family:var(--mono);font-weight:700">5</td><td>Restauración del SEN — reconexión · black start · isla · resincronización</td><td style="font-family:var(--mono);font-size:.8rem">1069–1070</td></tr>
+          <tr><td style="font-family:var(--mono);font-weight:700">6</td><td>Administración del SEN — protecciones · modelos · telemetría</td><td style="font-family:var(--mono);font-size:.8rem">1070–1073</td></tr>
+          <tr><td style="font-family:var(--mono);font-weight:700">7</td><td>Calidad de la Potencia — desbalance · flicker · VRT · armónicas · CC</td><td style="font-family:var(--mono);font-size:.8rem">1073–1076</td></tr>
+          <tr><td style="font-family:var(--mono);font-weight:700">8</td><td>Verificación de la Conformidad — EOC · UI · CENACE · CRE</td><td style="font-family:var(--mono);font-size:.8rem">1076</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══════════ 1.1 CLASIFICACIÓN ═══════════ -->
+    <h2 class="sec" id="sec-clasif"><span class="snum">1.1</span>Clasificación de las Centrales Eléctricas</h2>
+
+    <blockquote>
+      La Central Eléctrica debe cumplir los requerimientos según su Capacidad Instalada Neta de conformidad con las categorías mostradas en la Tabla 1.1.
+      <cite>RES/550/2021, Manual INTE, Cap. 1 1.1 — DOF 31-dic-2021 · PDF p. 218</cite>
+    </blockquote>
+
+    <div class="tbl-wrap full-w" id="sec-tabla11">
+      <div class="tbl-caption">Tabla 1.1 — Clasificación de una Central Eléctrica según su Capacidad Instalada Neta (CIN)
+        <span class="tbl-sub">RES/550/2021, Manual INTE, Cap. 1 1.1 — DOF 31-dic-2021 · PDF p. 218</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Área Síncrona</th>
+            <th>Tipo A<br><small>(exenta del Manual INTE)</small></th>
+            <th>Tipo B</th>
+            <th>Tipo C</th>
+            <th>Tipo D<br><small>(más requerimientos)</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sistema Interconectado Nacional (SIN)</strong></td>
+            <td style="font-family:var(--mono);text-align:center">P &lt; 0.5 MW</td>
+            <td style="font-family:var(--mono);text-align:center">0.5 MW ≤ P &lt; 10 MW</td>
+            <td style="font-family:var(--mono);text-align:center">10 MW ≤ P &lt; 30 MW</td>
+            <td style="font-family:var(--mono);text-align:center;font-weight:700">P ≥ 30 MW</td>
+          </tr>
+          <tr>
+            <td><strong>Sistema Interconectado Baja California (SIBC)</strong></td>
+            <td style="font-family:var(--mono);text-align:center">P &lt; 0.5 MW</td>
+            <td style="font-family:var(--mono);text-align:center">0.5 MW ≤ P &lt; 5 MW</td>
+            <td style="font-family:var(--mono);text-align:center">5 MW ≤ P &lt; 20 MW</td>
+            <td style="font-family:var(--mono);text-align:center;font-weight:700">P ≥ 20 MW</td>
+          </tr>
+          <tr>
+            <td><strong>Sistema Interconectado Baja California Sur (SIBCS)</strong></td>
+            <td style="font-family:var(--mono);text-align:center">P &lt; 0.5 MW</td>
+            <td style="font-family:var(--mono);text-align:center">0.5 MW ≤ P &lt; 3 MW</td>
+            <td style="font-family:var(--mono);text-align:center">3 MW ≤ P &lt; 10 MW</td>
+            <td style="font-family:var(--mono);text-align:center;font-weight:700">P ≥ 10 MW</td>
+          </tr>
+          <tr>
+            <td><strong>Sistema Interconectado Mulegé (SIM)</strong></td>
+            <td style="font-family:var(--mono);text-align:center">P &lt; 0.5 MW</td>
+            <td style="font-family:var(--mono);text-align:center">0.5 MW ≤ P &lt; 1 MW</td>
+            <td style="font-family:var(--mono);text-align:center">1 MW ≤ P &lt; 3 MW</td>
+            <td style="font-family:var(--mono);text-align:center;font-weight:700">P ≥ 3 MW</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ref-nota">CIN = Capacidad Instalada Neta. P = potencia activa generada en el Punto de Interconexión. El umbral de tipo D en el SIM (≥ 3 MW) refleja el menor tamaño de los sistemas aislados de la Península: una Central que sería tipo B en el SIN puede ser tipo D en Mulegé.</p>
+
+    <!-- ═══════════ TIPO A ═══════════ -->
+    <h2 class="sec" id="sec-tipoa"><span class="snum">Ref.</span>Tipo A — Régimen especial</h2>
+
+    <p>
+      Las Centrales Eléctricas de tipo A (P &lt; 0.5 MW en cualquier sistema) quedan excluidas de los requerimientos del Manual INTE. En su lugar, deben cumplir con las <strong>Disposiciones vigentes para Centrales Eléctricas con capacidad menor a 0.5 MW</strong>, que en la práctica corresponden a las regulaciones de Generación Distribuida y de pequeños generadores contempladas en la normatividad de distribución.
+    </p>
+
+    <p>
+      Esta exclusión es coherente con el principio de proporcionalidad del III: imponer los mismos requerimientos de ROCOF, LVRT, modelos de simulación y PMU a una central de 200 kW que a una de 500 MW sería desproporcionado y técnicamente irrelevante para la seguridad del SEN.
+    </p>
+
+    <!-- ═══════════ ESCALONAMIENTO ═══════════ -->
+    <h2 class="sec" id="sec-capabilidad"><span class="snum">Ref.</span>Escalonamiento de requerimientos B → C → D</h2>
+
+    <p>
+      El Manual INTE sigue una estructura acumulativa: los requerimientos del tipo D incluyen todos los del tipo C, que a su vez incluyen todos los del tipo B. La lógica es que una Central Eléctrica de mayor capacidad tiene mayor impacto potencial sobre el SEN —tanto positivo como negativo— y por lo tanto debe cumplir con requerimientos más exigentes.
+    </p>
+
+    <div class="tbl-wrap" style="max-width:720px">
+      <div class="tbl-caption">Requerimientos adicionales por tipo — resumen por capítulo</div>
+      <table>
+        <thead>
+          <tr><th>Cap.</th><th>Tipo B (base)</th><th>Tipo C (adicional a B)</th><th>Tipo D (adicional a C)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-family:var(--mono);font-weight:700">2</td>
+            <td>ROCOF · Control Primario · reconexión automática</td>
+            <td>Control Secundario de frecuencia</td>
+            <td>Monitoreo en tiempo real de Control Primario y Secundario</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-weight:700">3</td>
+            <td>LVRT/HVRT · rangos V · Q reactiva (síncronas/asíncronas)</td>
+            <td>Diagrama V-Q/Pmáx más exigente</td>
+            <td>RAT de respaldo obligatorio</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-weight:700">4</td>
+            <td>Zona A de respuesta ante fallas · recuperación de P post-falla</td>
+            <td>Zona A igual a B/C</td>
+            <td>Zona A más ajustada (PB2=0.25 s vs 0.40 s en B/C)</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-weight:700">5</td>
+            <td>Reconexión a instrucción del CENACE</td>
+            <td>Arranque de emergencia · operación en isla · resincronización</td>
+            <td>Ídem C</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-weight:700">6</td>
+            <td>Control · protecciones · telemetría · modelos de simulación</td>
+            <td>EPS adicionales · tasas de rampa · puesta a tierra del neutro</td>
+            <td>Sincronización previa autorizada por CENACE y UI</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-weight:700">7</td>
+            <td>Desbalance ≤ 1.8 % · Pst ≤ 1.0/Plt ≤ 0.65 · VRT · armónicas · CC</td>
+            <td>Desbalance ≤ 1.4 % (más estricto) · Pst ≤ 0.9/Plt ≤ 0.65</td>
+            <td>Ídem C</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="../index_cdr_2v4.html">
+        <span class="nd">← Índice</span>
+        <span class="nt">Portada — Código de Red 2.0</span>
+      </a>
+      <a href="cap2.html" class="n-next">
+        <span class="nd">Capítulo siguiente →</span>
+        <span class="nt">Cap. 2 — Frecuencia y Control Primario</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

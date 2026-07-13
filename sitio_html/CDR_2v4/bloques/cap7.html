@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capítulo 7 — Calidad de la Potencia | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+<script>
+MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
+options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual INTE — Centrales Eléctricas</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual INTE — Capítulos</span>
+    <a href="cap1.html" class="sb-cap">Cap. 1 — Tipos de Centrales Eléctricas</a>
+    <a href="cap2.html" class="sb-cap">Cap. 2 — Frecuencia y Control Primario</a>
+    <a href="cap3.html" class="sb-cap">Cap. 3 — Variaciones de Tensión</a>
+    <a href="cap4.html" class="sb-cap">Cap. 4 — Control Dinámico de Tensión</a>
+    <a href="cap5.html" class="sb-cap">Cap. 5 — Restauración del SEN</a>
+    <a href="cap6.html" class="sb-cap">Cap. 6 — Administración del SEN</a>
+    <a href="cap7.html" class="sb-cap active" aria-current="page">Cap. 7 — Calidad de la Potencia</a>
+    <a href="#sec71"  class="sb-sub">7.1 Desbalance máximo</a>
+    <a href="#sec711" class="sb-sub">&nbsp;&nbsp;7.1.1 Tipo B</a>
+    <a href="#sec712" class="sb-sub">&nbsp;&nbsp;7.1.2 Tipo C y D</a>
+    <a href="#sec72"  class="sb-sub">7.2 Severidad del parpadeo</a>
+    <a href="#sec721" class="sb-sub">&nbsp;&nbsp;7.2.1 Tipo B</a>
+    <a href="#sec722" class="sb-sub">&nbsp;&nbsp;7.2.2 Tipo C y D</a>
+    <a href="#sec73"  class="sb-sub">7.3 Variaciones rápidas</a>
+    <a href="#sec74"  class="sb-sub">7.4 Contenido armónico</a>
+    <a href="#sec741" class="sb-sub">&nbsp;&nbsp;7.4.1 Tipo B</a>
+    <a href="#sec742" class="sb-sub">&nbsp;&nbsp;7.4.2 Tipo C y D</a>
+    <a href="#sec75"  class="sb-sub">7.5 Corriente directa</a>
+    <a href="cap8.html" class="sb-cap">Cap. 8 — Verificación de la Conformidad</a>
+    <span class="sb-section-lbl">Otros Manuales</span>
+    <a href="../index_cdr_2v4.html#cone" class="sb-cap">Manual CONE — Centros de Carga</a>
+    <span class="sb-cap" style="opacity:.4;cursor:default">Manual SEA — próximamente</span>
+    <span class="sb-cap" style="opacity:.4;cursor:default">Manual TIC — próximamente</span>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+    <a href="https://www.cenace.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CENACE</a>
+    <a href="https://www.cre.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CRE</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Manual INTE › <strong>Capítulo 7 — Calidad de la Potencia</strong></div>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual Regulatorio INTE · Capítulo 7 de 8</span>
+    <h1 class="titulo">Capítulo 7. Requerimientos generales de Calidad de la potencia</h1>
+
+    <details>
+      <summary>Normas y documentos de referencia aplicables al Capítulo 7</summary>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">RES/550/2021 — CRE.</strong> Código de Red 2.0. Manual INTE, Capítulo 7: Requerimientos generales de Calidad de la potencia, 7.1–7.5. DOF, 31 de diciembre de 2021. <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" target="_blank" rel="noopener">Enlace oficial</a>.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">NOM-001-CRE/SCFI-2019.</strong> Sistemas de medición de energía eléctrica — calidad de la potencia. Instrumento de medición de referencia para la evaluación de Pst, Plt, desbalance, THD y armónicas individuales.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">NMX-J-610-4-30-ANCE-2018 Clase A.</strong> Equivalente a IEC 61000-4-30 Clase A. Métodos de medición de calidad de la potencia. Alternativa admitida expresamente por el Capítulo 7.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">IEC 61000-4-30 Clase A.</strong> Testing and measurement techniques — Power quality measurement methods. Tercera opción expresamente admitida.
+        </li>
+      </ul>
+    </details>
+
+    <!-- Resumen rápido de límites -->
+    <div class="tbl-wrap full-w">
+      <div class="tbl-caption">Resumen de límites — Capítulo 7 (percentil P95)
+        <span class="tbl-sub">Evaluación cada 10 min · periodo mínimo 1 semana · P99 ≤ 1.5 × P95 (excepto 7.3 y 7.5)</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Parámetro</th>
+            <th>Sección</th>
+            <th>Tipo B</th>
+            <th>Tipo C y D</th>
+            <th>Todos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Desbalance máximo de tensión (P95)</td><td style="font-family:var(--mono);text-align:center">7.1</td><td class="n-limit">1.8 %</td><td class="n-limit">1.4 %</td><td>—</td></tr>
+          <tr><td>Parpadeo corto plazo Pst (P95)</td><td style="font-family:var(--mono);text-align:center">7.2</td><td class="n-limit">0.90</td><td class="n-limit">0.80</td><td>—</td></tr>
+          <tr><td>Parpadeo largo plazo Plt (P95)</td><td style="font-family:var(--mono);text-align:center">7.2</td><td class="n-limit">0.70</td><td class="n-limit">0.60</td><td>—</td></tr>
+          <tr><td>Variaciones rápidas (conteo diario)</td><td style="font-family:var(--mono);text-align:center">7.3</td><td>≤ 5/día &gt; |5 %|</td><td>≤ 5/día &gt; |4 %|</td><td>—</td></tr>
+          <tr><td>THD total (P95, hasta arm. 50)</td><td style="font-family:var(--mono);text-align:center">7.4</td><td class="n-limit">5.0 %</td><td class="n-limit">3.0 %</td><td>—</td></tr>
+          <tr><td>Interarmónicos individuales (P95)</td><td style="font-family:var(--mono);text-align:center">7.4</td><td class="n-limit">0.2 %</td><td class="n-limit">0.2 %</td><td>—</td></tr>
+          <tr><td>Inyección de corriente directa</td><td style="font-family:var(--mono);text-align:center">7.5</td><td>—</td><td>—</td><td style="font-weight:700;color:var(--blue-dark)">Prohibición absoluta</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Este Capítulo establece los límites cuantitativos que deben respetar las Centrales Eléctricas tipo B, C y D en su Punto de Interconexión (PI) con el SEN en materia de calidad de la potencia. Salvo el 7.3 —conteo diario de eventos— y el 7.5 —prohibición absoluta sin margen estadístico—, todos los parámetros se evalúan con muestras de 10 minutos durante un mínimo de una semana con el criterio dual <strong>P95 ≤ límite</strong> y <strong>P99 ≤ 1.5 × límite</strong>.
+    </p>
+
+    <!-- ═══════════════════════════════
+ 7.1 DESBALANCE
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec71"><span class="snum">7.1</span>Requerimientos generales de desbalance máximo en la tensión</h2>
+
+    <blockquote>
+      El desbalance de la tensión en sistemas trifásicos es definido como la razón entre la magnitud de la componente de desbalance de secuencia negativa y la magnitud de la componente de secuencia positiva expresada en porcentaje de acuerdo con la siguiente formulación.
+      <cite>RES/550/2021, Cap. 7 7.1 — DOF 31-dic-2021 · PDF p. 238</cite>
+    </blockquote>
+
+    <div class="formula-wrap">
+      <span class="f-tag">Formulación oficial — 7.1</span>
+      <span class="f-ref">RES/550/2021, Cap. 7</span>
+      \[
+        \text{Desbalance en la tensión} = \left|\frac{V_{\text{neg}}}{V_{\text{pos}}}\right| \times 100\ \%
+      \]
+    </div>
+
+    <dl class="formula-leyenda">
+      <dt>\(V_{\text{neg}}\)</dt>
+      <dd>Magnitud de la componente de tensión de secuencia negativa en el PI, determinada por descomposición en componentes simétricas (método de Fortescue).</dd>
+      <dt>\(V_{\text{pos}}\)</dt>
+      <dd>Magnitud de la componente de tensión de secuencia positiva en el PI. En condiciones ideales de equilibrio perfecto, \(V_{\text{neg}} = 0\).</dd>
+    </dl>
+
+    <p>
+      Los límites de desbalance máximo son evaluados cada 10 minutos durante un periodo mínimo de una semana. El P95 de las mediciones no debe exceder los límites de 7.1.1 y 7.1.2, y el P99 no debe exceder 1.5 veces esos límites.
+    </p>
+
+    <h3 class="subsec" id="sec711">7.1.1 Requerimientos para Centrales Eléctricas tipo B</h3>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">i.</span>
+        <span>Los valores máximos permitidos de desbalance en estado estable no deben exceder el <strong>1.8 %</strong> para desbalance máximo en la tensión (componente de desbalance de secuencia negativa).</span>
+      </li>
+    </ul>
+
+    <h3 class="subsec" id="sec712">7.1.2 Requerimientos para Centrales Eléctricas tipo C y D</h3>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">i.</span>
+        <span>Los valores máximos permitidos de desbalance en estado estable no deben exceder el <strong>1.4 %</strong> para desbalance máximo en la tensión (componente de desbalance de secuencia negativa).</span>
+      </li>
+    </ul>
+
+    <div class="nota">
+      <span class="nota-title">Comparativo B vs. C/D — 7.1</span>
+      El límite para tipo C y D (1.4 %) es 22 % más estricto que el de tipo B (1.8 %), reflejando el mayor potencial de perturbación de las Centrales de mayor potencia. El desequilibrio sostenido afecta motores de inducción cercanos al PI generando corrientes de secuencia negativa y pérdidas en el rotor que se amplifican cuadráticamente con la magnitud del desequilibrio.
+    </div>
+
+    <!-- ═══════════════════════════════
+ 7.2 PARPADEO
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec72"><span class="snum">7.2</span>Requerimientos generales de severidad del parpadeo</h2>
+
+    <blockquote>
+      La Severidad del parpadeo será evaluada mediante dos categorías, de corta duración y de larga duración: Pst y Plt conforme a la NOM-001-CRE/SCFI-2019 vigente o la NMX-J-610-4-30-ANCE-2018 Clase A o IEC 61000-4-30 Clase A. Se tomará el valor mayor para cada fase y el percentil 95% de las mediciones de al menos una semana no deberán exceder los límites definidos en los requerimientos 7.2.1 y 7.2.2. El percentil 99% de las mediciones de al menos una semana no deberá exceder 1.5 veces los límites definidos en los requerimientos 7.2.1 y 7.2.2.
+      <cite>RES/550/2021, Cap. 7 7.2 — DOF 31-dic-2021 · PDF p. 238</cite>
+    </blockquote>
+
+    <p>
+      <strong>Pst</strong> (<em>short-term flicker severity</em>) se calcula sobre 10 minutos integrando la energía de la señal de molestia visual ponderada. Un valor Pst = 1.0 corresponde al umbral de irritabilidad percibido por el 50 % de los observadores. <strong>Plt</strong> (<em>long-term flicker severity</em>) se calcula sobre 2 horas a partir de 12 valores consecutivos de Pst:
+    </p>
+
+    <div class="formula-wrap">
+      <span class="f-tag">Definición de Plt — IEC 61000-4-15 / NMX-J-610-4-15</span>
+      \[
+        P_{lt} = \sqrt[3]{\frac{1}{12}\sum_{i=1}^{12} P_{st,i}^{3}}
+      \]
+    </div>
+
+    <dl class="formula-leyenda">
+      <dt>\(P_{lt}\)</dt><dd>Severidad del parpadeo de larga duración (intervalo de 2 horas).</dd>
+      <dt>\(P_{st,i}\)</dt><dd>Severidad del parpadeo de corta duración en el intervalo de 10 minutos número <em>i</em>.</dd>
+    </dl>
+
+    <h3 class="subsec" id="sec721">7.2.1 Requerimientos para Centrales Eléctricas tipo B</h3>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">i.</span>
+        <span>La Central Eléctrica de tipo B no debe causar niveles de emisión de variaciones periódicas de amplitud de la tensión individuales fuera de los límites establecidos en la <strong>Tabla 7.3.1</strong>:</span>
+      </li>
+    </ul>
+
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Tabla 7.3.1 — Límites de severidad de parpadeo · Tipo B
+        <span class="tbl-sub">P95 ≤ límite · P99 ≤ 1.5 × límite · periodo mínimo: 1 semana · valor mayor entre fases</span>
+      </div>
+      <table class="tbl-center-first">
+        <thead>
+          <tr><th>Indicador</th><th>Ventana de cálculo</th><th>Límite P95</th><th>Límite P99 (= 1.5 × P95)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Pst</td><td>10 minutos</td><td class="n-limit">0.90</td><td>1.35</td></tr>
+          <tr><td>Plt</td><td>2 horas (12 × Pst)</td><td class="n-limit">0.70</td><td>1.05</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec" id="sec722">7.2.2 Requerimientos para Centrales Eléctricas tipo C y D</h3>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">i.</span>
+        <span>La Central Eléctrica de tipo C y D no debe causar niveles de emisión de variaciones periódicas de amplitud de la tensión individuales fuera de los límites establecidos en la <strong>Tabla 7.3.2</strong>:</span>
+      </li>
+    </ul>
+
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Tabla 7.3.2 — Límites de severidad de parpadeo · Tipo C y D
+        <span class="tbl-sub">P95 ≤ límite · P99 ≤ 1.5 × límite · periodo mínimo: 1 semana · valor mayor entre fases</span>
+      </div>
+      <table class="tbl-center-first">
+        <thead>
+          <tr><th>Indicador</th><th>Ventana de cálculo</th><th>Límite P95</th><th>Límite P99 (= 1.5 × P95)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Pst</td><td>10 minutos</td><td class="n-limit">0.80</td><td>1.20</td></tr>
+          <tr><td>Plt</td><td>2 horas (12 × Pst)</td><td class="n-limit">0.60</td><td>0.90</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="nota">
+      <span class="nota-title">Fuentes típicas de parpadeo</span>
+      Las Centrales eólicas producen parpadeo por fluctuaciones de potencia asociadas a turbulencia y efecto de sombra de torre. Las fotovoltaicas lo generan bajo nubosidad variable. En ambos casos, el diseño del control del convertidor y el dimensionamiento de los filtros de salida determinan en gran medida el nivel de parpadeo emitido.
+    </div>
+
+    <!-- ═══════════════════════════════
+ 7.3 VARIACIONES RÁPIDAS
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec73"><span class="snum">7.3</span>Requerimientos generales de variaciones rápidas en la tensión</h2>
+
+    <blockquote>
+      Las variaciones rápidas en la tensión se calculan de acuerdo con la siguiente formulación.
+      <cite>RES/550/2021, Cap. 7 7.3 — DOF 31-dic-2021 · PDF p. 239</cite>
+    </blockquote>
+
+    <div class="formula-wrap">
+      <span class="f-tag">Formulación oficial — 7.3</span>
+      <span class="f-ref">RES/550/2021, Cap. 7</span>
+      \[
+        \text{VRT} = \frac{\Delta V}{V_{\text{máx}}}\ \%
+      \]
+    </div>
+
+    <dl class="formula-leyenda">
+      <dt>\(\Delta V\)</dt>
+      <dd>Cambio de tensión durante el evento: diferencia entre el valor inmediatamente antes y el estabilizado inmediatamente después de la maniobra.</dd>
+      <dt>\(V_{\text{máx}}\)</dt>
+      <dd>Tensión máxima observada en el intervalo de evaluación en el PI. Referencia de normalización para expresar el escalón en términos porcentuales.</dd>
+    </dl>
+
+    <h4 class="subsubsec">Régimen de evaluación distinto al P95/P99</h4>
+    <p>
+      Las VRT se evalúan mediante un <strong>conteo diario de eventos</strong> que superan el umbral de magnitud, no con el régimen estadístico P95/P99. Ningún día calendario puede registrar más de 5 escalones por encima del umbral aplicable.
+    </p>
+
+    <h3 class="subsec" id="sec731">7.3.1 Requerimientos para Centrales Eléctricas tipo B</h3>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">i.</span>
+        <span>La Interconexión de una Central Eléctrica no debe ocasionar más de <strong>5 variaciones rápidas por día</strong> en la tensión superiores al <strong>|5 %|</strong>.</span>
+      </li>
+    </ul>
+
+    <h3 class="subsec" id="sec732">7.3.2 Requerimientos para Centrales Eléctricas tipo C y D</h3>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">i.</span>
+        <span>La Interconexión de una Central Eléctrica no debe ocasionar más de <strong>5 variaciones rápidas por día</strong> en la tensión superiores al <strong>|4 %|</strong>.</span>
+      </li>
+    </ul>
+
+    <!-- ═══════════════════════════════
+ 7.4 ARMÓNICOS / THD
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec74"><span class="snum">7.4</span>Requerimientos generales de contenido armónico máximo</h2>
+
+    <blockquote>
+      La distorsión armónica total de tensión se calcula con la siguiente formulación.
+      La operación e Interconexión de la Central Eléctrica al SEN no debe ocasionar la circulación de corrientes armónicas que ocasionen violaciones a los límites de distorsión armónica en la tensión. En caso de no cumplir con estos requerimientos, se debe implementar la solución técnica adecuada para mitigar el efecto adverso hacia la Red Eléctrica.
+      <cite>RES/550/2021, Cap. 7 7.4 — DOF 31-dic-2021 · PDF p. 239</cite>
+    </blockquote>
+
+    <div class="formula-wrap">
+      <span class="f-tag">Formulación oficial — 7.4</span>
+      <span class="f-ref">RES/550/2021, Cap. 7</span>
+      \[
+        \text{THD} = \frac{\sqrt{V_2^2 + V_3^2 + \cdots + V_{50}^2}}{V_1} \times 100\ \%
+      \]
+    </div>
+
+    <dl class="formula-leyenda">
+      <dt>THD</dt><dd>Distorsión Armónica Total de la tensión en el PI, expresada en % respecto a la fundamental.</dd>
+      <dt>\(V_n\)</dt><dd>Magnitud eficaz (RMS) de la componente armónica de orden <em>n</em> (n = 2, 3, …, 50).</dd>
+      <dt>\(V_1\)</dt><dd>Magnitud eficaz (RMS) de la componente fundamental (60 Hz) en el PI.</dd>
+    </dl>
+
+    <p>
+      Los límites de THD total, armónicas individuales e interarmónicos individuales son evaluados cada 10 minutos durante un mínimo de una semana. El P95 no debe exceder los límites de 7.4.1 y 7.4.2, y el P99 no debe exceder 1.5 veces esos límites.
+    </p>
+
+    <h3 class="subsec" id="sec741">7.4.1 Requerimientos para Centrales Eléctricas tipo B</h3>
+
+    <ul class="incisos">
+      <li><span class="lbl">i.</span><span>El valor máximo permitido de THD en la tensión es de <strong>5 %</strong>, considerando hasta la 50.ª armónica;</span></li>
+      <li><span class="lbl">ii.</span><span>Los límites de distorsión armónica individual se indican en la <strong>Tabla 7.5.1 B</strong>; y</span></li>
+      <li><span class="lbl">iii.</span><span>El valor máximo de interarmónicos individuales de tensión no debe exceder el <strong>0.2 %</strong> respecto de la fundamental.</span></li>
+    </ul>
+
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Tabla 7.5.1 B — Niveles armónicos en la tensión · Tipo B
+        <span class="tbl-sub">% respecto a la tensión fundamental · P95 ≤ límite · P99 ≤ 1.5 × límite · THD ≤ 5 % · Interarmónicos ≤ 0.2 %</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Orden (impar)</th>
+            <th>Nivel máx. (% V<sub>fund</sub>)</th>
+            <th>Orden (par)</th>
+            <th>Nivel máx. (% V<sub>fund</sub>)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="n-impar">3</td><td>4.00</td><td class="n-par">2</td><td>1.80</td></tr>
+          <tr><td class="n-impar">5</td><td>5.00</td><td class="n-par">4</td><td>1.00</td></tr>
+          <tr><td class="n-impar">7</td><td>4.00</td><td class="n-par">6</td><td>0.50</td></tr>
+          <tr><td class="n-impar">9</td><td>1.20</td><td class="n-par">8</td><td>0.50</td></tr>
+          <tr><td class="n-impar">11</td><td>3.00</td><td class="n-par">10</td><td>0.47</td></tr>
+          <tr><td class="n-impar">13</td><td>2.50</td><td class="n-par">12</td><td>0.43</td></tr>
+          <tr><td class="n-impar">15</td><td>0.30</td><td class="n-par">14</td><td>0.40</td></tr>
+          <tr><td class="n-impar">17</td><td>1.70</td><td class="n-par">16</td><td>0.38</td></tr>
+          <tr><td class="n-impar">19</td><td>1.50</td><td class="n-par">18</td><td>0.36</td></tr>
+          <tr><td class="n-impar">21</td><td>0.20</td><td class="n-par">20</td><td>0.35</td></tr>
+          <tr><td class="n-impar">23</td><td>1.20</td><td class="n-par">22</td><td>0.33</td></tr>
+          <tr><td class="n-impar">25</td><td>1.09</td><td class="n-par">24</td><td>0.32</td></tr>
+          <tr><td class="n-impar">27</td><td>0.20</td><td class="n-par">26</td><td>0.32</td></tr>
+          <tr><td class="n-impar">29</td><td>0.91</td><td class="n-par">28</td><td>0.31</td></tr>
+          <tr><td class="n-impar">31</td><td>0.84</td><td class="n-par">30</td><td>0.30</td></tr>
+          <tr><td class="n-impar">33</td><td>0.20</td><td class="n-par">32</td><td>0.30</td></tr>
+          <tr><td class="n-impar">35</td><td>0.72</td><td class="n-par">34</td><td>0.29</td></tr>
+          <tr><td class="n-impar">37</td><td>0.67</td><td class="n-par">36</td><td>0.29</td></tr>
+          <tr><td class="n-impar">39</td><td>0.20</td><td class="n-par">38</td><td>0.29</td></tr>
+          <tr><td class="n-impar">41</td><td>0.59</td><td class="n-par">40</td><td>0.28</td></tr>
+          <tr><td class="n-impar">43</td><td>0.55</td><td class="n-par">42</td><td>0.28</td></tr>
+          <tr><td class="n-impar">45</td><td>0.20</td><td class="n-par">44</td><td>0.28</td></tr>
+          <tr><td class="n-impar">47</td><td>0.49</td><td class="n-par">46</td><td>0.27</td></tr>
+          <tr><td class="n-impar">49</td><td>0.46</td><td class="n-par">48</td><td>0.27</td></tr>
+          <tr><td style="background:var(--table-alt)"></td><td style="background:var(--table-alt)"></td><td class="n-par">50</td><td>0.27</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ref-nota">Fuente: RES/550/2021, CRE. Manual INTE, Cap. 7, 7.4.1, Tabla 7.5.1 B. DOF 31-dic-2021. <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" target="_blank" rel="noopener">Texto oficial (PDF)</a>.</p>
+
+    <h3 class="subsec" id="sec742">7.4.2 Requerimientos para Centrales Eléctricas tipo C y D</h3>
+
+    <ul class="incisos">
+      <li><span class="lbl">i.</span><span>El valor máximo permitido de THD en la tensión es de <strong>3.0 %</strong>, considerando hasta la 50.ª armónica;</span></li>
+      <li><span class="lbl">ii.</span><span>Los límites de distorsión armónica individual se indican en la <strong>Tabla 7.5.2</strong>; y</span></li>
+      <li><span class="lbl">iii.</span><span>El valor máximo de interarmónicos individuales de tensión no debe exceder el <strong>0.2 %</strong> respecto de la fundamental.</span></li>
+    </ul>
+
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Tabla 7.5.2 — Niveles armónicos en la tensión · Tipo C y D
+        <span class="tbl-sub">% respecto a la tensión fundamental · P95 ≤ límite · P99 ≤ 1.5 × límite · THD ≤ 3.0 % · Interarmónicos ≤ 0.2 %</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Orden (impar)</th>
+            <th>Nivel máx. (% V<sub>fund</sub>)</th>
+            <th>Orden (par)</th>
+            <th>Nivel máx. (% V<sub>fund</sub>)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="n-impar">3</td><td>2.00</td><td class="n-par">2</td><td>1.40</td></tr>
+          <tr><td class="n-impar">5</td><td>2.00</td><td class="n-par">4</td><td>0.80</td></tr>
+          <tr><td class="n-impar">7</td><td>2.00</td><td class="n-par">6</td><td>0.40</td></tr>
+          <tr><td class="n-impar">9</td><td>1.00</td><td class="n-par">8</td><td>0.40</td></tr>
+          <tr><td class="n-impar">11</td><td>1.50</td><td class="n-par">10</td><td>0.35</td></tr>
+          <tr><td class="n-impar">13</td><td>1.50</td><td class="n-par">12</td><td>0.32</td></tr>
+          <tr><td class="n-impar">15</td><td>0.30</td><td class="n-par">14</td><td>0.30</td></tr>
+          <tr><td class="n-impar">17</td><td>1.20</td><td class="n-par">16</td><td>0.28</td></tr>
+          <tr><td class="n-impar">19</td><td>1.07</td><td class="n-par">18</td><td>0.27</td></tr>
+          <tr><td class="n-impar">21</td><td>0.20</td><td class="n-par">20</td><td>0.26</td></tr>
+          <tr><td class="n-impar">23</td><td>0.89</td><td class="n-par">22</td><td>0.25</td></tr>
+          <tr><td class="n-impar">25</td><td>0.82</td><td class="n-par">24</td><td>0.24</td></tr>
+          <tr><td class="n-impar">27</td><td>0.20</td><td class="n-par">26</td><td>0.23</td></tr>
+          <tr><td class="n-impar">29</td><td>0.70</td><td class="n-par">28</td><td>0.23</td></tr>
+          <tr><td class="n-impar">31</td><td>0.66</td><td class="n-par">30</td><td>0.22</td></tr>
+          <tr><td class="n-impar">33</td><td>0.20</td><td class="n-par">32</td><td>0.22</td></tr>
+          <tr><td class="n-impar">35</td><td>0.58</td><td class="n-par">34</td><td>0.22</td></tr>
+          <tr><td class="n-impar">37</td><td>0.55</td><td class="n-par">36</td><td>0.21</td></tr>
+          <tr><td class="n-impar">39</td><td>0.20</td><td class="n-par">38</td><td>0.21</td></tr>
+          <tr><td class="n-impar">41</td><td>0.50</td><td class="n-par">40</td><td>0.21</td></tr>
+          <tr><td class="n-impar">43</td><td>0.47</td><td class="n-par">42</td><td>0.21</td></tr>
+          <tr><td class="n-impar">45</td><td>0.20</td><td class="n-par">44</td><td>0.20</td></tr>
+          <tr><td class="n-impar">47</td><td>0.43</td><td class="n-par">46</td><td>0.20</td></tr>
+          <tr><td class="n-impar">49</td><td>0.42</td><td class="n-par">48</td><td>0.20</td></tr>
+          <tr><td style="background:var(--table-alt)"></td><td style="background:var(--table-alt)"></td><td class="n-par">50</td><td>0.20</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ref-nota">Fuente: RES/550/2021, CRE. Manual INTE, Cap. 7, 7.4.2, Tabla 7.5.2. DOF 31-dic-2021. <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" target="_blank" rel="noopener">Texto oficial (PDF)</a>.</p>
+
+    <div class="nota">
+      <span class="nota-title">Comparativo THD · Tipo B vs. C/D</span>
+      El límite de THD para tipo C y D (3.0 %) es el 60 % del de tipo B (5.0 %). Las armónicas individuales son sistemáticamente menores: la 5.ª pasa de 5.00 % (B) a 2.00 % (C/D); la 7.ª de 4.00 % a 2.00 %; la 11.ª de 3.00 % a 1.50 %; la 13.ª de 2.50 % a 1.50 %. El límite de interarmónicos individuales es idéntico (0.2 %) porque la problemática depende de la topología del convertidor, no de la potencia.
+    </div>
+
+    <!-- ═══════════════════════════════
+ 7.5 CORRIENTE DIRECTA
+    ═══════════════════════════════ -->
+    <h2 class="sec" id="sec75"><span class="snum">7.5</span>Requerimientos generales de inyección de corriente directa</h2>
+
+    <blockquote>
+      La Central Eléctrica de tipo A, B, C y D debe cumplir el requerimiento de inyección de corriente directa: En ningún caso se permitirá la inyección de corriente directa en el Punto de Interconexión.
+      <cite>RES/550/2021, Cap. 7 7.5 — DOF 31-dic-2021 · PDF p. 241</cite>
+    </blockquote>
+
+    <div class="advertencia">
+      <strong>Prohibición absoluta — aplica a todos los tipos (A, B, C y D).</strong> Este es el único requerimiento del Capítulo 7 que no admite evaluación estadística de percentiles ni margen temporal: se debe cumplir en todo momento durante la operación de la Central Eléctrica. Cualquier inyección de corriente directa en el PI constituye incumplimiento inmediato.
+    </div>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">i.</span>
+        <span>En ningún caso se permitirá la inyección de corriente directa en el Punto de Interconexión.</span>
+      </li>
+    </ul>
+
+    <p>
+      La corriente directa inyectada en una red de CA produce saturación del núcleo de los transformadores conectados al mismo nodo o en nodos eléctricos cercanos, generando: corriente magnetizante fuertemente distorsionada con grandes armónicas de orden impar, pérdidas adicionales en el hierro, aumento de temperatura, interferencia con protecciones diferenciales y deterioro acelerado del aislamiento.
+    </p>
+
+    <h4 class="subsubsec">Métodos de cumplimiento en inversores</h4>
+    <p>
+      Los métodos habituales incluyen: transformador de conexión con al menos un devanado en triángulo (barrera natural a CC), filtro de bloqueo de continua (condensador de bloqueo), lazo de eliminación de <em>offset</em> DC en el modulador PWM, y monitorización continua con alarma y disparo ante valores superiores al umbral de diseño.
+    </p>
+
+    <p class="ref-nota">Fuente: RES/550/2021, CRE. Manual INTE, Cap. 7, 7.1–7.5. DOF 31-dic-2021. <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" target="_blank" rel="noopener">Texto oficial (PDF)</a>.</p>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="cap6.html">
+        <span class="nd">← Capítulo anterior</span>
+        <span class="nt">Cap. 6 — Administración del SEN</span>
+      </a>
+      <a href="cap8.html" class="n-next">
+        <span class="nd">Capítulo siguiente →</span>
+        <span class="nt">Cap. 8 — Verificación de la Conformidad</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

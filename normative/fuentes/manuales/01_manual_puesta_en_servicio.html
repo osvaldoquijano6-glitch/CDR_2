@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual — Puesta en Servicio de Centrales Eléctricas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --indigo-900:#312E81; --indigo-800:#3730A3; --indigo-700:#4338CA;
+  --indigo-100:#E0E7FF; --indigo-50:#EEF2FF;
+  --amber-600:#EA580C; --amber-100:#FED7AA; --amber-50:#FFF7ED;
+  --gray-900:#111827; --gray-700:#374151; --gray-500:#6B7280; --gray-400:#9CA3AF; --gray-300:#D1D5DB; --gray-200:#E5E7EB; --gray-100:#F3F4F6; --gray-50:#F9FAFB;
+  --white:#FFFFFF;
+  --f-head:'Montserrat','Helvetica Neue',sans-serif;
+  --f-body:'Inter','Helvetica Neue',-apple-system,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,monospace;
+  --sh-sm:0 1px 2px rgba(17,24,39,.05);
+  --sh-md:0 4px 12px rgba(49,46,129,.08);
+  --sh-lg:0 8px 24px rgba(49,46,129,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--f-body);background:var(--gray-50);color:var(--gray-900);line-height:1.55;font-size:14px}
+
+/* HEADER */
+header.top{position:sticky;top:0;z-index:100;background:var(--indigo-900);color:var(--white);border-bottom:3px solid var(--amber-600);box-shadow:var(--sh-md)}
+.top-inner{max-width:1400px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand-title{font-family:var(--f-head);font-weight:700;font-size:15px;letter-spacing:.02em}
+.brand-sub{font-size:11px;color:var(--indigo-100);letter-spacing:.05em;text-transform:uppercase}
+.top-actions{display:flex;gap:8px}
+.btn{font-family:var(--f-body);font-size:12px;font-weight:500;padding:8px 14px;border:1px solid var(--indigo-700);background:transparent;color:var(--white);border-radius:6px;cursor:pointer;transition:all .15s}
+.btn:hover{background:var(--indigo-800)}
+.btn.primary{background:var(--amber-600);border-color:var(--amber-600)}
+.btn.primary:hover{background:#c2410c}
+
+/* LAYOUT */
+.wrap{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:260px 1fr;gap:32px}
+@media (max-width:960px){.wrap{grid-template-columns:1fr;padding:16px;gap:16px}}
+
+/* SIDEBAR */
+aside.nav{position:sticky;top:88px;align-self:start;max-height:calc(100vh - 108px);overflow-y:auto;background:var(--white);border:1px solid var(--gray-200);border-radius:12px;padding:16px}
+aside.nav h3{font-family:var(--f-head);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-500);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--gray-200)}
+aside.nav ul{list-style:none}
+aside.nav li{margin-bottom:2px}
+aside.nav a{display:block;padding:6px 10px;color:var(--gray-700);text-decoration:none;font-size:12.5px;border-radius:6px;border-left:2px solid transparent;transition:all .12s}
+aside.nav a:hover{background:var(--indigo-50);color:var(--indigo-900);border-left-color:var(--indigo-100)}
+aside.nav a.sub{padding-left:22px;font-size:12px;color:var(--gray-500)}
+@media (max-width:960px){aside.nav{position:relative;top:0;max-height:none}}
+
+/* MAIN */
+main{min-width:0}
+.hero{background:linear-gradient(135deg,var(--indigo-50) 0%,var(--white) 100%);border:1px solid var(--indigo-100);border-radius:14px;padding:28px 32px;margin-bottom:24px}
+.hero h1{font-family:var(--f-head);font-size:26px;font-weight:700;color:var(--indigo-900);margin-bottom:6px;letter-spacing:-.01em}
+.hero .sub{color:var(--gray-700);font-size:14px}
+.hero .refs{margin-top:14px;padding-top:14px;border-top:1px dashed var(--indigo-100);display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--gray-700)}
+.ref-chip{background:var(--white);border:1px solid var(--indigo-100);padding:4px 10px;border-radius:20px}
+.ref-chip b{color:var(--indigo-900);font-weight:600}
+
+section.block{margin-bottom:36px;scroll-margin-top:80px}
+h2.section{font-family:var(--f-head);font-size:20px;font-weight:700;color:var(--indigo-900);padding-bottom:10px;border-bottom:2px solid var(--indigo-100);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+h2.section .num{background:var(--indigo-900);color:var(--white);width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+h3.sub{font-family:var(--f-head);font-size:15px;font-weight:600;color:var(--indigo-800);margin:20px 0 10px}
+
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--gray-200);border-radius:12px;padding:20px;margin-bottom:14px;box-shadow:var(--sh-sm)}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:12px}
+.card-title{font-family:var(--f-head);font-size:14px;font-weight:600;color:var(--indigo-900)}
+.card-tag{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--indigo-50);color:var(--indigo-800);padding:4px 8px;border-radius:4px}
+
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+
+/* NOTAS */
+.nota{background:var(--amber-50);border:1px solid var(--amber-100);border-left:4px solid var(--amber-600);border-radius:8px;padding:14px 16px;margin:14px 0;font-size:13px;color:#7c2d12}
+.nota .label{font-family:var(--f-head);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-600);display:block;margin-bottom:6px}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--gray-200);border-radius:8px;margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:var(--indigo-50);color:var(--indigo-900);font-family:var(--f-head);font-weight:600;padding:10px 12px;text-align:left;border-bottom:1px solid var(--indigo-100);white-space:nowrap;font-size:12px;letter-spacing:.01em}
+td{padding:9px 12px;border-bottom:1px solid var(--gray-100);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--gray-50)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--f-mono);font-size:12px}
+td.c,th.c{text-align:center}
+td.chk{text-align:center;font-weight:700;color:var(--indigo-800);font-size:14px}
+td.dash{text-align:center;color:var(--gray-400)}
+
+/* ACCORDION (details) */
+details.acc{background:var(--white);border:1px solid var(--gray-200);border-radius:10px;margin-bottom:8px;overflow:hidden;box-shadow:var(--sh-sm)}
+details.acc[open]{box-shadow:var(--sh-md);border-color:var(--indigo-100)}
+details.acc summary{padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:14px;font-family:var(--f-body);font-size:13.5px;color:var(--gray-900);user-select:none;transition:background .15s}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";margin-left:auto;color:var(--indigo-800);font-size:20px;font-weight:400;transition:transform .2s;line-height:1;font-family:var(--f-mono)}
+details.acc[open] summary::after{content:"−"}
+details.acc summary:hover{background:var(--indigo-50)}
+details.acc[open] summary{background:var(--indigo-50);border-bottom:1px solid var(--indigo-100)}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:24px;padding:0 8px;border-radius:6px;background:var(--indigo-900);color:var(--white);font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.02em;flex-shrink:0}
+.pill.aplic{background:var(--amber-600)}
+.pill.doc{background:var(--gray-500)}
+.acc-body{padding:18px 22px;font-size:13px;color:var(--gray-700)}
+.acc-body h4{font-family:var(--f-head);font-size:12px;font-weight:600;color:var(--indigo-900);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px;padding-top:4px}
+.acc-body h4:first-child{margin-top:0;padding-top:0}
+.acc-body p{margin-bottom:6px;color:var(--gray-700)}
+.acc-body ul{margin:4px 0 8px 20px}
+.acc-body li{margin-bottom:3px}
+
+/* KEY-VALUE */
+.kv{display:grid;grid-template-columns:1fr auto;gap:6px 16px;font-size:12.5px;background:var(--gray-50);border-radius:8px;padding:12px 14px}
+.kv .k{color:var(--gray-700)}
+.kv .v{color:var(--indigo-900);font-family:var(--f-mono);font-weight:500;text-align:right}
+
+/* CHIPS TIPOS */
+.tipos{display:inline-flex;gap:4px;margin-left:6px}
+.tipo{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:5px;font-family:var(--f-mono);font-size:11px;font-weight:600;background:var(--gray-200);color:var(--gray-500)}
+.tipo.on{background:var(--indigo-900);color:var(--white)}
+
+/* PLANTILLA (quote-like) */
+.plantilla{background:var(--indigo-50);border-left:3px solid var(--indigo-700);border-radius:6px;padding:10px 14px;font-family:var(--f-body);font-size:12.5px;color:var(--gray-700);margin:6px 0;line-height:1.55}
+.plantilla em{color:var(--indigo-900);font-style:normal;font-weight:500}
+.tag-line{font-family:var(--f-head);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo-700);margin-bottom:6px;display:block}
+
+/* CODE */
+code{font-family:var(--f-mono);font-size:12px;background:var(--gray-100);padding:1px 5px;border-radius:3px;color:var(--indigo-900)}
+pre{background:var(--gray-900);color:var(--gray-100);padding:14px 16px;border-radius:8px;overflow-x:auto;font-family:var(--f-mono);font-size:12px;line-height:1.55}
+
+/* FOOTER */
+footer{max-width:1400px;margin:32px auto 24px;padding:20px 24px;color:var(--gray-500);font-size:11.5px;border-top:1px solid var(--gray-200);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+/* PRINT */
+@media print{
+  header.top,aside.nav,.top-actions,footer{display:none}
+  .wrap{grid-template-columns:1fr;padding:0}
+  details.acc{break-inside:avoid;box-shadow:none;border:1px solid #ccc}
+  details.acc summary{display:none}
+  .acc-body{display:block!important;padding:8px}
+  body{background:#fff;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <span class="brand-title">Manual de Consulta · Puesta en Servicio</span>
+      <span class="brand-sub">Centrales Eléctricas · Código de Red 2.0</span>
+    </div>
+    <div class="top-actions">
+      <button class="btn" onclick="toggleAll(true)">Expandir todo</button>
+      <button class="btn" onclick="toggleAll(false)">Colapsar todo</button>
+      <button class="btn primary" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<aside class="nav" aria-label="Navegación">
+  <h3>Índice</h3>
+  <ul>
+    <li><a href="#s0">0. Clasificación de CE</a></li>
+    <li><a href="#s1">1. Tablas normativas base</a></li>
+    <li><a href="#s1-1" class="sub">1.1 Rangos de frecuencia</a></li>
+    <li><a href="#s1-2" class="sub">1.2 Parámetros CPF</a></li>
+    <li><a href="#s1-3" class="sub">1.3 Regulación por tecnología</a></li>
+    <li><a href="#s1-4" class="sub">1.4 Rangos de tensión PI</a></li>
+    <li><a href="#s1-5" class="sub">1.5 Perfil Q/Pmáx</a></li>
+    <li><a href="#s1-6" class="sub">1.6 Modos de control Q</a></li>
+    <li><a href="#s1-7" class="sub">1.7 Huecos de tensión (Zona A)</a></li>
+    <li><a href="#s2">2. Matriz — Asíncronas</a></li>
+    <li><a href="#s3">3. Matriz — Síncronas</a></li>
+    <li><a href="#s4">4. Fichas asíncronas</a></li>
+    <li><a href="#s5">5. Fichas síncronas por central</a></li>
+    <li><a href="#s6">6. Pruebas por unidad (pendiente)</a></li>
+    <li><a href="#s7">7. Estructura del reporte</a></li>
+  </ul>
+</aside>
+
+<main>
+
+<div class="hero">
+  <h1>Puesta en Servicio de Centrales Eléctricas</h1>
+  <div class="sub">Catálogo de parámetros normativos, matrices de aplicabilidad y fichas por prueba para el generador de reportes CENACE.</div>
+  <div class="refs">
+    <span class="ref-chip"><b>[1]</b> Manual INTE · Código de Red 2.0 (RES/550/2021)</span>
+    <span class="ref-chip"><b>[2]</b> POC Anexo 5 · CENACE</span>
+    <span class="ref-chip"><b>[3]</b> MIC · DOF 09-feb-2018</span>
+  </div>
+</div>
+
+<div class="nota">
+  <span class="label">Nota — Convenciones para el generador</span>
+  Placeholders: <code>{{NOMBRE_CE}}</code>, <code>{{FECHA_PRUEBA}}</code>, <code>{{TIPO_CE}}</code> (A/B/C/D), <code>{{TECNOLOGIA}}</code>, <code>{{AREA_SINCRONA}}</code> (SIN/SIBC/SIBCS/SIM), <code>{{PMAX_KW}}</code>, <code>{{VNOM_KV}}</code>, <code>{{ESTATISMO}}</code>. Tablas de resultados con timestamps <code>HH:MM:SS.mmm</code>. Nunca incluir nombres de empresas.
+</div>
+
+<!-- SECCION 0 -->
+<section id="s0" class="block">
+  <h2 class="section"><span class="num">0</span>Clasificación de Centrales Eléctricas</h2>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">Tabla 1.1 · Capacidad Instalada Neta</span>
+      <span class="card-tag">Manual INTE</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Sistema Interconectado</th><th class="c">Tipo A</th><th class="c">Tipo B</th><th class="c">Tipo C</th><th class="c">Tipo D</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Nacional (SIN)</td><td class="num">P &lt; 0.5 MW</td><td class="num">0.5 ≤ P &lt; 10 MW</td><td class="num">10 ≤ P &lt; 30 MW</td><td class="num">P ≥ 30 MW</td></tr>
+          <tr><td>Baja California (SIBC)</td><td class="num">P &lt; 0.5 MW</td><td class="num">0.5 ≤ P &lt; 5 MW</td><td class="num">5 ≤ P &lt; 20 MW</td><td class="num">P ≥ 20 MW</td></tr>
+          <tr><td>Baja California Sur (SIBCS)</td><td class="num">P &lt; 0.5 MW</td><td class="num">0.5 ≤ P &lt; 3 MW</td><td class="num">3 ≤ P &lt; 10 MW</td><td class="num">P ≥ 10 MW</td></tr>
+          <tr><td>Mulegé (SIM)</td><td class="num">P &lt; 0.5 MW</td><td class="num">0.5 ≤ P &lt; 1 MW</td><td class="num">1 ≤ P &lt; 3 MW</td><td class="num">P ≥ 3 MW</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="nota">
+    <span class="label">Nota</span>
+    Tipo A se rige por disposiciones para generación &lt; 0.5 MW. El Manual INTE es obligatorio para tipos B, C y D.
+  </div>
+</section>
+
+<!-- SECCION 1 -->
+<section id="s1" class="block">
+  <h2 class="section"><span class="num">1</span>Tablas normativas de referencia</h2>
+
+  <div class="card" id="s1-1">
+    <div class="card-head"><span class="card-title">1.1 Rangos de frecuencia — operación sin desconexión</span><span class="card-tag">Tabla 2.1 · [1]</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Área síncrona</th><th>Rango</th><th>Tiempo mínimo acumulado</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="5">SIN y SIBC</td><td class="num">61.8 ≤ f &lt; 62.4 Hz</td><td>15 minutos</td></tr>
+          <tr><td class="num">61.2 ≤ f &lt; 61.8 Hz</td><td>30 minutos</td></tr>
+          <tr><td class="num">58.8 ≤ f &lt; 61.2 Hz</td><td>Ilimitado</td></tr>
+          <tr><td class="num">58.2 ≤ f &lt; 58.8 Hz</td><td>30 minutos</td></tr>
+          <tr><td class="num">57.0 ≤ f &lt; 58.2 Hz</td><td>15 minutos</td></tr>
+          <tr><td rowspan="5">SIBCS y SIM</td><td class="num">61.8 ≤ f &lt; 63.0 Hz</td><td>15 minutos</td></tr>
+          <tr><td class="num">61.2 ≤ f &lt; 61.8 Hz</td><td>30 minutos</td></tr>
+          <tr><td class="num">58.8 ≤ f &lt; 61.2 Hz</td><td>Ilimitado</td></tr>
+          <tr><td class="num">58.2 ≤ f &lt; 58.8 Hz</td><td>30 minutos</td></tr>
+          <tr><td class="num">57.0 ≤ f &lt; 58.2 Hz</td><td>15 minutos</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><span class="label">Nota</span>Tiempos acumulativos e independientes por rango. Rangos más amplios factibles no deben limitarse.</div>
+  </div>
+
+  <div class="card" id="s1-2">
+    <div class="card-head"><span class="card-title">1.2 Parámetros del Control Primario de Frecuencia</span><span class="card-tag">Tabla 2.2.2.A · [1]</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Parámetro</th><th>Rango / Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Intervalo ΔP respecto a Pref (\|ΔP\|/Pref)</td><td class="num">3 – 10 %</td></tr>
+          <tr><td>Insensibilidad propia del control (\|Δfi\|)</td><td class="num">0 – 15 mHz (0 – 0.025 % de fn)</td></tr>
+          <tr><td>Banda muerta de respuesta (bm)</td><td class="num">±30 mHz</td></tr>
+          <tr><td>Característica de regulación (estatismo)</td><td class="num">3 – 8 %</td></tr>
+          <tr><td>Tiempo máx. de retardo t₁ — CE Síncronas</td><td class="num">2 s</td></tr>
+          <tr><td>Tiempo máx. de retardo t₁ — CE Asíncronas</td><td class="num">&lt; 2 s</td></tr>
+          <tr><td>Tiempo máx. de respuesta total t₂</td><td class="num">30 s</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="sub">Umbrales de activación</h3>
+    <div class="grid-2">
+      <div class="kv"><span class="k">CPF activo</span><span class="v">59.8 – 60.2 Hz (SIN/SIBC/SIBCS)</span></div>
+      <div class="kv"><span class="k">CPF activo (SIM)</span><span class="v">59.7 – 60.3 Hz</span></div>
+      <div class="kv"><span class="k">Respuesta a alta frecuencia</span><span class="v">≥ 60.2 Hz (60.3 en SIM)</span></div>
+      <div class="kv"><span class="k">Respuesta a baja frecuencia</span><span class="v">≤ 59.8 Hz (59.7 en SIM)</span></div>
+      <div class="kv"><span class="k">Pref síncronas</span><span class="v">Capacidad máxima</span></div>
+      <div class="kv"><span class="k">Pref asíncronas</span><span class="v">P real al alcanzar umbral / Cap. máx.</span></div>
+      <div class="kv"><span class="k">Tiempo máx. recorrido extremo-extremo</span><span class="v">15 minutos (2.2.10 [1])</span></div>
+    </div>
+  </div>
+
+  <div class="card" id="s1-3">
+    <div class="card-head"><span class="card-title">1.3 Rango de regulación de potencia activa por tecnología</span><span class="card-tag">Tabla 2.2.2.B · [1]</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Tecnología</th><th>Rango ΔP/Pref (%)</th></tr></thead>
+        <tbody>
+          <tr><td>Carboeléctrica carbón pulverizado</td><td class="num">35 – 100</td></tr>
+          <tr><td>Termoeléctrica combustóleo</td><td class="num">20 – 100</td></tr>
+          <tr><td>Termoeléctrica gas</td><td class="num">20 – 100</td></tr>
+          <tr><td>Termoeléctrica biogás</td><td class="num">35 – 100</td></tr>
+          <tr><td>Termoeléctrica paja o madera</td><td class="num">50 – 100</td></tr>
+          <tr><td>Carboeléctrica carbón sólido</td><td class="num">50 – 100</td></tr>
+          <tr><td>Termoeléctrica biomasa</td><td class="num">70 – 100</td></tr>
+          <tr><td>Motor de gas</td><td class="num">30 (35 % ≥ 5 min) – 100</td></tr>
+          <tr><td>Turbina de gas</td><td class="num">30 – 95</td></tr>
+          <tr><td>Ciclo combinado</td><td class="num">35 – 95</td></tr>
+          <tr><td>Motor Diésel</td><td class="num">30 (20 % ≥ 5 min) – 100</td></tr>
+          <tr><td>Geotérmica</td><td class="num">50 – 100</td></tr>
+          <tr><td>Eólica</td><td class="num">0 – 100</td></tr>
+          <tr><td>Fotovoltaica</td><td class="num">0 – 100</td></tr>
+          <tr><td>Hidroeléctrica</td><td class="num">0 – 100</td></tr>
+          <tr><td>Nucleoeléctrica</td><td class="num">50 – 100</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><span class="label">Nota</span>Protocolos previos pueden diferir en algunos valores (p. ej. turbina de gas). Los valores obligatorios son los del CdR 2.0 mostrados aquí.</div>
+  </div>
+
+  <div class="card" id="s1-4">
+    <div class="card-head"><span class="card-title">1.4 Rangos de tensión en el Punto de Interconexión</span><span class="card-tag">Tabla 3.1.1 · [1] · Tipos B/C/D</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Rango de tensión (pu)</th><th>Tiempo mínimo por evento</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1.05 ≤ V &lt; 1.10</td><td>30 minutos</td></tr>
+          <tr><td class="num">0.95 ≤ V &lt; 1.05</td><td>Ilimitado</td></tr>
+          <tr><td class="num">0.90 ≤ V &lt; 0.95</td><td>30 minutos</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="s1-5">
+    <div class="card-head"><span class="card-title">1.5 Perfil de potencia reactiva</span><span class="card-tag">Tabla 3.3.2 · [1]</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Zona</th><th>Rango máx. Q/Pmáx</th><th>Rango de V (pu)</th></tr></thead>
+        <tbody>
+          <tr><td>Área Gris (opcional)</td><td class="num">±0.5</td><td class="num">0.95 – 1.05</td></tr>
+          <tr><td>Área Blanca (requerimiento mínimo obligatorio)</td><td class="num">±0.33</td><td class="num">0.95 – 1.05</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><span class="label">Nota</span>Pmáx = Capacidad Instalada Neta. Figuras: 3.3.2 (V-Q/Pmáx síncrona), 3.3.3 (V-P-Q/Pmáx síncrona), 3.5.1 (P-Q/Pmáx asíncrona), 3.5.2 (V-P-Q/Pmáx asíncrona).</div>
+  </div>
+
+  <div class="card" id="s1-6">
+    <div class="card-head"><span class="card-title">1.6 Modos de control de potencia reactiva — asíncronas B/C/D</span><span class="card-tag">3.5.3 · [1]</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Modo</th><th class="c">t 90 %</th><th class="c">Estabilización</th><th class="c">Pasos máx.</th><th class="c">Error / tolerancia</th></tr></thead>
+        <tbody>
+          <tr><td>Control de tensión directo</td><td class="num">≤ 3 s</td><td class="num">≤ 5 s</td><td class="num">0.01 pu</td><td class="num">0.5 %</td></tr>
+          <tr><td>Control de tensión QV</td><td class="num">≤ 3 s</td><td class="num">≤ 5 s</td><td class="num">—</td><td class="num">5 % de Q calculada</td></tr>
+          <tr><td>Control de potencia reactiva</td><td class="num">≤ 3 s</td><td class="num">≤ 5 s</td><td class="num">1 MVAr o 5 % Qmáx (menor)</td><td class="num">—</td></tr>
+          <tr><td>Control de factor de potencia</td><td class="num">≤ 3 s</td><td class="num">≤ 5 s</td><td class="num">0.002</td><td class="num">0.1 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid-2" style="margin-top:14px">
+      <div class="kv"><span class="k">Consigna de tensión</span><span class="v">≥ 0.95 – 1.05 pu</span></div>
+      <div class="kv"><span class="k">Banda muerta permitida</span><span class="v">0 a ±1 % de Vnom</span></div>
+    </div>
+    <div class="nota"><span class="label">Nota — Prioridad durante fallas (3.5.5)</span>Si prioridad P → establecer a más tardar 0.25 s desde inicio de falla. Si prioridad Q → P debe recuperarse en &lt; 1 s.</div>
+  </div>
+
+  <div class="card" id="s1-7">
+    <div class="card-head"><span class="card-title">1.7 Huecos de tensión — Zona A ante condiciones dinámicas o de falla</span><span class="card-tag">Capítulo 4 · [1]</span></div>
+
+    <h3 class="sub">Síncronas tipo B y C · Tabla 4.1.1.A</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Punto</th><th class="num">t (s)</th><th class="num">V (pu)</th></tr></thead><tbody>
+      <tr><td>PB1</td><td class="num">0.00</td><td class="num">0.00</td></tr>
+      <tr><td>PB2</td><td class="num">0.25</td><td class="num">0.00</td></tr>
+      <tr><td>PB3</td><td class="num">0.25</td><td class="num">0.70</td></tr>
+      <tr><td>PB4</td><td class="num">0.70</td><td class="num">0.70</td></tr>
+      <tr><td>PB5</td><td class="num">1.50</td><td class="num">0.90</td></tr>
+      <tr><td>PA1</td><td class="num">0.00</td><td class="num">1.20</td></tr>
+      <tr><td>PA2</td><td class="num">0.20</td><td class="num">1.20</td></tr>
+      <tr><td>PA3</td><td class="num">0.20</td><td class="num">1.10</td></tr>
+    </tbody></table></div>
+
+    <h3 class="sub">Asíncronas tipo B y C · Tabla 4.1.1.B</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Punto</th><th class="num">t (s)</th><th class="num">V (pu)</th></tr></thead><tbody>
+      <tr><td>PB1</td><td class="num">0.00</td><td class="num">0.00</td></tr>
+      <tr><td>PB2</td><td class="num">0.40</td><td class="num">0.00</td></tr>
+      <tr><td>PB3</td><td class="num">0.55</td><td class="num">0.35</td></tr>
+      <tr><td>PB4</td><td class="num">0.70</td><td class="num">0.70</td></tr>
+      <tr><td>PB5</td><td class="num">1.50</td><td class="num">0.90</td></tr>
+      <tr><td>PA1</td><td class="num">0.00</td><td class="num">1.30</td></tr>
+      <tr><td>PA2</td><td class="num">0.20</td><td class="num">1.30</td></tr>
+      <tr><td>PA3</td><td class="num">0.20</td><td class="num">1.10</td></tr>
+    </tbody></table></div>
+
+    <h3 class="sub">Síncronas tipo D · Tabla 4.2.1.A</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Punto</th><th class="num">t (s)</th><th class="num">V (pu)</th></tr></thead><tbody>
+      <tr><td>PB1</td><td class="num">0.00</td><td class="num">0.00</td></tr>
+      <tr><td>PB2</td><td class="num">0.25</td><td class="num">0.00</td></tr>
+      <tr><td>PB3</td><td class="num">0.25</td><td class="num">0.25</td></tr>
+      <tr><td>PB4</td><td class="num">0.45</td><td class="num">0.25</td></tr>
+      <tr><td>PB5</td><td class="num">0.70</td><td class="num">0.50</td></tr>
+      <tr><td>PB6</td><td class="num">1.50</td><td class="num">0.90</td></tr>
+      <tr><td>PA1</td><td class="num">0.00</td><td class="num">1.20</td></tr>
+      <tr><td>PA2</td><td class="num">0.20</td><td class="num">1.20</td></tr>
+      <tr><td>PA3</td><td class="num">0.20</td><td class="num">1.10</td></tr>
+    </tbody></table></div>
+
+    <h3 class="sub">Asíncronas tipo D · Tabla 4.2.1.B</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Punto</th><th class="num">t (s)</th><th class="num">V (pu)</th></tr></thead><tbody>
+      <tr><td>PB1</td><td class="num">0.00</td><td class="num">0.00</td></tr>
+      <tr><td>PB2</td><td class="num">0.25</td><td class="num">0.00</td></tr>
+      <tr><td>PB3</td><td class="num">0.35</td><td class="num">0.00</td></tr>
+      <tr><td>PB4</td><td class="num">0.45</td><td class="num">0.00</td></tr>
+      <tr><td>PB5</td><td class="num">1.05</td><td class="num">0.45</td></tr>
+      <tr><td>PB6</td><td class="num">1.50</td><td class="num">0.90</td></tr>
+      <tr><td>PA1</td><td class="num">0.00</td><td class="num">1.30</td></tr>
+      <tr><td>PA2</td><td class="num">0.20</td><td class="num">1.30</td></tr>
+      <tr><td>PA3</td><td class="num">0.20</td><td class="num">1.10</td></tr>
+    </tbody></table></div>
+
+    <div class="nota"><span class="label">Nota — Complementos Cap. 4</span>
+      <ul>
+        <li>Recuperación de P post falla (asíncronas B/C): valor pre-falla en 0.25 – 0.5 s (4.1.2).</li>
+        <li>Aportación de Icc, PI &gt; 69 kV: síncronas B/C &gt; 2 × In; asíncronas B/C ≥ corriente previa al cortocircuito respecto a Pref (4.1.4).</li>
+        <li>Síncronas &lt; 230 kV: CENACE puede ampliar tiempos PB2/PB3 por liberación en Zona 2 de distancia.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECCION 2 - MATRIZ ASINCRONAS -->
+<section id="s2" class="block">
+  <h2 class="section"><span class="num">2</span>Matriz de aplicabilidad — Asíncronas</h2>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">Pruebas 1 – 28 · Anexo 5 POC</span>
+      <span class="card-tag">Tipos A · B · C · D</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th class="c">No.</th><th>Prueba</th><th>Criterio resumido</th><th class="c">A</th><th class="c">B</th><th class="c">C</th><th class="c">D</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="c">1</td><td>Rango de frecuencia</td><td>Rangos y tiempos Tabla 2.1</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">2</td><td>Razón de cambio (ROCOF)</td><td>Permanecer ante 2.5 Hz/s (200 ms)</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">3</td><td>Respuesta a alta frecuencia</td><td>Regulación 3–8 % desde 60.2 Hz; t &lt; 2 s</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">4</td><td>P constante 60.0 – 60.2 Hz</td><td>Potencia constante en la banda</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">5</td><td>Limitación total de P</td><td>Interfaz lógica &lt; 5 s a 0 MW</td><td class="dash">—</td><td class="chk">✔*</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">6</td><td>Reconexión automática</td><td>f 58.8–60.2 Hz + V ±5 % ≥ 5 min; rampa ≤ 10 % CIN/min</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">7</td><td>Limitación parcial de P</td><td>Consigna en tiempo/tolerancia CENACE</td><td class="dash">—</td><td class="chk">✔*</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">8</td><td>Respuesta a baja frecuencia</td><td>Regulación 3–8 % desde 59.8 Hz; t₁ &lt; 2 s</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">9</td><td>Control primario de frecuencia</td><td>Parámetros Tabla 2.2.2.A</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">10</td><td>Control secundario de frecuencia</td><td>Equipamiento y monitoreo</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">11</td><td>Rango de tensión PI (ilimitado)</td><td>0.90 – 1.10 pu ilimitado</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">12</td><td>Rango de tensión PI</td><td>Tabla 3.1.1</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">13</td><td>Capacidad de potencia reactiva</td><td>F.P. ±0.95 en el PI</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">14</td><td>Capacidad de Q a Pmáx</td><td>Q/Pmáx ≥ 0.33 (obligatorio)</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">15</td><td>Capacidad de Q debajo de Pmáx</td><td>Perfil P-Q/Pmáx</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">16</td><td>Control de voltaje</td><td>t₁ &lt; 3 s, t₂ &lt; 5 s, tol 0.5 %</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">17</td><td>Control de potencia reactiva</td><td>t₁ &lt; 3 s, t₂ &lt; 5 s, tol 2 %</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">18</td><td>Control de F.P.</td><td>t₁ &lt; 3 s, t₂ &lt; 5 s, tol 0.1 %</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">19</td><td>Amortiguamiento de oscilaciones</td><td>Funcionalidad POD</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">20</td><td>Control de tensión en fallas</td><td>Zona A del Cap. 4</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">21</td><td>Runback / Rundown</td><td>Verificar proceso</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">22</td><td>Rampa de variación de carga</td><td>10 % Pn/min</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">23</td><td>Rechazo de carga parcial</td><td>Sobretensión y apagado del inversor</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">24</td><td>Modelos de simulación</td><td>Modelo completo en versión requerida</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">25</td><td>Capacidad Instalada Neta</td><td>240 h al 100 % CIN, controles automáticos</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">26</td><td>Calidad de la potencia</td><td>Reporte ≥ 10 días consecutivos</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">27</td><td>Modos de control V–Q</td><td>Operación en los 3 modos</td><td class="dash">—</td><td class="chk">✔*</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">28</td><td>Control de frecuencia (operación)</td><td>Rampas y bm en operación</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><span class="label">Nota</span>* Pruebas 5, 7 y 27 pueden excluirse por indicación expresa de CENACE en tipo B; documentar la exclusión con oficio.</div>
+    <div class="nota"><span class="label">Nota — Discrepancia detectada</span>Protocolos previos pueden citar reconexión con V ±10 % y ROCOF "2.0 Hz/s". Los valores normativos vigentes CdR 2.0 son: reconexión con V ±5 % Vnom (2.2.8) y ROCOF 2.5 Hz/s (2.2.1). Usar los valores del CdR salvo instrucción distinta de CENACE.</div>
+  </div>
+</section>
+
+<!-- SECCION 3 - MATRIZ SINCRONAS -->
+<section id="s3" class="block">
+  <h2 class="section"><span class="num">3</span>Matriz de aplicabilidad — Síncronas (pruebas por Central)</h2>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">Pruebas 21 – 41 · Anexo 5 POC</span>
+      <span class="card-tag">Numeración por unidad 1–20 en sección 6</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th class="c">No.</th><th>Prueba</th><th class="c">A</th><th class="c">B</th><th class="c">C</th><th class="c">D</th></tr></thead>
+        <tbody>
+          <tr><td class="c">21</td><td>Razón de cambio 2.5 Hz/s</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">22</td><td>Rango de frecuencia</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">23</td><td>Limitación total de P</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">24</td><td>Reconexión automática</td><td class="chk">✔</td><td class="chk">✔</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="c">25</td><td>Limitación parcial de P</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">26</td><td>Control primario de frecuencia</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">27</td><td>Control secundario de frecuencia</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">28</td><td>Rango de tensión PI (variante no-B)</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">29</td><td>Rango de tensión PI</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">30</td><td>Capacidad de potencia reactiva</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">31</td><td>Capacidad de Q a Pmáx</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">32</td><td>Capacidad de Q debajo de Pmáx</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">33</td><td>Sistema de control de tensión</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">34</td><td>Tensión en condiciones dinámicas o falla</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">35</td><td>Arranque de emergencia (opcional)</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">36</td><td>Operación en modo isla</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">37</td><td>Resincronización rápida</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="chk">✔</td></tr>
+          <tr><td class="c">38</td><td>Administración del SEN</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">39</td><td>Administración del SEN (complemento)</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">40</td><td>Administración del SEN (complemento)</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+          <tr><td class="c">41</td><td>Modelos de simulación</td><td class="dash">—</td><td class="chk">✔</td><td class="chk">✔</td><td class="chk">✔</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><span class="label">Nota</span>Aplicabilidad exacta de 24, 28, 35–37, 39–40 varía por tipo; matriz refleja lo documentado en reportes tipo B. Validar contra Anexo 5 vigente antes de usarse en reportes C y D.</div>
+  </div>
+</section>
+
+<!-- SECCION 4 - FICHAS ASINCRONAS -->
+<section id="s4" class="block">
+  <h2 class="section"><span class="num">4</span>Fichas por prueba — Asíncronas</h2>
+  <div class="nota"><span class="label">Nota — Instrumentación general</span>Registrador con muestreo ≥ 20 muestras/s (50 ms) por señal, sincronizado en tiempo, para todas las pruebas dinámicas.</div>
+
+  <details class="acc">
+    <summary><span class="pill">P1</span> Rangos de frecuencia<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 2.1 [1] · Prueba No. 1 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>Permanecer interconectada y en operación estable dentro de los rangos y tiempos de la Tabla 2.1 (ver §1.1), sin disparos ni desconexiones. Verificar además que los ajustes 81H/81L respetan los rangos.</p>
+      <h4>Metodología</h4><p>Aplicar variaciones simuladas de frecuencia mediante consignas al control de planta, escalonando desde 60 Hz hasta valores cercanos a los límites (típico 61.2 → 61.9 Hz en alta; 58.8 → 58.1 Hz en baja) y retorno. Documentar captura de ajustes del control (estatismo configurado, banda muerta).</p>
+      <h4>Señales</h4><p>frecuencia (real y simulada), potencia activa en PI, estado de interruptores.</p>
+      <h4>Tabla de resultados</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>PASO</th><th>HORA INICIO</th><th>HORA FIN</th><th>FRECUENCIA (Hz)</th><th>P (kW o MW)</th></tr></thead><tbody><tr><td colspan="5" style="text-align:center;color:var(--gray-400);padding:16px">— filas dinámicas por paso —</td></tr></tbody></table></div>
+      <h4>Gráficas</h4><p>Serie de tiempo doble eje — Frecuencia (Hz, eje izq., trazo escalonado) vs P (MW, eje der.); una gráfica para alta y otra para baja frecuencia; anotaciones de valor en cada escalón.</p>
+      <h4>Plantilla — Objetivo</h4>
+      <div class="plantilla"><span class="tag-line">objetivo</span>El objetivo de esta prueba es verificar que la Central Eléctrica <em>{{NOMBRE_CE}}</em> permanezca interconectada y en operación dentro de los rangos de frecuencia y tiempos de permanencia establecidos en la Sección 2.1 del Manual Regulatorio [1], conforme a la Prueba No. 1 del Anexo 5 [2].</div>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>Ante las variaciones de frecuencia aplicadas, desde 60 Hz hasta <em>{{F_MAX}}</em> Hz en alta frecuencia y <em>{{F_MIN}}</em> Hz en baja frecuencia, la central se mantiene en operación en todo momento, sin disparos ni desconexiones, con comportamiento estable en cada escalón evaluado, cumpliendo satisfactoriamente la prueba.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P2</span> Razón de cambio de la frecuencia (ROCOF)<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 2.2.1 [1] · Prueba No. 2 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>Mantenerse interconectada ante ROCOF de hasta <strong>2.5 Hz/s</strong>, medido en ventana de <strong>200 ms</strong>, sin disparo de protecciones ni desconexión no intencional.</p>
+      <h4>Metodología</h4><p>Aplicar escalones rápidos de frecuencia simulada (típico ±1.25 a ±1.5 Hz en ≤ 200 ms para producir la razón requerida); registrar permanencia y comportamiento. Verificar ajustes 81R compatibles.</p>
+      <h4>Tabla de resultados</h4><p>Igual formato que P1.</p>
+      <h4>Gráficas</h4><p>Serie de tiempo doble eje frecuencia/potencia con escalón identificado; opcional gráfica de df/dt (Hz/s) vs tiempo.</p>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>Al aplicar las rampas de frecuencia correspondientes (±2.5 Hz/s), la central mantiene operación continua sin desconexiones ni actuación indebida de protecciones; las variaciones de potencia activa son consistentes con la condición operativa. Se concluye que la central cumple los criterios de permanencia ante cambios rápidos de frecuencia.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P3</span> Respuesta ante alta frecuencia<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Secciones 2.2.2, 2.2.3, 2.2.4 [1] · Prueba No. 3 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>Reducción de P activada a partir de 60.2 Hz (banda muerta 200 mHz respecto a nominal), característica de regulación seleccionable 3 / 5 / 8 % (definida por CENACE); activación &lt; 2 s; continuar en operación al límite mínimo de regulación.</p>
+      <h4>Metodología</h4><p>Para cada estatismo (3, 5 y 8 %): escalones de frecuencia crecientes por encima de 60.2 Hz y retorno; comparar P medida vs esperada. Documentar capturas de ajustes de droop antes de cada corrida.</p>
+      <h4>Cálculo P esperada</h4>
+      <div class="plantilla" style="font-family:var(--f-mono)">ΔP = −(Δf / fn) × (1/R) × Pref&nbsp;&nbsp;(con f por encima de umbral + bm)</div>
+      <h4>Tabla de resultados (una por estatismo)</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>PASO</th><th>HORA INICIO</th><th>HORA FIN</th><th>FRECUENCIA (Hz)</th><th>P ESPERADA (kW)</th><th>P MEDIDA (kW)</th></tr></thead><tbody><tr><td colspan="6" style="text-align:center;color:var(--gray-400);padding:16px">— repetir tabla para 3 % · 5 % · 8 % —</td></tr></tbody></table></div>
+      <h4>Gráficas</h4><p>Una por estatismo; doble eje frecuencia escalonada vs P; anotaciones de valores.</p>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>Para los distintos ajustes de estatismo (3 %, 5 % y 8 %) la potencia activa disminuye de manera progresiva y proporcional ante los incrementos de frecuencia; la respuesta es más sensible para estatismos menores y más moderada para mayores, coherente con la lógica del control primario. La central mantiene operación continua, por lo que cumple los criterios de respuesta ante alta frecuencia.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P4</span> P constante en el rango 60.0 – 60.2 Hz<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 2.2.7 inciso i [1] · Prueba No. 4 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>P constante mientras 60.0 ≤ f ≤ 60.2 Hz, sin acciones de regulación adicionales (salvo lo definido en 2.2.2–2.2.4).</p>
+      <h4>Metodología</h4><p>Con la respuesta droop desactivada o dentro de banda, aplicar escalones dentro y ligeramente fuera de la banda (60 / 60.2 / 60.3 / 60.45 Hz típico); verificar P constante dentro de la banda. Documentar captura de ajustes.</p>
+      <h4>Tabla</h4><p>PASO · HORA INICIO · HORA FIN · FRECUENCIA (Hz) · P (kW).</p>
+      <h4>Gráfica</h4><p>Doble eje frecuencia escalonada y P en escala fina; incluir setpoint/referencia como tercera serie punteada si aplica.</p>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>Ante las variaciones de frecuencia dentro del rango evaluado, la potencia activa se mantiene prácticamente constante, sin respuesta proporcional de ajuste, demostrando que el control mantiene la generación desacoplada de las variaciones de frecuencia dentro de la banda, cumpliendo el criterio de potencia activa constante.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P5</span> Limitación total de potencia activa<span class="tipos"><span class="tipo">A</span><span class="tipo on">B*</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 2.2.5 [1] · Prueba No. 5 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>Interfaz lógica que permita detener la aportación total de P en <strong>menos de 5 segundos</strong>; la restricción prevalece hasta confirmación de CENACE.</p>
+      <h4>Metodología</h4><p>Central a capacidad; enviar consigna 0 MW (local o remota coordinada con CENACE); medir tiempo hasta P ≈ 0 en el PI sin desconexión de red.</p>
+      <h4>Señales</h4><p>P, consigna de P, frecuencia, tensión.</p>
+      <h4>Gráfica</h4><p>P y consigna vs tiempo con marcadores de inicio de consigna y alcance de 0 MW.</p>
+      <div class="nota"><span class="label">Nota</span>* Excluible por CENACE en centrales tipo B; documentar la exclusión.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P6</span> Reconexión automática<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 2.2.8 [1] · Prueba No. 6 Anexo 5 [2].</p>
+      <h4>Criterio</h4>
+      <ul>
+        <li>Reconexión sólo con f en <strong>58.8 – 60.2 Hz</strong> y V en <strong>±5 % Vnom</strong>, ambas estables durante <strong>≥ 5 minutos</strong>.</li>
+        <li>Rampa de incremento de P <strong>≤ 10 % de la Capacidad Instalada Neta por minuto</strong>.</li>
+        <li>Sin reconexiones intempestivas.</li>
+      </ul>
+      <h4>Metodología</h4><p>Provocar/simular condición de desconexión; verificar que la lógica de reconexión bloquea mientras las variables estén fuera de rango; una vez restablecidas por ≥ 5 min, supervisar reincorporación y medir rampa de toma de carga (kW/min) en terminales y en el PI.</p>
+      <h4>Tabla A — Condiciones previas</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Variable (5 min previos)</th><th>Valor máximo</th><th>Valor mínimo</th><th>Comentario de cumplimiento</th></tr></thead><tbody>
+        <tr><td>Frecuencia (Hz)</td><td></td><td></td><td>Rango permitido 58.8 – 60.2 Hz</td></tr>
+        <tr><td>Tensión (kV o pu)</td><td></td><td></td><td>Rango permitido ±5 % Vnom</td></tr>
+      </tbody></table></div>
+      <h4>Tabla B — Rampa</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Punto de medición</th><th>Rampa (kW/min)</th><th>Límite (10 % CIN/min = <code>{{LIM_RAMPA}}</code> kW/min)</th></tr></thead><tbody>
+        <tr><td>Terminales del generador / salida</td><td></td><td></td></tr>
+        <tr><td>Punto de Interconexión</td><td></td><td></td></tr>
+      </tbody></table></div>
+      <h4>Gráfica</h4><p>Doble eje frecuencia (PI) vs potencia (MW) con marcador del instante de reconexión y rampa.</p>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>Tras la condición de desconexión, la central restablece su operación al retornar las variables a condiciones normales, evidenciando la reconexión automática sin intervención externa. La potencia activa incrementa mediante rampa controlada por debajo del 10 % de la Capacidad Instalada Neta por minuto hasta el nivel de operación normal, confirmando el cumplimiento de los criterios de reconexión automática y control de rampa.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P7</span> Limitación parcial de potencia activa<span class="tipos"><span class="tipo">A</span><span class="tipo on">B*</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 2.2.6 [1] · Prueba No. 7 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>Alcanzar la consigna enviada con la rampa, tolerancia y tiempo definidos por CENACE.</p>
+      <h4>Metodología</h4><p>Central operando a valor distinto del máximo (típico 50 % si CENACE no define otro); enviar consigna de reducción; registrar rampa y tiempo de alcance.</p>
+      <h4>Tabla / gráfica</h4><p>Iguales a P5.</p>
+      <div class="nota"><span class="label">Nota</span>* Excluible por CENACE en centrales tipo B; documentar la exclusión.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P8</span> Respuesta a baja frecuencia<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 2.2.4 [1] · Prueba No. 8 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>Incremento de P activado a partir de 59.8 Hz, regulación seleccionable 3–8 %, <strong>t₁ &lt; 2 s</strong>; incremento hasta capacidad disponible (limitado por condiciones ambientales/operativas y CIN). Requiere operar con reserva.</p>
+      <h4>Metodología</h4><p>Para cada estatismo (3, 5, 8 %): limitar P en el PI para crear reserva; escalones decrecientes (60 → 59.8 → 59.5 → 59.2 → 58.9 Hz típico) y retorno; comparar P medida vs esperada.</p>
+      <h4>Tabla</h4><p>PASO · HORA INICIO · HORA FIN · FRECUENCIA (Hz) · P ESPERADA (kW) · P MEDIDA (kW) — una por estatismo.</p>
+      <h4>Gráficas</h4><p>Una por estatismo, doble eje.</p>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>La Central Eléctrica incrementa su potencia activa de forma progresiva conforme la frecuencia disminuye por debajo del umbral de activación (~59.8 Hz), con activación dentro del tiempo esperado y pendiente conforme al estatismo configurado, sin disparos ni saturaciones abruptas, cumpliendo los criterios de incremento de potencia activa ante baja frecuencia.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P9</span> Control primario de frecuencia<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 2.2.2, Tabla 2.2.2.A, Figuras 2.2.2.A/B [1] · Prueba No. 9 Anexo 5 [2].</p>
+      <h4>Criterios (verificar todos)</h4>
+      <ul>
+        <li>Característica de regulación 3–8 %.</li>
+        <li>Insensibilidad 0–15 mHz.</li>
+        <li>Intervalo ΔP/Pref 3–10 %.</li>
+        <li>Banda muerta ±30 mHz.</li>
+        <li>t₁ &lt; 2 s (asíncronas); t₂ = 30 s.</li>
+        <li>Restricción por límite mínimo de regulación (Tabla 2.2.2.B) en alta frecuencia y por CIN/fuente primaria en baja.</li>
+      </ul>
+      <h4>Metodología</h4><p>Control configurado con bm 30 mHz y P limitada para reserva; escalones pequeños alrededor de 60 Hz dentro y fuera de bm (típico: 60 → 59.97 → 59.88 → 59.8 → 60 → 60.03 → 60.12 → 60.2 → 60 Hz) para cada estatismo (3, 5, 8 %); verificar que dentro de bm la P no cambia y fuera responde según pendiente.</p>
+      <h4>Tabla</h4><p>PASO · HORA INICIO · HORA FIN · FRECUENCIA (Hz) · P MEDIDA (kW) · P ESPERADA (kW) — una por estatismo.</p>
+      <h4>Gráficas</h4><p>Una por estatismo, doble eje, resolución fina alrededor de 60 Hz.</p>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>La central responde de manera automática y proporcional ante desviaciones de frecuencia: ante disminuciones incrementa P y ante incrementos la reduce, siguiendo la pendiente del estatismo configurado, con operación estable, transiciones suaves y funcionamiento correcto de la banda muerta. Se valida el cumplimiento de los criterios de control primario de frecuencia.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P10</span> Control secundario de frecuencia<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Secciones 2.3.1, 2.3.2 [1].</p>
+      <h4>Criterio</h4><p>Equipamiento para participar en AGC conforme Manual TIC; disponibilidad de señales de monitoreo en tiempo real.</p>
+      <h4>Señales SCADA requeridas</h4>
+      <ul>
+        <li>Estado CPF (activo/inactivo).</li>
+        <li>Consigna de P.</li>
+        <li>Valor actual de P.</li>
+        <li>Parámetros de ajuste actuales de respuesta P–f.</li>
+        <li>Rango de P vs Capacidad Instalada.</li>
+        <li>Característica de regulación.</li>
+        <li>Insensibilidad y banda muerta configuradas.</li>
+        <li>Umbrales de desactivación ante baja/alta frecuencia.</li>
+      </ul>
+      <h4>Evidencia</h4><p>Documental + verificación de señales SCADA.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P11</span> Rango de tensión PI (ilimitado)<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 3.1.1, Tabla 3.1.1 [1] · Prueba 11 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>Operación ilimitada dentro de 0.90 &lt; V &lt; 1.10 pu para tipos C/D.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P12</span> Rango de tensión en el Punto de Interconexión<span class="tipos"><span class="tipo">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 3.1.1, Tabla 3.1.1 [1] · Prueba 12 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>Operar dentro de 1.05–1.10 pu (30 min), 0.95–1.05 pu (ilimitado), 0.90–0.95 pu (30 min); ajustes 27/59 del PI compatibles y sin desconexiones indebidas.</p>
+      <h4>Metodología</h4><p>Documental (tabla de ajustes de relevadores del PI, típicamente 27/59 en SEL-351 o equivalente) + prueba con referencia de tensión emulada aplicando escalones 1.0 → 0.90 → 0.95 → 1.05 → 1.10 → 1.0 pu, registrando permanencia y P. Indicar Vnom de referencia (L-L o L-N, explícito).</p>
+      <h4>Tabla de ajustes de protección</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Relay ID</th><th>Función</th><th>Nivel (pu)</th><th>Nivel (V primarios)</th><th>Tiempo (s)</th><th>Modo</th></tr></thead><tbody><tr><td colspan="6" style="text-align:center;color:var(--gray-400);padding:16px">— filas por relevador —</td></tr></tbody></table></div>
+      <h4>Tabla de resultados</h4><p>PASO · HORA INICIO · HORA FIN · VOLTAJE (V) · VOLTAJE (pu) · P (kW).</p>
+      <h4>Gráfica</h4><p>Doble eje tensión (pu, escalonada) vs P (MW), zonas UNDER/OVER señaladas.</p>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>Ante las variaciones de tensión aplicadas en el punto de interconexión, la central mantiene operación continua dentro del rango evaluado, sin desconexiones ni actuación indebida de protecciones; durante los eventos de sobretensión y subtensión la potencia activa permanece estable. Se confirma el cumplimiento de los criterios de operación ante variaciones de tensión en el PI.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P13</span> Capacidad de potencia reactiva<span class="tipos"><span class="tipo">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Secciones 3.2 / 3.5.1 [1] · Prueba No. 13 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>Mantener Q en el PI en un rango de F.P. de al menos <strong>0.95 en atraso y 0.95 en adelanto</strong>.</p>
+      <h4>Metodología</h4><p>Evaluar entrega y absorción de Q a niveles de P de 25, 50, 75 y 100 % de la capacidad, en condición inductiva y capacitiva (ajuste cos φ sobreexcitado/subexcitado en inversores), sin inestabilidad ni disparos. Puede complementarse con mediciones de campo de periodo largo.</p>
+      <h4>Tabla de resultados</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Nivel de carga (% CI)</th><th>Condición</th><th>F.P. alcanzado</th><th>Q (MVAr)</th><th>Cumple ±0.95</th></tr></thead><tbody><tr><td colspan="5" style="text-align:center;color:var(--gray-400);padding:16px">— filas por escenario —</td></tr></tbody></table></div>
+      <h4>Gráficas</h4><p>F.P. vs tiempo con línea punteada en ±0.95; opcional dispersión P-Q sobre el perfil normativo.</p>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>Los inversores operan de manera coordinada para sostener el Factor de Potencia dentro del rango requerido, gestionando activamente la entrega y absorción de potencia reactiva en función de las condiciones operativas del Punto de Interconexión, por lo que la Central Eléctrica cumple con los requerimientos de capacidad de potencia reactiva.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P14</span> Capacidad de Q a Pmáx<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Secciones 3.5.1, Tabla 3.3.2, Figura 3.5.1 [1].</p>
+      <h4>Criterio</h4><p>Q/Pmáx ≥ ±0.33 obligatorio; rango máximo ±0.5.</p>
+      <h4>Gráfica</h4><p>Puntos medidos superpuestos al diagrama P-Q/Pmáx (zona blanca/gris).</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P15</span> Capacidad de Q debajo de Pmáx<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 3.5.2, Figura 3.5.2 [1].</p>
+      <h4>Criterio</h4><p>A P &lt; Pmáx, operar en cualquier punto de la zona blanca del perfil P-Q/Pmáx; moverse a cualquier punto en el tiempo definido por CENACE.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P16-18</span> Modos de control V · Q · F.P.<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 3.5.3 [1]. Parámetros: ver §1.6.</p>
+      <h4>Metodología común</h4><p>Escalón de consigna en cada modo; medir t 90 % (≤ 3 s), estabilización (≤ 5 s), sobrepaso, error en régimen permanente y tamaño de pasos.</p>
+      <h4>Tabla</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Modo</th><th>Consigna inicial</th><th>Consigna final</th><th>t 90 (s)</th><th>t estab (s)</th><th>Error final</th><th>Cumple</th></tr></thead><tbody><tr><td colspan="7" style="text-align:center;color:var(--gray-400);padding:16px">— filas por modo/escenario —</td></tr></tbody></table></div>
+      <h4>Gráfica</h4><p>Variable controlada y consigna vs tiempo con marcadores t₉₀ / t_estab.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P19</span> Amortiguamiento de oscilaciones de potencia<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 3.5.6 [1].</p>
+      <h4>Criterio</h4><p>Evidencia de funcionalidad POD si es requerido por CENACE.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P20</span> Control de tensión en condiciones dinámicas o de falla<span class="tipos"><span class="tipo">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Capítulo 4, Tablas 4.1.1.B (B/C) o 4.2.1.B (D) [1] · Prueba No. 20 Anexo 5 [2].</p>
+      <h4>Criterio</h4><p>Esquemas de protección ajustados para permanecer conectada dentro de la Zona A y desconectarse sólo al ingresar a Zona B; prioridad P/Q en falla conforme 3.5.5; recuperación de P post falla en 0.25–0.5 s.</p>
+      <h4>Evidencia (típicamente documental)</h4><p>Estudio de Coordinación de Protecciones con ajustes 27/59 multipaso alineados a la envolvente de Zona A; reportes de ajustes de relevadores del PI (función 32 direccional si aplica no-inyección).</p>
+      <h4>Ajustes multipaso (formato)</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Función</th><th>Paso</th><th>Umbral (pu)</th><th>Tiempo (s)</th><th>Lógica</th></tr></thead><tbody>
+        <tr><td>27 (baja tensión)</td><td>1</td><td></td><td></td><td>AND</td></tr>
+        <tr><td>27</td><td>2</td><td></td><td></td><td>AND</td></tr>
+        <tr><td>27</td><td>3</td><td></td><td></td><td>AND</td></tr>
+        <tr><td>59 (sobretensión)</td><td>1</td><td></td><td></td><td>AND</td></tr>
+        <tr><td>59</td><td>2</td><td></td><td></td><td>AND</td></tr>
+      </tbody></table></div>
+      <h4>Plantilla — Conclusión</h4>
+      <div class="plantilla"><span class="tag-line">conclusión</span>Los ajustes propuestos aseguran que los generadores permanezcan conectados dentro de la Zona A definida en la Figura 4.1.1.B del Código de Red y se desconecten únicamente al ingresar a la Zona B. Se adjuntan los estudios y reportes de ajuste para validación de la prueba.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P21-23</span> Runback / Rampa / Rechazo de carga parcial<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <ul>
+        <li><strong>P21 — Runback / Rundown:</strong> verificación del proceso ante instrucción.</li>
+        <li><strong>P22 — Rampa de variación de carga:</strong> 10 % Pn/minuto (medir kW/min en subida y bajada).</li>
+        <li><strong>P23 — Rechazo de carga parcial:</strong> medir sobretensión transitoria y tiempo/secuencia de apagado del inversor.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">P24</span> Modelos de simulación<span class="tipos"><span class="tipo">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Referencia</h4><p>Sección 6.1.6 [1] · Prueba No. 24 Anexo 5 [2] · MIC [3].</p>
+      <h4>Criterio</h4><p>Entregar modelos que reflejen el comportamiento en estado estacionario, dinámico y de transitorios electromagnéticos, en la versión de software y formato solicitados por CENACE; modelos verificados contra los resultados de las pruebas de conformidad; documentación completa.</p>
+      <h4>Submodelos mínimos</h4>
+      <ul>
+        <li>Fuente primaria.</li>
+        <li>Control de velocidad / P.</li>
+        <li>Control de tensión (incl. PSS o POD según aplique).</li>
+        <li>Protecciones.</li>
+        <li>Convertidores/inversores, controlador de planta y compensación (centrales basadas en inversores).</li>
+      </ul>
+      <h4>Documentación</h4><p>Diagramas de bloques, código fuente si no es librería estándar, manuales.</p>
+      <h4>Evidencia</h4><p>Informe de validación de modelos (p. ej. PSS/E) + oficio de entrega.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SECCION 5 - FICHAS SINCRONAS -->
+<section id="s5" class="block">
+  <h2 class="section"><span class="num">5</span>Fichas por prueba — Síncronas por Central</h2>
+  <p style="color:var(--gray-500);font-size:12.5px;margin-bottom:12px">Sólo se detallan diferencias respecto a las fichas asíncronas equivalentes. Estructura de tabla, gráficas y plantillas: la misma.</p>
+
+  <details class="acc">
+    <summary><span class="pill">21</span> Razón de cambio 2.5 Hz/s<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Condición previa</h4><p>Generador sincronizado, tensión nominal, ~75 % de carga, modo de control P–f activado.</p>
+      <h4>Procedimiento</h4><p>Escalón de 0.5 Hz en frecuencia simulada que debe ocurrir en ≤ 200 ms (equivale a 2.5 Hz/s); medir tiempo de respuesta y permanencia.</p>
+      <h4>Señales</h4><p>velocidad del rotor, P, f, f simulada, Vg.</p>
+      <h4>Evidencia complementaria</h4><p>Captura del ajuste ROCOF en el gobernador/controlador.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">22</span> Rango de frecuencia<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Naturaleza</h4><p><strong>Documental.</strong> Información técnica del fabricante (rangos seguros f-P), restricciones de velocidad/frecuencia y evidencia gráfica de ajustes 81H/81L (unidad y red particular) + estudio de ajuste de protecciones.</p>
+      <h4>Tabla de ajustes tipo</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Protección ANSI</th><th>Frecuencia (Hz)</th><th>Tiempo (s)</th><th>Modo</th></tr></thead><tbody>
+        <tr><td>81H</td><td>f ≥ <code>{{F_ALARMA_H}}</code></td><td></td><td>Alarma</td></tr>
+        <tr><td>81H</td><td>f ≥ <code>{{F_DISPARO_H}}</code></td><td></td><td>Disparo</td></tr>
+        <tr><td>81L</td><td>f ≤ <code>{{F_ALARMA_L}}</code></td><td></td><td>Alarma</td></tr>
+        <tr><td>81L</td><td>f ≤ <code>{{F_DISPARO_L}}</code></td><td></td><td>Disparo</td></tr>
+      </tbody></table></div>
+      <h4>Criterio</h4><p>Los ajustes permiten operar al menos los tiempos de la Tabla 2.1 en cada rango.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">23</span> Limitación total de potencia activa<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Criterio síncronas</h4><p>Alcanzar consigna 0 kW <strong>en más de 5 segundos</strong> (rampa controlada; evita rechazo súbito).</p>
+      <h4>Ejecución</h4><p>Registrar tiempo total de Pmáx → 0 kW sin desconexión de la red.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">24</span> Reconexión automática<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo">C</span><span class="tipo">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Criterio</h4><p>Igual que asíncronas P6.</p>
+      <h4>Ejecución</h4><p>Tras operación en isla ≥ 5 min. Tablas A/B de condiciones previas y rampa (kW/min vs límite 10 % CIN/min).</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">25</span> Limitación parcial de potencia activa<span class="tipos"><span class="tipo">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Ejecución</h4><p>Central al 50 % (o valor definido por CENACE) → consigna 0 MW; criterio: tiempo y tolerancia definidos por CENACE.</p>
+      <div class="nota"><span class="label">Nota</span>Documentar si CENACE no definió criterio de tiempo/tolerancia para el proyecto.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">26</span> Control primario de frecuencia<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Condición previa</h4><p>Generador sincronizado, tensión nominal, ~80 % de carga, control P–f activo, bm ±30 mHz.</p>
+      <h4>Procedimiento</h4><p>Fijar Rdroop (típico 5 %); escalones de f simulada dentro de bm (P no debe cambiar) y fuera de bm (P debe responder por pendiente).</p>
+      <h4>Señales</h4><p>velocidad de rotor, P, f, f simulada, Vg.</p>
+      <h4>Criterio</h4><p>Funcionamiento correcto de la banda muerta y respuesta por estatismo.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">27</span> Control secundario de frecuencia<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <p>No aplica tipo B. Equipamiento AGC para tipos C y D conforme Manual TIC.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">28-29</span> Rango de tensión en el PI<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Naturaleza</h4><p><strong>Documental.</strong> Ajustes 27/59 de cada unidad y del relevador del PI; conversión explícita V-secundarios ↔ pu; comparación contra Tabla 3.1.1.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">30</span> Capacidad de potencia reactiva<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Criterio tipo B síncrona</h4><p>F.P. ±0.95 en el PI (3.2.1 [1]).</p>
+      <h4>Procedimiento</h4><p>Generador en operación normal con Q ≈ 0; llevar a carga y mover excitación a sobreexcitado/subexcitado hasta alcanzar/rebasar ±0.95; a distintos niveles de carga.</p>
+      <h4>Gráfica</h4><p>F.P. vs tiempo con línea de referencia ±0.95 y flecha de sentido; tabla resumen de valores relevantes.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">31-32</span> Capacidad de Q a/debajo de Pmáx<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <p>No aplican tipo B. Perfil V-Q/Pmáx (Figura 3.3.2) y V-P-Q/Pmáx (Figura 3.3.3) para tipos C/D.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">33</span> Sistema de control de tensión<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Criterio tipo B (3.2.2 [1])</h4><p>Sistema de control automático de excitación <strong>permanente</strong> que proporcione tensión constante a consigna seleccionable sin inestabilidad en todo el rango de la curva de capabilidad.</p>
+      <h4>Evidencia</h4><p>Resultados de pruebas por unidad relacionadas (rango operativo de tensión / AVR) + gráfica de consigna vs Vg.</p>
+      <h4>Tipos C/D (3.3.3 [1])</h4>
+      <ul>
+        <li>Especificaciones del RAT.</li>
+        <li>Limitador de baja excitación (MEL).</li>
+        <li>Limitador de sobreexcitación (OEL).</li>
+        <li>Limitación de ancho de banda de la señal de salida.</li>
+        <li>Funcionalidad PSS.</li>
+      </ul>
+      <h4>Tipo D adicional (3.4.1)</h4><p>RAT de respaldo y PSS de doble entrada.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">34</span> Control de tensión en condiciones dinámicas o de falla<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Zona A síncrona</h4><p>Tabla 4.1.1.A (B/C) o 4.2.1.A (D). Ver §1.7.</p>
+      <h4>Evidencia</h4><p>Ajustes 27/59 en controlador de unidad y relevador del PI, con conversión a pu, demostrando permanencia dentro de Zona A (p. ej. disparo por sobretensión ajustado &gt; 1.10 pu).</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">35</span> Arranque de emergencia (opcional)<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Si se oferta (5.2.1 [1])</h4>
+      <ul>
+        <li>Listo para tomar carga con medios propios en ≤ 30 min.</li>
+        <li>Regular f (Tabla 2.1) y V (Tabla 3.1.1) en todo el rango.</li>
+        <li>Regulación automática de tensión durante restauración.</li>
+        <li>Alimentar bloques de carga acordados.</li>
+        <li>Operar en respuesta a alta/baja frecuencia.</li>
+        <li>Paralelo en isla con otras CE.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">36</span> Operación en modo isla<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Requisitos (5.2.2 [1])</h4>
+      <ul>
+        <li>Límites de f (Tabla 2.1) y V (Tabla 3.1.1) aplican en isla.</li>
+        <li>CPF activo en isla.</li>
+        <li>Reducción de P a cualquier punto de la curva de capabilidad.</li>
+        <li>Método de detección de isla acordado con CENACE (no sólo por posición de interruptores).</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">37</span> Resincronización rápida<span class="tipos"><span class="tipo">A</span><span class="tipo">B</span><span class="tipo">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>5.2.3 [1]</h4>
+      <ul>
+        <li>Tiempo máx. de resincronización 15 min conforme estrategia acordada.</li>
+        <li>Si &gt; 15 min: capacidad de pasar a alimentar sólo servicios auxiliares/carga local y operar estable.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">38-40</span> Administración del SEN<span class="tipos"><span class="tipo on">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <h4>Evidencia documental</h4>
+      <ul>
+        <li><strong>Esquemas de control y ajustes:</strong> EAR si CENACE los solicitó; documentar exención en caso contrario.</li>
+        <li><strong>Esquemas de protección y ajustes</strong> (6.1.2.iv [1]) contra:
+          <ul>
+            <li>Cortocircuito ext/int (87, 50/51, 46).</li>
+            <li>Carga asimétrica — secuencia de fase negativa (46).</li>
+            <li>Sobrecarga estator/rotor (49).</li>
+            <li>Sobre/baja excitación (24 / 40).</li>
+            <li>Sobre/baja tensión en terminales (27/59), en el PI (27/59), en auxiliares.</li>
+            <li>Oscilaciones entre áreas (68 / 78).</li>
+            <li>Inrush — restricción 2º/5º armónico.</li>
+            <li>Operación asíncrona (78).</li>
+            <li>Esfuerzos torsionales (resonancia subsíncrona).</li>
+            <li>Protección de línea de interconexión (50/51, 27/59, 81).</li>
+            <li>Transformador de unidad (87, 49, 24, 50/51).</li>
+            <li>Respaldo y falla de interruptor (50BF).</li>
+            <li>V/f (24), potencia inversa (32), ROCOF (81R).</li>
+            <li>Desplazamiento de neutro (59N).</li>
+            <li>Verificación de sincronismo (25).</li>
+            <li>Pérdida de campo (40).</li>
+          </ul>
+        </li>
+        <li><strong>Prioridad de protección y control:</strong> protecciones &gt; control de frecuencia &gt; restricción de P &gt; limitación de rampa.</li>
+        <li><strong>Intercambio de información:</strong> tiempo real / bajo demanda con estampa de tiempo (Manual TIC).</li>
+        <li><strong>Instrumentación:</strong> registro de al menos V, P, Q y f; registrador de disturbios con criterios de activación acordados; analizador de calidad conforme NOM / Manual TIC.</li>
+      </ul>
+      <h4>Formato del reporte</h4><p>Por cada inciso: captura de ajustes + referencia al documento fuente (estudio de coordinación).</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="pill">41</span> Modelos de simulación<span class="tipos"><span class="tipo">A</span><span class="tipo on">B</span><span class="tipo on">C</span><span class="tipo on">D</span></span></summary>
+    <div class="acc-body">
+      <p>Igual que ficha asíncrona P24 (6.1.6 [1]), incluyendo PSS para síncronas.</p>
+      <h4>Criterio PSS (MIC [3])</h4><p>Evidencia de que el PSS amortigua a un tercio la amplitud de oscilaciones consecutivas ante escalón de reactivos de ±25 % al 90 % de Pn.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SECCION 6 - PENDIENTE -->
+<section id="s6" class="block">
+  <h2 class="section"><span class="num">6</span>Pruebas por Unidad (síncronas 1 – 20)</h2>
+  <div class="nota">
+    <span class="label">Nota — Sección pendiente</span>
+    El listado completo por unidad no está contenido en los documentos fuente de este catálogo. Referencias confirmadas en reportes existentes:
+    <ul style="margin-top:8px">
+      <li><strong>Prueba 1</strong> — Rango operativo de tensión (consigna seleccionable, AVR).</li>
+      <li><strong>Pruebas 1 – 5 y 9</strong> — Sistema de control de tensión / excitación (AVR, escalones de consigna, MEL / OEL).</li>
+      <li><strong>Prueba 17</strong> — Estatismo (característica de regulación del gobernador).</li>
+      <li><strong>Pruebas típicas restantes:</strong> sincronización manual/automática, regulador de velocidad, curva de capabilidad, escalones de P y Q, compensador de reactivos (%CR), PSS (AES/AFS), rechazo de carga, mediciones en vacío.</li>
+    </ul>
+    <p style="margin-top:10px"><strong>Acción:</strong> completar esta sección con el "Reporte de Pruebas por Unidad" correspondiente antes de habilitar la generación de reportes por unidad en el programa.</p>
+  </div>
+</section>
+
+<!-- SECCION 7 -->
+<section id="s7" class="block">
+  <h2 class="section"><span class="num">7</span>Estructura estándar de cada sección de prueba</h2>
+  <div class="card">
+    <div class="card-head"><span class="card-title">Estructura del bloque en el reporte generado</span><span class="card-tag">Formato objetivo</span></div>
+<pre>3.X  Prueba No. {{N}} — {{NOMBRE_PRUEBA}} [2]
+     ├── Objetivo (plantilla, con referencias [1] y [2])
+     ├── Criterio de aceptación (tabla o texto normativo)
+     ├── Metodología / condiciones de prueba
+     ├── Figura(s): capturas de ajustes previos (droop, protecciones)
+     ├── Tabla de resultados (FECHA DE PRUEBA + pasos con timestamps)
+     ├── Gráfico(s): serie de tiempo doble eje (f o V vs P), anotada
+     └── Conclusión (plantilla con resultado: "Cumple requerimiento")</pre>
+  </div>
+  <div class="card">
+    <div class="card-head"><span class="card-title">Convenciones de gráficas</span><span class="card-tag">Consistencia visual</span></div>
+    <ul style="padding-left:20px;color:var(--gray-700);font-size:13px">
+      <li>Eje izquierdo: variable de excitación (Frecuencia Hz o Tensión pu), trazo escalonado, color 1.</li>
+      <li>Eje derecho: Potencia Activa (MW), color 2.</li>
+      <li>Título: <code>"P{{N}} – {{NOMBRE}} · Estatismo {{X}}%"</code> cuando aplique.</li>
+      <li>Anotaciones de valor en cada escalón (etiquetas con Hz y MW).</li>
+      <li>Eje X: tiempo <code>HH:MM:SS</code>.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <span>Manual de consulta — Puesta en Servicio · Basado en Código de Red 2.0 (RES/550/2021)</span>
+  <span>Documento técnico interno</span>
+</footer>
+
+<script>
+function toggleAll(open){
+  document.querySelectorAll('details.acc').forEach(d=>{ d.open = open; });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap. 3 — Verificación de la Conformidad | Manual CONE — Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+.nota.cone   { border-left-color: #0077b6; }
+.nota.cone .nota-title { background: rgba(0,119,182,.12); color: #0077b6; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual CONE — Centros de Carga</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual CONE — Capítulos</span>
+    <a href="cone_c1.html"  class="sb-cap">Objetivo · Alcance · Cap. 1</a>
+    <a href="cone_c2.html"  class="sb-cap">Cap. 2 2.1–2.7 y 2.9</a>
+    <a href="cap8.html"     class="sb-cap">Cap. 2 2.8 — Calidad de la Potencia</a>
+    <a href="cone_c3.html"  class="sb-cap active" aria-current="page">Cap. 3 — Verificación</a>
+    <a href="#sec-conexion"     class="sb-sub">Proceso de Conexión · EOC</a>
+    <a href="#sec-equipos"      class="sb-sub">Evaluación con equipos propios</a>
+    <a href="#sec-cre"          class="sb-sub">Facultades de la CRE</a>
+    <a href="#sec-vs-inte"      class="sb-sub">Diferencias con INTE Cap. 8</a>
+    <a href="cone_c4.html"  class="sb-cap">Cap. 4 — Plan de Trabajo</a>
+    <span class="sb-section-lbl">Manual INTE — Centrales Eléctricas</span>
+    <a href="cap8_inte.html" class="sb-cap">Cap. 8 — Verificación (INTE)</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+    <a href="https://www.cenace.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CENACE — SIM</a>
+    <a href="https://www.cre.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CRE</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Manual CONE › <strong>Cap. 3 — Verificación de la Conformidad</strong></div>
+    <span class="pg-pill">Manual CONE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual CONE · Cap. 3 de 4 — Cierre del ciclo regulatorio de Conexión</span>
+    <h1 class="titulo">Capítulo 3. Verificación de la Conformidad</h1>
+
+    <p>
+      El Capítulo 3 del Manual CONE es el cierre del ciclo regulatorio: una vez que los Capítulos 1 y 2 definen <em>qué</em> debe cumplir un Centro de Carga y <em>quién</em> está obligado (Tabla 1.1.A), el Capítulo 3 establece <em>cómo y quién</em> verifica ese cumplimiento. A diferencia del Manual INTE (Cap. 8), que exige una Unidad de Inspección acreditada y un Procedimiento EOC formal con validación previa, el Manual CONE permite que la evaluación se realice con los propios equipos de medición del Centro de Carga. Esto reduce la carga regulatoria para instalaciones cuya influencia en la red es menor a la de una Central Eléctrica.
+    </p>
+
+    <!-- Diagrama de actores -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 28px">
+      <div style="background:rgba(0,119,182,.07);border:1px solid rgba(0,119,182,.25);border-radius:9px;padding:14px 12px;text-align:center">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#0077b6;margin-bottom:5px">Centro de Carga</div>
+        <div style="font-size:.8rem;font-weight:700;color:var(--text-dark);margin-bottom:3px">Auto-monitoreo</div>
+        <div style="font-size:.73rem;color:var(--text-secondary);line-height:1.4">Equipos propios de medición · Proceso de EOC para CdC en nuevo proceso de Conexión</div>
+      </div>
+      <div style="background:var(--blue-light);border:1px solid rgba(0,102,204,.2);border-radius:9px;padding:14px 12px;text-align:center">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:5px">CENACE / Transportista / Distribuidor</div>
+        <div style="font-size:.8rem;font-weight:700;color:var(--text-dark);margin-bottom:3px">Apoyo a la CRE</div>
+        <div style="font-size:.73rem;color:var(--text-secondary);line-height:1.4">Monitoreo y vigilancia · Información de calidad de sus sistemas de medición</div>
+      </div>
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:14px 12px;text-align:center">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:5px">CRE</div>
+        <div style="font-size:.8rem;font-weight:700;color:var(--text-dark);margin-bottom:3px">Autoridad regulatoria</div>
+        <div style="font-size:.73rem;color:var(--text-secondary);line-height:1.4">Inspecciones directas · Unidades de Inspección · Servidores públicos</div>
+      </div>
+    </div>
+
+    <!-- I Texto íntegro del Cap. 3 -->
+    <h2 class="sec" id="sec-conexion"><span class="snum">I.</span>Proceso de Conexión y Modificación Técnica</h2>
+
+    <blockquote>
+      La vigilancia y el monitoreo se realizará tanto para los Centros de Carga en proceso de Conexión o Modificación Técnica, así como para los que ya se encuentren conectados al SEN.
+      <br><br>
+      En el proceso de Conexión o Modificación Técnica, para la Conexión de los Centros de Carga, se deberá atender lo previsto en el Procedimiento de Operación para la Declaración de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, publicado por el CENACE en el Sistema de Información del Mercado.
+      <cite>RES/550/2021, Manual CONE, Cap. 3 — DOF 31-dic-2021 · PDF p. 249</cite>
+    </blockquote>
+
+    <p>
+      El alcance de la verificación es doble: cubre tanto los CdC que están pasando por un proceso de Conexión o Modificación Técnica —que requieren cumplir antes de entrar en operación comercial— como los que ya están conectados y operando —que están sujetos a supervisión continua—. Para los primeros, el marco procedimental es el mismo <strong>Procedimiento de EOC publicado por el CENACE en el Sistema de Información del Mercado (SIM)</strong> que aplica para las Centrales Eléctricas bajo el Manual INTE (Cap. 8 INTE). La diferencia está en el nivel de exigencia técnica: para un CdC, los estudios y pruebas de la EOC son menos extensos que para una Central Eléctrica tipo D.
+    </p>
+
+    <!-- II Equipos propios -->
+    <h2 class="sec" id="sec-equipos"><span class="snum">II.</span>Evaluación con los Propios Equipos del Centro de Carga</h2>
+
+    <blockquote>
+      La evaluación para los Centros de Carga se podrá realizar con las mediciones de los equipos de medición del Centro de Carga que se encuentren instalados.
+      <cite>RES/550/2021, Manual CONE, Cap. 3 — DOF 31-dic-2021 · PDF p. 249</cite>
+    </blockquote>
+
+    <p>
+      Esta disposición es significativamente más flexible que el Manual INTE, que exige una <strong>Unidad de Inspección acreditada por la EMA</strong> para certificar la instalación antes de la primera sincronización (6.3.1.i del INTE) y después de la EOC para verificación continua. En el Manual CONE, los propios medidores del CdC —analizadores de calidad de la potencia instalados en el Punto de Conexión, medidores de facturación del Transportista o Distribuidor, o equipos de monitoreo propio— son aceptados como fuente de evidencia para la evaluación de cumplimiento. Esto no exime al CdC de usar equipos calibrados y trazables conforme a la NOM-001-CRE/SCFI-2019 o su equivalente.
+    </p>
+
+    <div class="nota cone">
+      <span class="nota-title">Qué equipos se consideran válidos</span>
+      Para que las mediciones propias del CdC sean aceptadas, deben cumplir los métodos de la NOM-001-CRE/SCFI-2019 vigente o la NMX-J-610-4-30-ANCE-2018 Clase A o IEC 61000-4-30 Clase A (los mismos estándares citados en el 2.8). Mediciones no trazables o tomadas con equipos no calibrados no tienen validez regulatoria frente a la CRE.
+    </div>
+
+    <!-- III CRE -->
+    <h2 class="sec" id="sec-cre"><span class="snum">III.</span>Facultades de Monitoreo e Inspección de la CRE</h2>
+
+    <blockquote>
+      Sin menoscabo de lo anterior, la CRE podrá apoyarse del CENACE, Transportista y Distribuidor para llevar a cabo los actos de monitoreo y vigilancia del cumplimiento de los requerimientos de este Manual. Asimismo, la CRE podrá llevar a cabo los actos de inspección que determine necesarios por conducto de los servidores públicos que tenga adscritos o mediante Unidades de Inspección.
+      <cite>RES/550/2021, Manual CONE, Cap. 3 — DOF 31-dic-2021 · PDF p. 249</cite>
+    </blockquote>
+
+    <p>
+      La frase "sin menoscabo de lo anterior" es técnica jurídica que preserva las facultades de la CRE como autoridad regulatoria suprema, por encima del mecanismo ordinario de auto-monitoreo del CdC. La CRE puede iniciar una inspección en cualquier momento y de forma independiente, sin necesidad de que exista una queja previa o un evento específico. Para ello puede:
+    </p>
+
+    <ul style="margin:10px 0 16px;padding-left:1.4rem;display:flex;flex-direction:column;gap:8px;font-size:.88rem;color:var(--text-secondary);line-height:1.6">
+      <li><strong>Apoyarse del CENACE</strong> para acceder a mediciones SCADA, telemetría y datos de calidad de la potencia disponibles en la RNT.</li>
+      <li><strong>Apoyarse del Transportista o Distribuidor</strong> para obtener mediciones en el Punto de Conexión del CdC desde la infraestructura de red.</li>
+      <li><strong>Comisionar servidores públicos adscritos</strong> para realizar inspecciones físicas directas en las instalaciones del CdC.</li>
+      <li><strong>Contratar Unidades de Inspección acreditadas (EMA)</strong> para auditorías técnicas independientes, equivalentes a las que el INTE exige pro-activamente para las Centrales Eléctricas.</li>
+    </ul>
+
+    <!-- IV Diferencias INTE vs CONE -->
+    <h2 class="sec" id="sec-vs-inte"><span class="snum">IV.</span>Diferencias de Verificación: CONE vs. INTE</h2>
+
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Comparativa del régimen de verificación — Manual INTE Cap. 8 vs. Manual CONE Cap. 3
+        <span class="tbl-sub">RES/550/2021 — Elaboración comparativa</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Aspecto</th><th>INTE — Cap. 8 (CE)</th><th>CONE — Cap. 3 (CdC)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Verificación pre-EOC</strong></td>
+            <td>Unidad de Inspección acreditada (EMA) obligatoria antes de 1ª sincronización (6.3.1.i INTE)</td>
+            <td>EOC del CENACE aplicable, pero sin exigencia explícita de UI previa</td>
+          </tr>
+          <tr>
+            <td><strong>Fuente de mediciones</strong></td>
+            <td>SCADA + PMU + DFR + analizadores (6.1.5 INTE)</td>
+            <td>Propios equipos del CdC aceptados</td>
+          </tr>
+          <tr>
+            <td><strong>Monitoreo post-EOC</strong></td>
+            <td>CENACE evalúa telemetría continuamente</td>
+            <td>Vigilancia del Transportista/Distribuidor + CRE cuando sea necesario</td>
+          </tr>
+          <tr>
+            <td><strong>Instrumento formal</strong></td>
+            <td>Certificación por UI · Plan de validación modelos</td>
+            <td>Plan de Trabajo (Cap. 4) en caso de incumplimiento</td>
+          </tr>
+          <tr>
+            <td><strong>CRE</strong></td>
+            <td>Monitoreo y vigilancia; actos de inspección</td>
+            <td>Monitoreo y vigilancia; actos de inspección (texto casi idéntico)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="cap8.html">
+        <span class="nd">← Capítulo anterior</span>
+        <span class="nt">Cap. 2 2.8 — Calidad de la Potencia (CONE)</span>
+      </a>
+      <a href="cone_c4.html" class="n-next">
+        <span class="nd">Capítulo siguiente →</span>
+        <span class="nt">Cap. 4 — Plan de Trabajo</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

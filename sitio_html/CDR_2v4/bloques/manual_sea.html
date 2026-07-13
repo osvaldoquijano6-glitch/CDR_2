@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual SEA — Sistemas Eléctricamente Aislados | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Disposiciones Generales — Sistemas Aislados</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Disposiciones Generales</span>
+    <a href="disposiciones.html"    class="sb-cap">Disposiciones · Glosario</a>
+    <a href="disposiciones_sen.html" class="sb-cap">Disposiciones del SEN</a>
+
+    <span class="sb-section-lbl">Manual SEA — Secciones</span>
+    <a href="manual_sea.html" class="sb-cap active" aria-current="page">Manual SEA — Sistemas Aislados</a>
+    <a href="#sec-objetivo"      class="sb-sub">Objetivo y alcance</a>
+    <a href="#sec-procedimientos" class="sb-sub">6.3.1 Procedimientos operativos</a>
+    <a href="#sec-tension"       class="sb-sub">6.3.2 Tensión</a>
+    <a href="#sec-frecuencia"    class="sb-sub">6.3.3 Frecuencia</a>
+    <a href="#sec-reserva"       class="sb-sub">6.3.4 Reserva y demanda</a>
+    <a href="#sec-despacho"      class="sb-sub">6.3.5 Despacho de generación</a>
+    <a href="#sec-protecciones"   class="sb-sub">6.3.6 Protecciones</a>
+    <a href="#sec-mantenimiento"  class="sb-sub">6.3.7 Mantenimiento y licencias</a>
+
+    <span class="sb-section-lbl">Disposiciones Operativas</span>
+    <a href="manual_pse.html" class="sb-cap">Manual PSE — Planeación SEN</a>
+    <a href="manual_co.html"  class="sb-cap">Manual CO — Coordinación Operativa</a>
+    <a href="manual_eso.html" class="sb-cap">Manual ESO — Estados Operativos</a>
+    <a href="manual_tic.html" class="sb-cap">Manual TIC — Red Inteligente</a>
+
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Disposiciones Generales › <strong>Cap. 6 — Sistemas Eléctricamente Aislados</strong></div>
+    <span class="pg-pill">Manual SEA</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Disposiciones Generales · Capítulo 6 — Sistemas Aislados</span>
+    <h1 class="titulo">Manual SEA — Sistemas Eléctricamente Aislados</h1>
+
+    <details>
+      <summary>Referencia normativa y marco del Manual SEA</summary>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">RES/550/2021 — CRE.</strong> Disposiciones Generales, Capítulo 6: Disposiciones Generales aplicables a Sistemas Eléctricamente Aislados (SEA). DOF, 31 de diciembre de 2021, págs. 895–900. <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" target="_blank" rel="noopener">Texto oficial (PDF)</a>.
+        </li>
+        <li style="font-size:.855rem;color:var(--text-secondary);line-height:1.6">
+          <strong style="color:var(--blue)">Sistemas cubiertos:</strong> SIBC (Baja California), SIBCS (Baja California Sur) y SIM (Mulegé) — sistemas que operan de forma aislada del Sistema Interconectado Nacional (SIN).
+        </li>
+      </ul>
+    </details>
+
+    <!-- ═══════════ OBJETIVO ═══════════ -->
+    <h2 class="sec" id="sec-objetivo"><span class="snum">6.1</span>Objetivo y Alcance</h2>
+
+    <blockquote>
+      El objetivo de las presentes Disposiciones Generales es establecer los criterios de eficiencia, Calidad, Confiabilidad, Continuidad, seguridad y sustentabilidad que deben ser observados durante la operación de los Sistemas Eléctricamente Aislados (SEA), con el objeto de maximizar su operación en Estado Operativo Normal y minimizar el riesgo de daño a sus elementos durante la operación.
+      <cite>RES/550/2021, Disposiciones Generales, 6.1 — DOF 31-dic-2021 · PDF p. 895</cite>
+    </blockquote>
+
+    <p>
+      Los criterios establecidos en este capítulo son aplicables a los sistemas que se encuentran <strong>eléctricamente aislados del SEN</strong> y que forman parte de la RNT y de las RGD. Incluyen los sistemas interconectados de Baja California (SIBC), Baja California Sur (SIBCS) y Mulegé (SIM).
+    </p>
+
+    <div class="nota">
+      <span class="nota-title">Diferencia clave con el SIN</span>
+      A diferencia del SIN donde el CENACE opera centralizadamente, en los SEA existe la figura del <strong>Operador del SEA</strong>, que coordina de forma integrada la operación de generación, transmisión y despacho de carga en tiempo real. Los rangos de frecuencia son específicos para cada sistema aislado.
+    </div>
+
+    <!-- ═══════════ 6.3.1 PROCEDIMIENTOS ═══════════ -->
+    <h2 class="sec" id="sec-procedimientos"><span class="snum">6.3.1</span>Procedimientos Operativos</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">SEA-1</span>
+        <span>El Operador del SEA coordinará de forma integrada la operación de las instalaciones de generación y Transmisión con el despacho de carga en tiempo real, atendiendo la <strong>demanda horaria en forma segura, confiable y a mínimo costo</strong>.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-2</span>
+        <span>El Operador del SEA garantizará la operación confiable y segura del SEA bajo su responsabilidad por medio del uso adecuado de la generación, Suministro Eléctrico y administración de los <strong>recursos de potencia reactiva</strong>.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-3</span>
+        <span>El Operador del SEA coordinará los recursos de generación, <strong>Márgenes de Reserva</strong>, Demanda Controlable y Esquemas de Acción Remedial de manera eficiente, confiable y segura para mantener el <strong>control de la frecuencia</strong>.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-4</span>
+        <span>El Operador del SEA mantendrá la cargabilidad de la red de acuerdo con los <strong>Límites Operativos</strong> definidos para cada Elemento del SEA, evitando la congestión de la Red Eléctrica.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-5</span>
+        <span>El Operador del SEA realizará una <strong>supervisión permanente</strong> del Estado Operativo del SEA, aplicando las políticas preventivas y/o correctivas que permitan mantener y/o restablecer las condiciones operativas.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-6</span>
+        <span>El Operador del SEA deberá contar con procedimientos que le permitan <strong>restablecer parcial o totalmente</strong> el sistema a condiciones de operación segura dentro de los límites establecidos.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-7</span>
+        <span>El Operador del SEA realizará una <strong>administración estricta de las Licencias</strong> que se concedan sobre los Elementos del SEA evitando crear condiciones de operación no planeadas que demeriten la seguridad del SEA.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-8</span>
+        <span>El Operador del SEA realizará la <strong>planeación operativa</strong> de la operación de corto plazo y de mediano plazo disponiendo del pronóstico de demanda y del programa de Licencias proyectado para el escenario de estudio.</span>
+      </li>
+    </ul>
+
+    <!-- ═══════════ 6.3.2 TENSIÓN ═══════════ -->
+    <h2 class="sec" id="sec-tension"><span class="snum">6.3.2</span>Rangos Permisibles de Tensión en Estado Operativo Normal</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">SEA-9</span>
+        <span>En niveles de tensión correspondientes a Media Tensión y en Estado Operativo Normal, el SEA debe operar y mantenerse en un rango de tensión de <strong>−5 % a +5 %</strong> de la tensión nominal correspondiente o el Límite Operativo que establezca el CENACE. En niveles de tensión correspondientes a Alta Tensión, aplica el mismo rango de <strong>−5 % a +5 %</strong>.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-10</span>
+        <span>Para niveles de tensión por debajo del límite inferior de la banda operativa definida en el Criterio SEA-9, los <strong>Centros de Carga</strong> deberán desconectarse de acuerdo con los tiempos de retraso y rangos de tensión definidos en el Manual CONE.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-11</span>
+        <span>Para niveles de tensión por debajo del límite inferior, las <strong>Unidades de Central Eléctrica</strong> deberán desconectarse de acuerdo con los tiempos de retraso y rangos de tensión definidos en el Manual INTE.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-12</span>
+        <span>Para niveles de tensión por encima del límite superior, los <strong>Centros de Carga</strong> deberán reconectarse de acuerdo con los tiempos y rangos del Manual CONE.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-13</span>
+        <span>Para niveles de tensión por encima del límite superior, las <strong>Unidades de Central Eléctrica</strong> deberán desconectarse conforme al Manual INTE.</span>
+      </li>
+    </ul>
+
+    <div class="tbl-wrap" style="max-width:600px">
+      <div class="tbl-caption">Bandas de tensión en Estado Operativo Normal — SEA
+        <span class="tbl-sub">Criterio SEA-9 · RES/550/2021 · PDF p. 896</span>
+      </div>
+      <table>
+        <thead><tr><th>Nivel de tensión</th><th>Rango permitido</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Media Tensión</strong></td><td style="font-family:var(--mono);text-align:center">−5 % a +5 % V<sub>nom</sub></td></tr>
+          <tr><td><strong>Alta Tensión</strong></td><td style="font-family:var(--mono);text-align:center">−5 % a +5 % V<sub>nom</sub></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══════════ 6.3.3 FRECUENCIA ═══════════ -->
+    <h2 class="sec" id="sec-frecuencia"><span class="snum">6.3.3</span>Rangos Permisibles de Frecuencia en Estado Operativo Normal</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">SEA-14</span>
+        <span>En Estado Operativo Normal, el SEA correspondiente al <strong>SIM</strong> debe operar y mantenerse en un rango de frecuencia de <strong>59.7 a 60.3 Hz</strong>. Los SEA <strong>SIBC y SIBCS</strong> deben operar y mantenerse en un rango de frecuencia de <strong>59.8 a 60.2 Hz</strong>.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-15</span>
+        <span>Para niveles de frecuencia por debajo del límite inferior, los <strong>Centros de Carga</strong> podrán desconectarse de acuerdo con los tiempos de retraso y rangos de frecuencia definidos en el Manual CONE.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-16</span>
+        <span>Para niveles de frecuencia por debajo del límite inferior, las <strong>Unidades de Central Eléctrica</strong> podrán desconectarse conforme al Manual INTE.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-17</span>
+        <span>Para niveles de frecuencia por encima del límite superior, los <strong>Centros de Carga</strong> podrán reconectarse conforme al Manual CONE.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-18</span>
+        <span>Para niveles de frecuencia por encima del límite superior, las <strong>Unidades de Central Eléctrica</strong> deberán desconectarse conforme al Manual INTE.</span>
+      </li>
+    </ul>
+
+    <div class="tbl-wrap" style="max-width:640px">
+      <div class="tbl-caption">Bandas de frecuencia en Estado Operativo Normal — por sistema aislado
+        <span class="tbl-sub">Criterio SEA-14 · RES/550/2021 · PDF p. 897</span>
+      </div>
+      <table>
+        <thead><tr><th>Sistema aislado</th><th>Límite inferior</th><th>Nominal</th><th>Límite superior</th></tr></thead>
+        <tbody>
+          <tr><td><strong>SIBC (Baja California)</strong></td><td style="font-family:var(--mono);text-align:center">59.8 Hz</td><td style="font-family:var(--mono);text-align:center">60.0 Hz</td><td style="font-family:var(--mono);text-align:center">60.2 Hz</td></tr>
+          <tr><td><strong>SIBCS (Baja California Sur)</strong></td><td style="font-family:var(--mono);text-align:center">59.8 Hz</td><td style="font-family:var(--mono);text-align:center">60.0 Hz</td><td style="font-family:var(--mono);text-align:center">60.2 Hz</td></tr>
+          <tr><td><strong>SIM (Mulegé)</strong></td><td style="font-family:var(--mono);text-align:center">59.7 Hz</td><td style="font-family:var(--mono);text-align:center">60.0 Hz</td><td style="font-family:var(--mono);text-align:center">60.3 Hz</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="nota">
+      <span class="nota-title">Banda más amplia para Mulegé</span>
+      El SIM (Mulegé) tiene una banda de frecuencia más amplia (±0.3 Hz vs ±0.2 Hz) debido a su <strong>menor inercia del sistema</strong> — tiene menos generadores síncronos conectados, lo que dificulta mantener la frecuencia en un rango estrecho ante perturbaciones.
+    </div>
+
+    <!-- ═══════════ 6.3.4 RESERVA ═══════════ -->
+    <h2 class="sec" id="sec-reserva"><span class="snum">6.3.4</span>Reserva Operativa y Demanda Controlable</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">SEA-19</span>
+        <span>El Operador del SEA debe mantener la <strong>Reserva de Regulación de frecuencia</strong> suficiente para cumplir los rangos de operación normal, considerando las características dinámicas de los elementos de generación.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-20</span>
+        <span>El Operador del SEA debe mantener <strong>Márgenes de Reserva Operativa</strong> suficientes para hacer frente a la pérdida de la Unidad de Central Eléctrica de mayor tamaño o a la contingencia sencilla de mayor impacto en el SEA.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-21</span>
+        <span>En caso de agotamiento de Reserva Operativa, el Operador del SEA podrá instruir a las <strong>Centrales Eléctricas</strong> a operar en condiciones especiales, así como instruir la activación de <strong>Demanda Controlable</strong> o Esquemas de Acción Remedial para restablecer la Reserva.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-22</span>
+        <span>El Operador del SEA debe mantener <strong>Reserva Reactiva suficiente</strong> para mantener los niveles de tensión dentro de los rangos operativos definidos en el Criterio SEA-9.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-23</span>
+        <span>El Operador del SEA debe contar con un <strong>Plan de Restablecimiento</strong> ante contingencias que incluya los procedimientos para la reconexión ordenada de carga y la resincronización de generadores.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-24</span>
+        <span>Cuando los niveles de frecuencia rebasen los rangos del Criterio SEA-14, el Operador del SEA podrá instruir la <strong>desconexión de carga</strong> mediante Esquemas de Protección del Sistema o instrucciones directas.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-25</span>
+        <span>El Operador del SEA deberá contar con <strong>esquemas de desconexión automática de carga</strong> por baja frecuencia que sean suficientes para contener la caída de frecuencia ante la pérdida del mayor generador.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-26</span>
+        <span>Los esquemas de desconexión de carga por baja frecuencia deben ser diseñados para <strong>detener la caída de frecuencia</strong> antes de alcanzar el umbral de disparo de los generadores restantes.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-27</span>
+        <span>El Operador del SEA deberá contar con esquemas de <strong>desconexión de carga por baja tensión</strong> para contener una caída progresiva de la tensión que pudiera llevar a un colapso de tensión en el SEA.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-28</span>
+        <span>El Operador del SEA determinará la <strong>capacidad operativa de potencia reactiva</strong> de los recursos disponibles y procurará que las Centrales Eléctricas operen dentro de sus curvas de capabilidad.</span>
+      </li>
+    </ul>
+
+    <!-- ═══════════ 6.3.5 DESPACHO ═══════════ -->
+    <h2 class="sec" id="sec-despacho"><span class="snum">6.3.5</span>Despacho de Generación</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">SEA-29</span>
+        <span>Los responsables de las Centrales Eléctricas conectadas al SEA deben proporcionar al Operador del SEA las <strong>características de operación</strong>, las capacidades de los equipos y las restricciones operativas de los mismos.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-30</span>
+        <span>Las Centrales Eléctricas deben <strong>informar a la brevedad</strong> al Operador del SEA de cualquier cambio en el estado de la instalación que podría afectar la Disponibilidad.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-31</span>
+        <span>Las Centrales Eléctricas deben mantener <strong>comunicación permanente</strong> con el Centro de Control del Operador del SEA.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-32</span>
+        <span>Los recursos de <strong>Demanda Controlable</strong> deberán contar con la telemetría necesaria y ser capaces de recibir instrucciones de despacho del Operador del SEA.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-33</span>
+        <span>Las Centrales Eléctricas deben cumplir con las <strong>instrucciones de despacho</strong> emitidas por el Operador del SEA, a menos que ello implique un riesgo a la integridad del equipo.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-34</span>
+        <span>Cuando una instrucción de despacho no pueda cumplirse por riesgo a la integridad del equipo, la Central Eléctrica deberá <strong>informar inmediatamente</strong> al Operador del SEA las razones y las limitaciones.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-35</span>
+        <span>Las Centrales Eléctricas del SEA deben tener la capacidad de <strong>arrancar de forma autónoma</strong> o con la ayuda de equipos auxiliares en caso de un apagón total del sistema (black start).</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-36</span>
+        <span>El Operador del SEA debe contar con un <strong>Predespacho</strong> que considere la demanda horaria pronosticada, la disponibilidad de generación, las restricciones de la red, los compromisos energéticos y los requerimientos de reserva.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-37</span>
+        <span>El Predespacho debe realizarse de acuerdo con criterios de <strong>mínimo costo</strong> y seguridad operativa.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-38</span>
+        <span>El Operador del SEA debe realizar los <strong>estudios eléctricos</strong> necesarios para la planeación operativa de corto plazo y determinar las condiciones de operación segura.</span>
+      </li>
+    </ul>
+
+    <!-- ═══════════ 6.3.6 PROTECCIONES ═══════════ -->
+    <h2 class="sec" id="sec-protecciones"><span class="snum">6.3.6</span>Protecciones y Seguridad del Sistema</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">SEA-39</span>
+        <span>Las <strong>protecciones</strong> de las Centrales Eléctricas, líneas de transmisión y demás elementos del SEA deben estar coordinadas para aislar las fallas de la manera más rápida posible sin afectar la estabilidad del sistema.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-40</span>
+        <span>El Operador del SEA debe asegurar que los <strong>Esquemas de Acción Remedial</strong> estén debidamente diseñados, implementados y mantenidos para garantizar la seguridad del sistema.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-41</span>
+        <span>El Operador del SEA debe revisar periódicamente los <strong>ajustes de protecciones</strong> y los Esquemas de Acción Remedial ante cambios en la topología del sistema o en la capacidad de generación.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-42</span>
+        <span>Las Centrales Eléctricas deben contar con los <strong>esquemas de protección requeridos</strong> por el Manual INTE y las instrucciones del Operador del SEA.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-43</span>
+        <span>El Operador del SEA debe garantizar que los <strong>elementos de la red</strong> cuenten con protección primaria y de respaldo.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-44</span>
+        <span>El Operador del SEA debe supervisar que las <strong>Unidades de Central Eléctrica</strong> operen dentro de los límites de tensión, frecuencia y cargabilidad establecidos.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-45</span>
+        <span>El Operador del SEA debe contar con la <strong>telemetría necesaria</strong> para supervisar en tiempo real el estado de los elementos del SEA.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-46</span>
+        <span>El Operador del SEA debe contar con <strong>canales de comunicación redundantes</strong> con las Centrales Eléctricas y las subestaciones del sistema aislado.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-47</span>
+        <span>Se respetarán en todo momento las <strong>restricciones del SEA</strong>, así como los flujos máximos derivados de las restricciones de red entre regiones.</span>
+      </li>
+    </ul>
+
+    <!-- ═══════════ 6.3.7 MANTENIMIENTO ═══════════ -->
+    <h2 class="sec" id="sec-mantenimiento"><span class="snum">6.3.7</span>Mantenimiento y Licencias</h2>
+
+    <ul class="incisos">
+      <li>
+        <span class="lbl">SEA-48</span>
+        <span>Se respetarán en todo momento las restricciones del SEA, así como los <strong>flujos máximos</strong> derivados de las restricciones de red entre regiones.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-49</span>
+        <span>Si durante la aplicación del Predespacho horario las condiciones del sistema cambian, el Operador del SEA hará un <strong>redespacho</strong> con la información actualizada de asignación y valor de generación.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-50</span>
+        <span>El Operador del SEA debe realizar el <strong>cálculo de Pérdidas de Transmisión</strong> y adecuar el despacho para considerar las pérdidas de potencia activa y reactiva de la red.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-51</span>
+        <span>Las Centrales Eléctricas serán responsables de la <strong>conservación y mantenimiento</strong> de sus equipos e instalaciones.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-52</span>
+        <span>El Operador del SEA debe coordinar las <strong>pruebas, inspecciones y maniobras</strong> de los elementos del SEA que pudieran afectar la seguridad del sistema.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-53</span>
+        <span>Las maniobras necesarias para el correcto funcionamiento de los elementos del SEA deben coordinarse a través de <strong>Licencias</strong>, con el fin de adecuar de forma óptima la disponibilidad de generación, Transmisión y transformación.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-54</span>
+        <span>El Operador del SEA debe coordinarse con las entidades que elaboran los <strong>programas de obras</strong> de corto y mediano plazo, para considerar su impacto en la planeación operativa.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-55</span>
+        <span>Los responsables de los diferentes elementos conectados al SEA deben proporcionar al Operador del SEA las <strong>necesidades de Mantenimiento</strong> en forma mensual, trimestral y anual.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-56</span>
+        <span>El Operador del SEA debe contar, durante la última semana del mes de mayo de cada año, con las necesidades de Mantenimiento de <strong>Unidades de Central Eléctrica y Elementos de Transmisión y Transformación</strong> de la RNT para el año siguiente. Esta información debe ser actualizada en el mes de octubre de cada año.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-57</span>
+        <span>Todo equipo en operación podrá estar en <strong>servicio, en disponibilidad o en Licencia</strong>. Un equipo desconectado por requerimientos de operación no se podrá trabajar sin Licencia previa.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-58</span>
+        <span>Si un equipo no puede ser puesto en servicio por presentar algún daño, este debe tomar la <strong>Licencia respectiva de inmediato</strong>.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-59</span>
+        <span>Las Licencias se podrán clasificar como <strong>en vivo o en muerto</strong> y serán programadas o de emergencia de conformidad con el Manual de Programación de Salidas.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-60</span>
+        <span>A fin de optimizar el tiempo bajo Licencia, el Operador del SEA debe coordinar a las diferentes entidades para <strong>aprovechamiento máximo de Licencias</strong>.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-61</span>
+        <span>Las Licencias programadas deben solicitarse al Operador del SEA con una <strong>anticipación adecuada</strong> a la importancia del elemento a librar.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-62</span>
+        <span>Las solicitudes se harán a más tardar a las <strong>12:00 horas del día laborable previo</strong>. Las Licencias para fin de semana, lunes o días festivos: antes de las 12:00 horas del penúltimo día laborable.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-63</span>
+        <span>El Operador del SEA proporcionará un <strong>número de registro</strong> para cada solicitud de Licencia y dará su resolución a la mayor brevedad.</span>
+      </li>
+      <li>
+        <span class="lbl">SEA-64</span>
+        <span>Si la Licencia ocasiona Interrupción a los Centros de Carga, la solicitud deberá hacerse con la suficiente anticipación y en <strong>ningún caso menor a 96 horas</strong> (4 días), con el fin de avisar a los Usuarios Finales conforme a la LIE.</span>
+      </li>
+    </ul>
+
+    <div class="advertencia">
+      <strong>⚠ Criterio SEA-64:</strong> El plazo mínimo de 96 horas para interrupciones programadas es más estricto que en muchos otros códigos de red internacionales, y refleja la importancia de la coordinación en sistemas con baja inercia y opciones limitadas de reconexión.
+    </div>
+
+    <p class="ref-nota">Los 64 criterios SEA conforman la base operativa para los sistemas de SIBC, SIBCS y SIM. Para los requerimientos técnicos específicos de interconexión de Centrales Eléctricas en estos sistemas, aplica el Manual INTE con los umbrales de clasificación ajustados según la Tabla 1.1 del Capítulo 1.</p>
+
+    <nav class="nav-footer" aria-label="Navegación entre manuales">
+      <a href="disposiciones_sen.html">
+        <span class="nd">← Anterior</span>
+        <span class="nt">Disposiciones Generales del SEN</span>
+      </a>
+      <a href="manual_tic.html" class="n-next">
+        <span class="nd">Siguiente →</span>
+        <span class="nt">Manual TIC — Red Inteligente</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

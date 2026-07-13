@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Objetivo, Alcance y Capítulo 1 | Manual CONE — Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+.nota.cone   { border-left-color: #0077b6; }
+.nota.cone .nota-title { background: rgba(0,119,182,.12); color: #0077b6; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual CONE — Centros de Carga</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual CONE — Capítulos</span>
+    <a href="cone_c1.html"  class="sb-cap active" aria-current="page">Objetivo · Alcance · Cap. 1</a>
+    <a href="#sec-obj"      class="sb-sub">Objetivo del Manual</a>
+    <a href="#sec-alcance"  class="sb-sub">Alcance — Tabla 1.1.A</a>
+    <a href="#sec-trans"    class="sb-sub">Régimen transitorio</a>
+    <a href="#sec-cap1"     class="sb-sub">Cap. 1 — Punto de Conexión</a>
+    <a href="cone_c2.html"  class="sb-cap">Cap. 2 2.1–2.7 y 2.9</a>
+    <a href="cap8.html"     class="sb-cap">Cap. 2 2.8 — Calidad de la Potencia</a>
+    <a href="cone_c3.html"  class="sb-cap">Cap. 3 — Verificación</a>
+    <a href="cone_c4.html"  class="sb-cap">Cap. 4 — Plan de Trabajo</a>
+    <span class="sb-section-lbl">Manual INTE — Centrales Eléctricas</span>
+    <a href="cap1.html"     class="sb-cap">Cap. 1 — Tipos de CE</a>
+    <a href="cap2.html"     class="sb-cap">Cap. 2 — Frecuencia y Control</a>
+    <a href="cap3.html"     class="sb-cap">Cap. 3 — Variaciones de Tensión</a>
+    <a href="cap4.html"     class="sb-cap">Cap. 4 — Control Dinámico</a>
+    <a href="cap5.html"     class="sb-cap">Cap. 5 — Restauración</a>
+    <a href="cap6.html"     class="sb-cap">Cap. 6 — Administración</a>
+    <a href="cap7.html"     class="sb-cap">Cap. 7 — Calidad de la Potencia</a>
+    <a href="cap8_inte.html" class="sb-cap">Cap. 8 — Verificación (INTE)</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+    <a href="https://www.cenace.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CENACE — SIM</a>
+    <a href="https://www.cre.gob.mx" class="sb-cap" target="_blank" rel="noopener">↗ CRE</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Manual CONE › <strong>Objetivo · Alcance · Cap. 1</strong></div>
+    <span class="pg-pill">Manual CONE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">DOF 31-dic-2021</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Manual CONE · Introducción — Regulación de Centros de Carga al SEN</span>
+    <h1 class="titulo">Capítulo 1. Criterios de Conexión<br><span style="font-size:.65em;font-weight:400;color:var(--text-secondary)">Manual Regulatorio de Requerimientos Técnicos para la Conexión de Centros de Carga al SEN</span></h1>
+
+    <p>
+      El Manual CONE es el complemento del Manual INTE dentro del Código de Red 2.0: donde el INTE establece los requerimientos para <em>inyectar energía</em> al SEN desde Centrales Eléctricas, el CONE establece los requerimientos para <em>consumirla</em> desde Centros de Carga. Ambos manuales comparten resolución, fecha y estructura paralela —objetivo, alcance, requerimientos técnicos, verificación, plan de trabajo— aunque los parámetros técnicos difieren por la naturaleza inversa de sus obligaciones. El Manual CONE completo comprende las páginas 1077–1092 del DOF de la RES/550/2021.
+    </p>
+
+    <!-- Diagrama CONE vs INTE -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0 28px">
+      <div style="background:var(--blue-light);border:1px solid rgba(0,102,204,.25);border-radius:9px;padding:16px 14px;text-align:center">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:6px">Manual INTE</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--text-dark);margin-bottom:4px">Centrales Eléctricas</div>
+        <div style="font-size:.75rem;color:var(--text-secondary);line-height:1.5">CE → SEN · 8 capítulos · Punto de Interconexión (PI) · párrafos 1017–1076 del DOF</div>
+      </div>
+      <div style="background:rgba(0,119,182,.07);border:1px solid rgba(0,119,182,.25);border-radius:9px;padding:16px 14px;text-align:center">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#0077b6;margin-bottom:6px">Manual CONE</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--text-dark);margin-bottom:4px">Centros de Carga</div>
+        <div style="font-size:.75rem;color:var(--text-secondary);line-height:1.5">SEN → CdC · 4 capítulos · Punto de Conexión (PC) · párrafos 1077–1092 del DOF</div>
+      </div>
+    </div>
+
+    <!-- I Objetivo -->
+    <h2 class="sec" id="sec-obj"><span class="snum">I.</span>Objetivo del Manual CONE</h2>
+
+    <blockquote>
+      Establecer los requerimientos técnicos que deben cumplir los Centros de Carga conectados al SEN en Media o Alta Tensión, para garantizar la eficiencia, Calidad, Confiabilidad, Continuidad, seguridad y sustentabilidad del SEN.
+      <cite>RES/550/2021, Manual CONE, Objetivo — DOF 31-dic-2021 · PDF p. 242</cite>
+    </blockquote>
+
+    <p>
+      El objetivo enuncia seis propiedades del SEN que el Manual CONE pretende preservar: eficiencia, calidad, confiabilidad, continuidad, seguridad y sustentabilidad. Las mismas seis que persigue el Manual INTE. La diferencia es el sujeto regulado: el INTE habla de <em>Centrales Eléctricas</em> (productores) y el CONE de <em>Centros de Carga</em> (consumidores). Un Centro de Carga, en el sentido del Código de Red 2.0, es toda instalación de consumo eléctrico conectada directamente a la Red Nacional de Transmisión (RNT) en Alta Tensión o a las Redes Generales de Distribución (RGD) en Media Tensión —parques industriales, centros comerciales, instalaciones mineras, plantas procesadoras, usuarios calificados, etc.—, con independencia de su actividad.
+    </p>
+
+    <!-- II Alcance -->
+    <h2 class="sec" id="sec-alcance"><span class="snum">II.</span>Alcance y Aplicación</h2>
+
+    <blockquote>
+      Los requerimientos del presente Manual regulatorio de requerimientos técnicos para la Conexión de Centros de Carga al SEN (Manual Regulatorio de Conexión) son de aplicación para todos los Centros de Carga conectados o que pretendan la Conexión al SEN en los niveles de Media o Alta Tensión.
+      <br><br>
+      Los Centros de Carga en Baja Tensión no son objeto del presente Manual Regulatorio de Conexión.
+      <cite>RES/550/2021, Manual CONE, Alcance — DOF 31-dic-2021 · PDF p. 242</cite>
+    </blockquote>
+
+    <p>
+      No todos los requerimientos del Capítulo 2 aplican de igual forma. La Tabla 1.1.A distingue tres categorías de CdC según el nivel de tensión en el Punto de Conexión y la demanda contratada. Esta segmentación refleja que los CdC pequeños en Media Tensión tienen menor impacto en la red y menor capacidad de inversión, y por tanto están excluidos de los requerimientos más exigentes (Factor de Potencia, Armónicas y Parpadeo).
+    </p>
+
+    <div class="tbl-wrap" id="tbl-11a">
+      <div class="tbl-caption">Tabla 1.1.A — Requerimientos del Cap. 2 aplicables por tipo de Centro de Carga
+        <span class="tbl-sub">RES/550/2021, Manual CONE, II Alcance — DOF 31-dic-2021 · PDF p. 242</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Requerimiento</th>
+            <th>MT · dem. &lt; 1 MW</th>
+            <th>MT · dem. ≥ 1 MW</th>
+            <th>AT · cualquier dem.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>2.1 Tensión</strong></td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+          </tr>
+          <tr>
+            <td><strong>2.2 Frecuencia</strong></td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+          </tr>
+          <tr>
+            <td><strong>2.3 Corto circuito</strong></td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+          </tr>
+          <tr style="background:rgba(0,102,204,.04)">
+            <td><strong>2.4 Factor de Potencia</strong></td>
+            <td style="text-align:center;color:#c0392b;font-weight:700">✗ no aplica</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+          </tr>
+          <tr>
+            <td><strong>2.5 Protecciones</strong></td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+            <td style="text-align:center;color:#1a761a">✓</td>
+          </tr>
+          <tr>
+            <td><strong>2.6 Control</strong></td>
+            <td style="text-align:center;font-size:.8rem;color:var(--text-muted)">solo si es RDC</td>
+            <td style="text-align:center;font-size:.8rem;color:var(--text-muted)">solo si es RDC</td>
+            <td style="text-align:center;font-size:.8rem;color:var(--text-muted)">solo si es RDC</td>
+          </tr>
+          <tr>
+            <td><strong>2.7 Intercambio de información</strong></td>
+            <td style="text-align:center;font-size:.8rem;color:var(--text-muted)">conf. Manual TIC</td>
+            <td style="text-align:center;font-size:.8rem;color:var(--text-muted)">conf. Manual TIC</td>
+            <td style="text-align:center;font-size:.8rem;color:var(--text-muted)">conf. Manual TIC</td>
+          </tr>
+          <tr style="background:rgba(0,102,204,.04)">
+            <td><strong>2.8 Calidad de la potencia</strong></td>
+            <td style="text-align:center;font-size:.82rem;color:var(--text-muted)">solo desbalance V e I</td>
+            <td style="text-align:center;color:#1a761a">✓ completo</td>
+            <td style="text-align:center;color:#1a761a">✓ completo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ref-nota">MT = Media Tensión (≤ 69 kV) · AT = Alta Tensión (&gt; 69 kV) · RDC = Recurso de Demanda Controlable · dem. = demanda contratada</p>
+
+    <div class="nota cone">
+      <span class="nota-title">Sanciones por incumplimiento — Capítulo B.3</span>
+      El Manual CONE advierte expresamente: "En caso de incumplimiento a los requerimientos establecidos en el presente Manual Regulatorio se aplicarán las sanciones de conformidad con el Capítulo B.3 Incumplimiento y sanciones, del Código de Red." La entrega del Plan de Trabajo (Cap. 4) no exime del cumplimiento ni suspende las sanciones; es un documento informativo que la CRE puede considerar en el ejercicio de sus facultades de supervisión.
+    </div>
+
+    <!-- III Régimen Transitorio -->
+    <h2 class="sec" id="sec-trans"><span class="snum">III.</span>Régimen Transitorio y Plazos Vencidos</h2>
+
+    <blockquote>
+      Finalmente, los Centros de Carga que se encuentren conectados en Media Tensión, y que tengan una demanda contratada mayor o igual a 1 MW, contarán con un periodo transitorio no mayor a dos años, contados a partir de la publicación en el DOF de la presente versión del Código de Red, para asegurar el cumplimiento con los requerimientos técnicos señalados en los numerales 2.4 y 2.8 del presente Manual Regulatorio de Conexión, referidos a factor de potencia y Calidad de la potencia.
+      <cite>RES/550/2021, Manual CONE, Alcance — DOF 31-dic-2021 · PDF p. 242</cite>
+    </blockquote>
+
+    <p>
+      El Código de Red 2.0 se publicó en el DOF el 31 de diciembre de 2021. El periodo transitorio de dos años para 2.4 (Factor de Potencia) y 2.8 (Calidad de la Potencia) para CdC en Media Tensión con demanda ≥ 1 MW venció el <strong>31 de diciembre de 2023</strong>. A partir de esa fecha, todos los CdC en esa categoría están obligados al cumplimiento pleno. Los que no lo hubieran logrado y hubieran previsto necesitar más tiempo debían presentar un Plan de Trabajo ante la CRE antes de esa fecha.
+    </p>
+
+    <div class="advertencia">
+      <strong>Obligación heredada del Código de Red 2016.</strong> El II Alcance incluye un párrafo específico sobre los CdC que quedaron obligados por la RES/151/2016 (DOF 8-abr-2016), que fijó un plazo de 3 años. El Código de Red 2021 reconoce esa obligación como <em>vigente y exigible por la CRE</em> en los plazos señalados. Los CdC que no cumplieron en 2019 y tampoco en 2023 acumulan incumplimientos bajo dos resoluciones distintas.
+    </div>
+
+    <!-- IV Cap. 1 -->
+    <h2 class="sec" id="sec-cap1"><span class="snum">IV.</span>Capítulo 1 — Criterios de Conexión</h2>
+
+    <blockquote>
+      Como se menciona en el apartado anterior, el Manual Regulatorio de Conexión regulará las responsabilidades de los Centros de Carga conectados al SEN en Media o Alta Tensión. Los requerimientos técnicos contenidos en el siguiente apartado serán referidos al Punto de Conexión, a menos que se especifique algo distinto.
+      <cite>RES/550/2021, Manual CONE, Cap. 1 — DOF 31-dic-2021 · PDF p. 243</cite>
+    </blockquote>
+
+    <p>
+      El <strong>Punto de Conexión (PC)</strong> es el equivalente funcional, para los Centros de Carga, del Punto de Interconexión (PI) que define el Manual INTE para las Centrales Eléctricas. Es el nodo de la red eléctrica donde termina la infraestructura del Transportista o Distribuidor y comienza la Red Particular del Centro de Carga —típicamente los terminales de Media o Alta Tensión del transformador principal del CdC—. Todos los requerimientos del Capítulo 2 —tensión, frecuencia, corto circuito, factor de potencia, protecciones, calidad de la potencia— se miden, verifican y cumplen en ese punto.
+    </p>
+
+    <p>
+      El proceso físico de conectar un CdC al SEN (estudios de conexión, contratos de acceso, obras de infraestructura, puesta en servicio) está regulado no en el Manual CONE sino en el <strong>Manual para la Interconexión de Centrales Eléctricas y Conexión de Centros de Carga</strong> (DOF 9-feb-2018, SENER), vigente en lo que no contradiga la RES/550/2021. El Manual CONE se limita a definir los parámetros técnicos de operación continua que el CdC debe cumplir una vez conectado.
+    </p>
+
+    <div class="tbl-wrap" style="max-width:680px">
+      <div class="tbl-caption">Punto de Conexión (CONE) vs. Punto de Interconexión (INTE) — diferencias clave</div>
+      <table>
+        <thead>
+          <tr><th>Aspecto</th><th>PI — Manual INTE</th><th>PC — Manual CONE</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Flujo de potencia</td>
+            <td>Inyección CE → SEN</td>
+            <td>Consumo SEN → CdC</td>
+          </tr>
+          <tr>
+            <td>Frontera de responsabilidad</td>
+            <td>CE entrega potencia al Transportista</td>
+            <td>Transportista/Distribuidor entrega al CdC</td>
+          </tr>
+          <tr>
+            <td>Clasificación del sujeto</td>
+            <td>Tipo A / B / C / D (por MW instalados)</td>
+            <td>MT &lt;1 MW / MT ≥1 MW / AT</td>
+          </tr>
+          <tr>
+            <td>Requerimiento de reactiva</td>
+            <td>Q/Pmáx (Área Blanca ±0.33, 3.3.2 INTE)</td>
+            <td>FP ≥ 0.97 atraso–1.0 (desde abr-2026)</td>
+          </tr>
+          <tr>
+            <td>Medición de armónicas</td>
+            <td>Distorsión en tensión (%V), 7 INTE</td>
+            <td>Distorsión en corriente (%I<sub>L</sub>), 2.8 CONE</td>
+          </tr>
+          <tr>
+            <td>Verificación previa</td>
+            <td>Unidad de Inspección + EOC obligatorios</td>
+            <td>Propios equipos del CdC aceptados (Cap. 3)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="nav-footer" aria-label="Navegación entre capítulos">
+      <a href="../index_cdr_2v4.html">
+        <span class="nd">← Índice</span>
+        <span class="nt">Portada — Código de Red 2.0</span>
+      </a>
+      <a href="cone_c2.html" class="n-next">
+        <span class="nd">Capítulo siguiente →</span>
+        <span class="nt">Cap. 2 — Requerimientos Técnicos 2.1–2.7 y 2.9</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

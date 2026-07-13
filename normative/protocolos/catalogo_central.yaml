@@ -1,0 +1,1372 @@
+origen: Protocolo_Central_v1.2.1.docx
+capitulo: 3. Pruebas por Central Eléctrica
+preambulo:
+- estilo: Normal
+  texto: A continuación, se lista la aplicabilidad de las pruebas, el objetivo, las condiciones de la
+    prueba, el procedimiento, las señales e instrumentación requerida, el criterio de aceptación y los
+    resultados de cada una de las pruebas por central. De conformidad con el Procedimiento de Operación
+    para la Declaración de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga (Anexo
+    5), las pruebas se encuentran clasificadas según el tipo de Central Eléctrica (A, B, C y D).
+- estilo: Normal
+  texto: En ese sentido, y considerando que la Central Eléctrica CONEK CATERPILLAR corresponde a una Central
+    Eléctrica Tipo B, únicamente se contemplan, desarrollan y documentan en el presente protocolo aquellas
+    pruebas que el Anexo 5 establece como aplicables a Centrales Eléctricas Tipo B.
+- estilo: Subtitle
+  texto: Tabla 1. Listado de pruebas aplicables a Centrales Asincronas tipo B
+- estilo: Normal
+  texto: Las pruebas señaladas en el Anexo 5 como exclusivas para Centrales Tipo C o D no forman parte
+    del alcance de este protocolo y, por lo tanto, se documentan como No Aplicables, sin que ello represente
+    incumplimiento normativo alguno, dado que su exigibilidad depende expresamente del tipo de central
+    definido por la regulación vigente. De manera electrónica se entregarán los datos registrados para
+    cada una de las pruebas que apliquen, además de los archivos PDF con la información correspondiente
+    a distintas pruebas, con diagramas, ajustes de protecciones, relés, etc.
+tabla_maestra:
+- - PRUEBAS CENTRALES ELÉCTRICAS SÍNCRONAS
+  - APLICA (SI/NO)
+- - Numero
+  - Prueba
+  - Criterio de aceptación
+  - APLICA (SI/NO)
+- - PRUEBAS POR CENTRAL ELÉCTRICA EN EL PUNTO DE INTERCONEXIÓN
+- - '21'
+  - Razón de cambio 2.5 Hz/s
+  - Permanecer conectada
+  - SI
+- - '22'
+  - Rango de frecuencia
+  - '58.8 = f < 61.2 Hz en operación continua
+
+    61.2 Hz = f < 61.8 Hz.  30 min
+
+    58.2 Hz = f < 58.8 Hz.  30min
+
+    61.8 Hz = f < 63.0 Hz.  15min
+
+    57.0 Hz = f < 58.2 Hz.  15min'
+  - Si
+- - '23'
+  - Limitación total de potencia activa
+  - Alcanzar consiga > 5 s
+  - SI
+- - '24'
+  - Reconexión automática
+  - 'Frecuencia en el rango de 58.8 a 60.2 Hz y tensión en el rango de ± 10 % del valor nominal al menos
+    durante 5 minutos
+
+    • Una rampa admisible máxima de incremento de potencia de 10 % de la capacidad nominal de la Central
+    Eléctrica por minuto'
+  - SI
+- - '25'
+  - Limitación parcial de potencia activa
+  - Alcanzar Consigna tiempo y tolerancia definido por CENACE
+  - SI
+- - '26'
+  - Control primario de frecuencia
+  - 'Control primario de frecuencia Característica de Regulación: 3% - 8%
+
+    Se evalúa con la prueba de estatismo.'
+  - SI
+- - '27'
+  - Control secundario de frecuencia
+  - 'Equipamiento necesario
+
+    Monitoreo y señales'
+  - No se cuenta con la infraestructura
+- - '28'
+  - Rango de tensión en el punto de interconexión
+  - 0.90 pu < V < 1.10 pu ilimitado
+  - No Aplica
+- - '29'
+  - Rango de tensión en el punto de interconexión
+  - '1.05 pu < V < 1.10 pu 30 min
+
+    0.95 < V < 1.05 pu ilimitado
+
+    0.90 pu < V < 0.95 pu 30 min'
+  - SI
+- - '30'
+  - Capacidad de potencia reactiva
+  - "Potencia reactiva para mantener un rango de Fp ±0.95 \nMantener tensión constante mediante consiga\
+    \ con AVR"
+  - SI
+- - '31'
+  - Capacidad de potencia reactiva a potencia máxima
+  - Cumplir con el perfil V-Q/PmaxRequerimiento mínimo de Q/Pmáx ≥ 0.33Rango máximo de Q/Pmáx con ± 0.5
+  - No Aplica
+- - '32'
+  - Capacidad de potencia reactiva debajo de la potencia máxima
+  - Operar dentro de la curva de capabilidad P-Q de la central Eléctrica
+  - No Aplica
+- - '33'
+  - Sistema de control de tensión
+  - 'Se evalúa con pruebas antes mencionada.
+
+    Incluye PSS'
+  - SI
+- - '34'
+  - Control de tensión en condiciones dinámicas o de falla
+  - Evidencia de ajuste de esquemas protecciones para permanecer dentro de la zona permitida.
+  - SI
+- - '35'
+  - Arranque de emergencia (opcional)
+  - "Debe ofrecer regulación de frecuencia y tensión dentro de límites establecidos. \nFuncionar en paralelo\
+    \ dentro de otras centrales.\nDebe tener conexión a Bus Muerto."
+  - No se cuenta con la infraestructura.
+- - '36'
+  - Operación modo isla
+  - 'Verificación y ajustes para operación modo isla.
+
+    Debe tener conexión a Bus Muerto.'
+  - SI.
+- - '37'
+  - Resincronización rápida
+  - 't ≤ 15 minutos
+
+    t > 15 minutos cambia a condición de operación solo alimentado servicios auxiliares o carga local.'
+  - No Aplica
+- - '38'
+  - Requerimientos generales de administración del sistema
+  - 'Verificación de: Esquemas de control y ajustes, Esquemas de protección y ajustes, Prioridad de protección
+    y control,'
+  - SI
+- - '39'
+  - Requerimientos generales de administración del sistema (complemento)
+  - Verificación de perdida de estabilidad o control angular, instrumentación, equipos para operación
+    o seguridad de sistema, tasas de cambio de potencia activa y método de aterrizamiento del neutro
+  - No Aplica
+- - '40'
+  - Requerimientos generales de administración del sistema (complemento)
+  - Verificación de configuración de dispositivos de sincronización
+  - No Aplica
+- - '41'
+  - Modelos de simulación
+  - Modelo completo de la central en la versión de software requerida
+  - SI
+- - PRUEBAS PREOPERATIVAS Y OPERATIVAS
+- - '42'
+  - Capacidad Instalada Neta, carga máxima y secuencias de arranque y paro y funcionamiento de sistemas
+    de control, protección y servicios auxiliares
+  - Operación en forma satisfactoria y confiable durante 15 días y en turnos de 8 hrs
+  - SI
+- - PRUEBAS DE OPERACIÓN
+- - '43'
+  - Operación en automático confiable (controles de los equipos y la Central Eléctrica en modo automático)
+  - "Duración de 15 días, \nParada permisible de 25 hrs acumuladas por falla de equipos\n240hrs mínimas\
+    \ acumulados al 100% de carga"
+  - SI
+- - PRUEBAS DE DESEMPEÑO
+- - '44'
+  - Verificación de capacidad Instalada Neta, y consumos.
+  - Operación en forma satisfactoria y confiable durante 15 días y en turnos de 8 hrs.
+  - No Aplica
+- - '45'
+  - Requerimientos de Calidad de la Potencia
+  - Reporte de cumplimiento con mediciones de al menos 10 días consecutivos.
+  - SI
+- - '17'
+  - Estatismo
+  - Característica de regulación 3% a 8%
+  - SI
+- - '18'
+  - Escalones de potencia (10% de Pnom)
+  - 'SP<30%
+
+    Ts< 30s'
+  - SI
+- - '19'
+  - Rechazo de Carga
+  - 'Ts < 90s
+
+    Quedar excitada y a velocidad nominal'
+  - SI
+- - '20'
+  - Operación en isla
+  - Auto abastecida, cambia a modo isócrono
+  - No se cuenta con la infraestructura
+pruebas:
+- seccion: '1'
+  titulo: Prueba 1 - Razón de cambio 2.5 Hz/s
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica que la Central Eléctrica permanezca interconectada y en operación ante
+      una razón de cambio de frecuencia respecto al tiempo de 2.5 Hz/s, sin disparos ni desconexiones
+      no intencionales.
+  - estilo: Normal
+    texto: El criterio se toma del Anexo 5 del Procedimiento de Operación para la Declaración de Entrada
+      en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de pruebas por
+      Central Eléctrica para Centrales Eléctricas Síncronas, donde se establece la prueba de Razón de
+      cambio 2.5 Hz/s con el criterio de permanecer conectada.
+  - estilo: Normal
+    texto: La prueba también se fundamenta en el Código de Red 2.0, dentro del Manual Regulatorio de Requerimientos
+      Técnicos para la Interconexión de Centrales Eléctricas al Sistema Eléctrico Nacional, Capítulo 2,
+      particularmente en la Sección 2.2.1 Razón de cambio de la frecuencia, aplicable a Centrales Eléctricas
+      tipo B.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la Central Eléctrica se encuentre sincronizada, en operación estable y con tensión
+      nominal.
+  - estilo: List Paragraph
+    texto: Operar la central aproximadamente al 75% de carga, conforme a las condiciones operativas disponibles
+      para la prueba.
+  - estilo: List Paragraph
+    texto: Confirmar que el modo de control de potencia activa ante variaciones de frecuencia se encuentre
+      habilitado.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación, incluyendo frecuencia, frecuencia simulada, potencia
+      activa, velocidad del rotor y voltaje del generador.
+  - estilo: List Paragraph
+    texto: Aplicar, mediante señal de frecuencia simulada, una variación controlada que permita evaluar
+      una razón de cambio de 2.5 Hz/s.
+  - estilo: List Paragraph
+    texto: 'Para la evaluación, generar un cambio de frecuencia de 0.5 Hz en un tiempo menor o igual a
+      200 ms, equivalente a:'
+  - estilo: List Paragraph
+    texto: RoCoF = Δf / Δt = 0.5 Hz / 0.200 s = 2.5 Hz/s
+  - estilo: List Paragraph
+    texto: Registrar la respuesta de la Central Eléctrica durante el evento de variación de frecuencia
+      simulada.
+  - estilo: List Paragraph
+    texto: Verificar que la Central Eléctrica permanezca interconectada durante la aplicación de la razón
+      de cambio.
+  - estilo: List Paragraph
+    texto: Confirmar que no se presenten disparos, desconexiones no intencionales, pérdida de control
+      o actuación indebida de protecciones.
+  - estilo: List Paragraph
+    texto: Documentar que la prueba se realiza mediante frecuencia simulada, debido a que la frecuencia
+      real de la red no puede modificarse intencionalmente para fines de prueba al formar parte del Sistema
+      Interconectado Nacional.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Velocidad del rotor
+  - estilo: Normal
+    texto: Potencia activa (P)
+  - estilo: Normal
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Frecuencia simulada
+  - estilo: Normal
+    texto: Voltaje del generador (Vg)
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando la Central Eléctrica permanece interconectada
+      y en operación ante una razón de cambio de frecuencia de al menos:'
+  - estilo: Normal
+    texto: 2.5 Hz/s, evaluada como Δf / Δt = 0.5 Hz / 0.200 s.
+  - estilo: Normal
+    texto: evaluada mediante una variación de frecuencia simulada, sin disparo de protecciones ni desconexión
+      no intencional.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de la frecuencia simulada, frecuencia
+      medida, potencia activa, velocidad del rotor y voltaje del generador durante la aplicación del cambio
+      de frecuencia.
+  - estilo: Normal
+    texto: La información presentada permitirá verificar que la Central Eléctrica permanece interconectada
+      ante la razón de cambio evaluada y que la variación de potencia activa corresponde a la actuación
+      del modo de control de frecuencia, sin comprometer la continuidad operativa de la central.
+  - estilo: Normal
+    texto: Como respaldo documental, se podrá integrar la evidencia de configuración del sistema de control
+      donde se identifique el ajuste asociado a la permanencia ante razón de cambio de frecuencia, siempre
+      que dicha información se encuentre disponible.
+  - placeholder: 'Captura ajuste Freq. control setpoint ramp = 2.5 Hz/s
+
+      [Captura de pantalla]'
+  - estilo: Subtitle
+    texto: Figura. Ajustes control setpoint 2-5Hz/s
+  - placeholder: 'Gráfica: Razón de cambio 2.5 Hz/s — CNK
+
+      [Espacio reservado para gráfica]'
+  - estilo: Subtitle
+    texto: Grafica. Razón de Cambio 2.5 Hz/s
+- seccion: '2'
+  titulo: Prueba 2 - Rango de Frecuencia
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica que la Central Eléctrica permanezca interconectada y en operación dentro
+      de los rangos de frecuencia y tiempos mínimos establecidos para el Sistema Interconectado Nacional.
+  - estilo: Normal
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por Central Eléctrica para Centrales Eléctricas Síncronas, donde se establece la prueba
+      de Rango de Frecuencia.
+  - estilo: Normal
+    texto: El fundamento técnico corresponde al Código de Red 2.0, dentro del Manual Regulatorio de Requerimientos
+      Técnicos para la Interconexión de Centrales Eléctricas al Sistema Eléctrico Nacional, Capítulo 2,
+      Sección 2.1, donde se definen las zonas de frecuencia y los tiempos mínimos de operación sin desconexión
+      de la Red Eléctrica para Centrales Eléctricas.
+  - tabla_datos:
+    - - Área síncrona
+      - Rango de frecuencias
+      - Tiempo mínimo de operación
+    - - Sistema Interconectado Nacional y Baja California
+      - 61.8 Hz ≤ f < 62.4 Hz
+      - 15 minutos
+    - - Sistema Interconectado Nacional y Baja California
+      - 61.2 Hz ≤ f < 61.8 Hz
+      - 30 minutos
+    - - Sistema Interconectado Nacional y Baja California
+      - 58.8 Hz ≤ f < 61.2 Hz
+      - Ilimitado
+    - - Sistema Interconectado Nacional y Baja California
+      - 58.2 Hz ≤ f < 58.8 Hz
+      - 30 minutos
+    - - Sistema Interconectado Nacional y Baja California
+      - 57.0 Hz ≤ f < 58.2 Hz
+      - 15 minutos
+  - estilo: Subtitle
+    texto: Tabla 1.2 Tiempos mínimos en los que una Central Eléctrica debe operar en frecuencias diferentes
+      del valor nominal, sin desconectarse de la red.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Integrar la información técnica del fabricante donde se indiquen los rangos de frecuencia en
+      los que las unidades de la Central Eléctrica pueden operar de manera correcta y segura.
+  - estilo: List Paragraph
+    texto: Revisar las restricciones operativas asociadas a la velocidad o frecuencia de operación de
+      la unidad.
+  - estilo: List Paragraph
+    texto: Verificar que los rangos de operación documentados no se contrapongan con los tiempos mínimos
+      de permanencia requeridos por el Código de Red.
+  - estilo: List Paragraph
+    texto: Integrar, en caso de estar disponible, evidencia de pruebas de diseño, pruebas de laboratorio
+      o documentación técnica que respalde la capacidad de operación de la unidad ante frecuencias distintas
+      a la nominal.
+  - estilo: List Paragraph
+    texto: Revisar los ajustes de protección asociados a frecuencia, principalmente funciones de sobrefrecuencia
+      y baja frecuencia.
+  - estilo: List Paragraph
+    texto: Integrar evidencia gráfica de los ajustes implementados en campo y, cuando aplique, el estudio
+      documental de ajuste de protecciones de la unidad.
+  - estilo: List Paragraph
+    texto: Comparar los ajustes de protección contra los rangos mínimos de permanencia requeridos, verificando
+      que no provoquen la desconexión anticipada de la Central Eléctrica dentro de los rangos exigidos.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: No aplica para medición directa en campo, al tratarse de una verificación documental de rangos
+      de operación y ajustes de protección.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando la documentación técnica y los ajustes de protección
+      evidencian que la Central Eléctrica puede permanecer interconectada y operando dentro de los rangos
+      de frecuencia y tiempos mínimos establecidos.
+  - estilo: Normal
+    texto: De forma particular, los ajustes de protección no deberán provocar la desconexión de la Central
+      Eléctrica antes de cumplir los tiempos mínimos requeridos para cada rango de frecuencia.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá a la documentación técnica de la unidad, los rangos
+      de operación permitidos y los ajustes de protección asociados a frecuencia.
+  - estilo: Normal
+    texto: La información presentada permitirá comparar los puntos de alarma y disparo de las protecciones
+      de frecuencia contra los tiempos mínimos de operación requeridos por el Código de Red, verificando
+      que la Central Eléctrica no se desconecte dentro de los rangos exigidos.
+  - estilo: Normal
+    texto: La evidencia documental podrá presentarse mediante tabla de ajustes de protección, capturas
+      del sistema de control o protección, y referencias al documento técnico donde se identifiquen los
+      parámetros de sobrefrecuencia y baja frecuencia.
+  - tabla_datos:
+    - - Protección ANSI
+      - Frecuencia (Hz)
+      - Tiempo (s)
+      - Modo de operación
+    - - ''
+      - ''
+      - ''
+      - Alarma
+    - - ''
+      - ''
+      - ''
+      - Disparo
+  - estilo: Subtitle
+    texto: Tabla. Ajustes de protección de sobre frecuencia y baja frecuencia
+  - placeholder: 'Ajustes — Sobre/Baja frecuencia
+
+      [Captura de pantalla]'
+  - estilo: Subtitle
+    texto: Figura. Ajustes Sobre/Baja frecuencia
+- seccion: '3'
+  titulo: Prueba 3 - Limitación Total de Potencia Activa
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica que la Central Eléctrica permita detener la aportación de potencia activa
+      mediante una consigna de reducción total, llevando la referencia de generación hasta 0 MW, sin que
+      esto implique la desconexión de la central de la red.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por Central Eléctrica para Centrales Eléctricas Síncronas, donde se establece la prueba
+      de Limitación Total de Potencia Activa, con el criterio de alcanzar la consigna en un tiempo mayor
+      a 5 segundos.
+  - estilo: p1
+    texto: La prueba permite comprobar la capacidad de la central para responder a una instrucción de
+      reducción total de potencia activa, manteniendo la condición de interconexión y sin presentar pérdida
+      de control durante la reducción.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la Central Eléctrica se encuentre sincronizada y operando en condición estable.
+  - estilo: List Paragraph
+    texto: Operar la central a su capacidad disponible para la prueba, preferentemente cercana a su condición
+      nominal.
+  - estilo: List Paragraph
+    texto: Confirmar la disponibilidad del sistema de control de potencia activa y de la comunicación
+      operativa requerida para la ejecución de la prueba.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación, incluyendo potencia activa, consigna de potencia,
+      frecuencia y voltaje del generador.
+  - estilo: List Paragraph
+    texto: Enviar la consigna de reducción total de potencia activa, estableciendo una referencia de 0
+      MW.
+  - estilo: List Paragraph
+    texto: Registrar la respuesta de la Central Eléctrica desde la condición inicial de generación hasta
+      alcanzar la consigna de 0 MW.
+  - estilo: List Paragraph
+    texto: Verificar que durante la reducción de potencia la central permanezca interconectada a la red.
+  - estilo: List Paragraph
+    texto: Confirmar que no se presenten disparos, desconexiones no intencionales, pérdida de control
+      o actuación indebida de protecciones.
+  - estilo: List Paragraph
+    texto: Registrar el tiempo total requerido para alcanzar la consigna de potencia activa indicada.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Potencia activa (P)
+  - estilo: Normal
+    texto: Consigna de potencia
+  - estilo: Normal
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Voltaje del generador (Vg)
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando la Central Eléctrica alcanza la consigna de reducción
+      total de potencia activa:'
+  - estilo: Normal
+    texto: 'en un tiempo mayor a:'
+  - estilo: Normal
+    texto: manteniéndose interconectada y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de la potencia activa, consigna de potencia,
+      frecuencia y voltaje del generador durante la reducción total de generación.
+  - estilo: Normal
+    texto: La información presentada permitirá identificar el tiempo requerido para que la Central Eléctrica
+      alcance la consigna de 0 MW, así como verificar que la central permanece interconectada durante
+      la ejecución de la prueba.
+  - estilo: Normal
+    texto: La evaluación se sustentará mediante el comportamiento gráfico de la potencia activa respecto
+      a la consigna aplicada, confirmando la reducción controlada de generación sin desconexión no intencional.
+  - placeholder: 'Gráfica: Limitación Total de Potencia Activa — CNK
+
+      [Espacio reservado para gráfica]'
+  - estilo: Subtitle
+    texto: Grafica. Limitación Total de Potencia Activa
+- seccion: '4'
+  titulo: Prueba 4 - Reconexión Automática
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica que la Central Eléctrica cumpla con las condiciones requeridas para su
+      reconexión automática o resincronización posterior a una desconexión, considerando los rangos permitidos
+      de frecuencia, tensión y rampa de toma de carga.
+  - estilo: Normal
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por Central Eléctrica para Centrales Eléctricas Síncronas, donde se establece la prueba
+      de Reconexión Automática.
+  - estilo: Normal
+    texto: El fundamento técnico se asocia con los requerimientos de reconexión definidos en el Código
+      de Red 2.0, dentro del Manual Regulatorio de Requerimientos Técnicos para la Interconexión de Centrales
+      Eléctricas al Sistema Eléctrico Nacional, particularmente en el Capítulo 2, Sección 2.2.8, Condiciones
+      para reconexión automática, aplicable a Centrales Eléctricas tipo B.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la Central Eléctrica se encuentre desconectada de la red y operando en condición
+      de isla, conforme al procedimiento operativo definido para la prueba.
+  - estilo: List Paragraph
+    texto: Mantener la condición previa a la reconexión durante al menos 5 minutos, verificando que la
+      frecuencia y la tensión permanezcan dentro de los rangos requeridos.
+  - estilo: List Paragraph
+    texto: Registrar las condiciones previas a la reconexión, incluyendo frecuencia, voltaje del generador
+      y potencia activa.
+  - estilo: List Paragraph
+    texto: Coordinar la maniobra de reconexión o resincronización conforme al procedimiento operativo
+      y comunicación aplicable.
+  - estilo: List Paragraph
+    texto: Ejecutar la reconexión de la Central Eléctrica a la red.
+  - estilo: List Paragraph
+    texto: Registrar el comportamiento de la frecuencia, tensión y potencia activa durante la reconexión.
+  - estilo: List Paragraph
+    texto: Monitorear la rampa de toma de carga posterior a la reconexión.
+  - estilo: List Paragraph
+    texto: Verificar que el incremento de potencia activa no supere la rampa máxima admisible.
+  - estilo: List Paragraph
+    texto: Confirmar que la Central Eléctrica se mantenga estable posterior a la reconexión, sin oscilaciones
+      anormales, pérdida de sincronismo o actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Potencia activa de la central
+  - estilo: Normal
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Voltaje del generador (Vg)
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando la Central Eléctrica cumple con las condiciones
+      previas de reconexión y con la rampa máxima de toma de carga establecida.
+  - estilo: Normal
+    texto: 'Previo a la reconexión, durante al menos 5 minutos, deberán cumplirse las siguientes condiciones:'
+  - estilo: Normal
+    texto: 'Posterior a la reconexión, la rampa máxima admisible de incremento de potencia activa será:'
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de las condiciones previas a la reconexión,
+      considerando frecuencia y tensión durante el periodo mínimo requerido, así como al comportamiento
+      de la potencia activa durante la toma de carga posterior a la resincronización.
+  - estilo: Normal
+    texto: La información presentada permitirá verificar que la Central Eléctrica mantiene las condiciones
+      necesarias para la reconexión y que la rampa de incremento de potencia activa se mantiene dentro
+      del límite permitido.
+  - estilo: Normal
+    texto: La evaluación podrá integrarse mediante tablas de valores máximos y mínimos previos a la reconexión,
+      así como el cálculo de la rampa de toma de carga en terminales del generador y, cuando aplique,
+      en el Punto de Interconexión.
+  - placeholder: 'Gráfica: Reconexión Automática Rampa de toma de carga
+
+      [Espacio reservado para gráfica]'
+  - estilo: Subtitle
+    texto: Gráfica. Reconexión Automática Rampa de toma de carga
+- seccion: '5'
+  titulo: Prueba 5 - Limitación Parcial de Potencia Activa
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica que la Central Eléctrica responda correctamente a una consigna de reducción
+      parcial de potencia activa, partiendo de un valor de generación distinto a su capacidad máxima,
+      manteniéndose interconectada y en operación estable.
+  - estilo: Normal
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por Central Eléctrica para Centrales Eléctricas Síncronas, donde se establece la prueba
+      de Limitación Parcial de Potencia Activa, con el criterio de alcanzar la consigna en el tiempo y
+      tolerancia definidos por CENACE.
+  - estilo: Normal
+    texto: La prueba permite comprobar la capacidad de la central para modificar su aportación de potencia
+      activa mediante una consigna de control, sin desconexión de la red ni pérdida de estabilidad operativa.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la Central Eléctrica se encuentre sincronizada, interconectada y en operación
+      estable.
+  - estilo: List Paragraph
+    texto: Operar la central en un valor de generación distinto a su capacidad máxima, conforme a la condición
+      indicada por CENACE.
+  - estilo: List Paragraph
+    texto: En caso de no contar con una consigna específica de CENACE, considerar una condición operativa
+      aproximada del 50% de la capacidad máxima disponible.
+  - estilo: List Paragraph
+    texto: Confirmar la disponibilidad del sistema de control de potencia activa y de la comunicación
+      operativa requerida para la ejecución de la prueba.
+  - estilo: List Paragraph
+    texto: Registrar la condición inicial de operación, incluyendo potencia activa, consigna de potencia,
+      frecuencia y voltaje del generador.
+  - estilo: List Paragraph
+    texto: Enviar una consigna de reducción de potencia activa al valor definido para la prueba, sin desconectar
+      la Central Eléctrica de la red.
+  - estilo: List Paragraph
+    texto: Registrar la respuesta de la central desde la condición inicial de generación hasta alcanzar
+      la consigna indicada.
+  - estilo: List Paragraph
+    texto: Medir el tiempo requerido para alcanzar la consigna y documentar la trayectoria de reducción
+      de potencia.
+  - estilo: List Paragraph
+    texto: Verificar que la central permanezca interconectada, sin disparos, desconexiones no intencionales,
+      pérdida de control o actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Potencia activa (P)
+  - estilo: Normal
+    texto: Consigna de potencia
+  - estilo: Normal
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Voltaje del generador (Vg)
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando la Central Eléctrica alcanza la consigna de potencia
+      activa enviada, dentro del tiempo y tolerancia definidos por CENACE, manteniéndose interconectada
+      y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: En caso de que CENACE no establezca un tiempo o tolerancia específicos para esta prueba, la
+      evaluación se documentará con base en la respuesta registrada, verificando que la reducción de potencia
+      se realice de forma controlada, estable y sin desconexión de la central.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de la potencia activa, consigna de potencia,
+      frecuencia y voltaje del generador durante la reducción parcial de generación desde el punto operativo
+      inicial hasta la consigna indicada.
+  - estilo: Normal
+    texto: La información presentada permitirá identificar el tiempo de respuesta de la Central Eléctrica,
+      la trayectoria de reducción de potencia activa y la estabilidad de la operación durante la ejecución
+      de la prueba.
+  - estilo: Normal
+    texto: Cuando CENACE no defina un criterio particular de tiempo y tolerancia, la evidencia se dejará
+      documentada para su revisión, considerando el comportamiento de la central y la ausencia de desconexiones,
+      disparos o condiciones anormales durante la prueba.
+  - placeholder: 'Gráfica: Limitación Parcial de Potencia Activa
+
+      [Espacio reservado para gráfica]'
+  - estilo: Subtitle
+    texto: Gráfica. Limitación Parcial de Potencia Activa
+- seccion: '6'
+  titulo: Prueba 6 - Control Primario de Frecuencia
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - placeholder: "Gráfica: Control Primario de Frecuencia — CNK Unidad \n[Espacio reservado para gráfica]"
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica que la Central Eléctrica participe en el Control Primario de Frecuencia
+      mediante la respuesta de potencia activa ante desviaciones de frecuencia, manteniéndose interconectada
+      y en operación estable.
+  - estilo: Normal
+    texto: El criterio de evaluación considera una característica de regulación entre 3% y 8%. Para este
+      protocolo, la validación se documentará mediante la prueba de Estatismo por unidad y las pruebas
+      de respuesta ante alta y baja frecuencia, empleando señal simulada de frecuencia cuando no sea posible
+      modificar la frecuencia real de la red.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: Normal
+    texto: 1. Verificar que la Central Eléctrica se encuentre sincronizada, interconectada y en operación
+      estable.
+  - estilo: Normal
+    texto: 2. Confirmar que el modo de control potencia-frecuencia se encuentre habilitado y que la característica
+      de regulación aplicable esté configurada dentro del rango permitido.
+  - estilo: Normal
+    texto: 3. Registrar la condición inicial de operación, incluyendo potencia activa, frecuencia medida,
+      frecuencia simulada, velocidad del rotor y voltaje del generador.
+  - estilo: Normal
+    texto: 4. Aplicar una señal simulada de frecuencia para generar desviaciones controladas por arriba
+      y por debajo de 60 Hz, conforme al procedimiento de Estatismo y respuesta ante alta/baja frecuencia.
+  - estilo: Normal
+    texto: 5. Registrar la respuesta de potencia activa de la Central Eléctrica durante cada desviación
+      de frecuencia simulada.
+  - estilo: Normal
+    texto: 6. Verificar que la respuesta sea estable, que corresponda al ajuste de estatismo y que no
+      se presenten disparos, desconexiones no intencionales ni actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Potencia activa (P)
+  - estilo: Normal
+    texto: Consigna de potencia
+  - estilo: Normal
+    texto: Frecuencia (f)
+  - estilo: Normal
+    texto: Voltaje del generador (Vg)
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando la Central Eléctrica demuestra respuesta de potencia
+      activa ante desviaciones de frecuencia conforme a una característica de regulación entre 3% y 8%,
+      manteniéndose interconectada y sin actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de frecuencia simulada, frecuencia medida,
+      potencia activa, velocidad del rotor y voltaje del generador durante las pruebas de Estatismo y
+      respuesta ante alta/baja frecuencia.
+  - estilo: Normal
+    texto: La evaluación deberá mostrar que la potencia activa cambia de manera coherente con la desviación
+      de frecuencia y con el ajuste de estatismo configurado, sin comprometer la estabilidad operativa
+      de la Central Eléctrica.
+- seccion: '7'
+  titulo: Prueba 7 - Control Secundario de Frecuencia
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: No aplica para la Central Eléctrica CNK.
+- seccion: '8'
+  titulo: Prueba 8 - Rango de Tensión en el Punto de Interconexión (no aplica)
+  no_aplica_en_plantilla: true
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: No aplica para la Central Eléctrica CNK.
+- seccion: '9'
+  titulo: Prueba 9 - Rango de Tensión en el Punto de Interconexión
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: p1
+    texto: Esta prueba verifica que la Central Eléctrica pueda permanecer interconectada y en operación
+      dentro de los rangos de tensión establecidos en el Punto de Interconexión, sin que los ajustes de
+      protección provoquen una desconexión anticipada dentro de los tiempos mínimos requeridos.
+  - estilo: p1
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por Central Eléctrica para Centrales Eléctricas Síncronas, donde se establece la prueba
+      de Rango de Tensión en el Punto de Interconexión.
+  - estilo: p1
+    texto: El fundamento técnico corresponde al Código de Red 2.0, dentro del Manual Regulatorio de Requerimientos
+      Técnicos para la Interconexión de Centrales Eléctricas al Sistema Eléctrico Nacional, Capítulo 3,
+      Sección 3.1.1, donde se establecen los valores de operación sin desconexión ante variaciones de
+      tensión para Centrales Eléctricas.
+  - estilo: Normal
+    texto: solo hay una unidad, mostrado el cumplimiento de los tiempos establecidos a continuación.
+  - tabla_datos:
+    - - Área síncrona
+      - Rango de tensión del punto de interconexión
+      - Tiempo mínimo de operación
+    - - Sistema Interconectado Nacional
+      - 1.05 p.u. < V < 1.10 p.u.
+      - 30 minutos
+    - - Sistema Interconectado Nacional
+      - 0.95 p.u. ≤ V ≤ 1.05 p.u.
+      - Ilimitado
+    - - Sistema Interconectado Nacional
+      - 0.90 p.u. < V < 0.95 p.u.
+      - 30 minutos
+  - estilo: Subtitle
+    texto: Tabla 1. Tiempo mínimo de operación sin desconexión.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Integrar la información documental de los ajustes de protección asociados al Punto de Interconexión.
+  - estilo: List Paragraph
+    texto: Identificar los ajustes de protección de baja tensión y sobretensión aplicables, principalmente
+      funciones ANSI 27 y ANSI 59.
+  - estilo: List Paragraph
+    texto: Verificar los valores de alarma y disparo configurados en el relevador correspondiente al Punto
+      de Interconexión.
+  - estilo: List Paragraph
+    texto: Comparar los ajustes de protección contra los rangos de tensión establecidos en el criterio
+      de aceptación.
+  - estilo: List Paragraph
+    texto: Confirmar que los ajustes no provoquen la desconexión de la Central Eléctrica dentro de los
+      rangos donde el Código de Red exige permanencia en operación.
+  - estilo: List Paragraph
+    texto: Documentar los valores de ajuste en volts y su equivalencia en por unidad, cuando dicha conversión
+      aplique.
+  - estilo: List Paragraph
+    texto: Integrar capturas de pantalla o evidencia documental de los ajustes del relevador como soporte
+      de la evaluación.
+  - estilo: Normal
+    texto: Señales requerida
+  - estilo: Normal
+    texto: No aplica para medición directa en campo, al tratarse de una verificación documental de ajustes
+      de protección y rangos de permanencia ante variaciones de tensión.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando la documentación presentada demuestra que los ajustes
+      de protección permiten la permanencia de la Central Eléctrica dentro de los rangos de tensión establecidos.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá a la revisión documental de los ajustes de protección
+      del relevador asociado al Punto de Interconexión, considerando las funciones de baja tensión y sobretensión.
+  - estilo: Normal
+    texto: La información presentada permitirá comparar los valores de alarma y disparo contra los rangos
+      de permanencia exigidos, verificando que la Central Eléctrica pueda mantenerse en operación dentro
+      de los límites establecidos por el Código de Red.
+  - tabla_datos:
+    - - Protección ANSI
+      - Voltaje (V)
+      - Tiempo (s)
+      - Modo de operación
+    - - ''
+      - ''
+      - ''
+      - ''
+    - - ''
+      - ''
+      - ''
+      - ''
+  - estilo: Subtitle
+    texto: Tabla. Ajustes relevadores
+  - estilo: Normal
+    texto: Cuando se integren los ajustes del relevador, se deberá indicar su equivalencia en por unidad
+      para confirmar la correspondencia con los límites normativos de 0.90 pu, 0.95 pu, 1.05 pu y 1.10
+      pu.
+- seccion: '10'
+  titulo: Prueba 10 - Capacidad de Potencia Reactiva
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica que la Central Eléctrica Síncrona tipo B cuente con la capacidad de generar
+      y absorber potencia reactiva, manteniendo su operación dentro del rango de factor de potencia requerido
+      en el Punto de Interconexión.
+  - estilo: Normal
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por Central Eléctrica para Centrales Eléctricas Síncronas, donde se establece la prueba
+      de Capacidad de Potencia Reactiva.
+  - estilo: Normal
+    texto: El fundamento técnico corresponde al Código de Red 2.0, dentro del Manual Regulatorio de Requerimientos
+      Técnicos para la Interconexión de Centrales Eléctricas al Sistema Eléctrico Nacional, Capítulo 3,
+      particularmente en la Sección 3.2.1 Capacidad de potencia reactiva para Centrales Eléctricas Síncronas
+      tipo B, donde se establece la capacidad de mantener potencia reactiva en un rango de factor de potencia
+      de al menos 0.95 en atraso y 0.95 en adelanto.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Verificar que la Central Eléctrica se encuentre sincronizada, en operación estable y con el
+      sistema de control de tensión/reactivos disponible.
+  - estilo: List Paragraph
+    texto: Operar el generador en condición normal, entregando potencia activa y con potencia reactiva
+      cercana a 0 kVAr como condición inicial.
+  - estilo: List Paragraph
+    texto: Llevar la unidad al punto de operación de 100% de carga, conforme a la capacidad disponible
+      para la prueba.
+  - estilo: List Paragraph
+    texto: Ajustar la consigna para generar potencia reactiva, mantener la condición el tiempo necesario
+      para estabilización y registrar las variables eléctricas.
+  - estilo: List Paragraph
+    texto: Ajustar la consigna para absorber potencia reactiva, mantener la condición el tiempo necesario
+      para estabilización y registrar las variables eléctricas.
+  - estilo: List Paragraph
+    texto: Retornar la unidad a una condición cercana a la condición inicial.
+  - estilo: List Paragraph
+    texto: Repetir la evaluación al 75% de carga, generando y absorbiendo potencia reactiva.
+  - estilo: List Paragraph
+    texto: Repetir la evaluación al 50% de carga, generando y absorbiendo potencia reactiva.
+  - estilo: List Paragraph
+    texto: Verificar que, en los puntos evaluados, la Central Eléctrica mantenga capacidad de operación
+      dentro del rango mínimo de factor de potencia requerido.
+  - estilo: List Paragraph
+    texto: Confirmar que no se presenten oscilaciones anormales, pérdida de control de tensión/reactivos
+      o actuación indebida de protecciones.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: Frecuencia
+  - estilo: Normal
+    texto: Potencia activa (P)
+  - estilo: Normal
+    texto: Potencia reactiva (Q)
+  - estilo: Normal
+    texto: Voltaje del generador (Vg)
+  - estilo: Normal
+    texto: Para recabar la información de la prueba se utilizará un adquisidor de datos HIOKI MR8847A,
+      mediante el cual se registrarán las señales eléctricas requeridas durante la ejecución de la prueba,
+      con capacidad de muestreo mínima de 20 muestras por segundo, equivalente a un intervalo de 50 ms
+      por señal.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando la Central Eléctrica Síncrona tipo B demuestra
+      capacidad de operar en un rango de factor de potencia de al menos:'
+  - estilo: Normal
+    texto: y
+  - estilo: Normal
+    texto: en el Punto de Interconexión, conforme a los requerimientos aplicables del Código de Red.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá al registro de potencia activa, potencia reactiva,
+      voltaje del generador y frecuencia en los puntos de carga evaluados.
+  - estilo: Normal
+    texto: La información presentada permitirá calcular la potencia aparente y el factor de potencia para
+      cada condición, verificando la capacidad de la Central Eléctrica para generar y absorber potencia
+      reactiva conforme al rango mínimo requerido.
+  - estilo: Normal
+    texto: Los resultados se organizarán en una tabla de evaluación por nivel de carga, considerando como
+      mínimo las condiciones de 100%, 75% y 50% de carga, tanto en generación como en absorción de potencia
+      reactiva.
+  - placeholder: "Gráfica: Capacidad de Potencia Reactiva — 100% de carga \n[Espacio reservado para gráfica]"
+  - estilo: Subtitle
+    texto: 'Gráfica: Capacidad de Potencia Reactiva — 100% de carga'
+  - placeholder: 'Gráfica: Capacidad de Potencia Reactiva — 75% de carga
+
+      [Espacio reservado para gráfica]'
+  - estilo: Subtitle
+    texto: 'Gráfica: Capacidad de Potencia Reactiva — 75% de carga'
+  - placeholder: "Gráfica: Capacidad de Potencia Reactiva — 50% de carga \n[Espacio reservado para gráfica]"
+  - estilo: Subtitle
+    texto: 'Gráfica: Capacidad de Potencia Reactiva — 50% de carga'
+- seccion: '11'
+  titulo: Prueba 11 - Capacidad de Potencia Reactiva a Potencia Máxima (no aplica)
+  no_aplica_en_plantilla: true
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: No aplica para la Central Eléctrica CNK.
+- seccion: '12'
+  titulo: Prueba 12 - Capacidad de Potencia Reactiva Debajo de Potencia Máxima (no aplica)
+  no_aplica_en_plantilla: true
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: No aplica para la Central Eléctrica CNK.
+- seccion: '13'
+  titulo: Prueba 13 - Sistema de Control de Tensión
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica que la Central Eléctrica Síncrona tipo B cuente con un sistema de control
+      automático de excitación permanente, capaz de mantener una tensión constante en sus terminales mediante
+      una consigna seleccionable, sin causar inestabilidad dentro de su rango de operación.
+  - estilo: Normal
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por Central Eléctrica para Centrales Eléctricas Síncronas, donde se establece la prueba
+      de Sistema de Control de Tensión.
+  - estilo: Normal
+    texto: El fundamento técnico corresponde al Código de Red 2.0, dentro del Manual Regulatorio de Requerimientos
+      Técnicos para la Interconexión de Centrales Eléctricas al Sistema Eléctrico Nacional, Capítulo 3,
+      Sección 3.2.2, relativo al sistema de control de tensión para Centrales Eléctricas Síncronas tipo
+      B.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Integrar la evidencia documental del sistema de control automático de excitación de la Central
+      Eléctrica.
+  - estilo: List Paragraph
+    texto: Verificar que el sistema permita operar con una consigna seleccionable de tensión.
+  - estilo: List Paragraph
+    texto: Confirmar que el sistema de excitación pueda mantener tensión constante en terminales de la
+      Central Eléctrica dentro de su rango de operación.
+  - estilo: List Paragraph
+    texto: 'Relacionar esta verificación con las pruebas por unidad asociadas al sistema de control de
+      tensión, principalmente:'
+  - estilo: List Paragraph
+    texto: Rango Operativo de Tensión.
+  - estilo: List Paragraph
+    texto: Escalón de Tensión.
+  - estilo: List Paragraph
+    texto: Limitador V/Hz.
+  - estilo: List Paragraph
+    texto: Secuencia de Excitación y Desexcitación.
+  - estilo: List Paragraph
+    texto: Seguidor Auto entre Canales y UCE’s.
+  - estilo: List Paragraph
+    texto: Compensador de Reactivos.
+  - estilo: List Paragraph
+    texto: Documentar la referencia al Reporte de Pruebas por Unidad de la Central Eléctrica CNK, donde
+      se desarrollan las pruebas específicas del sistema de excitación y control de tensión.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: No aplica para medición directa en campo, al tratarse de una verificación documental sustentada
+      en las pruebas por unidad asociadas al sistema de control de tensión.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando se documenta que la Central Eléctrica cuenta con
+      un sistema de control automático de excitación permanente, capaz de proporcionar una tensión constante
+      en terminales mediante una consigna seleccionable, sin causar inestabilidad en su rango de operación.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá a la documentación técnica del sistema de excitación
+      y a los resultados de las pruebas por unidad relacionadas con el control de tensión.
+  - estilo: Normal
+    texto: La información presentada permitirá confirmar que la Central Eléctrica cuenta con un sistema
+      automático de excitación y que su desempeño fue verificado mediante las pruebas específicas de la
+      Unidad de Generación.
+  - estilo: Normal
+    texto: Para el sustento de esta prueba se deberá hacer referencia al Reporte de Pruebas por Unidad
+      de la Central Eléctrica CNK, particularmente a las pruebas asociadas al sistema de control de tensión.
+  - placeholder: 'Gráfica: Rango Operativo de Tensión
+
+      [Espacio reservado para gráfica]'
+  - estilo: Subtitle
+    texto: 'Gráfica: Rango Operativo de Tensión'
+  - placeholder: 'Gráfica: Desempeño del control de tensión — Automátic
+
+      [Espacio reservado para gráfica]'
+  - estilo: Subtitle
+    texto: 'Gráfica: Desempeño del control de tensión'
+- seccion: '14'
+  titulo: Prueba 14 - Control de Tensión en Condiciones Dinámicas o de Falla
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica que la Central Eléctrica cuente con ajustes de protección compatibles
+      con los requerimientos de permanencia ante condiciones dinámicas o de falla, de forma que no se
+      produzca una desconexión anticipada mientras la tensión permanezca dentro de la zona permitida.
+  - estilo: Normal
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por Central Eléctrica para Centrales Eléctricas Síncronas, donde se establece la prueba
+      de Control de Tensión en Condiciones Dinámicas o de Falla.
+  - estilo: Normal
+    texto: El fundamento técnico corresponde al Código de Red 2.0, dentro del Manual Regulatorio de Requerimientos
+      Técnicos para la Interconexión de Centrales Eléctricas al Sistema Eléctrico Nacional, Capítulo 4,
+      relativo a los requerimientos de control de tensión en condiciones dinámicas o de falla, particularmente
+      para Centrales Eléctricas tipo B y C.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Integrar la información documental de los ajustes de protección asociados a tensión en la Central
+      Eléctrica y en el Punto de Interconexión.
+  - estilo: List Paragraph
+    texto: Identificar los ajustes de protección de baja tensión y sobretensión aplicables, principalmente
+      funciones ANSI 27 y ANSI 59.
+  - estilo: List Paragraph
+    texto: Comparar los ajustes de alarma y disparo contra la curva de permanencia requerida para condiciones
+      dinámicas o de falla.
+  - estilo: List Paragraph
+    texto: Verificar que los ajustes permitan la permanencia de la Central Eléctrica dentro de la Zona
+      A definida para Centrales Eléctricas Síncronas tipo B y C.
+  - estilo: List Paragraph
+    texto: Documentar los puntos de operación tensión-tiempo aplicables al perfil de permanencia ante
+      falla.
+  - estilo: List Paragraph
+    texto: Integrar evidencia documental de los ajustes de protección del controlador, relevador o sistema
+      de protección correspondiente.
+  - estilo: List Paragraph
+    texto: Cuando aplique, indicar la equivalencia de los ajustes en valores por unidad para comprobar
+      su correspondencia con los límites requeridos.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: No aplica para medición directa en campo, al tratarse de una verificación documental de ajustes
+      de protección y permanencia ante condiciones dinámicas o de falla.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La prueba se considera satisfactoria cuando los ajustes de protección permiten que la Central
+      Eléctrica permanezca interconectada dentro de la Zona A del perfil tensión-tiempo aplicable a Centrales
+      Eléctricas Síncronas tipo B y C.
+  - estilo: Normal
+    texto: La evaluación deberá confirmar que las protecciones de baja tensión y sobretensión no provoquen
+      una desconexión anticipada dentro de la zona permitida por el Código de Red.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá a la revisión documental de los ajustes de protección
+      de tensión implementados en la Central Eléctrica y en el Punto de Interconexión.
+  - estilo: Normal
+    texto: La información presentada permitirá comparar los ajustes de alarma y disparo contra el perfil
+      de permanencia tensión-tiempo requerido, verificando que los valores configurados sean compatibles
+      con la operación dentro de la Zona A.
+  - estilo: Normal
+    texto: Cuando se integren los ajustes del relevador asociado al Punto de Interconexión, se deberá
+      indicar su equivalencia en por unidad para confirmar su correspondencia con los límites de permanencia
+      ante falla. En particular, deberá verificarse que el ajuste de disparo por sobretensión no interfiera
+      con la permanencia requerida hasta 1.10 pu, y que los ajustes de baja tensión sean compatibles con
+      la curva de respuesta aplicable.
+  - placeholder: 'Figura. Respuesta de la central eléctrica de tipo B ante condiciones dinámicas o de
+      falla (perfil V vs t)
+
+      [Espacio reservado para gráfica]'
+  - estilo: Subtitle
+    texto: Figura. Respuesta de la central eléctrica de tipo B ante condiciones dinámicas o de falla
+  - tabla_datos:
+    - - Protección
+      - Punto de Operación
+      - Tiempo t (s)
+      - Tensión V (pu)
+    - - ''
+      - ''
+      - ''
+      - ''
+  - estilo: Subtitle
+    texto: Tabla 3. Ajustes de protección de voltaje establecidos en el Woodward 3500 de la Central Eléctrica
+      CNK.
+- seccion: '15'
+  titulo: Prueba 15 - Arranque de Emergencia (opcional, no aplica)
+  no_aplica_en_plantilla: true
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: No aplica para la Central Eléctrica CNK.
+- seccion: '16'
+  titulo: Prueba 16 - Operación en Modo Isla (no aplica)
+  no_aplica_en_plantilla: true
+  flujo:
+  - tabla_datos:
+    - - Tipo de Central Eléctrica
+    - - A
+      - B
+      - C
+      - D
+    - - ''
+      - ''
+      - ■
+      - ■
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: No aplica para la Central Eléctrica CNK.
+- seccion: '17'
+  titulo: Prueba 17 - Resincronización Rápida (no aplica)
+  no_aplica_en_plantilla: true
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: No aplica para la Central Eléctrica CNK.
+- seccion: '18'
+  titulo: Prueba 18 - Requerimientos Generales de Administración del Sistema
+  no_aplica_en_plantilla: false
+  flujo:
+  - tabla: aplicabilidad
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Esta prueba verifica que la Central Eléctrica cuente con la evidencia documental asociada a
+      los requerimientos generales de administración del sistema, incluyendo esquemas de control, esquemas
+      de protección, prioridad entre protección y control, intercambio de información, instrumentación
+      y modelos de simulación.
+  - estilo: Normal
+    texto: El criterio de evaluación se toma del Anexo 5 del Procedimiento de Operación para la Declaración
+      de Entrada en Operación Comercial de Centrales Eléctricas y Centros de Carga, en el apartado de
+      pruebas por Central Eléctrica para Centrales Eléctricas Síncronas, donde se establecen los Requerimientos
+      Generales de Administración del Sistema.
+  - estilo: Normal
+    texto: El fundamento técnico corresponde al Código de Red 2.0, dentro del Manual Regulatorio de Requerimientos
+      Técnicos para la Interconexión de Centrales Eléctricas al Sistema Eléctrico Nacional, Capítulo 6,
+      relativo a los requerimientos generales de administración del SEN para Centrales Eléctricas tipo
+      B.
+  - estilo: Normal
+    texto: Condiciones y desarrollo de la prueba
+  - estilo: List Paragraph
+    texto: Integrar la evidencia documental de los esquemas de control y ajustes disponibles para la Central
+      Eléctrica.
+  - estilo: List Paragraph
+    texto: Verificar la documentación de esquemas de acción remedial, en caso de que resulten aplicables
+      al proyecto.
+  - estilo: List Paragraph
+    texto: Integrar los esquemas de protección y ajustes asociados a la Central Eléctrica, Unidad de Generación,
+      transformador, servicios auxiliares y Punto de Interconexión.
+  - estilo: List Paragraph
+    texto: Revisar la documentación de prioridad entre esquemas de protección y funciones de control.
+  - estilo: List Paragraph
+    texto: Integrar la evidencia del intercambio de información en tiempo real o bajo demanda con CENACE,
+      conforme a los requerimientos aplicables durante la validación técnica.
+  - estilo: List Paragraph
+    texto: Confirmar que la Central Eléctrica cuente con instrumentación para el registro de variables
+      eléctricas principales.
+  - estilo: List Paragraph
+    texto: Integrar la referencia a los modelos de simulación de la Central Eléctrica, considerando que
+      su verificación específica se desarrolla en la prueba correspondiente a modelos.
+  - estilo: Normal
+    texto: Señales requeridas
+  - estilo: Normal
+    texto: No aplica para medición directa en campo, al tratarse de una verificación documental de los
+      requerimientos generales de administración del sistema.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: 'La prueba se considera satisfactoria cuando se presenta evidencia documental suficiente de
+      los siguientes requerimientos:'
+  - estilo: Heading 3
+    texto: Esquemas de control y ajustes
+  - estilo: List Paragraph
+    texto: Esquemas de acción remedial, cuando apliquen.
+  - estilo: Heading 3
+    texto: Esquemas de protección y ajustes
+  - estilo: List Paragraph
+    texto: Corto circuito externo e interno.
+  - estilo: List Paragraph
+    texto: Carga asimétrica o secuencia de fase negativa.
+  - estilo: List Paragraph
+    texto: Sobrecarga del estator o del rotor.
+  - estilo: List Paragraph
+    texto: Sobreexcitación o baja excitación.
+  - estilo: List Paragraph
+    texto: Sobretensión o baja tensión en terminales de la Central Eléctrica.
+  - estilo: List Paragraph
+    texto: Sobretensión o baja tensión en el Punto de Interconexión.
+  - estilo: List Paragraph
+    texto: Sobretensión o baja tensión en servicios auxiliares.
+  - estilo: List Paragraph
+    texto: Oscilaciones de potencia entre áreas.
+  - estilo: List Paragraph
+    texto: Corriente de energización o inrush.
+  - estilo: List Paragraph
+    texto: Operación asíncrona.
+  - estilo: List Paragraph
+    texto: Esfuerzos torsionales inadmisibles o resonancia subsíncrona.
+  - estilo: List Paragraph
+    texto: Protección de la línea de interconexión entre la Central Eléctrica y la Red Eléctrica.
+  - estilo: List Paragraph
+    texto: Protección del transformador de Unidad de Central Eléctrica.
+  - estilo: List Paragraph
+    texto: Protecciones de respaldo y ante falla de equipo de seccionamiento.
+  - estilo: List Paragraph
+    texto: Sobreflujo magnético, V/Hz.
+  - estilo: List Paragraph
+    texto: Potencia inversa.
+  - estilo: List Paragraph
+    texto: Razón de cambio de la frecuencia.
+  - estilo: List Paragraph
+    texto: Desplazamiento de tensión del neutro.
+  - estilo: List Paragraph
+    texto: Verificación de sincronismo.
+  - estilo: List Paragraph
+    texto: Pérdida de campo.
+  - estilo: Heading 3
+    texto: Prioridad de protección y control
+  - estilo: List Paragraph
+    texto: Protecciones del sistema y protecciones de la Central Eléctrica.
+  - estilo: List Paragraph
+    texto: Control de frecuencia mediante ajuste de potencia activa.
+  - estilo: List Paragraph
+    texto: Restricción de potencia activa.
+  - estilo: List Paragraph
+    texto: Limitación de rampa de potencia activa.
+  - estilo: Heading 3
+    texto: Intercambio de información
+  - estilo: Normal
+    texto: La Central Eléctrica deberá contar con los medios para intercambiar información en tiempo real
+      o bajo demanda con CENACE, con estampa de tiempo conforme a lo definido durante la validación de
+      requerimientos técnicos.
+  - estilo: Heading 3
+    texto: Instrumentación para Centrales Eléctricas
+  - estilo: Normal
+    texto: 'La Central Eléctrica deberá contar con instrumentación para registrar, al menos:'
+  - estilo: List Paragraph
+    texto: Tensión.
+  - estilo: List Paragraph
+    texto: Potencia activa.
+  - estilo: List Paragraph
+    texto: Potencia reactiva.
+  - estilo: List Paragraph
+    texto: Frecuencia.
+  - estilo: Heading 3
+    texto: Modelos de simulación
+  - estilo: Normal
+    texto: La Central Eléctrica deberá contar con modelos de simulación que representen adecuadamente
+      su comportamiento. La validación específica de dichos modelos se documenta en la prueba correspondiente
+      a Modelos de Simulación.
+  - estilo: Normal
+    texto: Resultados de la prueba
+  - estilo: Normal
+    texto: La evidencia de esta prueba corresponderá a la relación documental de los esquemas, ajustes,
+      registros, configuraciones y documentos técnicos aplicables a los requerimientos generales de administración
+      del sistema.
+  - estilo: Normal
+    texto: La información se presentará mediante una matriz de cumplimiento que identifique el requerimiento,
+      el documento de soporte, la ubicación de la evidencia y el estatus de revisión.
+  - estilo: Normal
+    texto: 3.19. Prueba 42 - Capacidad Instalada Neta, carga máxima, secuencias de arranque y paro, y
+      funcionamiento de sistemas de control, protección y servicios auxiliares
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Documentar la evidencia operativa relacionada con la capacidad instalada neta, carga máxima,
+      secuencias de arranque y paro, así como el funcionamiento de los sistemas de control, protección
+      y servicios auxiliares de la Central Eléctrica.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La evidencia deberá demostrar operación satisfactoria y confiable conforme a los requerimientos
+      aplicables del procedimiento de entrada en operación comercial.
+  - estilo: Normal
+    texto: 3.20. Prueba 43 - Operación en automático confiable
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Documentar la operación confiable de la Central Eléctrica con los controles de los equipos
+      y de la Central Eléctrica en modo automático.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La evidencia deberá demostrar operación confiable durante el periodo requerido, considerando
+      las restricciones de falla permisibles y la disponibilidad de registros operativos.
+  - estilo: Normal
+    texto: 3.21. Prueba 44 - Verificación de capacidad instalada neta y consumos
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Documentar la verificación de capacidad instalada neta y consumos asociados, cuando resulte
+      aplicable al alcance de la Central Eléctrica y del Centro de Carga.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La evidencia deberá permitir validar la capacidad y los consumos conforme a los datos operativos
+      registrados y a la documentación técnica de soporte.
+  - estilo: Normal
+    texto: 3.22. Prueba 45 - Requerimientos de Calidad de la Potencia
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Documentar el cumplimiento de los requerimientos de calidad de la potencia mediante registros
+      de medición en el Punto de Interconexión o Punto de Conexión, según corresponda al alcance del proyecto.
+  - estilo: Normal
+    texto: Criterio de aceptación
+  - estilo: Normal
+    texto: La evidencia deberá incluir mediciones de al menos 10 días consecutivos y el análisis de cumplimiento
+      de los parámetros aplicables.
+  - estilo: Normal
+    texto: 3.23. Pruebas por Centro de Carga
+  - estilo: Normal
+    texto: Objetivo
+  - estilo: Normal
+    texto: Integrar, cuando corresponda, las pruebas y verificaciones aplicables al Centro de Carga asociado,
+      incluyendo calidad de la potencia, factor de potencia, tensión, frecuencia, protecciones, control,
+      intercambio de información y modelos de simulación conforme al Código de Red.
+  - estilo: Normal
+    texto: Nota
+  - estilo: Normal
+    texto: Este apartado queda reservado para completar la evidencia específica del Centro de Carga con
+      base en la información operativa y documental disponible.

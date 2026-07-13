@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual PSE — Planeación del SEN | Código de Red 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+/* Diagrama de flujo de actores (Figura 1.2.1) */
+.flujo { margin: 22px 0 8px; display: flex; flex-direction: column; gap: 0; }
+.fl-tier { border: 1px solid var(--border); border-radius: var(--r-lg); padding: 13px 16px; background: var(--white); }
+.fl-lbl { font-family: var(--mono); font-size: 8px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.fl-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 7px; }
+.fl-card { background: var(--blue-light); border: 1px solid rgba(0,102,204,.18); border-radius: var(--r);
+  padding: 8px 11px; }
+.fl-card .t { font-size: .8rem; font-weight: 700; color: var(--text-dark); }
+.fl-card .d { font-size: .68rem; color: var(--text-secondary); line-height: 1.4; margin-top: 2px; }
+.fl-arrow { text-align: center; color: var(--blue-mid); font-size: 17px; padding: 3px 0; }
+.fl-out { border-color: var(--blue); background: var(--blue-light); }
+.fl-out .fl-cards .fl-card { background: var(--white); }
+.fl-note { font-size: .72rem; color: var(--text-muted); font-style: italic; margin-top: 7px; }
+
+/* Tira de horizontes */
+.horizontes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 20px 0; }
+.hz { border: 1px solid var(--border); border-left: 4px solid var(--blue); border-radius: 0 var(--r) var(--r) 0;
+  padding: 12px 14px; background: var(--white); }
+.hz .hz-yr { font-family: var(--mono); font-size: .72rem; font-weight: 700; color: var(--blue); }
+.hz .hz-t { font-size: .82rem; font-weight: 700; color: var(--text-dark); margin: 3px 0; }
+.hz .hz-d { font-size: .7rem; color: var(--text-muted); line-height: 1.45; }
+@media(max-width:640px){ .horizontes { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<button id="sb-toggle" aria-expanded="false" aria-label="Menú">☰</button>
+
+<nav id="sidebar" aria-label="Índice Código de Red">
+  <div class="sb-brand">
+    <span class="sb-tag">RES/550/2021 · CRE · DOF 31-dic-2021</span>
+    <div class="sb-title"><span class="sb-mark"><i class="ti ti-bolt" aria-hidden="true"></i></span>Código de Red 2.0</div>
+    <div class="sb-sub">Manual Regulatorio de Planeación</div>
+  </div>
+  <div class="sb-nav">
+    <span class="sb-section-lbl">Manual PSE — Capítulos</span>
+    <a href="#sec-intro" class="sb-sub">Objetivo · presentación</a>
+    <a href="#sec-c1" class="sb-cap active" aria-current="page">Cap. 1 — Etapas del proceso</a>
+    <a href="#sec-c2" class="sb-cap">Cap. 2 — Insumos</a>
+    <a href="#sec-c3" class="sb-cap">Cap. 3 — Criterios de observancia</a>
+    <a href="#sec-c4" class="sb-cap">Cap. 4 — Pronósticos de Demanda</a>
+    <a href="#sec-c5" class="sb-cap">Cap. 5 — Análisis Costo-Beneficio</a>
+    <a href="#sec-c6" class="sb-cap">Cap. 6 — Planeación de las RGD</a>
+    <span class="sb-section-lbl">Manuales Regulatorios</span>
+    <a href="disposiciones_sen.html" class="sb-cap">Disposiciones Generales SEN</a>
+    <a href="cap1.html" class="sb-cap">Manual INTE — Centrales</a>
+    <a href="cone_c1.html" class="sb-cap">Manual CONE — Cargas</a>
+    <span class="sb-section-lbl">Fuentes Oficiales</span>
+    <a href="https://dof.gob.mx/2021/CRE/CRE_311221.pdf" class="sb-cap" target="_blank" rel="noopener">↗ DOF — Texto oficial (PDF)</a>
+  </div>
+</nav>
+
+<div id="main-wrap">
+  <header id="pg-header">
+    <div class="pg-crumb"><a href="../index_cdr_2v4.html">Código de Red 2.0</a> › Disposiciones Operativas › <strong>Manual de Planeación (PSE)</strong></div>
+    <span class="pg-pill">Manual PSE</span>
+    <span class="pg-pill">RES/550/2021</span>
+    <span class="pg-pill">PDF p. 65–110</span>
+  </header>
+
+  <main id="contenido">
+
+    <span class="eyebrow">Disposiciones Operativas · Manual Regulatorio — DOF 31-dic-2021</span>
+    <h1 class="titulo">Manual Regulatorio de Planeación del Sistema Eléctrico Nacional</h1>
+
+    <p>Contiene las guías, lineamientos y metodología para la elaboración de los <strong>PAMRNT</strong> (Programa de Ampliación y Modernización de la Red Nacional de Transmisión y de las RGD del MEM) y <strong>PAMRGD</strong> (RGD fuera del MEM), insumos del <strong>PRODESEN</strong>. Aplica a la CRE, los Usuarios del SEN y la SENER. La planeación de la expansión del SEN se inicia con varios años de anticipación dados los tiempos de aprobación, licitación, construcción y puesta en servicio.</p>
+
+    <details>
+      <summary>Los 6 capítulos del Manual de Planeación</summary>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;margin-top:4px;font-size:.83rem;color:var(--text-secondary);line-height:1.55">
+        <li><strong>Cap. 1 · Etapas</strong> — Proceso de planeación por plazos (corto, mediano, largo) y casos base.</li>
+        <li><strong>Cap. 2 · Insumos</strong> — Diagnóstico operativo, escenarios económicos, PIIRCE, pronósticos, costos.</li>
+        <li><strong>Cap. 3 · Criterios</strong> — Calidad, Confiabilidad y seguridad; categorías A–D; criterio N-1 y LOLP.</li>
+        <li><strong>Cap. 4 · Pronósticos</strong> — Demanda y energía a 15 años por Sistema Interconectado y GCR.</li>
+        <li><strong>Cap. 5 · Costo-Beneficio</strong> — VPN, TIR y relación B/C; metodología probabilística.</li>
+        <li><strong>Cap. 6 · RGD</strong> — Criterios de planeación de las RGD que no pertenecen al MEM.</li>
+      </ul>
+    </details>
+
+    <div class="nota">
+      <div class="nota-title">Sustento legal</div>
+      La actividad de planeación del CENACE y el Distribuidor se desprende de los artículos constitucionales 25, 27 y 28, la Ley de la Industria Eléctrica (LIE) y su Reglamento. El CENACE propone el PAMRNT; el Distribuidor propone el PAMRGD; la SENER autoriza, escuchando la opinión de la CRE.
+    </div>
+
+    <!-- ═══════════ CAPÍTULO 1 ═══════════ -->
+    <h2 class="sec" id="sec-c1"><span class="snum">Cap. 1</span>Descripción general de las etapas del proceso de planeación</h2>
+
+    <p>Dada la complejidad del proceso —demanda, precios de combustibles, aportaciones hidráulicas, intermitencia renovable, disponibilidad de Elementos— la planeación se estructura en <strong>tres horizontes</strong> dentro del periodo de 15 años. Siendo <em>n</em> el año en curso de presentación de los programas, el año base es <em>n−1</em>.</p>
+
+    <div class="horizontes">
+      <div class="hz">
+        <div class="hz-yr">n a n+4</div>
+        <div class="hz-t">Corto plazo</div>
+        <div class="hz-d">Red y generación definidas. Se ajustan programas y FEON con modelo completo de CA balanceado; estudios de estado estacionario, estabilidad y, en casos de riesgo, transitorios.</div>
+      </div>
+      <div class="hz">
+        <div class="hz-yr">n+5 a n+9</div>
+        <div class="hz-t">Mediano plazo</div>
+        <div class="hz-d">Proyectos en proceso de decisión. Estudios en estado estacionario y estabilidad transitoria para casos relevantes; se estiman costos de proyectos candidatos.</div>
+      </div>
+      <div class="hz">
+        <div class="hz-yr">n+10 a n+14</div>
+        <div class="hz-t">Largo plazo</div>
+        <div class="hz-d">Mayor incertidumbre. Se propone la configuración futura de la Red por niveles de tensión y tecnologías; fechas de entrada/retiro solo indicativas.</div>
+      </div>
+    </div>
+
+    <h3 class="subsec">Casos Base y alternativas de refuerzo (1.1.4)</h3>
+    <p>Los <strong>Casos Base</strong> son condiciones operativas representativas del SEN (presentes y futuras) que sirven de referencia para los estudios. Cada caso contiene el SEN actual, pronósticos de demanda, capacidad de generación del PIIRCE, proyectos instruidos por la SENER, legados y por aportaciones. Ante condiciones fuera de Límites Térmicos, de diseño u Operativos, las alternativas de refuerzo son:</p>
+    <ul class="incisos">
+      <li><span class="lbl">i–ii</span> Líneas de Transmisión y circuitos de Distribución · Bancos de Transformación.</li>
+      <li><span class="lbl">iii</span> Compensación de potencia reactiva.</li>
+      <li><span class="lbl">iv–v</span> Sistemas de Transmisión Flexible (FACTS) · Transmisión de CD en Alta Tensión (HVDC).</li>
+      <li><span class="lbl">vi</span> Enlaces asíncronos Back-to-Back y transformador de frecuencia variable.</li>
+      <li><span class="lbl">vii–ix</span> Proyectos sugeridos por la SENER · cambios en niveles de tensión · Redes Particulares.</li>
+    </ul>
+
+    <h3 class="subsec">Proceso de Planeación (1.2)</h3>
+    <div class="flujo">
+      <div class="fl-tier">
+        <div class="fl-lbl"><i class="ti ti-database" aria-hidden="true"></i> Insumos</div>
+        <div class="fl-cards">
+          <div class="fl-card"><div class="t">PIIRCE</div><div class="d">Instalación y retiro de Centrales (SENER)</div></div>
+          <div class="fl-card"><div class="t">Pronósticos</div><div class="d">Demanda y consumo a 15 años</div></div>
+          <div class="fl-card"><div class="t">Diagnóstico</div><div class="d">Operativo al cierre del año</div></div>
+          <div class="fl-card"><div class="t">Costos</div><div class="d">Infraestructura · ENS · combustibles</div></div>
+        </div>
+      </div>
+      <div class="fl-arrow"><i class="ti ti-chevron-down" aria-hidden="true"></i></div>
+      <div class="fl-tier">
+        <div class="fl-lbl"><i class="ti ti-cpu" aria-hidden="true"></i> Estudios eléctricos y económicos</div>
+        <div class="fl-cards">
+          <div class="fl-card"><div class="t">CENACE</div><div class="d">RNT y RGD del MEM · casos base · N-1</div></div>
+          <div class="fl-card"><div class="t">Distribuidor</div><div class="d">RGD fuera del MEM (Cap. 6)</div></div>
+        </div>
+      </div>
+      <div class="fl-arrow"><i class="ti ti-chevron-down" aria-hidden="true"></i></div>
+      <div class="fl-tier fl-out">
+        <div class="fl-lbl"><i class="ti ti-file-check" aria-hidden="true"></i> Programas y autorización</div>
+        <div class="fl-cards">
+          <div class="fl-card"><div class="t">PAMRNT</div><div class="d">RNT + RGD del MEM</div></div>
+          <div class="fl-card"><div class="t">PAMRGD</div><div class="d">RGD fuera del MEM</div></div>
+          <div class="fl-card"><div class="t">PRODESEN</div><div class="d">SENER autoriza · CRE opina</div></div>
+        </div>
+      </div>
+      <div class="fl-note">Figura 1.2.1 / 1.2.2 — Actores, flujo de información y etapas del proceso de planeación (RES/550/2021, Manual PSE 1.2).</div>
+    </div>
+
+    <!-- ═══════════ CAPÍTULO 2 ═══════════ -->
+    <h2 class="sec" id="sec-c2"><span class="snum">Cap. 2</span>Insumos para el proceso de planeación del SEN</h2>
+
+    <p>Conjunto de insumos que el CENACE y el Distribuidor deben considerar para la planeación:</p>
+    <ul class="incisos">
+      <li><span class="lbl">2.1</span> Diagnóstico operativo al cierre del año.</li>
+      <li><span class="lbl">2.2</span> Escenarios de crecimiento de la economía nacional.</li>
+      <li><span class="lbl">2.3</span> Acciones de eficiencia energética.</li>
+      <li><span class="lbl">2.4</span> Evolución de precios de combustibles.</li>
+      <li><span class="lbl">2.5</span> PIIRCE — Programas Indicativos para la Instalación y Retiro de Centrales Eléctricas.</li>
+      <li><span class="lbl">2.6</span> Pronósticos de demanda y consumo del SEN.</li>
+      <li><span class="lbl">2.7</span> Costo de la Energía No Suministrada (ENS).</li>
+      <li><span class="lbl">2.8</span> Costos de inversión típicos de Transmisión, Transformación y compensación.</li>
+      <li><span class="lbl">2.9 / 2.10</span> Costos de actividades previas · Tasa social de descuento.</li>
+      <li><span class="lbl">2.11</span> Información de Participantes y no Participantes del Mercado: Central Eléctrica, Transportista, Entidades Responsables de Carga y Comercializadores, Distribuidor.</li>
+    </ul>
+
+    <!-- ═══════════ CAPÍTULO 3 ═══════════ -->
+    <h2 class="sec" id="sec-c3"><span class="snum">Cap. 3</span>Criterios de observancia para el proceso de planeación</h2>
+
+    <p>Aseguran que se satisface la demanda y consumo durante los 15 años cumpliendo indicadores de Confiabilidad en Estado Operativo Normal. El comportamiento del sistema se evalúa bajo cuatro <strong>categorías de contingencia</strong>:</p>
+
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Categorías de condiciones de Estado Estable (3.2)
+        <span class="tbl-sub">RES/550/2021, Manual PSE, Cap. 3 — DOF 31-dic-2021</span>
+      </div>
+      <table>
+        <thead><tr><th>Categoría</th><th>Condición</th><th>Criterio</th></tr></thead>
+        <tbody>
+          <tr><td>A</td><td>Estado Operativo Normal, sin contingencia</td><td style="font-family:var(--mono)">N</td></tr>
+          <tr><td>B</td><td>Post-Falla de un Elemento</td><td style="font-family:var(--mono)">N-1</td></tr>
+          <tr><td>C</td><td>Post-Falla de dos Elementos</td><td style="font-family:var(--mono)">N-1-1 ó N-2</td></tr>
+          <tr><td>D</td><td>Eventos críticos extremos (pérdida de ≥2 Elementos principales)</td><td style="font-family:var(--mono)">N-≥3</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec">Criterios de seguridad y Confiabilidad (3.3)</h3>
+    <ul class="incisos">
+      <li><span class="lbl">N-1</span> Para la planeación de la RNT debe cumplirse el criterio ante la desconexión de un Elemento.</li>
+      <li><span class="lbl">LOLP</span> Criterio probabilístico de Confiabilidad basado en la <strong>Probabilidad de Pérdida de Carga</strong>; la SENER determina el índice a utilizar.</li>
+      <li><span class="lbl">Tensión</span> En Estado Estable, los límites y tolerancias los definen Transportistas/Distribuidores conforme al Manual de Estados Operativos; se admite hasta <strong>±10 % durante 30 minutos</strong> dentro del Límite de Sobrecarga declarado.</li>
+      <li><span class="lbl">Reactiva / EAR-EPS</span> Compensación de potencia reactiva y Esquemas de Acción Remedial / Protección del Sistema para mantener estabilidad ante N-1-1, N-2 y categoría D.</li>
+    </ul>
+    <p class="ref-nota">El Capítulo cierra con la coordinación de programas de mantenimiento de generación y RNT en mediano/largo plazo (3.4), el retiro de Centrales Eléctricas sin afectar la Confiabilidad (3.5) y las particularidades de los SEA, que no cuentan con enlaces vecinos de apoyo ante disturbios (3.6).</p>
+
+    <!-- ═══════════ CAPÍTULO 4 ═══════════ -->
+    <h2 class="sec" id="sec-c4"><span class="snum">Cap. 4</span>Pronósticos de Demanda y Energía Eléctrica para el SEN</h2>
+
+    <p>El pronóstico anual y horario a <strong>15 años</strong> se elabora por Sistema Interconectado, Gerencia de Control Regional (GCR), Zonas y Subestaciones, como insumo de los PAMRNT/PAMRGD y del PRODESEN.</p>
+
+    <h3 class="subsec">Horizontes y escenarios (4.1–4.2)</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Horizonte</span> Anual y horario, 15 años, conforme a la LIE y su Reglamento.</li>
+      <li><span class="lbl">Escenarios</span> Tres para el crecimiento de la demanda máxima integrada y el consumo: <strong>Alto, Medio (Planeación) y Bajo</strong>.</li>
+      <li><span class="lbl">Cobertura</span> SEN, SIN, SIBCS, SIM y cada GCR: Central, Oriental, Occidental, Noroeste, Norte, Noreste, Peninsular y Baja California.</li>
+    </ul>
+
+    <h3 class="subsec">Proceso general de pronóstico (4.3–4.4)</h3>
+    <p>Cada Entidad Responsable de Carga envía al CENACE la información de demanda y consumo a más tardar en <strong>febrero y julio</strong>. El CENACE se coordina con Transportista, Distribuidor y ERC mediante reuniones anuales (junio–agosto). El proceso parte del consumo final regional, se ajusta con las trayectorias del PIB y produce la demanda máxima integrada anual del SIN. La Subdirección de Planeación del CENACE elabora el documento prospectivo a 15 años con intervalos de confianza, base de todos los estudios de largo plazo.</p>
+
+    <!-- ═══════════ CAPÍTULO 5 ═══════════ -->
+    <h2 class="sec" id="sec-c5"><span class="snum">Cap. 5</span>Análisis Costo-Beneficio de proyectos de la RNT y RGD del MEM</h2>
+
+    <p>La evaluación técnico-económica mide el valor agregado para la sociedad mediante indicadores de rentabilidad: <strong>Valor Presente Neto (VPN), Tasa Interna de Retorno (TIR)</strong> y relación <strong>beneficio/costo (B/C)</strong>. Aplica a proyectos individuales o por <em>grupo (clúster)</em>: un proyecto principal que incrementa la capacidad de Transmisión más uno o más proyectos de soporte.</p>
+
+    <div class="tbl-wrap">
+      <div class="tbl-caption">Clasificación de costos y beneficios (5.1)
+        <span class="tbl-sub">RES/550/2021, Manual PSE, Cap. 5 — DOF 31-dic-2021 · PDF p. 87</span>
+      </div>
+      <table>
+        <thead><tr><th>Costos</th><th>Beneficios</th></tr></thead>
+        <tbody>
+          <tr><td>Actividades previas [Cap]</td><td>Reducción en costos de generación [Bgen]</td></tr>
+          <tr><td>Inversión inicial [Cii]</td><td>Reducción de costos de transmisión / congestión [Btrans]</td></tr>
+          <tr><td>Operación y mantenimiento [Co&amp;m]</td><td>Reducción de Energía No Suministrada [Bens]</td></tr>
+          <tr><td>—</td><td>Reducción de pérdidas técnicas I²R [Bpet]</td></tr>
+          <tr><td>—</td><td>Energía incremental [Bei] · externalidades [Bext]</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec">Tasa de descuento y metodología probabilística (5.2–5.3)</h3>
+    <ul class="incisos">
+      <li><span class="lbl">Tasa</span> Tasa social de descuento en términos reales, autorizada por la SHCP; el VPN se referencia al primer año de erogaciones.</li>
+      <li><span class="lbl">Certeza</span> Criterio determinístico con valores fijos de los parámetros de entrada.</li>
+      <li><span class="lbl">Probabilístico</span> Cuantifica la incertidumbre vía funciones de probabilidad o series de tiempo históricas.</li>
+      <li><span class="lbl">Incertidumbre</span> No es posible cuantificar el riesgo; se usan métodos de decisión bajo incertidumbre, identificando variables de mayor riesgo y alternativas de menor riesgo.</li>
+    </ul>
+    <p class="ref-nota">El Capítulo continúa con identificación y grupos de proyectos (5.4–5.5), escenarios y casos de estudio (política energética, economía, demanda, hidrología, retrasos, combustibles), análisis de sensibilidad de la RNT (5.8), impacto ambiental y social (5.9) y penetración de Energía Renovable (5.10).</p>
+
+    <!-- ═══════════ CAPÍTULO 6 ═══════════ -->
+    <h2 class="sec" id="sec-c6"><span class="snum">Cap. 6</span>Criterios de observancia para la planeación de las RGD</h2>
+
+    <p>Criterios que debe observar el Distribuidor para la planeación de las <strong>RGD que no pertenecen al MEM</strong> (niveles de tensión menores a 69 kV), integrando Generación Distribuida, sistemas de REI y proyectos del FSUE.</p>
+    <ul class="incisos">
+      <li><span class="lbl">6.1–6.2</span> Descripción del proceso de planeación de las RGD y criterios para su diagnóstico.</li>
+      <li><span class="lbl">6.3</span> Criterios para la planeación de Subestaciones Eléctricas de Alta a Media Tensión (AT/MT).</li>
+      <li><span class="lbl">6.4</span> Criterios de planeación para circuitos de Media Tensión.</li>
+      <li><span class="lbl">6.5</span> Criterios de planeación para redes de Baja Tensión.</li>
+      <li><span class="lbl">6.6</span> Criterios para la elaboración de proyectos.</li>
+      <li><span class="lbl">6.7</span> Criterios para el análisis Costo-Beneficio de los PAMRGD.</li>
+    </ul>
+    <p class="ref-nota">Los criterios de planeación de las RGD buscan minimizar pérdidas de potencia, observar la regulación de tensión y seleccionar los diseños de mayor relación beneficio-costo para el SEN, considerando el criterio N-1 a nivel de distribución.</p>
+
+    <!-- ═══════════ NAV ═══════════ -->
+    <nav class="nav-footer" aria-label="Navegación entre secciones">
+      <a href="disposiciones_sen.html" class="n-prev">
+        <span class="nd">← Anterior</span>
+        <span class="nt">Disposiciones Generales del SEN</span>
+      </a>
+      <a href="../index_cdr_2v4.html" class="n-next">
+        <span class="nd">Índice →</span>
+        <span class="nt">Código de Red 2.0</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

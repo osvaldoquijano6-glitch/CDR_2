@@ -1,0 +1,111 @@
+# =============================================================================
+# PARÁMETROS PROPUESTOS — por confirmar contra PDF oficial
+#
+# Estructura idéntica al bloque `limites:` que consume cada evaluador de
+# src/gcv/evaluation/. NO se copian a matriz_pruebas.yaml hasta confirmar la
+# fuente primaria: mientras estén aquí, el motor devuelve NO_EVALUABLE.
+#
+# Procedencia y confianza: ver normative/INVESTIGACION_PARAMETROS.md
+# (todos [S] = fuente secundaria que cita el Código de Red).
+#
+# Flujo de validación:
+#   1. Abrir el PDF oficial (P2 Manual INTER / P4 Guía Centros de Carga).
+#   2. Confirmar el valor y anotar numeral + versión en 'fuente'.
+#   3. Copiar el bloque 'limites' a la prueba en matriz_pruebas.yaml y poner
+#      estado_normativo: VALIDADO.
+# =============================================================================
+
+version: "0.1.0"
+fecha: "2026-07-05"
+estado: PROPUESTO_POR_CONFIRMAR
+
+propuestas:
+
+  CE-V-01:            # Rango de tensión en el POI (Central)
+    estado: PROPUESTO_POR_CONFIRMAR
+    confianza: secundaria
+    fuente: "Manual INTER (por confirmar numeral) — resúmenes técnicos"
+    limites:
+      bandas:
+        - {v_min_pu: 0.90, v_max_pu: 0.95, t_min_s: 1800}   # 30 min
+        - {v_min_pu: 0.95, v_max_pu: 1.05, t_min_s: null}   # continuo
+        - {v_min_pu: 1.05, v_max_pu: 1.10, t_min_s: 1800}   # 30 min
+
+  CC-02:              # Rango de frecuencia (Centro de Carga)
+    estado: PROPUESTO_POR_CONFIRMAR
+    confianza: secundaria
+    fuente: "radthink.com.mx (cita Código de Red) — confirmar P2/P4"
+    limites:
+      bandas:
+        - {f_min: 59.0, f_max: 61.0, t_min_s: null}   # estado permanente
+        - {f_min: 58.0, f_max: 62.5, t_min_s: 1800}   # 30 min
+
+  CC-04:              # Factor de potencia (Centro de Carga)
+    estado: PROPUESTO_POR_CONFIRMAR
+    confianza: secundaria
+    fuente: "Risoul / CFE (cita Código de Red) — confirmar P4/P5"
+    parametros_medicion: {intervalo_min: 5, base: "Alta Tensión"}
+    limites:
+      fp_min: 0.95
+      cumplimiento_minimo_pct: 95      # ≥95 % del tiempo en periodo mensual
+
+  CE-Q-02:            # Flicker (Pst/Plt)
+    estado: PROPUESTO_POR_CONFIRMAR
+    confianza: secundaria
+    fuente: "radthink.com.mx / CFE L0000-45 — confirmar percentil/campaña"
+    limites:
+      pst_max: 1.0     # ventana 10 min
+      plt_max: 0.65    # 2 h (12 Pst)
+      percentil: 95
+
+  CE-Q-01:            # Desbalance de tensión
+    estado: PROPUESTO_POR_CONFIRMAR
+    confianza: secundaria
+    fuente: "kin.energy / radthink (cita Código de Red) — confirmar P1/P4"
+    limites:
+      metodo: iec_ll          # secuencia negativa (agregación 10 min)
+      limite_pct: 2.0
+      percentil: 95           # confirmar percentil/agregación normativa
+
+  CE-Q-04:            # Armónicos de tensión (THD) — PARCIAL
+    estado: PROPUESTO_POR_CONFIRMAR
+    confianza: secundaria
+    fuente: "kin.energy (Tablas 3.8.A/B/C) — confirmar P1/P4"
+    aplicabilidad: "≤ 69 kV"
+    limites:
+      thd_max_pct: 3.0        # sólo nivel 1–69 kV
+      percentil: 95
+      # armonicos: {orden: límite}  → PENDIENTE (tabla individual, gap [G])
+
+  CC-08:              # Calidad de la potencia (Centro de Carga) — reutiliza calidad
+    estado: PROPUESTO_POR_CONFIRMAR
+    confianza: secundaria
+    fuente: "Guía Código de Red Centros de Carga (P4) — confirmar"
+    limites:
+      thd_v_max_pct: 3.0          # ≤69 kV
+      desbalance_tension_pct: 2.0
+      desbalance_corriente_pct: 15.0
+      pst_max: 1.0
+      plt_max: 0.65
+
+# ── Pendientes sin dato público (gap [G]) — requieren PDF oficial ────────────
+pendientes_sin_dato:
+  - id: TIPO_A_B_C_D
+    descripcion: "Bandas de capacidad instalada (MW) por Tipo y área síncrona (SIN/BCA/BCS/Mulegé)"
+    fuente_requerida: "Manual INTER (P2)"
+    prioridad: alta   # bloquea evaluation/applicability.py
+  - id: CE-F-01
+    descripcion: "Tabla de bandas de frecuencia de centrales con tiempos mínimos"
+    fuente_requerida: "Manual INTER (P2)"
+  - id: CE-F-02
+    descripcion: "ROCOF de inmunidad y ventana de cálculo df/dt"
+    fuente_requerida: "Manual INTER (P2)"
+  - id: CE-Q-05
+    descripcion: "Tabla de distorsión de corriente (TDD) por nivel e Isc/IL"
+    fuente_requerida: "Código de Red DACG (P1) / Guía (P4)"
+  - id: CE-Q-03
+    descripcion: "Variaciones rápidas de tensión: límite % y ocurrencia"
+    fuente_requerida: "Código de Red DACG (P1)"
+  - id: CC-01
+    descripcion: "Rango de tensión de Centros de Carga por nivel (MT/AT)"
+    fuente_requerida: "Guía Centros de Carga (P4)"
