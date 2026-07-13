@@ -104,12 +104,23 @@ proyecto = ProyectoProtocolo(
 1. **Fiel a plantilla** (`generar_protocolo`) — cirugía sobre las plantillas
    originales del usuario. Para cotejo con revisiones previas ante CENACE.
 2. **Rediseño v2** (`generar_protocolo_v2`, módulo `diseno_v2`) — **formato
-   aprobado por el usuario** que se genera completo desde los datos del
-   proyecto + catálogo YAML. Paleta Variante A: eléctrico `#0EA5D8`, marino
-   `#1B3A6B`, apagado `#7FB8D9` (filas NO APLICA). Elementos: banda de marca,
-   eyebrow normativo, ficha de datos, placas de sección, tabla maestra con
-   cabecera sólida y chips SI / NO APLICA. Tipografías Montserrat/Helvetica
-   Neue. Sin nombre de empresa: solo sus colores.
+   aprobado por el usuario**, generado completo desde los datos del proyecto +
+   catálogo YAML. Paleta Variante A: eléctrico `#0EA5D8`, marino `#1B3A6B`,
+   apagado `#7FB8D9` (filas NO APLICA). Elementos: banda de marca, eyebrow
+   normativo, placas de sección numeradas, tabla maestra con cabecera sólida y
+   chips SI / NO APLICA, tabla de contenido como campo real de Word. Tipografías
+   **Arial/Calibri** (universales — cualquier revisor las tiene instaladas; NUNCA
+   Montserrat/Helvetica Neue en este estilo). Sin nombre de empresa: solo sus
+   colores.
+   **REGLA DURA — reestructurar NO es eliminar**: la estructura completa se
+   extrae de la plantilla original (`_extraer_plantilla`) y se conserva
+   íntegra — portada con todas sus líneas, control de revisiones, definiciones
+   y abreviaciones, objetivo, alcance/introducción, datos de pruebas,
+   certificados de calibración y **referencias** con sus viñetas. El v2 solo
+   cambia el tratamiento visual, nunca el contenido ni las secciones. Cualquier
+   ajuste de diseño debe verificarse contra
+   `test_protocolo_v2_conserva_estructura_completa` (compara los H1 generados
+   contra los H1 de la plantilla; ninguno puede faltar).
 
 ## Flujo recomendado
 
@@ -128,5 +139,6 @@ generar_revisiones("salida/Anexo_Revisiones.xlsx", proyecto=proyecto.proyecto)
    datos del proyecto y el resto del formato es idéntico a la plantilla.
 2. Confirma que la tabla maestra refleja exactamente `pruebas_aplican` y las
    notas.
-3. Corre `pytest tests/unit/test_protocolos.py` — deben pasar los 7 casos.
+3. Corre `pytest tests/unit/test_protocolos.py` — deben pasar los 10 casos
+   (incluye la verificación de estructura completa del v2).
 4. Si editaste una plantilla, re-extrae el catálogo antes de generar.
